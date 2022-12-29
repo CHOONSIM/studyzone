@@ -35,6 +35,16 @@ public class Test11 {
 		
 		//출력
 		System.out.println(bmi);
+		
+		 //만약 소수점 2자리만 살리고 싶다면?
+	    double bmi2 = bmi * 100;
+	    System.out.println(bmi2);
+	    int bmi3 = (int)bmi2;
+	    System.out.println(bmi3);
+	    double bmi4 = bmi3;
+	    System.out.println(bmi4);
+	    double bmi5 = bmi4 / 100;
+	    System.out.println(bmi5);
 	
 	}
 
