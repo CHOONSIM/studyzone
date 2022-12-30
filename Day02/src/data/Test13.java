@@ -33,7 +33,7 @@ public class Test13 {
 		//System.out.println(pcCharge3);
 		int totalCharge = pcCharge3 * 100;
 		
-		System.out.println(totalCharge);
+		System.out.println(totalCharge);  
 	}
 
 }
