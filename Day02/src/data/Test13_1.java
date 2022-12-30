@@ -7,7 +7,9 @@ public class Test13_1 {
 		//오전 9시 50분부터 오후 1시 35분까지 이용한 고객의 요금을 출력
 		//단, 십원 단위는 받지 않습니다.(99원까지는 할인 처리)
 		
-		//입력 ; 시간당요금, 시작시각, 종료시작  
+		//과제 풀이
+		
+		//입력 ; 시간당요금, 시작시각, 종료시작
 		int pricePerHour = 1300;
 		int startHour = 9 , startMinute = 50;
 		int finishHour = 13 , finishMinute = 35;
