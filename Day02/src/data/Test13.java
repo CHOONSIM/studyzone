@@ -7,6 +7,7 @@ public class Test13 {
 		//오전 9시 50분부터 오후 1시 35분까지 이용한 고객의 요금을 출력
 		//단, 십원 단위는 받지 않습니다.(99원까지는 할인 처리)
 		
+		//내풀이
 		int pcCharge = 1300;
 		int pcHour1 = 9;  int pcMin1 = 50;
 		int pcHour2 = 13; int pcMin2 = 35;
