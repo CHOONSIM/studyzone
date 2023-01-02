@@ -37,13 +37,13 @@ public class Test04 {
 		}
 		else if(time < 60 * 60) {
 			int min = time /60;
-			System.out.println(min +" 분 전");
+			System.out.println(min + " 분 전");
 		}
 		else if(time < 24 * 60 * 60) {
 			int hour = time / 60 / 60;
 			System.out.println(hour + " 시간 전");
 		}
-		else if(time < 10 * 24 * 60 * 60) {
+		else if(time < 10 * 24 * 60 * 60) {  //10일이 되지 않았다면
 			int day = time / 60 / 60 / 24;
 			System.out.println(day + " 일 전");
 		}
