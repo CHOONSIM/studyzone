@@ -10,7 +10,7 @@ public class Test01 {
 		//주문할 수 있는 가장 비싼 메뉴를 1개만 추천
 		
 		int money = 1000;
-		
+	
 		//boolean order = money >= 25000;
 		if(money >= 25000) {
 			System.out.println("피자추천");
