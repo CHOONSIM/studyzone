@@ -4,6 +4,8 @@ import java.lang.*;
 public class Test03 {
 	public static void main(String[] args) {
 		
+		//내 풀이
+		
 		//지하철 이용요금 계산
 		
 		//어르신(65세~) - 무료
