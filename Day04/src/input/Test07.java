@@ -31,6 +31,8 @@ public class Test07 {
 
 		//<버튼을 눌러 예약 사이트로 이동해주세요>
 		
+		//내 풀이
+		
 		int oneDayCost = 100000;
 		int springDc1 = 10;
 		int summerDc1 = 5;
