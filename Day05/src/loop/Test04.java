@@ -8,9 +8,9 @@ public class Test04 {
 		
 		//내 풀이
 		
-		for(int i=3; i<=99; i++) {
-			int one = i % 10;
+		for(int i=10; i<=99; i++) {
 			int ten = i / 10;
+			int one = i % 10;
 			
 			if(one % 3 == 0 ) {
 				System.out.println("박수 : "+i);
