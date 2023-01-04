@@ -1,5 +1,7 @@
 package loop;
 
+import java.util.Scanner;
+
 public class Test07 {
 
 	public static void main(String[] args) {
@@ -10,15 +12,28 @@ public class Test07 {
 		// 2. 30일동안 하게되는 푸시업 개수 합
 		// 3. 첫날 개수와 증가 폭, 기간을 입력받아서 출력
 		
-		int cnt = 0;
+		Scanner sc = new Scanner(System.in);
 		
-		int firstDay = 5;
-		int addDay = 2;
-		int day = 30;
 		
-		for(int i = 1; i<= day; i++) {
-			System.out.println(i);
+		System.out.println("날짜(일)을 입력하세요.");
+		int period = sc.nextInt();
+	    
+		System.out.println("첫날개수를 입력하세요.");
+		int pushup = sc.nextInt();
+		
+		System.out.println("증가 폭을 입력하세요.");
+		int increase = sc.nextInt();
+		
+		sc.close();
+		
+		int total = 0;
+		
+		for(int day = 1; day<= period; day++) {
+			System.out.println(day + "일차" + pushup + "개");
+			total += pushup;
+			pushup += 2;
 		}	
+		System.out.println("총 개수 : " + total);
 
 	}
 
