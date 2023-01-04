@@ -20,19 +20,29 @@ public class Test12 {
 		//정답!
 
 		//정답 개수 : 2
-		
 		Scanner sc = new Scanner(System.in);
-		
-		int problem = 0;
-		int answer = 0;
 		
 		System.out.println("원하는 구구단을 입력");
 		int n = sc.nextInt();
-		
-		for(int i = 0; i <10; i ++) {
+		int i; //단
+		int respone; //답입력값
+		int answer; //정답
+	
+		for(i = 1; i <10; i ++) {
 			//구구단 처리
+			System.out.println(i + "x" + n + "=");
 			
+			respone=sc.nextInt();
+			answer=i*n;
+			if(respone==answer) {
+				System.out.println("정답!");
+			}
+			else {
+				System.out.println("오답!");
+			}
 		}
+		sc.close();
+		
 	}
 
 }
