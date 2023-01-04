@@ -1,5 +1,7 @@
 package loop;
 
+import java.util.Scanner;
+
 public class Test09 {
 
 	public static void main(String[] args) {
@@ -12,22 +14,35 @@ public class Test09 {
 		
 		
 		//내 풀이
-	
-		int num =1;
+		//입력
+		Scanner sc = new Scanner(System.in);
 		
-		for(int i=3; i<=num; i++) {
-			for(int j = 2; j<i; ++j) {
-				if(i/j == 0) {
-					System.out.println("소수가 아닙니다.");
-				}
-				else {
-					System.out.println("소수입니다.");
-				}
-			}
-			
-		}
-		
-		
+		System.out.println("숫자를 입력하세요.");
+	    int num = sc.nextInt();
+	    sc.close();
+	    
+	    int count = 0;
+	    //처리
+	    for(int i=1; i<=num; i++) {  //1과 자기 자신을 없애면 처리속도 증가
+	    	System.out.println(i + "로 나눈 나머지 = " + num % i);
+	    	if(num % i==0) {
+	    		//System.out.println(num % i); //0찾기 
+	    		count++;  //0개수 찾기 0이 두개면 소수
+	    		
+	    	    break; //나머지 0인경우가 발견되면 바로 종료
+	    	}
+	    }
+	    System.out.println("나누어 떨어지는 숫자 개수 = " + count);
+	    	
+	    
+	    //출력
+	    if(count == 2){              //1과 자기 자신을 없애면 0의 갯수는 0
+	    	System.out.println("소수입니다.");
+	    }
+	    else {
+	    	System.out.println("소수가 아닙니다.");
+	    }
+	    
 	}
 
 }
