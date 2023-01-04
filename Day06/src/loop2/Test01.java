@@ -10,6 +10,7 @@ public class Test01 {
 			System.out.println(i);
 		}
 		
+		//while 사용
 		int n = 1;
 		while(n<=10) {
 			System.out.println(n);
