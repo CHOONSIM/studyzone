@@ -4,27 +4,30 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Test05 {
-	public static void main(String[] main) {
-		
-		//랜덤으로 10개의 구구단 문제를 출제하고, 사용자가 이를 풀 수 있도록 구현
+	public static void main(String[] args) {
+		//구구단 랜덤 10문제 출제 프로그램
+		//- 횟수니까 for 사용
 		
 		Random r = new Random();
 		Scanner sc = new Scanner(System.in);
 		
-		int n = r.nextInt(10)+1; 
-		int n1 = r.nextInt(10)+1;
-		int respone; //답입력값
-		int answer; //정답
-		int i;
-		
-		System.out.println(n);
-		System.out.println(n1);
-		
+		for(int i=0; i<10; i++) {
+			
+			int a = r.nextInt(8)+2;
+			int b = r.nextInt(9)+1;
+			
+			System.out.println(a + " X " + b + " = ");
+			
+			int user = sc.nextInt();
+			
+			if(a*b == user) {
+				System.out.println("정답");
+			}
+			else 
+				System.out.println("오답");
 
-		
+	  }		
 		sc.close();
-		
-		
 	}
 
 }
