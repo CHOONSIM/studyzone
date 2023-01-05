@@ -1,3 +1,4 @@
+
 package random;
 
 import java.util.Random;
@@ -16,7 +17,7 @@ public class Test02 {
 		
 		//1. 로또 번호 1개(1~45)
 		int lottery = r.nextInt(45)+1;
-		System.out.println("로또 번호" + lottery);
+		System.out.println("로또 번호 = " + lottery);
 		
 		
 		//2. 두 자리 정수 중 1개
@@ -54,10 +55,16 @@ public class Test02 {
 		//5. 윷놀이 한 턴 결과 출력(6개)
 		//4번식을 푼다면 도0 개1 걸2 윷3 모4 빽도5
 		//0부터 6개
+		//확률 다 동일
 		int yoot = r.nextInt(6);
 		if(yoot == 0) {
+			System.out.println("도");
+		if(yoot == 1) {
+			System.out.println("개");
+		}
 			
 		}
 	}
 
 }
+
