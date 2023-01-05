@@ -1,3 +1,4 @@
+
 package loop2;
 
 import java.util.Scanner;
@@ -15,12 +16,12 @@ public class Test04 {
 		//(+추가) 사용자가 1부터 9 사이의 값만 입력할 수 있도록 처리해보세요
 		
 		//내 풀이
+		int i = 100;
+		int count = 0;
+		
 		
 		Scanner sc = new Scanner(System.in);
 		
-		int i = 100;
-		int count = 0;
-		int total = 0;
 		
 		while(true) {
 			System.out.println("숫자 입력");
@@ -33,17 +34,16 @@ public class Test04 {
 		    	System.out.println("1~9까지의 숫자를 입력하세요.");
 		    }
 		    if(i < 0) {
-		    	System.out.println("Game Over");
 		    	break;
 		    }
 		    else {
-		    	//i-=n;     내 풀이
-		    	//count++;  내 풀이
+		    	System.out.println("남은 숫자 : " + i);
 		    }
 		}
 		
 		sc.close();
 		
+		System.out.println("Game Over");
 		System.out.println("입력 갯수 : " + count);
 		
 	}
