@@ -23,11 +23,14 @@ public class Test03_2 {
 		System.out.println(data[1]); //리모컨 부대장(1차원)
 		System.out.println(data[0][0]); //데이터
 		
-		System.out.println(data.length); // 2차원이 관리하는 1차원은 몇개? = 2개
+		System.out.println(data.length);     // 2차원이 관리하는 1차원은 몇개? = 2개
+		System.out.println(data[0].length);  // 1차원이 관리하는 배열은 몇개
+		System.out.println(data[1].length);  // 1차원이 관리하는 배열은 몇개
 		
-		for(int i=0; i<=1; i++) {          // i <=1  1인 이유 data[0] data[1]  0,1  2개
-			for(int k=0; k <= 2; k++) {    // k <=2  2인 이유 [10][20][30] 0,1,2  3개
-				System.out.print(data[i][k]);
+		
+		for(int i=0; i<data.length; i++) {          // i <=1  1인 이유 data[0] data[1]  0,1  2개
+			for(int k=0; k < data[i].length; k++) {    // k <=2  2인 이유 [10][20][30] 0,1,2  3개
+				System.out.print(data[i][k]);          //               [40][50][60]
 				System.out.print("\t");
 			}
 			System.out.println();
