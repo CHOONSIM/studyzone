@@ -2,12 +2,14 @@ package oop.method4;
 
 public class ShoppingMall {
 	
+	//member field
 	int eventPer = 10;
 	int deliveryFee = 2500;
 	String name, sort;
 	int price;
 	boolean event, delivery;
 	
+	//member method
 	void setting(String name, String sort, int price, boolean delivery, boolean event ) {
 		this.name = name;
 		this.sort = sort;
