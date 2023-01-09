@@ -1,4 +1,4 @@
-package oop.test5;
+package oop.method1;
 
 public class CellphoneFee {
 	
