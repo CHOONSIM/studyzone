@@ -2,9 +2,12 @@ package oop.method2;
 
 public class CaffeMenu {
 	
+	//멤버필드(변수) - 데이터 저장
 	String menu, category ,sale;
 	int price; boolean Dc; int discount = 20;
 	
+	
+	//멤버 메소드 - 기능 구현(코드지정)
 	void setting(String menu, String category, int price, 
 			boolean Dc) {
 		this.menu = menu;

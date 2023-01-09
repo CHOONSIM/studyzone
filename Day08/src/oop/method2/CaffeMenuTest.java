@@ -3,8 +3,7 @@ package oop.method2;
 public class CaffeMenuTest {
 	public static void main(String[] args) {
 		
-		   
-		
+		//객체 생성
 		CaffeMenu m1 = new CaffeMenu();
 		CaffeMenu m2 = new CaffeMenu();
 		CaffeMenu m3 = new CaffeMenu();
