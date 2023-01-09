@@ -2,11 +2,19 @@ package oop.method3;
 
 public class Telecom {
 	
+	
+	//member field
 	String name, company;
 	boolean month;
 	int price;
 	int agreement;
 	int Dc = 5;
+	
+	//member method
+	
+	//오버로딩
+	//필수 -> setting
+	//필수 + 선택 -> setting
 	
 	void setting (String name, String company, int price, int agreement, boolean month)
 	{
