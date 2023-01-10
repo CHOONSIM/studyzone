@@ -13,7 +13,7 @@ public class Test01 {
 		System.out.print("PW : ");
 		String password = sc.next();
 		sc.close();
-		
+		  
 		Member m = new Member(id, password);
 		m.output();
 	}
