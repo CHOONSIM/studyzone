@@ -23,13 +23,13 @@ public class Test02 {
 		System.out.println("rsp = " + rsp);
 		
 		switch(rsp){
-			case SCISSORS:
+			case RspGame.SCISSORS:
 				System.out.println("가위");
 				break;
-			case ROCK:
+			case RspGame.ROCK:
 				System.out.println("바위");
 				break;
-			case PAPER: //default:
+			case RspGame.PAPER: //default:
 				System.out.println("보");
 				break;
 		}
