@@ -1,4 +1,4 @@
-package oop.inherit03;
+package oop.inherit03; 
 
 public class Whale extends Browser{
 	public void name() {

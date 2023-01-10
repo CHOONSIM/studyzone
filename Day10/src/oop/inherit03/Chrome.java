@@ -1,5 +1,5 @@
 package oop.inherit03;
-
+ 
 public class Chrome extends Browser{
 	
 	public void name() {
