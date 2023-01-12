@@ -1,4 +1,4 @@
-package abstract01;
+package oop.abstract01;
 
 public class Test02 {
 	public static void main(String[] args) {
