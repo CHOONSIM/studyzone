@@ -1,4 +1,4 @@
-package abstract01;
+package oop.abstract01;
 
 
 //추상 클래스(abstract class)
