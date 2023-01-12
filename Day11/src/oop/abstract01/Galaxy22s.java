@@ -1,4 +1,4 @@
-package abstract01;
+package oop.abstract01;
 
 public class Galaxy22s extends Galaxy{
 
