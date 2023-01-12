@@ -28,6 +28,7 @@ public class Test01 {
 		System.out.println(a.equals(d));
 		System.out.println(a.equalsIgnoreCase(d));  //대소문자 구분 무시
 		
+		
 		//문자열은 전체가 아닌 일부만 비교하는 경우도 있다
 		String e = "https://iei.or.kr";
 		
