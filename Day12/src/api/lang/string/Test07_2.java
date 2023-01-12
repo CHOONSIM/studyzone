@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class Test07_2 {
 	public static void main(String[] args) {
-		
+		 
 		Scanner sc = new Scanner(System.in);
 		System.out.println("이름을 입력하세요");
 		String name = sc.nextLine();
@@ -19,7 +19,7 @@ public class Test07_2 {
 		else {
 			System.out.println("잘못된 이름");
 		}
-		
+		 
 	}
 
 }
