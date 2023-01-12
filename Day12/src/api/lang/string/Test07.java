@@ -10,7 +10,7 @@ public class Test07 {
 		System.out.println("이름을 입력하세요");
 		String name = sc.nextLine();
 		sc.close();
-		
+		 
 		
 		if (!(Pattern.matches("^[가-힣]*$", name))){
 			System.out.println("이름에 사용 가능한 문자를 사용해주세요");
