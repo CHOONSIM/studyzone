@@ -1,4 +1,4 @@
-package abstract01;
+package oop.abstract01;
 
 public abstract class Iphone extends Mobile{
 
