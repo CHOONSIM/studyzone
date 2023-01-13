@@ -7,13 +7,11 @@ public class Test07 {
 	public static void main(String[] args) {
 		
 		
-		//문제점 : 스캐너가 어떨땐 닫히고 어떨땐 안닫히는지?
-		//원인 : 예외 발생 여부에 따라 close()가 실행이 될 수도 안될 수도 있어서
+//		문제점 : 개발자는 원래 발생하던 예외 메세지를 보고싶어한다.
 		
+		Scanner sc = new Scanner(System.in);
 		try {
 			
-		Scanner sc = new Scanner(System.in);
-		
 		System.out.print("금액 : ");
 		int money = sc.nextInt();
 		if(money <= 0) {  //자바가 감지하지 못하는 예외상황
@@ -41,12 +39,14 @@ public class Test07 {
 			e.printStackTrace();
 		}
 		
-
+		//문제점 : 스캐너가 어떨땐 닫히고 어떨땐 안닫히는지?
 
 
 		
 		}
 
 }
+
+
 
 
