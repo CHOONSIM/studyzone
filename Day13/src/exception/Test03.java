@@ -3,7 +3,7 @@ package exception;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Test02 {
+public class Test03 {
 	public static void main(String[] args) {
 		
 		// ex) 1/n 계산기
@@ -17,6 +17,12 @@ public class Test02 {
 		// 결론적으로 이 프로그램에서 파악한 문제는 2종류이다.
 		// - 1, 2, 3, 5는 입력이 잘못된 경울
 		// - 4는 나눗셈이 잘못된 경우
+		
+		//문제점
+		// - 오류가 정말 2개 뿐인것인가	
+		// - RuntimeException 상속	ArithmeticException		InputMismatchException
+		// - 장담할 수 없으므로 "통합처리"하는 방법으로 변경 (업캐스팅)
+		
 		
 		try { //문제가 발생하리라고 예산되는 지역(플랜A)
 			
@@ -36,16 +42,12 @@ public class Test02 {
 		System.out.println("1인당 "+result+"원");
 		System.out.println("짜투리 "+remain+"원");
 		}
-		catch(InputMismatchException  e) { //입력이 잘못되었을 때의 플랜B
-			System.err.println("입력을 똑바로 하세요.");
+//		catch(RuntimeException e) {
+		catch(Exception e) {  //앞으로 모든 예외를 통합처리 할때
+//		catch(Throwable e) {  //오류와 예외        Error : 오류
+//		catch(Object e) { //error
+			System.err.println("오류가 발생했습니다.");
 		}
-		catch(ArithmeticException e){  //나누기가 잘못되었을 때의 플랜B
-			System.err.println("인원 수는 0일 수 없습니다.");
-		}
-		
-		//문제점
-		// - 오류가 정말 2개 뿐인것인가
-		// - RuntimeException 상속
 		
 		}
 
