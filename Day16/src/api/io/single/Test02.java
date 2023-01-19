@@ -10,7 +10,7 @@ public class Test02 {
 		
 //		목표 : 싱글바이트 단위 데이터 입력(열기)
 //		준비물 : 파일 객체(없으면 에러), 스트림 객체(입력용)
-		File target = new File("temp", "Single.kh");
+		File target = new File("temp", "single.kh");
 		if(!target.isFile()) {
 			System.err.println("존재하지 않는 파일입니다.");
 			System.exit(-1);
