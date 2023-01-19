@@ -8,7 +8,7 @@ public class Test01 {
 
 	public static void main(String[] args) throws IOException {
 		
-//		목표 : single byte 단위 데이터 출력(저장)
+//		목표 : 싱글바이트 단위 데이터 출력(저장)
 //		준비물 : 파일 객체(없으면 생김) , 스트림 객체(출력용 통로)
 		
 //		도구 준비
