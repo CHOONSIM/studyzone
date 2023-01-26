@@ -12,7 +12,7 @@ public class Test01 {
 		//	- insert, update, delete처럼 구현하면 원하는 결과를 얻을 수 없다
 		
 		// 데이터 준비(없음)
-		
+		 
 		// JDBC
 		JdbcTemplate jdbcTemplate = JdbcUtils.getJdbcTemplate();
 		
