@@ -2,7 +2,7 @@ package jdbc.test;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-
+ 
 public class Test01 {
 	public static void main(String[] args) {
 		
