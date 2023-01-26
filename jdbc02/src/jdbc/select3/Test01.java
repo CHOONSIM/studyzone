@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-import dto.PocketmonDto;
+import jdbc.dto.PocketmonDto;
 import jdbc.util.JdbcUtils;
 
 public class Test01 {
