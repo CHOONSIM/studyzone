@@ -5,6 +5,10 @@ package dto;
 //	- DTO는 테이블당 1개 구현
 
 public class PocketmonDto {
+	@Override
+	public String toString() {
+		return "PocketmonDto [no=" + no + ", name=" + name + ", type=" + type + "]";
+	}
 	private int no;
 	private String name;
 	private String type;
