@@ -2,39 +2,41 @@
 -- 데이터가 저장되는 객체
 -- 표 형태이다
 
-create table attendance(
-no number(10),
-name varchar2(21),
-phone char(13)
+CREATE TABLE ATTENDANCE(
+NO NUMBER(10),
+NAME VARCHAR2(21),
+PHONE CHAR(13)
 );
 
-drop table attendance;
+DROP TABLE ATTENDANCE;
 
 -- Day08 월드컵 테이블 예제
- create table worldcup(
- rank number(3),
- name varchar(39),
- nation varchar(15),
- goal number(2)
+ CREATE TABLE WORLDCUP(
+ RANK NUMBER(3),
+ NAME VARCHAR(39),
+ NATION VARCHAR(15),
+ GOAL NUMBER(2)
  );
- drop table worldcup;
+SELECT * FROM WORLDCUP;
+DELETE WORLDCUP;
+ ROLLBACK ;
  
  --Day08 포켓몬 테이블 예제
- create table pocketmon(
- no number(3),          -- 숫자를 안쓰면 자동으로 38자리가 됨
- name varchar2(21),
- type varchar2(9)
+ CREATE TABLE POCKETMON(
+ NO NUMBER(3),          -- 숫자를 안쓰면 자동으로 38자리가 됨
+ NAME VARCHAR2(21),
+ TYPE VARCHAR2(9)
  );
- drop table pocketmon;
+ DROP TABLE POCKETMON;
  
  --Day08 메달리스트 테이블 예제
- create table medalist(
- name varchar2(21),
- event varchar2(12),
- type char(6),             -- 고정된 글자에 char
- gold number(2),
- silver number(2),
- bronze number(2)
+ CREATE TABLE MEDALIST(
+ NAME VARCHAR2(21),
+ EVENT VARCHAR2(12),
+ TYPE CHAR(6),             -- 고정된 글자에 char
+ GOLD NUMBER(2),
+ SILVER NUMBER(2),
+ BRONZE NUMBER(2)
  );
- drop table medalist;
+ DROP TABLE MEDALIST;
  
