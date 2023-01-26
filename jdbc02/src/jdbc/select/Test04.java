@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-import dto.StudentDto;
+import jdbc.dto.StudentDto;
 import jdbc.util.JdbcUtils;
 
 public class Test04 {
