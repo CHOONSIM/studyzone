@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 public class Test04 {
-
+ 
 	public static void main(String[] args) {
 		
 		// 사용자가 입력한 정보를 토대로 pocketmon 테이블에 데이터를 추가
