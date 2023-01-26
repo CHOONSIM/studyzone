@@ -7,7 +7,7 @@ import jdbc.util.JdbcUtils;
 public class Test04 {
 
 	public static void main(String[] args) {
-		
+		 
 		//데이터
 		int no = 2;
 		String name = "아무개2";
