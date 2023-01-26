@@ -1,4 +1,4 @@
-package dto;
+package jdbc.dto;
 
 public class SubjectDto {
 	

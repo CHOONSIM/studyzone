@@ -1,4 +1,4 @@
-package dto;
+package jdbc.dto;
 
 //	pocketmon 테이블의 1줄을 옮겨 닮기 위한 클래스
 //	- DB와 같은 이름의 필드를 만들고 기본생성자, getter/setter 메소드까지 구현
