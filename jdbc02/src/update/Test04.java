@@ -10,7 +10,7 @@ public class Test04 {
 		 
 		//데이터
 		int no = 2;
-		String name = "아무개2";
+		String name = "아무개일";
 		int korean = 100;
 		int english = 100;
 		int math = 10;
