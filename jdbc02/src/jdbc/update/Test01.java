@@ -1,4 +1,4 @@
-package update;
+package jdbc.update;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
