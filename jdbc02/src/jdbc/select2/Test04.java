@@ -8,7 +8,7 @@ import java.util.Scanner;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-import dto.SubjectDto;
+import jdbc.dto.SubjectDto;
 import jdbc.util.JdbcUtils;
 
 public class Test04 {
