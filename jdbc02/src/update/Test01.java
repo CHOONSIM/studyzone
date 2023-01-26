@@ -6,7 +6,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 public class Test01 {
 
 	public static void main(String[] args) {
-		
+		 
 	/*
 		Spring JDBC update
 		- pk(Primary Key)를 사용하여 하나의 행만 수정하도록 구문을 구현
