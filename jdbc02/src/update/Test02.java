@@ -8,7 +8,7 @@ import jdbc.util.JdbcUtils;
 public class Test02 {
 
 	public static void main(String[] args) {
-		
+		 
 	/*
 		Spring JDBC update
 		- pk(Primary Key)를 사용하여 하나의 행만 수정하도록 구문을 구현
