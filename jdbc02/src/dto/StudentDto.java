@@ -10,6 +10,11 @@ public class StudentDto {
 		super();
 		
 	}
+	@Override
+	public String toString() {
+		return "StudentDto [no=" + no + ", name=" + name + ", korean=" + korean + ", english=" + english + ", math="
+				+ math + "]";
+	}
 	public int getNo() {
 		return no;
 	}
