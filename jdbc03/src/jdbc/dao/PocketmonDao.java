@@ -41,9 +41,18 @@ public class PocketmonDao {
 			Object[] param = {dto.getNo(), dto.getName(), dto.getType()};
 			jdbcTemplate.update(sql,param);
 		}
+
 //	  R(목록)
 //	  R(상세)
-//	  U(수정)
+//	  U(수정) - update pocketmon set name =?, type=? where no =?
+		public boolean update(PocketmonDto dto) {		//boolean, 수정이 되었는지 안되었는지
+			JdbcTemplate jdbcTemplate = JdbcUtils.getJdbcTemplate();
+			String sql = "update pocketmon set name =?, type=? where no =?";
+			Object[] param = {dto.getName(), dto.getType(), dto.getNo()};
+			int result = jdbcTemplate.update(sql,param);
+			return result > 0;
+
 //	  D(삭제)
 
+		}
 }
