@@ -30,7 +30,7 @@ public class SubjectDao {
 	public void insert(SubjectDto dto) {
 		JdbcTemplate jdbcTemplate = JdbcUtils.getJdbcTemplate();
 		String sql = "insert into subject(no,name,period,price,type) values(subject_seq.nextval,?,?,?,?)";
-		Object[] param = {dto.getNo(), dto.getName(), dto.getPeriod(), dto.getPrice(), dto.getType()};
+		Object[] param = {dto.getName(), dto.getPeriod(), dto.getPrice(), dto.getType()};
 		jdbcTemplate.update(sql,param);
 	}
 	
@@ -49,6 +49,16 @@ public class SubjectDao {
 		Object[] param = {keyword};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
+//	추가 - 메소드에서 자체적으로 구분하여 처리
+		public List<SubjectDto> selectAuto(String column, String keyword) {
+			if(column != null && !column.equals("")
+					&& keyword != null && !keyword.equals("")) {
+				return selectList(column, keyword);
+			}
+			else {
+				return selectList();
+			}
+		}
 	
 //	상세
 	public SubjectDto selectOne(int no) {
