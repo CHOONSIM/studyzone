@@ -26,6 +26,7 @@ public class PocketmonDao {
 			return dto;
 		}
 	};
+// 	  C(등록)
 	
 	
 	
