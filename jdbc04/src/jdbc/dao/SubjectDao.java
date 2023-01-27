@@ -29,7 +29,7 @@ public class SubjectDao {
 //	등록
 	public void insert(SubjectDto dto) {
 		JdbcTemplate jdbcTemplate = JdbcUtils.getJdbcTemplate();
-		String sql = "insert into subject(no,name,period,price,type) values(?,?,?,?,?)";
+		String sql = "insert into subject(no,name,period,price,type) values(subject_seq.nextval,?,?,?,?)";
 		Object[] param = {dto.getNo(), dto.getName(), dto.getPeriod(), dto.getPrice(), dto.getType()};
 		jdbcTemplate.update(sql,param);
 	}
