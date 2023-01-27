@@ -9,8 +9,8 @@ public class Test01 {
 
 //		등록
 		SubjectDto dto = new SubjectDto();
-		dto.setNo(1);
-		dto.setName("테스트");
+		
+		dto.setName("테스트테스트");
 		dto.setPeriod(60);
 		dto.setPrice(1000000);
 		dto.setType("혼합");

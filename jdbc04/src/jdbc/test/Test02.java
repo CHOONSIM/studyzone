@@ -6,7 +6,7 @@ import jdbc.dto.SubjectDto;
 public class Test02 {
 
 	public static void main(String[] args) {
-		
+		 
 //		수정
 		SubjectDto dto = new SubjectDto();
 		dto.setNo(1);
