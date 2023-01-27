@@ -14,7 +14,7 @@ public class Test02 {
 		dto.setNo(11);
 		dto.setName("바꾼이름");
 		dto.setType("바뀐타입");
-		
+		 
 //		 JDBC
 		PocketmonDao dao = new PocketmonDao();
 		boolean result = dao.update(dto);
