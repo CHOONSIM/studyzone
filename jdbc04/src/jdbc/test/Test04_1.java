@@ -1,21 +1,28 @@
 package jdbc.test;
 
 import java.util.List;
+import java.util.Scanner;
 
 import jdbc.dao.SubjectDao;
 import jdbc.dto.SubjectDto;
 
-public class Test04 {
+public class Test04_1 {
 
 	public static void main(String[] args) {
 		
 //		목록/검색
-		String column = "type";
-		String keyword = "오프";
+		
+//		Scanner를 사용하면 null이 입력되지 않는다.
+		Scanner sc = new Scanner(System.in);
+		System.out.println("검색분류 : ");
+		String column = sc.nextLine();
+		System.out.println("검색어 : ");
+		String keyword = sc.nextLine();
+		sc.close();
 		
 		SubjectDao dao = new SubjectDao();
 		List<SubjectDto> list;
-		if(column != null && keyword != null) {		//Scanner에서는 null입력 불가능
+		if(column != null && !column.equals("") && keyword != null && !keyword.equals("")) {	//Scanner에서는 null입력 불가능
 			list = dao.selectList(column, keyword);
 		}
 		else {
