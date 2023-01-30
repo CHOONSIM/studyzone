@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class ParameterController {
 	
-//	주소에 ?를 적고 뒤에 ket=value 형태로 데이터를 추가할 수 있다.
+//	주소에 ?를 적고 뒤에 key=value 형태로 데이터를 추가할 수 있다.
 //	이를 요청 파라미터(request parameter)라고 부른다.
 //	서버에서는 파라미터의 이름과 형태를 반드시 알아야 한다.
 //	@RequestParam과 변수를 사용하여 파라미터를 수신하도록 선언
