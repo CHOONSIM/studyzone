@@ -63,7 +63,7 @@ public class QuizController {
 	@RequestMapping("/subway")
 	@ResponseBody
 	public String subway(
-			@RequestParam(required=false) int birth) {
+			@RequestParam int birth) {
 		int card = 500; int adult = 1250; int teen = 720; int child = 450;
 		int age =  LocalDate.now().getYear()- birth + 1;
 		
@@ -87,8 +87,8 @@ public class QuizController {
 	@RequestMapping("/pcroom")
 	@ResponseBody
 	public String pcroom(
-			@RequestParam (required=false)int start,
-			@RequestParam (required = false)int end) {
+			@RequestParam int start,
+			@RequestParam int end) {
 		int pcCharge = 1300;
 		int totalHour = (end-start) / 100;
 		int totalMin = (end-start) % 100;
@@ -102,6 +102,44 @@ public class QuizController {
 		int totalCharge = pcCharge3 * 100; 
 		Format f = new DecimalFormat("#,##0");
 		return "총 이용요금 : " + f.format(totalCharge) + " 원 입니다.";
+	}
+	
+	@RequestMapping("/sum")
+	@ResponseBody
+	public String sum(
+			@RequestParam (required = false, defaultValue = "0")int start,
+			@RequestParam (required = false)int end) {
+		int []data = new int[] {start,end};
+		int total =0;
+		for(int i=start; i<=end; i++) {
+			total += i;
+		}
+		return "총 합 : " + total;
+	}
+	
+	@RequestMapping("/score")
+	@ResponseBody
+	public String score(
+			@RequestParam(required = false, defaultValue = "0")int korean,
+			@RequestParam(required = false, defaultValue = "0")int english,
+			@RequestParam(required = false, defaultValue = "0")int math) {
+		double average = (korean + english + math) / 3;
+		if(korean >= 40 && english >=40 && math >=40 && average >=60) {
+			return "평균 점수 " + average +" 점으로 합격입니다.";
+		}
+		return "평균 점수" + average + " 점으로 불합격입니다.";
+	}
+	
+	
+	@RequestMapping("/leap")
+	@ResponseBody
+	public String leap(
+			@RequestParam int year) {
+			
+		if((year % 4 == 0) && (year % 100 != 0) ||( year % 400 == 0)) {
+			return year + "년도는 윤년입니다.";
+			}
+			return year + "년은 윤년이 아닙니다.";
 	}
 
 	
