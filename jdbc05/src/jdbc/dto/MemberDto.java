@@ -1,5 +1,7 @@
 package jdbc.dto;
 
+import java.sql.Date;
+
 public class MemberDto {
 	
 	private String memberId;
@@ -13,8 +15,8 @@ public class MemberDto {
 	private String memberDetailAddr;
 	private String memberLevel;
 	private int memberPoint;
-	private String memberJoin;
-	private String memberLogin;
+	private Date memberJoin;
+	private Date memberLogin;
 	public MemberDto() {
 		super();
 	}
@@ -84,16 +86,16 @@ public class MemberDto {
 	public void setMemberPoint(int memberPoint) {
 		this.memberPoint = memberPoint;
 	}
-	public String getMemberJoin() {
+	public Date getMemberJoin() {
 		return memberJoin;
 	}
-	public void setMemberJoin(String memberJoin) {
+	public void setMemberJoin(Date memberJoin) {
 		this.memberJoin = memberJoin;
 	}
-	public String getMemberLogin() {
+	public Date getMemberLogin() {
 		return memberLogin;
 	}
-	public void setMemberLogin(String memberLogin) {
+	public void setMemberLogin(Date memberLogin) {
 		this.memberLogin = memberLogin;
 	}
 	@Override
