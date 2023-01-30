@@ -98,8 +98,7 @@ public class QuizController {
 		double pcChargeM = totalMin * minCharge;
 		double pcCharge1 = pcChargeH + pcChargeM;
 		double pcCharge2 = pcCharge1 * 0.01;
-		int pcCharge3 = (int)pcCharge2;
-		int totalCharge = pcCharge3 * 100; 
+		int totalCharge = (int)pcCharge2 * 100; 
 		Format f = new DecimalFormat("#,##0");
 		return "총 이용요금 : " + f.format(totalCharge) + " 원 입니다.";
 	}
@@ -141,16 +140,4 @@ public class QuizController {
 			}
 			return year + "년은 윤년이 아닙니다.";
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }
