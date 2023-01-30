@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+	<!-- maven모델 버젼 -->
+	<modelVersion>4.0.0</modelVersion>
+	
+	<!-- Spring Boot를 사용하기 위한 정보 -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.7.8</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	
+	<!-- 이 프로젝트 정보 -->
+	<groupId>com.kh</groupId>
+	<artifactId>spring01</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>spring01basic</name>
+	<description>Demo project for Spring Boot</description>
+	
+	<!-- 이 문서에서 사용할 변수-->
+	<properties>
+		<java.version>17</java.version>
+		
+		<!-- 이 프로젝트에서 사용할 라이브러리 정보
+				- Group ID, Artifact ID, Version Scope 를 작성
+				- Group ID 와 Artifact ID는 라이브러리를 식별하는 정보
+				- Version은 작성이 원칙이지만 관리되는 경우는 생략이 가능
+				- 관리가 된다는 것은 Spring Boot와 제휴를 맺은 라이브러리를 의미
+				- Scope는 라이브러리를 불러와서 사용하는 시기를 지정하는 것
+				-->
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
