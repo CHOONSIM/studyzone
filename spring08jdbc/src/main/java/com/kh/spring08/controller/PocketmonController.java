@@ -53,7 +53,7 @@ public class PocketmonController {
 		return buffer.toString();
 	}
 	
-//		검색
+//		검색페이지
 	@RequestMapping("/serch")
 	@ResponseBody
 	public String search(@RequestParam String column, 
@@ -95,7 +95,19 @@ public class PocketmonController {
 	}
 	
 	
-	
-	
-	
+//		상세페이지
+	@RequestMapping("/detail")
+	@ResponseBody
+	public String detail(@RequestParam int no) {			//Primary Key = no
+		PocketmonDto dto = dao.selectOne(no);
+		
+		if(dto==null) {
+			return "없음";
+		}
+		else {
+			return dto.toString();
+		}
+		
+	}
+
 }
