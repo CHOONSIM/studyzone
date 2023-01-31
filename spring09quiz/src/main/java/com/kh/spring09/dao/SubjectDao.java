@@ -51,7 +51,7 @@ public class SubjectDao {
 		Object[] param = {keyword};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
-	
+	 
 //		상세
 	public SubjectDto selectOne(int no) {
 		String sql = "select*from subject where no = ? ";
