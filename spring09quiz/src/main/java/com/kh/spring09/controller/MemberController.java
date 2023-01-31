@@ -16,7 +16,7 @@ import com.kh.spring09.dto.SubjectDto;
 @Controller
 @RequestMapping("/member")
 public class MemberController {
-	
+
 //	등록
 	@Autowired
 	private MemberDao dao;
@@ -76,5 +76,5 @@ public class MemberController {
 		else
 			return "잘못된 입력입니다.";
 	}
-	
+
 }
