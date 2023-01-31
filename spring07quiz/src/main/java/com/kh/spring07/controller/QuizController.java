@@ -5,6 +5,7 @@ import java.text.Format;
 import java.time.LocalDate;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -139,4 +140,20 @@ public class QuizController {
 			}
 			return year + "년은 윤년이 아닙니다.";
 	}
+	
+	
+//	파라미터가 너무 많거나 의미가 있는 데이터(객체)인 경우
+//		->클래스를 만들어서 필드를 원하는 형태로 구성한 뒤 자동 수신을 부탁
+//		-> @ModelAttribute를 사용
+//			-> 자동으로 올려주지만 자료가 없어도 올려줌(null, 0)
+//			-> 파라미터를 강제하기 어려움(추가 검사 및 예외처리가 필요)
+//	ex) 학생 정보(이름,점수)
+	
+	@RequestMapping("/student")
+	@ResponseBody
+//	public String student(Student 클래스를 이용하여 알아서 받아주세요) {
+	public String student(@ModelAttribute Student stu) {
+		return "받은 데이터 : " + stu.toString();
+	}
+	
 }
