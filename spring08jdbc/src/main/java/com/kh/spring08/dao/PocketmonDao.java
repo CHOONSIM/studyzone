@@ -48,4 +48,25 @@ public class PocketmonDao {
 		String sql = "select*from pocketmon order by no asc";
 		return jdbcTemplate.query(sql, mapper);
 	}
+	
+
+//	검색
+	
+	public List<PocketmonDto> selectList(String column,String keyword){
+		String sql = "select*from pocketmon where instr(#1,?) > 0"
+				+ "order by #1 asc";
+		sql = sql.replace("#1", column);
+		Object[] param = {keyword};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
