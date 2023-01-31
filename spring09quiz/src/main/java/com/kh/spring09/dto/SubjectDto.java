@@ -1,4 +1,4 @@
-package com.kh.spring09.subject.dto;
+package com.kh.spring09.dto;
 
 public class SubjectDto {
 	public int no;
