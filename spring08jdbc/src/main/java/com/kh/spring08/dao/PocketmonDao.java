@@ -74,7 +74,22 @@ public class PocketmonDao {
 	}
 	
 	
+//	수정
 	
+	public boolean update(PocketmonDto dto) {
+		String sql = "update pocketmon set name = ?, type = ? where no=?";
+		Object[] param = {dto.getName(), dto.getType(), dto.getNo()};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+	
+	
+//	삭제
+	
+	public boolean delete(int no) {
+		String sql = "delete pocketmon where no = ?";
+		Object[]param = {no};
+		return jdbcTemplate.update(sql,param)>0;
+	}
 	
 	
 	
