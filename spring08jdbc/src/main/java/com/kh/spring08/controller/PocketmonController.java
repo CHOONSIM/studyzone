@@ -25,6 +25,8 @@ public class PocketmonController {
 //	Spring 두번째 특징 (DI, Dependency Injection, 의존성 주입)
 	
 	
+//		등록
+//	http://localhost:8080/insert?no=1&name=테스트&type=테스트
 	@Autowired
 	private PocketmonDao dao;
 	
@@ -71,6 +73,7 @@ public class PocketmonController {
 	
 	
 //		목록&검색 통합페이지
+//		http://localhost:8080/all-in-one?column=name&keyword=이리
 	@RequestMapping("/all-in-one")		//주소에는 대시(-) 사용가능
 	@ResponseBody
 	public String allInOne(
@@ -96,6 +99,7 @@ public class PocketmonController {
 	
 	
 //		상세페이지
+//		http://localhost:8080/detail?no=1
 	@RequestMapping("/detail")
 	@ResponseBody
 	public String detail(@RequestParam int no) {			//Primary Key = no
@@ -107,7 +111,32 @@ public class PocketmonController {
 		else {
 			return dto.toString();
 		}
-		
 	}
-
+	
+	
+//		수정페이지 
+//		http://localhost:8080/edit?no=1&name=테스트&type=테스트
+	@RequestMapping("/edit")	//SOA : Service Oriented Architecture 기능고려하여 이름
+	@ResponseBody
+	public String edit(@ModelAttribute PocketmonDto dto) {
+		boolean sucess = dao.update(dto);
+		if(sucess) 
+			return "변경완료";
+		else
+			return "대상없음";
+	}
+	
+	
+//	삭제페이지
+//	http://localhost:8080/delete?no=1
+	@RequestMapping("/delete")
+	@ResponseBody
+	public String delete(@RequestParam int no) {
+		boolean sucess = dao.delete(no);
+		
+		if(sucess) 
+			return "삭제완료";
+		else
+			return "대상없음";
+	}
 }
