@@ -93,7 +93,7 @@ public class QuizController {
 		int totalHour = (end-start) / 100;
 		int totalMin = (end-start) % 100;
 		
-		double minCharge = pcCharge / 60;
+		double minCharge = (double)pcCharge / 60;
 		int pcChargeH = totalHour * pcCharge;
 		double pcChargeM = totalMin * minCharge;
 		double pcCharge1 = pcChargeH + pcChargeM;
@@ -108,7 +108,6 @@ public class QuizController {
 	public String sum(
 			@RequestParam (required = false, defaultValue = "0")int start,
 			@RequestParam (required = false)int end) {
-		int []data = new int[] {start,end};
 		int total =0;
 		for(int i=start; i<=end; i++) {
 			total += i;
@@ -122,7 +121,7 @@ public class QuizController {
 			@RequestParam(required = false, defaultValue = "0")int korean,
 			@RequestParam(required = false, defaultValue = "0")int english,
 			@RequestParam(required = false, defaultValue = "0")int math) {
-		double average = (korean + english + math) / 3;
+		double average = (korean + english + math) / 3.0;
 		if(korean >= 40 && english >=40 && math >=40 && average >=60) {
 			return "평균 점수 " + average +" 점으로 합격입니다.";
 		}
