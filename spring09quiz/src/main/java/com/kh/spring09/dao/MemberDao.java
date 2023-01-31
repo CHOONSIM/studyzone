@@ -13,8 +13,22 @@ import com.kh.spring09.dto.MemberDto;
 
 @Repository
 public class MemberDao {
+	
+//		등록
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+	
+	public void newbie(MemberDto dto) {
+		String sql = "insert into member(member_id, member_pw, member_nick, member_tel, member_email, member_birth, member_post, "
+				+ "member_basic_addr, member_detail_addr, member_level, member_point, member_join) "
+				+ "values(?,?,?,?,?,?,?,?,?,'준회원',0,sysdate,null)";
+		Object[] param = {dto.getMemberId(), dto.getMemberPw(), dto.getMemberNick(), dto.getMemberTel(), dto.getMemberEmail(), dto.getMemberBirth(), dto.getMemberPost(), 
+				dto.getMemberBasicAddr(), dto.getMemberDetailAddr(), dto.getMemberLevel(), dto.getMemberPoint(), dto.getMemberJoin()};
+		jdbcTemplate.update(sql,param);
+	}
+	
 	private RowMapper<MemberDto> mapper = new RowMapper<MemberDto>() {
-		
+
 		@Override
 		public MemberDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 			MemberDto dto = new MemberDto();
@@ -35,19 +49,6 @@ public class MemberDao {
 		}
 		
 	};
-	
-//		등록
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
-	
-	public void newbie(MemberDto dto) {
-		String sql = "insert into member(member_id, member_pw, member_nick, member_tel, member_email, member_birth, member_post, "
-				+ "member_basic_addr, member_detail_addr, member_level, member_point, member_join) "
-				+ "values(?,?,?,?,?,?,?,?,?,'준회원',0,sysdate,null)";
-		Object[] param = {dto.getMemberId(), dto.getMemberPw(), dto.getMemberNick(), dto.getMemberTel(), dto.getMemberEmail(), dto.getMemberBirth(), dto.getMemberPost(), 
-				dto.getMemberBasicAddr(), dto.getMemberDetailAddr(), dto.getMemberLevel(), dto.getMemberPoint(), dto.getMemberJoin()};
-		jdbcTemplate.update(sql,param);
-	}
 	
 	
 //		목록
