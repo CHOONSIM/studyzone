@@ -1,4 +1,4 @@
-package com.kh.spring09.subject.controller;
+package com.kh.spring09.controller;
 
 import java.util.List;
 
@@ -9,12 +9,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kh.spring09.subject.dao.SubjectDao;
-import com.kh.spring09.subject.dto.SubjectDto;
+import com.kh.spring09.dao.SubjectDao;
+import com.kh.spring09.dto.SubjectDto;
 
+//컨트롤러에는 공용 주소를 부여할 수 있다
 @Controller
+@RequestMapping("/subject")
 public class SubjectController {
-	
+//	@RequestMapping("/insert")
+//	@RequestMapping("/list")
+//	@RequestMapping("/detail")
+//	@RequestMapping("/edit")
+//	@RequestMapping("/delete")
 //		등록
 	@Autowired
 	private SubjectDao dao;
