@@ -27,9 +27,12 @@
 	- 목표 위치 - http://localhost:8080/test02
 	- 현재 위치와 목표 위치의 엔드포인드(endpoint,마지막 슬래시) 가 같으므로 이름만 작성
 	 -->
-	 <a href="http://localhost:8080/test02">기본 구조 예제로 이동</a><br>
-	 <a href="//localhost:8080/test02">기본 구조 예제로 이동</a><br>
-	 <a href="/test02">기본 구조 예제로 이동</a><br>
+	 <!-- 절대 경로 방식 -->
+	 <a href="http://localhost:8080/view/test02">기본 구조 예제로 이동</a><br>
+	 <a href="//localhost:8080/view/test02">기본 구조 예제로 이동</a><br>
+	 <a href="/view/test02">기본 구조 예제로 이동</a><br>
+	 
+	 <!-- 상대 경로 방식 -->
 	 <a href="test02">기본 구조 예제로 이동</a><br>
 	 <a href="img01">이미지 예제1로 이동</a><br>
 	 <a href="img02">이미지 예제2로 이동</a><br>

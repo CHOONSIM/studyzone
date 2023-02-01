@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/view")
 public class ViewController {
 	
 //	JSP를 사용자에게 전달하려면 컨트롤러에 @ResponseBody가 없어야한다
@@ -33,5 +34,10 @@ public class ViewController {
 	@RequestMapping("/a01")
 	public String a01() {
 		return"/WEB-INF/views/a01.jsp";
+	}
+	
+	@RequestMapping("/form01")
+	public String form01() {
+		return"/WEB-INF/views/form01.jsp";
 	}
 }
