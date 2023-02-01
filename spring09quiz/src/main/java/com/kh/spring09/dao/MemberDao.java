@@ -11,21 +11,12 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spring09.dto.MemberDto;
 
-@Repository
+@Repository			//영속성 개체를 관리하는 도구
 public class MemberDao {
 	
-//		등록
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	public void newbie(MemberDto dto) {
-		String sql = "insert into member(member_id, member_pw, member_nick, member_tel, member_email, member_birth, member_post, "
-				+ "member_basic_addr, member_detail_addr, member_level, member_point, member_join) "
-				+ "values(?,?,?,?,?,?,?,?,?,'준회원',0,sysdate,null)";
-		Object[] param = {dto.getMemberId(), dto.getMemberPw(), dto.getMemberNick(), dto.getMemberTel(), dto.getMemberEmail(), dto.getMemberBirth(), dto.getMemberPost(), 
-				dto.getMemberBasicAddr(), dto.getMemberDetailAddr(), dto.getMemberLevel(), dto.getMemberPoint(), dto.getMemberJoin()};
-		jdbcTemplate.update(sql,param);
-	}
 	
 	private RowMapper<MemberDto> mapper = new RowMapper<MemberDto>() {
 
@@ -50,6 +41,15 @@ public class MemberDao {
 		
 	};
 	
+//		등록
+	public void newbie(MemberDto dto) {
+		String sql = "insert into member(member_id, member_pw, member_nick, member_tel, member_email, member_birth, member_post, "
+				+ "member_basic_addr, member_detail_addr, member_level, member_point, member_join) "
+				+ "values(?,?,?,?,?,?,?,?,?,'준회원',0,sysdate,null)";
+		Object[] param = {dto.getMemberId(), dto.getMemberPw(), dto.getMemberNick(), dto.getMemberTel(), dto.getMemberEmail(), dto.getMemberBirth(), dto.getMemberPost(), 
+				dto.getMemberBasicAddr(), dto.getMemberDetailAddr(), dto.getMemberLevel(), dto.getMemberPoint(), dto.getMemberJoin()};
+		jdbcTemplate.update(sql,param);
+	}
 	
 //		목록
 	public List<MemberDto> selectList(){
