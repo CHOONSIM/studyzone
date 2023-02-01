@@ -22,6 +22,7 @@ public class MemberController {
 	private MemberDao dao;
 
 	@RequestMapping("/newbie")
+	@ResponseBody
 	public String newbie(@ModelAttribute MemberDto dto) {
 		dao.newbie(dto);
 		return "회원가입이 완료되었습니다.";
@@ -29,6 +30,7 @@ public class MemberController {
 	
 //	목록검색
 	@RequestMapping("/listandsearch")
+	@ResponseBody
 	public String listandsearch(
 			@RequestParam(required = false, defaultValue = "member_id")String column,
 			@RequestParam(required = false, defaultValue = "")String keyword,
@@ -52,6 +54,7 @@ public class MemberController {
 	
 //	상세
 	@RequestMapping("/detail")
+	@ResponseBody
 	public String detail(@RequestParam String memberId) {
 	MemberDto dto = dao.selectOne(memberId);
 	if(dto==null) 
@@ -62,6 +65,7 @@ public class MemberController {
 	
 //	수정
 	@RequestMapping("/edit")
+	@ResponseBody
 	public String edit(@ModelAttribute MemberDto dto) {
 		boolean done = dao.update(dto);
 		return done ?"개인정보변경 완료" : "잘못된 입력입니다. ";
@@ -69,6 +73,7 @@ public class MemberController {
 	
 //	삭제
 	@RequestMapping("/delete")
+	@ResponseBody
 	public String delete(@RequestParam String memberId) {
 		boolean done = dao.delete(memberId);
 		if(done)
