@@ -2,7 +2,6 @@ package com.kh.spring10.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class ViewController {
@@ -14,5 +13,10 @@ public class ViewController {
 	public String test01() {
 //		return"test01.jsp의 위치"
 		return "/WEB-INF/views/test01.jsp";
+	}
+	
+	@RequestMapping("/test02")
+	public String test02() {
+		return "/WEB-INF/views/test02.jsp";
 	}
 }
