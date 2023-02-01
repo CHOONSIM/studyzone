@@ -24,4 +24,9 @@ public class ViewController {
 	public String img01() {
 		return"/WEB-INF/views/img01.jsp";
 	}
+	
+	@RequestMapping("/img02")
+	public String img02() {
+		return"/WEB-INF/views/img02.jsp";
+	}
 }
