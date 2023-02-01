@@ -46,4 +46,10 @@ public class ViewController {
 	public String form02() {
 		return"/WEB-INF/views/form02.jsp";
 	}
+	
+//	pocketmon 검색 폼 페이지
+	@RequestMapping("/form03")
+	public String form03() {
+		return"/WEB-INF/views/form03.jsp";
+	}
 }
