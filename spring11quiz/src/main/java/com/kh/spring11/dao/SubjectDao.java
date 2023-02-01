@@ -57,11 +57,8 @@ public class SubjectDao {
 		String sql = "select*from subject where no = ? ";
 		Object[] param = {no};
 		List<SubjectDto> list = jdbcTemplate.query(sql, mapper, param);
-		return list.isEmpty() ? null : list.get(0);		//삼항연산자 - 조건 ? if : else
-//		if(list.isEmpty())
-//			return null;
-//		else
-//			return list.get(0);
+		return list.isEmpty() ? null : list.get(0);	
+
 	}
 	
 //		수정

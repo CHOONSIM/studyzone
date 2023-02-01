@@ -1,5 +1,6 @@
 package com.kh.spring11.controller;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.spring11.dao.SubjectDao;
 import com.kh.spring11.dto.SubjectDto;
+
 
 //컨트롤러에는 공용 주소를 부여할 수 있다
 @Controller
@@ -40,11 +42,11 @@ public class SubjectController {
 	public String insert(@ModelAttribute SubjectDto dto) {
 		dao.insert(dto);
 //		return "redirect:list";					//상대경로
-		return"redirect:/subject/list";		//절대경로	
+		return"redirect:/subject/listandsearch";		//절대경로	
 	}
 	
 //		목록검색
-	@RequestMapping("/list")
+	@RequestMapping("/listandsearch")
 	@ResponseBody
 	public String listandsearch(
 			@RequestParam(required = false, defaultValue = "name")String column,
@@ -99,4 +101,5 @@ public class SubjectController {
 		else
 			return"삭제작업 대상 없음";
 	}
+	
 }
