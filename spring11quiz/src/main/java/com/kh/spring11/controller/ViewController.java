@@ -8,51 +8,51 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ViewController {
 	
 //	student 등록
-	@RequestMapping("/formSt01")
-	public String formSt01() {
-		return "/WEB-INF/views/formSt01.jsp";
+	@RequestMapping("/form01")
+	public String form01() {
+		return "/WEB-INF/views/form01.jsp";
 	}
 	
 //	student 목록,검색,상세
-	@RequestMapping("/formSt02")
-	public String formSt02() {
-		return "/WEB-INF/views/formSt02.jsp";
+	@RequestMapping("/form02")
+	public String form02() {
+		return "/WEB-INF/views/form02.jsp";
 	}
 	
 //	student 수정
-	@RequestMapping("/formSt03")
-	public String formSt03() {
-		return "/WEB-INF/views/formSt03.jsp";
+	@RequestMapping("/form03")
+	public String form03() {
+		return "/WEB-INF/views/form03.jsp";
 	}
 	
 //	student 삭제
-	@RequestMapping("/formSt04")
-	public String formSt04() {
-		return "/WEB-INF/views/formSt04.jsp";
+	@RequestMapping("/form04")
+	public String form04() {
+		return "/WEB-INF/views/form04.jsp";
 	}
 
 //	subject 등록
-	@RequestMapping("/formSt01")
-	public String formSu01() {
-		return "/WEB-INF/views/formSu01.jsp";
+	@RequestMapping("/form05")
+	public String form05() {
+		return "/WEB-INF/views/form05.jsp";
 	}
 	
 //	subject 목록검색상세
-	@RequestMapping("/formSu02")
-	public String formSu02() {
-		return "/WEB-INF/views/formSu02.jsp";
+	@RequestMapping("/form06")
+	public String form06() {
+		return "/WEB-INF/views/form06.jsp";
 	}
 	
 //	subject 수정
-	@RequestMapping("/formSu03")
-	public String formSu03() {
-		return "/WEB-INF/views/formSu03.jsp";
+	@RequestMapping("/form07")
+	public String form07() {
+		return "/WEB-INF/views/form07.jsp";
 	}
 	
 //	subject 삭제
-	@RequestMapping("/formStu04")
-	public String formSu04() {
-		return "/WEB-INF/views/formSu04.jsp";
+	@RequestMapping("/form08")
+	public String form08() {
+		return "/WEB-INF/views/form08.jsp";
 	}
 
 
