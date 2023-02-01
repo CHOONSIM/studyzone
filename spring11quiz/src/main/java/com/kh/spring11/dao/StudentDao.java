@@ -18,7 +18,7 @@ public class StudentDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	 public void insert(StudentDto dto) {
-		 String sql = "insert into subject(no,name,korean,english,math) values(student_seq_nextval,?,?,?,? )";
+		 String sql = "insert into student(no,name,korean,english,math) values(student_seq.nextval,?,?,?,? )";
 		 Object[] param = {dto.getName(), dto.getKorean(), dto.getEnglish(), dto.getMath()};
 		jdbcTemplate.update(sql, param); 
 	 }

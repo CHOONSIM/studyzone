@@ -23,6 +23,7 @@
 		</form>
 		
 		<h2>학생 상세정보</h2>
+		<h5>학생번호 입력</h5>
 		<form action="/student/detail">
 			<input type="number"name="no">
 			<button>상세정보</button>

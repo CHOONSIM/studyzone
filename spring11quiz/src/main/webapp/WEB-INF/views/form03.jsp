@@ -20,7 +20,7 @@
 			<input  type="number"name="english"><br>
 			<h4>수학점수</h4>
 			<input  type="number"name="math"><br><br>
-			<button>수정완료</button>
+			<button>수정</button>
 		</form>
 	</body>
 </html>

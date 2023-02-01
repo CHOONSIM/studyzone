@@ -13,6 +13,7 @@ import com.kh.spring11.dao.StudentDao;
 import com.kh.spring11.dto.StudentDto;
 
 @Controller
+@RequestMapping("/student")
 public class StudentController {
 	
 //		등록
