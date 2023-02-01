@@ -10,7 +10,7 @@
 	<h1>학생 정보 수정</h1>
 	<a href="/student/listandsearch">전체목록확인</a>
 		<form action="/student/edit">
-			<h4>번호</h4>
+			<h4>수정할 학생번호</h4>
 			<input type="number"name="no"><br>
 			<h4>이름</h4>
 			<input type="text"name="name"><br>
