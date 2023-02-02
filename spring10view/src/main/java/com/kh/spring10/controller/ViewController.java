@@ -1,7 +1,11 @@
 package com.kh.spring10.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.kh.spring10.dto.PocketmonDto;
 
 @Controller
 @RequestMapping("/view")
@@ -52,4 +56,41 @@ public class ViewController {
 	public String form03() {
 		return"/WEB-INF/views/form03.jsp";
 	}
+	
+	
+	/*-----------------------------------------------------------------------------------------------*/
+	
+//	만약 View(화면)으로 데이터로 전달하고 싶다면?
+//	- Spring에서 제고하는 방법 중 Model 클래스를 사용
+//	- Model을 매개변수로 선언하면 자동으로 화면까지 전달
+//	- 원하는 데이터를 Model에 첨부하면 된다
+//	- 데이터 추가는 model.addAttribute("key",value)로 한다
+//	- key는 문자열 , value는 아무거나 가능
+	
+	@GetMapping("/data01")
+	public String data01(Model model) {
+		model.addAttribute("a", 100);
+		model.addAttribute("b", "hello");
+		PocketmonDto dto = new PocketmonDto();
+		dto.setNo(999);
+		dto.setName("아무개요");
+		dto.setType("테스트");
+		model.addAttribute("monster", dto);
+		return"/WEB-INF/views/data01.jsp";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
