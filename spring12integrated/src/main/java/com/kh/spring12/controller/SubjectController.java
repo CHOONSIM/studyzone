@@ -2,10 +2,12 @@ package com.kh.spring12.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.spring12.dao.SubjectDao;
 import com.kh.spring12.dto.SubjectDto;
@@ -37,5 +39,11 @@ public class SubjectController {
 	public String insertFinish() {
 		return"/WEB-INF/views/subject/insertFinish.jsp";
 	}
-
+	
+	@GetMapping("/detail")
+	public String detail(Model model, @RequestParam int no ) {
+		SubjectDto subjectDto = subjectDao.selectOne(no);
+		model.addAttribute("subjectDto", subjectDto);
+		return"/WEB-INF/views/subject/detail.jsp";
+	}
 }

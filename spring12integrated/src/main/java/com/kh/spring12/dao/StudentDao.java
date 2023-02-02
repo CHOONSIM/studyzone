@@ -52,7 +52,7 @@ public class StudentDao {
 	 }
 	 	
 //	 	상세
-	 public StudentDto selctOne(int no) {
+	 public StudentDto selectOne(int no) {
 		 String sql = "select*from student where no = ?";
 		 Object[] param = {no};
 		 List<StudentDto> list = jdbcTemplate.query(sql, mapper, param);
