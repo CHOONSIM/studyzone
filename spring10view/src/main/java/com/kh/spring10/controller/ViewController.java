@@ -105,6 +105,15 @@ public class ViewController {
 		return "/WEB-INF/views/data04.jsp";
 	}
 	
+//	데이터가 항상 변수로 존재라는 것은 아니다
+//	(EX : 목록이나 검색은 데티어가 배열 또는 List 형태로 존재한다.)
+	@GetMapping("/data05")
+	public String data05(Model model) {
+		int[] lotto = new int[] {10, 13, 24, 25, 37, 41};
+		model.addAttribute("lotto", lotto);
+		return "/WEB-INF/views/data05.jsp";
+	}
+	
 	
 	
 	
