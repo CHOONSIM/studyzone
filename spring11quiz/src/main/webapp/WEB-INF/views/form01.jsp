@@ -5,6 +5,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>학생 성적 등록</title>
+		<a href="http://localhost:8080/view/student">과제 목록으로</a><br><br>
 	</head>
 	<body>
 		<h1>학생 성적 정보 등록</h1>

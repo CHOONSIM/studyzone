@@ -5,6 +5,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>강의 정보 삭제</title>
+		<a href="http://localhost:8080/view/subject">과제 목록으로</a><br><br>
 	</head>
 	<body>
 	<h1>강의 정보 삭제</h1>

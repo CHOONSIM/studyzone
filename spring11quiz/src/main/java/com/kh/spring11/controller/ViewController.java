@@ -4,8 +4,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+
+
 @RequestMapping("/view")
 public class ViewController {
+	
+	@RequestMapping("/home")
+	public String home() {
+		return "/WEB-INF/views/home.jsp";
+	}
+	
+	@RequestMapping("/student")
+	public String student() {
+		return "/WEB-INF/views/student.jsp";
+	}
+	
+	@RequestMapping("/subject")
+	public String subject() {
+		return "/WEB-INF/views/subject.jsp";
+	}
 	
 //	student 등록
 	@RequestMapping("/form01")
