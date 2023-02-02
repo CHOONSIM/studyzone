@@ -96,6 +96,15 @@ public class ViewController {
 	}
 	
 	
+//	데이터라는 것이 항상 고정적으로 있지는 않다
+//	(EX :  상세정보는 PK따라 데이터가 달라짐)
+	@GetMapping("/data04")
+	public String data04(Model model) {
+		model.addAttribute("message",null);
+//		model.addAttribute("message", "HELLO JSP");
+		return "/WEB-INF/views/data04.jsp";
+	}
+	
 	
 	
 	
