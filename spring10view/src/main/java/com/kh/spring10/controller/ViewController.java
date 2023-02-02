@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.spring10.dto.PocketmonDto;
 
@@ -78,6 +79,23 @@ public class ViewController {
 		model.addAttribute("monster", dto);
 		return"/WEB-INF/views/data01.jsp";
 	}
+	
+	@GetMapping("/data02")
+	public String data02(Model model,
+		@RequestParam int a, @RequestParam int b) {
+		int result = a*b;
+		model.addAttribute("result",result);
+		return "/WEB-INF/views/data02.jsp";
+	}
+	
+	@GetMapping("/data03")
+	public String data03(Model model, @RequestParam double krw) {
+		double usd = krw * 0.00082;
+		model.addAttribute("usd", usd);
+		return"/WEB-INF/views/data03.jsp";
+	}
+	
+	
 	
 	
 	
