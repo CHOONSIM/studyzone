@@ -22,15 +22,29 @@
 <body>
 	<h1>message = ${message }</h1>
 	<h1>message = ${message == null}</h1>
-	<h1>message = ${message != null}</h1>
 	
-	<!--  JSTL의 if 태그를 이요해서 조건을 구현 -->
+	
+	<!-- 
+		 JSTL의 if 태그를 이요해서 조건을 구현 
+		(주의) c:else는 조재하지 않는다(c:choose로 해결)
+	-->
      <c:if test="${message == null}">
      	<h2>메세지가 없습니다.</h2>
      	</c:if>
      <c:if test="${message != null}">
      	<h2>메세지 = ${message}</h2>
      	</c:if>
+     	
+     	
+	<c:choose>
+		<c:when test="${message == null}">
+			<h2>메세지가 없습니다.</h2>
+		</c:when>
+		<c:otherwise>
+			<h2>메세지 = ${message}</h2>
+		</c:otherwise>
+	</c:choose>
+	
 	
 </body>
 </html>

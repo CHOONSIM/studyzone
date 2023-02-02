@@ -100,8 +100,8 @@ public class ViewController {
 //	(EX :  상세정보는 PK따라 데이터가 달라짐)
 	@GetMapping("/data04")
 	public String data04(Model model) {
-		model.addAttribute("message",null);
-//		model.addAttribute("message", "HELLO JSP");
+//		model.addAttribute("message",null);
+		model.addAttribute("message", "HELLO JSP");
 		return "/WEB-INF/views/data04.jsp";
 	}
 	
