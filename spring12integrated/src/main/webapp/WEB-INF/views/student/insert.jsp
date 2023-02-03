@@ -8,6 +8,7 @@
 	</head>
 	<body>
 		<h1>학생 성적 정보 등록</h1>
+		<h3><a href="list">목록보기</a></h3>
 		<form action="insert"method="post">
 			이름 : <input type="text"name="name"required placeholder="학생 이름"><br>
 			국어 점수 : <input type="number"name="korean"required placeholder="국어 점수"><br>

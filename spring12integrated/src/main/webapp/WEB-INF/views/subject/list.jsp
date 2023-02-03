@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>강의 목록</title>
+	<title>강의 ${mode }결과</title>
 </head>
 <body>
 	<h1>강의 목록/검색</h1><br>
@@ -19,7 +19,7 @@
 			 <option value="price">수강료</option>
 			 <option value="type">강의타입</option>
 			</select>
-			<input type = "search"name="keyword"placeholder="검색어"value=${keyword }>
+			<input type = "search"name="keyword"placeholder="검색어"value="${keyword }">
 			<button>검색</button>
 		</form>
 		

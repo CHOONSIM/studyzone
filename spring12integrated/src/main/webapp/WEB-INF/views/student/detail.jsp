@@ -23,5 +23,7 @@
 	<li>총 성적 합 : ${studentDto.total }점</li><br>
 	<li>평균 : ${studentDto.average }점</li><br>
 	</ul>
+	
+	<a href="list">목록</a>
 </body>
 </html>

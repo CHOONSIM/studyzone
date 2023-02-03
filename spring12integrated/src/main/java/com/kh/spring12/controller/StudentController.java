@@ -22,7 +22,7 @@ public class StudentController {
 	
 	@GetMapping("/insert")
 	public String insertInput() {
-		return"/WEB-INF/views/student/insert.jsp";
+		return "/WEB-INF/views/student/insert.jsp";
 	}
 	
 	@PostMapping("/insert")
@@ -42,5 +42,22 @@ public class StudentController {
 //		model.addAttribute("studentDto",studentDto);
 		model.addAttribute("studentDto",studentDao.selectOne(no));
 		return "/WEB-INF/views/student/detail.jsp";
+	}
+	
+	@GetMapping("/list")
+	public String list(Model model,
+			@RequestParam(required = false, defaultValue = "") String column,
+			@RequestParam(required = false, defaultValue = "") String keyword) {
+		boolean search =!column.equals("") && !keyword.equals("");
+		if(search) {
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("mode", "검색");
+			model.addAttribute("list", studentDao.selectList(column, keyword));
+		}
+		else {
+			model.addAttribute("mode", "목록");
+			model.addAttribute("list",studentDao.selectList());
+		}
+		return "/WEB-INF/views/student/list.jsp";
 	}
 }
