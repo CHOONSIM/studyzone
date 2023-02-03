@@ -64,7 +64,6 @@ public class PocketmonController {
 		else {
 			model.addAttribute("list", pocketmonDao.selectList(column, keyword));
 		}
-		model.addAttribute("list", pocketmonDao.selectList());
 			return "/WEB-INF/views/pocketmon/list.jsp";
 	}
 	

@@ -114,6 +114,11 @@ public class ViewController {
 		return "/WEB-INF/views/data05.jsp";
 	}
 	
+	@GetMapping("/table01")
+	public String table01() {
+		return"/WEB-INF/views/table01.jsp";
+	}
+	
 	
 	
 	

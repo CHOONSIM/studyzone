@@ -11,7 +11,7 @@
 <body>
 	<h1>포켓몬 목록/검색</h1>
 	
-	<h2><a href="inserInput">신규등록</a></h2>
+	<h2><a href="insertInput">신규등록</a></h2>
 	
 	<!-- 검색을 위한 검색창도 존재해야함 -->
 	<form action="list" method="get">
