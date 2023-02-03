@@ -8,7 +8,8 @@
 </head>
 <body>
 	<h1>과목이 등록 되었습니다.</h1>
-	<a href="insert">추가 과목 등록하기</a>
+	<h2><a href="insert">추가 과목 등록하기</a></h2><br><br>
+	<h2><a href="list">목록보기</a></h2>
 
 </body>
 </html>

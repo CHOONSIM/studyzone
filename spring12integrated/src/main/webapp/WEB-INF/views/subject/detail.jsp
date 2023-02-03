@@ -13,5 +13,10 @@
 	강의기간 : ${subjectDto.period }<br>
 	수강료 : ${subjectDto.price }<br>
 	강의타입 : ${subjectDto.type }<br> 
+	
+	<h2>
+	<a href="list">목록으로 이동</a>
+	</h2>
+	
 </body>
 </html>
