@@ -13,5 +13,9 @@
 	번호 : ${pocketmonDto.no }	<br>
 	이름 : ${pocketmonDto.name }	<br>
 	속성 : ${pocketmonDto.type }	<br>
+	
+	<h2>
+	<a href="list">목록으로 이동</a>
+	</h2>
 </body>
 </html>

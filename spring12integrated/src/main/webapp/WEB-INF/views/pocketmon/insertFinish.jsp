@@ -8,6 +8,7 @@
 </head>
 <body>
 	<h1>등록이 완료되었습니다</h1>
-	<a href="insertInput">추가 등록하기</a>
+	<h2><a href="insertInput">추가 등록하기</a></h2><br><br>
+	<h2><a href="list">목록보기</a></h2>
 </body>
 </html>

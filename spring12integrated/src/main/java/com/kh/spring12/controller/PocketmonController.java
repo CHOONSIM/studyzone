@@ -47,11 +47,26 @@ public class PocketmonController {
 		return"/WEB-INF/views/pocketmon/detail.jsp";
 	}
 	
-	
-	
-	
-	
-	
+//	목록
+	@GetMapping("/list")
+	public String list(Model model,
+			@RequestParam(required = false, defaultValue = "name")String column,
+			@RequestParam(required = false, defaultValue = "")String keyword) {
+//		if(keyword가 비어있다면) {
+//			model.addAttribute("list", 목록데이터)
+//		}
+//		else {
+//			model.addAttribute("list", 검색데이터)
+//		}
+		if(keyword.equals("")) {
+			model.addAttribute("list", pocketmonDao.selectList());
+		}
+		else {
+			model.addAttribute("list", pocketmonDao.selectList(column, keyword));
+		}
+		model.addAttribute("list", pocketmonDao.selectList());
+			return "/WEB-INF/views/pocketmon/list.jsp";
+	}
 	
 	
 }
