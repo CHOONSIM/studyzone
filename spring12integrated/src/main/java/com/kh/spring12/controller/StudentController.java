@@ -60,4 +60,10 @@ public class StudentController {
 		}
 		return "/WEB-INF/views/student/list.jsp";
 	}
+	
+	@GetMapping("/delete")
+	public String delete (@RequestParam int no) {
+		studentDao.delete(no);
+		return"redirect:list";
+	}
 }

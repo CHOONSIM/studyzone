@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>학생 성적 상세 정보</h1>
-	
+	<hr>
 	<!-- 
 		ul : 순서 없는 리스트 태그
 			- select 와 같은 주고로 배치하는 태크
@@ -23,7 +23,14 @@
 	<li>총 성적 합 : ${studentDto.total }점</li><br>
 	<li>평균 : ${studentDto.average }점</li><br>
 	</ul>
-	
-	<a href="list">목록</a>
+	<hr>
+	<h4>
+	<a href="list">목록</a><br><br>
+	</h4>
+	<h4>
+	<a href ="#">수정</a>
+	<br><br>
+	<a href ="delete?no=${studentDto.no }">삭제</a>
+	</h4>
 </body>
 </html>

@@ -40,6 +40,7 @@
 					<th>강의기간</th>
 					<th>수강료</th>
 					<th>강의타입</th>
+					<th>관리</th>
 				</tr>
 			</thead>
 			<tbody align="center">
@@ -54,6 +55,10 @@
 					<td>${subjectDto.period }</td>
 					<td align ="right">${subjectDto.price }</td>
 					<td>${subjectDto.type }</td>
+					<td>
+						<a href="#">수정</a>
+						<a href="delete?no=${subjectDto.no}&keyword=${keyword}">삭제</a>
+					</td>
 				</tr>
 				
 			</c:forEach>
@@ -62,7 +67,7 @@
 			<tfoot>
 				<tr>
 					<!-- 5칸 만큼 차지하세요 -->
-					<td colspan="5" align="right">
+					<td colspan="6" align="right">
 						<a href="insertInput">신규 강의 등록</a>
 					</td>
 				</tr>

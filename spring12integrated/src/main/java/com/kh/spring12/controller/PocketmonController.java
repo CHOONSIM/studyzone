@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spring12.dao.PocketmonDao;
 import com.kh.spring12.dto.PocketmonDto;
@@ -65,6 +66,32 @@ public class PocketmonController {
 			model.addAttribute("list", pocketmonDao.selectList(column, keyword));
 		}
 			return "/WEB-INF/views/pocketmon/list.jsp";
+	}
+	
+//	삭제
+	@GetMapping("/delete")
+	public String delete(@RequestParam int no) {				//처리만해서 화면 필요없음 Model model X
+		pocketmonDao.delete(no);
+		return"redirect:list";			//상대경로
+//		return"ridirect:/pocketmon/list";		//절대경로
+	}
+	
+//	수정(입력+처리)
+//	- 수정입력 페이지는 반드시 모든 기존 정보가 작성이 되어 있도로 국현
+	@GetMapping("/edit")
+	public String edit(Model model, @RequestParam int no) {
+		model.addAttribute("pocketmonDto",pocketmonDao.selectOne(no));
+		return "/WEB-INF/views/pocketmon/edit.jsp";
+	}
+	
+	@PostMapping("/edit")
+	public String edit(@ModelAttribute PocketmonDto pocketmonDto,
+			RedirectAttributes attr) {
+		pocketmonDao.update(pocketmonDto);
+		
+//		redirect에 필요한 no 데이터를 추가(주소 뒤에?no=XXX 가 추가됨)
+		attr.addAttribute("no", pocketmonDto.getNo());
+		return"redirect:detail";
 	}
 	
 	

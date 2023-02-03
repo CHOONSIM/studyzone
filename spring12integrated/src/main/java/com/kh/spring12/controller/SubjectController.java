@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spring12.dao.SubjectDao;
 import com.kh.spring12.dto.SubjectDto;
@@ -63,4 +64,25 @@ public class SubjectController {
 		}
 		return "/WEB-INF/views/subject/list.jsp";
 	}
+	
+//	리다이렉트 사용시 데이터를 첨부해야 하는 경우
+//	- 스프링에서 RedirectAttributes 라는 도구를 제공
+//	- Model과 사용법이 동일
+	
+	@GetMapping("/delete")
+	public String delete(
+				@RequestParam int no,
+				@RequestParam (required = false, defaultValue = "")String keyword,
+				RedirectAttributes attr) {
+		subjectDao.delete(no);
+		if(keyword.equals("")) {
+			
+			return "redirect:list";
+		}
+		else {
+			return"redirect:'ist";
+		}
+	}
+	
+	
 }

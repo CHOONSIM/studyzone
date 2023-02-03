@@ -28,15 +28,16 @@
 	
 	--%>
 	<br><br>
-	<table border="1" width="300">
+	<table border="1" width="400">
 		<thead>
 			<tr>
 				<th>번호</th>
 				<th>이름</th>
 				<th>속성</th>
+				<th>관리</th>
 			</tr>
 		</thead>
-			<tbody>
+			<tbody align ="center">
 			<c:forEach var ="pocketmonDto" items="${list }">
 				<tr>
 					<td>${pocketmonDto.no }</td>
@@ -46,6 +47,10 @@
 						</a>
 					</td>
 					<td>${pocketmonDto.type }</td>
+					<td >
+					<a href="edit?no=${pocketminDto.no }">수정</a>
+					<a href="delete?no=${pocketmonDto.no }">삭제</a>
+					</td>
 				</tr>
 				</c:forEach>
 			</tbody>
