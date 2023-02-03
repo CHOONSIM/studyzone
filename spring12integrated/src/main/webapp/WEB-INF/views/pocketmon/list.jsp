@@ -50,13 +50,5 @@
 				</c:forEach>
 			</tbody>
 	</table>
-	
-	
-	<c:forEach var ="pocketmonDto" items="${list }">
-		<h2>
-		${pocketmonDto }
-		<a href = "detail?no=${pocketmonDto.no }">상세보기</a>
-		</h2>
-	</c:forEach>
 </body>
 </html>
