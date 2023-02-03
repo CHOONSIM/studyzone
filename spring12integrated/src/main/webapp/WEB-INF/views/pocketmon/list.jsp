@@ -27,6 +27,31 @@
 		JSTL을 사용하여 반복적으로 출력하도록 구현 %-->
 	
 	--%>
+	<br><br>
+	<table border="1" width="300">
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th>이름</th>
+				<th>속성</th>
+			</tr>
+		</thead>
+			<tbody>
+			<c:forEach var ="pocketmonDto" items="${list }">
+				<tr>
+					<td>${pocketmonDto.no }</td>
+					<td>
+						<a href="detail?no=${pocketmonDto.no }">
+					${pocketmonDto.name }
+						</a>
+					</td>
+					<td>${pocketmonDto.type }</td>
+				</tr>
+				</c:forEach>
+			</tbody>
+	</table>
+	
+	
 	<c:forEach var ="pocketmonDto" items="${list }">
 		<h2>
 		${pocketmonDto }
