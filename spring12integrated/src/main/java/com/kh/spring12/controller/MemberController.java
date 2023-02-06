@@ -62,7 +62,7 @@ public class MemberController {
 			return"redirect:login";
 		}
 		
-//		모두 통화한 경우만 남음
+//		모두 통과한 경우만 남음
 			return"redirect:/";		//메인페이지
 	}
 }
