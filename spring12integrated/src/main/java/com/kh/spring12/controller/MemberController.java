@@ -71,6 +71,9 @@ public class MemberController {
 		session.setAttribute("memberId", findDto.getMemberId());
 		session.setAttribute("memberLevel", findDto.getMemberLevel());
 		
+//		+추가) 최종 로그인 시각을 갱신
+		memberDao.updateMemberLogin(findDto.getMemberId());
+		
 //		모두 통과한 경우만 남음
 			return"redirect:/";		//메인페이지
 	}

@@ -91,4 +91,11 @@ public class MemberDao {
 		
 	};
 	
+//	최종 로그인 시각만 갱신하는 기능(로그인 성공 시 호출)
+	public boolean updateMemberLogin(String memberId) {
+		String sql = "update member set member_login = sysdate where member_id = ?";
+		Object[] param = {memberId};
+		return jdbcTemplate.update(sql,param)>0;
+	}
+	
 }
