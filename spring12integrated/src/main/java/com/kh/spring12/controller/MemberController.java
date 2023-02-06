@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,7 +56,7 @@ public class MemberController {
 		
 //		존재하지 않는 아이디라면 -> 오류처리
 		if(findDto == null) {		
-			attr.addAttribute("mode","erroe");
+			attr.addAttribute("mode","error");
 			return"redirect:login";		// redirect도 GET방식 요청을 발생
 			}		
 //		비밀번호가 일치하지 않는다면 -> 오류처리
@@ -82,5 +83,19 @@ public class MemberController {
 		return"redirect:/";
 	}
 	
+//	내정보
+//	1. 세션에서 회원 아이디 추출
+//	2. 추출한 아이디로 대상의 정보를 상세조회
+//	3. 상세조회한 결과를 Model에 첨부
+	
+	@GetMapping("/mypage")
+	public String mypage(
+			HttpSession session, Model model) {
+		
+		String memberId = (String) session.getAttribute("memberId");
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		model.addAttribute("memberDto",memberDto);
+		return "/WEB-INF/views/member/mypage.jsp";
+	}
 	
 }
