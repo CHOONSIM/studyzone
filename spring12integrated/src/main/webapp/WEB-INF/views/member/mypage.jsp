@@ -55,6 +55,9 @@
 	</tbody>
 
 </table>
+<br><br>
+<hr>
+<a href="/member/exit">회원 탈퇴</a>
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

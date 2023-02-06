@@ -1,5 +1,7 @@
 package com.kh.spring12.controller;
 
+import java.lang.ProcessBuilder.Redirect;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,6 +101,43 @@ public class MemberController {
 		MemberDto memberDto = memberDao.selectOne(memberId);
 		model.addAttribute("memberDto",memberDto);
 		return "/WEB-INF/views/member/mypage.jsp";
+	}
+	
+//	@GetMapping("/password")
+	
+//	@PostMapping("/password")
+	
+//	@GetMapping("/passwordFinish")	// 회원 정보 페이지
+	
+//	@GetMapping("/edit")					// 비번 검사
+
+//	@PostMapping("/edit")
+
+//	@GetMapping("/editFinish")			//회원 정보 페이지
+	
+	@GetMapping("/exit")					//비번 입력
+	public String exit() {
+		return "/WEB-INF/views/member/exit.jsp";
+	}
+	
+	@PostMapping("/exit")					//비번 검사,로그아웃 처리
+	public String exit(
+			@ModelAttribute MemberDto userDto,
+			RedirectAttributes attr, HttpSession session) {
+		String memberId = (String)session.getAttribute("member_id");
+		
+		String memberPw = (String) session.getAttribute("memberPw");
+		
+		if(!userDto.getMemberPw().equals("memberPw")) {	
+			attr.addAttribute("mode","error");
+			return"redirect:exit";
+		}
+		return"/WEB-INF/views/member/exitFinish.jsp";
+	}
+	
+	@GetMapping("/exitFinish")			// 안내멘트 , 홈으로 이동
+	public String exitFinish() {
+		return "/WEB-INF/views/member/exitFinish.jsp";
 	}
 	
 }
