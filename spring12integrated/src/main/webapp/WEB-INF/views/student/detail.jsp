@@ -1,12 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>${studentDto.no }번 학생 상세 정보</title>
-</head>
-<body>
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 	<h1>학생 성적 상세 정보</h1>
 	<hr>
 	<!-- 
@@ -32,5 +24,5 @@
 	<br><br>
 	<a href ="delete?no=${studentDto.no }">삭제</a>
 	</h4>
-</body>
-</html>
+
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>${subjectDto.no }번 강의 정보</title>
-</head>
-<body>
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 	<h1>강의 상세 정보</h1>
 	번호 : ${subjectDto.no } <br>
 	강의명 : ${subjectDto.name }<br>
@@ -25,9 +19,5 @@
 	<br><br>
 	<a href="delete?no=${subjectDto.no }">삭제</a>
 	</h4>
-	
-	
-	
-	
-</body>
-</html>
+
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

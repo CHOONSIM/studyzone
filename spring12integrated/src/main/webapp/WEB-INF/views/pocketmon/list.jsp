@@ -1,15 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+    <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
     
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>포켓몬 목록/검색</title>
-</head>
-<body>
-	<h1>포켓몬 목록/검색</h1>
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 	
 	<h2><a href="insertInput">신규등록</a></h2>
 	
@@ -55,5 +48,8 @@
 				</c:forEach>
 			</tbody>
 	</table>
-</body>
-</html>
+	
+		<hr>
+	<h2>KH정보교육원</h2>
+	
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

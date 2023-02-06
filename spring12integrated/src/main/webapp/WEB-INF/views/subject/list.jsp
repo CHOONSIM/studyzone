@@ -1,13 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>강의 ${mode }결과</title>
-</head>
-<body>
+    
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
 	<h1>강의 목록/검색</h1><br>
 	<h2><a href="insertInput">신규 강의 등록</a></h2><br>
 	<h2><a href="list">목록</a></h2><br><br>
@@ -77,5 +73,5 @@
 		</table>
 		</c:otherwise>
 		</c:choose>
-</body>
-</html>
+		
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

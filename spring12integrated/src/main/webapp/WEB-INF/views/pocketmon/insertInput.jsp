@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>포켓몬 등록</title>
-</head>
-<body>
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
  <h1>포켓몬 등록</h1>
  <!-- 
  	form 전송방식은 크게 두 가지로 나뉜다
@@ -30,5 +26,8 @@
 		속성 : <input name="type"><br><br>
 		<button>등록</button>
 	</form>
-</body>
-</html>
+
+	<hr>
+	<h2>KH정보교육원</h2>
+	
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

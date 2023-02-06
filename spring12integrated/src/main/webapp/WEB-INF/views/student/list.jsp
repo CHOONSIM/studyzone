@@ -1,13 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>학생 ${mode }결과</title>
-</head>
-<body>
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
 	<h1>학생 성적 ${mode }</h1>
 	<hr>
 	<h3><a href="insertInput">신규 학생 성적 등록</a></h3>
@@ -69,5 +64,5 @@
 		</table>
 		</c:otherwise>
 		</c:choose>
-</body>
-</html>
+		
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
