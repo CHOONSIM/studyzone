@@ -1,5 +1,7 @@
 package com.kh.spring12.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,7 +49,7 @@ public class MemberController {
 	@PostMapping("/login")
 	public String login(
 			@ModelAttribute MemberDto userDto,
-			RedirectAttributes attr) {
+			RedirectAttributes attr, HttpSession session) {
 //		로그인검사 : 단일 조회 후 비밀번호 일치 비교
 		MemberDto findDto = memberDao.selectOne(userDto.getMemberId());
 		
@@ -62,7 +64,23 @@ public class MemberController {
 			return"redirect:login";
 		}
 		
+//		로그인에 성공한 경우라면 이를 기억하기 위해 HttpSession에 정보를 추가
+//		- memberId = 회원 아이디
+//		- memberLevel = 회원레벨
+		session.setAttribute("memberId", findDto.getMemberId());
+		session.setAttribute("memberLevel", findDto.getMemberLevel());
+		
 //		모두 통과한 경우만 남음
 			return"redirect:/";		//메인페이지
 	}
+	
+//	로그아웃	-	세션에 저장된 데이터를 삭제하는 작업
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("memberId");
+		session.removeAttribute("memberLevel");
+		return"redirect:/";
+	}
+	
+	
 }

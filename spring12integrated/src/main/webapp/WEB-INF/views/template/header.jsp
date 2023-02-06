@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,9 +15,29 @@
 				- (주의) 템플릿 페이지는 어디서 실행될지 모르므로 상대경로 사용 금지
 	 -->
 	 <!-- 상단 -->
+	 <%--
+	 	메뉴는 로그인 여부에 따라 다르게 출력
+	 	- 로그인 여부는 세션에 memberId가 있는지 여부로 판정
+	 --%>
+	 <c:choose>
+	 	<c:when test="${sessionScope.memberId != null }">
+	 	<!-- 로그인 상태 -->
+	 	<a href="/">홈으로</a>
+	 	<a href="/member/logout">로그아웃</a>
+	 	
+	 	</c:when>
+	 	<c:otherwise>
+	 	<!-- 로그아웃 상태 -->
+	 	<a href="/">홈으로</a>
+	 	<a href="/member/join">회원가입</a>
+	 	<a href="/member/login">로그인</a>
+	 	
+	 	
+	 	</c:otherwise>
+	 </c:choose>
+	 
+	 <a href="/">홈으로</a>
 	<a href="/pocketmon/list">포켓몬 관리</a>
 	<a href="/subject/list">강의 관리</a>
 	<a href="/student/list">학생 성적 관리</a>
-	<a href="/member/join">회원가입</a>
-	<a href="/member/login">로그인</a>
 	<hr>
