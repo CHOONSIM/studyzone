@@ -170,19 +170,58 @@ public class MemberController {
 	}
 	
 	
-//	@GetMapping("/exit")					//비번 입력
-//	public String exit() {
-//		return "/WEB-INF/views/member/exit.jsp";
-//	}
-//	
-//	@PostMapping("/exit")					//비번 검사,로그아웃 처리
-//	public String exit() {
-//		
-//	}
+//	계정 삭제
+	@GetMapping("/exit")					
+	public String exit() {
+		return "/WEB-INF/views/member/exit.jsp";
+	}
 	
-//	@GetMapping("/exitFinish")			// 안내멘트 , 홈으로 이동
-//	public String exitFinish() {
-//		return "/WEB-INF/views/member/exitFinish.jsp";
-//	}
+	@PostMapping("/exit")					//비번 검사,로그아웃 처리
+	public String exit(
+		HttpSession session,							//회원 정보가 저장되어있는 세션 객체
+		@RequestParam String memberPw,	//사용자가 입력한 비밀번호
+		RedirectAttributes attr) {
+		
+		String memberId = (String)session.getAttribute("memberId");
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		
+//		비밀번호 불일치시 exit화면으로
+		if(!memberDto.getMemberPw().equals(memberPw)) {
+			attr.addAttribute("mode", "error");
+			return "redirect:exit";
+		}
+//		비밀번호 일치시 -> 회원탈퇴 + 로그아웃
+		memberDao.delete(memberId);
+		session.removeAttribute("memberId");
+		session.removeAttribute("memberLevel");
+		return "redirect:exitFinish";
+	}
+	
+	// 안내멘트 , 홈으로 이동
+	@GetMapping("/exitFinish")
+	public String exitFinish() {
+		return "/WEB-INF/views/member/exitFinish.jsp";
+	}
+	
+	
+//	아이디 찾기
+	
+	@GetMapping("/find")
+	public String find() {
+		return "/WEB-INF/views/member/find.jsp";
+	}
+	 @PostMapping("/find")
+	 public String find(@ModelAttribute MemberDto memberDto, 
+			 Model model, RedirectAttributes attr) {
+		 try {
+			 String memberId = memberDao.findId(memberDto);
+			 model.addAttribute("memberId", memberId);
+			 return "/WEB-INF/views/member/findResult.jsp";
+		 }
+		 catch(Exception e) {
+			 attr.addAttribute("mode", "error");
+			 return "redirect:find";
+		}
+	}
 	
 }

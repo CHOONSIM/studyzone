@@ -119,5 +119,24 @@ public class MemberDao {
 		};
 		return jdbcTemplate.update(sql,param) >0;
 	}
-
+	
+//	회원 삭제(탈퇴)
+	public boolean update(String memberId) {
+		String sql ="delete member where member_id=?";
+		Object[] param = {memberId};
+		return jdbcTemplate.update(sql, param)>0;
+		
+	}
+	
+//	Nick , Tel, Birth로 아이디 찾기
+	public String findId(MemberDto memberDto) {
+		String sql = "select member_id from member "
+				+ "where member_nick=? and member_tel=? and member_birth=?";
+		Object[] param = {
+			memberDto.getMemberNick(), memberDto.getMemberTel(),
+			memberDto.getMemberBirth()
+		};
+		//String.class는 한글로 "String 자료형"이라는 뜻이다
+		return jdbcTemplate.queryForObject(sql, String.class, param);
+	}
 }
