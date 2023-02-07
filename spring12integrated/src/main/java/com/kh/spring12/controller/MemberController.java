@@ -1,7 +1,5 @@
 package com.kh.spring12.controller;
 
-import java.lang.ProcessBuilder.Redirect;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spring12.dao.MemberDao;
@@ -103,41 +102,87 @@ public class MemberController {
 		return "/WEB-INF/views/member/mypage.jsp";
 	}
 	
-//	@GetMapping("/password")
 	
-//	@PostMapping("/password")
-	
-//	@GetMapping("/passwordFinish")	// 회원 정보 페이지
-	
-//	@GetMapping("/edit")					// 비번 검사
-
-//	@PostMapping("/edit")
-
-//	@GetMapping("/editFinish")			//회원 정보 페이지
-	
-	@GetMapping("/exit")					//비번 입력
-	public String exit() {
-		return "/WEB-INF/views/member/exit.jsp";
+//	비밀번호 변경
+	@GetMapping("/password")
+	public String password() {
+		return "/WEB-INF/views/member/password.jsp";
 	}
 	
-	@PostMapping("/exit")					//비번 검사,로그아웃 처리
-	public String exit(
-			@ModelAttribute MemberDto userDto,
-			RedirectAttributes attr, HttpSession session) {
-		String memberId = (String)session.getAttribute("member_id");
+	@PostMapping("/password")
+	public String password(
+			HttpSession session,															//아이디가 저장되어있는 세션 객체
+			@RequestParam String currentPw, 										//현재비번
+			@RequestParam String changePw,										//바꿀비번
+			RedirectAttributes attr) {													//리다이렉트에 정보를 추가하기 위한 객체
+		String memberId= (String)session.getAttribute("memberId");		//세션에서 아이디 뽑기(다운캐스팅)
+		MemberDto memberDto = memberDao.selectOne(memberId);	//단일조회
 		
-		String memberPw = (String) session.getAttribute("memberPw");
-		
-		if(!userDto.getMemberPw().equals("memberPw")) {	
+//		비밀번호가 일치하지 않는다면
+		if(!memberDto.getMemberPw().equals(currentPw)) {
 			attr.addAttribute("mode","error");
-			return"redirect:exit";
+			return"redirect:password";
 		}
-		return"/WEB-INF/views/member/exitFinish.jsp";
+		
+//		비밀번호가 일치한다면 ->비밀번호 변경
+//		update member set member_pw =? where member_id = ?
+		memberDao.changePassword(memberId,changePw);
+		return "redirect:passwordFinish";
 	}
 	
-	@GetMapping("/exitFinish")			// 안내멘트 , 홈으로 이동
-	public String exitFinish() {
-		return "/WEB-INF/views/member/exitFinish.jsp";
+	@GetMapping("/passwordFinish")	// 회원 정보 페이지
+	public String passwordFinish() {
+		return "/WEB-INF/views/member/passwordFinish.jsp";
 	}
+	
+	@GetMapping("/edit")					// 개인정보 변경 (비번제외)
+	public String edit(
+			Model model, 					//회원 아이디 저장되어있는 세션객체
+			HttpSession session) {			//회원 모든 정보 전달할 전송객체
+		String memberId = (String)session.getAttribute("memberId");
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		model.addAttribute("memberDto", memberDto);
+		return"/WEB-INF/views/member/edit.jsp";
+	}
+	
+	@PostMapping("/edit")
+	public String edit(
+			@ModelAttribute MemberDto memberDto, 	//데이터 자동 수신 객체
+			HttpSession session,										//회원 아이디가 저장되어있는 세션 객체
+			RedirectAttributes attr )	{								//리다이렉트 시 정보를 추가할 전송 객체
+			
+			String memberId = (String)session.getAttribute("memberId");
+			MemberDto findDto = memberDao.selectOne(memberId);
+//			비밀번호가 일치하지 않는다면 -> 에러 표시 후 이전 페이지로 리다이렉트
+			if(!findDto.getMemberPw().equals(memberDto.getMemberPw())) {
+				attr.addAttribute("mode", "error");
+				return "redirect:edit";
+			}
+//			비밀번호가 일치한다면
+			memberDto.setMemberId(memberId);				//아이디를 추가 설정
+			memberDao.changeInformation(memberDto);	//정보 변경 요청
+			return"redirect:editFinish";
+			}
+	
+	@GetMapping("/editFinish")			//회원 정보 페이지
+	public String editFinish() {
+		return"/WEB-INF/views/member/editFinish.jsp";
+	}
+	
+	
+//	@GetMapping("/exit")					//비번 입력
+//	public String exit() {
+//		return "/WEB-INF/views/member/exit.jsp";
+//	}
+//	
+//	@PostMapping("/exit")					//비번 검사,로그아웃 처리
+//	public String exit() {
+//		
+//	}
+	
+//	@GetMapping("/exitFinish")			// 안내멘트 , 홈으로 이동
+//	public String exitFinish() {
+//		return "/WEB-INF/views/member/exitFinish.jsp";
+//	}
 	
 }

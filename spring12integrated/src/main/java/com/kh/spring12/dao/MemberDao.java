@@ -98,4 +98,26 @@ public class MemberDao {
 		return jdbcTemplate.update(sql,param)>0;
 	}
 	
+//	비밀번호 변경
+	public boolean changePassword(String memberId, String memberPw) {
+		String sql = "update member set member_pw =? where member_id = ?";
+		Object[] param = {memberPw, memberId};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+	
+//	개인정보 수정(비밀번호 제외)
+	public boolean changeInformation(MemberDto memberDto) {
+		String sql = "update member set "
+						+ "member_nick=?, member_tel=?, member_email=?, member_birth,"
+						+ "member_post=?, member_basic_addr=?, member_detail_addr=?,"
+						+ "where member_id = ?";
+		Object[] param = {
+				memberDto.getMemberNick(), memberDto.getMemberTel(),
+				memberDto.getMemberEmail(), memberDto.getMemberBirth(),
+				memberDto.getMemberPost(), memberDto.getMemberBasicAddr(),
+				memberDto.getMemberDetailAddr(), memberDto.getMemberId()
+		};
+		return jdbcTemplate.update(sql,param) >0;
+	}
+
 }

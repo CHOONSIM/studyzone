@@ -55,9 +55,15 @@
 	</tbody>
 
 </table>
+
+<!-- 회원관리 메뉴 -->
+
 <br><br>
 <hr>
-<a href="/member/exit">회원 탈퇴</a>
+<h3><a href="/member/password">비밀번호 변경</a></h3> 
+<h3><a href="/member/edit">개인정보 변경</a></h3> 
+<h3><a href="/member/exit">회원 탈퇴</a></h3>
+
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
