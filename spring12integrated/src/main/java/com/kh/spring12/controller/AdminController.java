@@ -43,7 +43,7 @@ public class AdminController {
 		int totalCount = memberDao.selectCount();
 		model.addAttribute("totalCount", totalCount);
 		
-		int totalPage = (totalCount + size-1)/10;
+		int totalPage = (totalCount + size-1)/size;
 		model.addAttribute("totalPage",totalPage);
 		
 		List<MemberDto> list = memberDao.selectListPaging(page, size);
