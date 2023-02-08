@@ -162,6 +162,18 @@ public class MemberDao {
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	
+//	탈퇴 대기
+	
+	public String insertWating(MemberDto memberDto) {
+		String sql = "insert into member(member_id, member_pw, member_nick, member_tel, member_email, member_birth, member_post, "
+				+ "member_basic_addr, member_detail_addr, member_level, member_point, member_join, member_login) "
+				+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		Object[] param = {memberDto.getMemberId(), memberDto.getMemberPw(), memberDto.getMemberNick(), memberDto.getMemberTel(), memberDto.getMemberEmail(), memberDto.getMemberBirth(), memberDto.getMemberPost(), 
+				memberDto.getMemberBasicAddr(), memberDto.getMemberDetailAddr(), memberDto.getMemberLevel(),
+				memberDto.getMemberPoint(), memberDto.getMemberJoin(), memberDto.getMemberLogin()};
+		jdbcTemplate.update(sql,param);
+		return"";
+	}
 	
 	
 

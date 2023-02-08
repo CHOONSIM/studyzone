@@ -1,6 +1,10 @@
 package com.kh.spring12.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spring12.dao.MemberDao;
 import com.kh.spring12.dto.MemberDto;
@@ -41,5 +46,74 @@ public class AdminController {
 		model.addAttribute("list", list);
 		return "/WEB-INF/views/admin/member/list.jsp";
 	}
+	
+//	상세조회
+	@GetMapping("/member/detail")
+	public String memberDetail(Model model, @RequestParam String memberId) {
+		model.addAttribute("memberDto",memberDao.selectOne(memberId));
+		return"/WEB-INF/views/admin/member/detail.jsp";
+	}
+	
+//	탈퇴
+	@GetMapping("/member/exit")
+	public String memberExit(
+			@RequestParam String memberId,
+			@RequestParam(required= false, defaultValue = "1")int page,
+			RedirectAttributes attr) {
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		memberDao.delete(memberId);
+		memberDao.insertWating(memberDto);
+		
+		attr.addAttribute("page", page);
+		return"redirect:list";
+	}
+	
+//	일회용 비밀번호 설정
+	@GetMapping("/member/password")
+	public String memberPassword(
+//			Model model, 
+//			RedirectAttributes attr,
+			@RequestParam String memberId,
+			HttpSession session) {
+//		String memberPw= "khacademy";				// 랜덤 부분
+		List<String> data = new ArrayList<>();
+		for(char i='A'; i<='Z'; i++)data.add(String.valueOf(i));
+		for(char i='a'; i<='z'; i++)data.add(String.valueOf(i));
+		for(char i='0'; i<='9'; i++)data.add(String.valueOf(i));
+		
+		Random r = new Random();
+		StringBuffer buffer = new StringBuffer();
+		
+		for(int i=0; i<10;i++) {
+		int index = r.nextInt(data.size());
+		buffer.append(data.get(index));
+		}
+		
+		String memberPw = buffer.toString();
+		
+		memberDao.changePassword(memberId, memberPw);
+//		model.addAttribute("memberPw", memberPw);
+//		return"/WEB-INF/views/admin/member/password.jsp";
+		
+//		비밀번호는 절대로 파라미터로 첨부하면 안됨
+//		attr.addAttribute("memberPw", memberPw);
+		
+//		일시적으로 세션에 보관한 뒤 바로 삭제하는 방식으로 전달
+		session.setAttribute("memberPw", memberPw);
+		return"redirect:passwordFinish";
+	}
+	
+	@GetMapping("/member/passwordFinish")
+	public String passwordFinish(
+//			@RequestParam String memberPw,
+			HttpSession session,
+			Model model) {
+		String memberPw = (String)session.getAttribute("memberPw");
+		session.removeAttribute("memberPw");
+		model.addAttribute("memberPw",memberPw );
+		return"/WEB-INF/views/admin/member/password.jsp";
+
+	}
+	
 	
 }
