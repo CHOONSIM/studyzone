@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.spring12.component.RandomComponent;
 import com.kh.spring12.dao.MemberDao;
 import com.kh.spring12.dto.MemberDto;
 
@@ -23,6 +24,9 @@ public class AdminController {
 	
 	@Autowired			// 의존성 주입 dependancy injection
 	private MemberDao memberDao;
+	
+	@Autowired
+	private RandomComponent randomComponent;		// 컨트롤러, 랜덤 컴포넌트 등록이 되어있어야함
 	
 	@GetMapping("/member/list")
 	public String memberList(
@@ -75,21 +79,8 @@ public class AdminController {
 //			RedirectAttributes attr,
 			@RequestParam String memberId,
 			HttpSession session) {
-//		String memberPw= "khacademy";				// 랜덤 부분
-		List<String> data = new ArrayList<>();
-		for(char i='A'; i<='Z'; i++)data.add(String.valueOf(i));
-		for(char i='a'; i<='z'; i++)data.add(String.valueOf(i));
-		for(char i='0'; i<='9'; i++)data.add(String.valueOf(i));
 		
-		Random r = new Random();
-		StringBuffer buffer = new StringBuffer();
-		
-		for(int i=0; i<10;i++) {
-		int index = r.nextInt(data.size());
-		buffer.append(data.get(index));
-		}
-		
-		String memberPw = buffer.toString();
+		String memberPw = randomComponent.generateString(10);
 		
 		memberDao.changePassword(memberId, memberPw);
 //		model.addAttribute("memberPw", memberPw);
