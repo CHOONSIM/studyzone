@@ -139,4 +139,30 @@ public class MemberDao {
 		//String.class는 한글로 "String 자료형"이라는 뜻이다
 		return jdbcTemplate.queryForObject(sql, String.class, param);
 	}
+	
+//	목록 및 검색 
+//	- 페이지 번호(page)와 페이지 크기(size)를 이용하여 계산
+//	- Top N Query 사용
+	
+	public List<MemberDto> selectListPaging(int page, int size){
+		int end = page * size;
+		int begin = end - (size-1);
+		String sql ="select * from("
+				+ "select tmp .*, rownum rn from("
+				+ "select*from member order by member_id asc"
+				+ ")tmp"
+				+ ")where rn between ? and ?";
+	Object[] param = {begin, end};
+	return jdbcTemplate.query(sql, mapper, param);
+	}
+	
+//	count 구하는 기능
+	public int selectCount() {
+		String sql = "select count(*) from member";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
+	
+	
+
 }
