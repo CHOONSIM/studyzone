@@ -1,0 +1,254 @@
+-- °èÁ¤ »ı¼º(°ü¸®ÀÚ·Î ÁøÇà)
+drop user kh11 cascade;
+create user kh11 identified by kh11;
+grant connect, resource to kh11;
+
+-- kh11·Î ·Î±×ÀÎ ÈÄ ÁøÇà
+
+-- attendance Å×ÀÌºí
+drop table attendance;
+create table attendance(
+no number(10),
+name varchar2(21),
+phone char(13)
+);
+
+-- worldcup Å×ÀÌºí
+drop table worldcup;
+create table worldcup(
+rank number(3),
+name varchar2(39),
+nation varchar2(15),
+goal number(2)
+);
+
+INSERT INTO WORLDCUP(RANK, NAME, NATION, GOAL)
+VALUES(1, 'À½¹ÙÆä', 'ÇÁ¶û½º', 8);
+INSERT INTO WORLDCUP(RANK, NAME, NATION, GOAL)
+VALUES(2, '¸®¿À³Ú ¸Ş½Ã', '¾Æ¸£ÇîÆ¼³ª', 7);
+insert into worldcup(rank, name, nation, goal)
+values(3, '¿Ã¸®ºñ¿¡ Áö·ç', 'ÇÁ¶û½º', 4);
+insert into worldcup(rank, name, nation, goal)
+values(4, 'ÈÇ¸®¾È ¾Ë¹Ù·¹½º', '¾Æ¸£ÇîÆ¼³ª', 4);
+commit;
+
+-- pocketmon Å×ÀÌºí
+drop table pocketmon;
+CREATE TABLE POCKETMON(
+NO NUMBER,--¾È¾²¸é ÀÚµ¿À¸·Î 38ÀÚ¸®°¡ µÊ
+NAME VARCHAR2(21),
+TYPE VARCHAR2(9)
+);
+insert into pocketmon(no,name,type) values(1,'ÀÌ»óÇØ¾¾','Ç®');
+insert into pocketmon(no,name,type) values(4,'ÆÄÀÌ¸®','ºÒ²É');
+insert into pocketmon(no,name,type) values(7,'²¿ºÎ±â','¹°');
+insert into pocketmon(no,name,type) values(25,'ÇÇÄ«Ãò','Àü±â');
+commit;
+
+-- medalist Å×ÀÌºí
+DROP TABLE MEDALIST;
+CREATE TABLE MEDALIST(
+NAME VARCHAR2(21),
+EVENT VARCHAR2(30),
+TYPE CHAR(6),
+GOLD NUMBER(2),
+SILVER NUMBER(2),
+BRONZE NUMBER(2)
+);
+insert into medalist(name,event,type,gold,silver,bronze)
+values('ÁøÁ¾¿À','»ç°İ','ÇÏ°è',4,2,0);
+insert into medalist(name,event,type,gold,silver,bronze)
+values('±è¼ö³ç','¾ç±Ã','ÇÏ°è',4,1,1);
+insert into medalist(name,event,type,gold,silver,bronze)
+values('ÀüÀÌ°æ','¼îÆ®Æ®·¢','µ¿°è',4,0,1);
+commit;
+
+-- plan Å×ÀÌºí
+drop table plan;
+create table plan(
+telecom char(2) not null check(telecom in ('SK','KT','LG')),
+name varchar2(60) not null unique,
+price number not null check(price >= 0),
+data number not null check(data >= 0),
+call number not null check(call >= 0),
+sms number not null check(sms >= 0)
+);
+
+insert into plan(telecom,name,price,data,call,sms)
+values('SK', '5G ¾ğÅÃÆ® 52', 52000, 200, 1000, 2000);
+commit;
+
+-- menu Å×ÀÌºí
+drop table menu;
+create table menu(
+name varchar2(30) not null unique,
+type varchar2(9) not null check(type in ('À½·á','µğÀúÆ®')),
+price number not null check(price >= 0),
+event char(1) not null check(event in ('0','1'))
+);
+insert into menu(name, type, price, event)
+values('¾Æ¸Ş¸®Ä«³ë', 'À½·á', 2500, '1');
+insert into menu(name, type, price, event)
+values('¸ğÄ«¶ó¶¼', 'À½·á', 3500, '0');
+insert into menu(name, type, price, event)
+values('Ä¡ÁîÄÉÀÌÅ©', 'µğÀúÆ®', 5000, '1');
+insert into menu(name, type, price, event)
+values('¸¶Ä«·Õ', 'µğÀúÆ®', 3000, '0');
+commit;
+
+-- mobile Å×ÀÌºí
+drop table mobile;
+create table mobile (
+name varchar2(12) not null,
+telecom char(2) not null check(telecom in ('SK','KT','LG')),
+price number not null check(price >= 0),
+month number(2) check(month in (24, 30, 36)),
+unique(name, telecom)
+);
+insert into mobile(name,telecom,price,month) 
+values('°¶·°½Ã22s', 'SK', 1800000, null);
+insert into mobile(name,telecom,price,month) 
+values('°¶·°½Ã22s', 'KT', 1750000, 24);
+insert into mobile(name,telecom,price,month) 
+values('¾ÆÀÌÆù14', 'LG', 2000000, 30);
+insert into mobile(name,telecom,price,month) 
+values('¾ÆÀÌÆù14', 'SK', 1990000, null);
+commit;
+
+-- item Å×ÀÌºí
+drop table item;
+create table item (
+--´ëÇ¥Ç×¸ñ(not null+unique)
+no number primary key,
+name varchar2(60) not null check(regexp_like(name,'^[°¡-ÆR0-9]+$')),
+type varchar2(15) not null,
+price number not null check(price >= 0),
+early char(1) not null check(early in ('0','1')),
+event char(1) not null check(event in ('0','1'))
+);
+drop sequence item_seq;
+create sequence item_seq;
+
+insert into item(no,name,type,price,early,event)
+values(item_seq.nextval,'ÂüÀÌ½½ÈÄ·¹½Ã','ÁÖ·ù',1200,'1','1');
+insert into item(no,name,type,price,early,event)
+values(item_seq.nextval,'Å¬¶ó¿ìµå¸ÆÁÖ','ÁÖ·ù',3000,'0','1');
+insert into item(no,name,type,price,early,event)
+values(item_seq.nextval,'¹Ù³ª³ªÅ±','°úÀÚ',1500,'0','1');
+insert into item(no,name,type,price,early,event)
+values(item_seq.nextval,'Çã´Ï¹öÅÍÄ¨','°úÀÚ',2000,'1','0');
+commit;
+
+-- subject Å×ÀÌºí
+drop table subject;
+drop sequence subject_seq;
+create table subject (
+no number primary key,
+name varchar2(60) not null,
+period number not null check(mod(period, 30) = 0),
+price number not null check(price >= 0),
+type varchar2(12) not null check(type in ('¿Â¶óÀÎ','¿ÀÇÁ¶óÀÎ','È¥ÇÕ'))
+);
+create sequence subject_seq;
+
+insert into subject(no,name,period,price,type) 
+values(subject_seq.nextval,'ÀÚ¹Ù ¸¶½ºÅÍ°úÁ¤', 90, 1000000, '¿Â¶óÀÎ');
+insert into subject(no,name,period,price,type) 
+values(subject_seq.nextval,'ÆÄÀÌ½ã ±âÃÊ', 60, 600000, '¿Â¶óÀÎ');
+insert into subject(no,name,period,price,type) 
+values(subject_seq.nextval,'À¥ °³¹ßÀÚ ´Ü±â¿Ï¼º', 120, 1200000, '¿ÀÇÁ¶óÀÎ');
+
+commit;
+
+-- product Å×ÀÌºí
+drop table product;
+create table product(
+no number primary key,
+name varchar2(30) not null,
+type varchar2(15) check(type in ('°úÀÚ','¾ÆÀÌ½ºÅ©¸²','ÁÖ·ù','»çÅÁ')),
+price number,
+made date,
+expire date
+);
+
+insert into product values(1, '½ºÅ©·ù¹Ù', '¾ÆÀÌ½ºÅ©¸²', 1200, '2020-05-01', '2020-10-01');
+insert into product values(2, '¸¶ÀÌÂé', '»çÅÁ', 900, '2020-01-01', '2021-01-01');
+insert into product values(3, 'ÃÊÄÚÆÄÀÌ', '°úÀÚ', 3000, '2020-01-01', '2021-01-01');
+insert into product values(4, '¸Àµ¿»ê', '°úÀÚ', 2200, '2020-02-01', '2020-10-20');
+insert into product values(5, 'ÂüÀÌ½½', 'ÁÖ·ù', 1000, '2020-01-05', '2020-04-05');
+insert into product values(6, 'Ã³À½Ã³·³', 'ÁÖ·ù', 1000, '2020-03-15', '2020-08-15');
+insert into product values(7, '¹Ù³ª³ªÅ±', '°úÀÚ', 1500, '2020-05-03', '2020-06-03');
+insert into product values(8, 'ºü»ßÄÚ', '¾ÆÀÌ½ºÅ©¸²', 1000, '2019-12-01', '2020-06-01');
+insert into product values(9, '¸àÅä½º', '»çÅÁ', 1200, '2020-03-20', '2020-12-31');
+insert into product values(10, '¿À·¹¿À', '°úÀÚ', 2100, '2019-06-01', '2020-06-01');
+
+commit;
+
+-- student Å×ÀÌºí
+drop table student;
+drop sequence student_seq;
+create table student(
+no number primary key,
+name varchar2(21) not null check(regexp_like(name, '^[°¡-ÆR]{2,7}$')),
+korean number(3) not null check(korean between 0 and 100),
+english number(3) not null check(english between 0 and 100),
+math number(3) not null check(math between 0 and 100)
+);
+create sequence student_seq;
+
+-- È¸¿ø(member) Å×ÀÌºí
+drop table member;
+create table member(
+member_id varchar2(20) primary key,
+member_pw varchar2(16) not null,
+member_nick varchar2(30) not null unique,
+member_tel char(11) not null,
+member_email varchar2(100),
+member_birth char(10) not null,
+member_post varchar2(6),
+member_basic_addr varchar2(300),
+member_detail_addr varchar2(300),
+member_level varchar2(12) default 'ÁØÈ¸¿ø' not null,
+member_point number default 0 not null,
+member_join date default sysdate not null,
+member_login date,
+check(regexp_like(member_id,'^[a-z0-9-_]{5,20}$')),
+check(
+    regexp_like(member_pw, '[A-Z]+')
+    and
+    regexp_like(member_pw, '[a-z]+')
+    and
+    regexp_like(member_pw, '[0-9]+')
+    and
+    regexp_like(member_pw, '[!@#$]+')
+    and
+    regexp_like(member_pw, '^[A-Za-z0-9!@#$]{8,16}$')
+),
+check(regexp_like(member_nick, '^[°¡-ÆR0-9]{2,10}$')),
+check(instr(member_email, '@') > 0),
+check(regexp_like(member_birth, '^(19[0-9]{2}|20[0-9]{2})-((02-(0[1-9]|[12][0-9]))|((0[469])|11)-(0[1-9]|[12][0-9]|30)|((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01])))$')),
+check(regexp_like(member_post, '^[0-9]{5,6}$')),
+check(member_level in ('ÁØÈ¸¿ø','ÀÏ¹İÈ¸¿ø','¿ì¼öÈ¸¿ø','°ü¸®ÀÚ')),
+check(member_point >= 0)
+);
+
+insert into member(
+    member_id, member_pw, member_nick,
+    member_tel, member_email, member_birth,
+    member_post, member_basic_addr, member_detail_addr,
+    member_level, member_point, member_join, member_login
+)
+values(?, ?, ?, ?, ?, ?, ?, ?, ?, 'ÁØÈ¸¿ø', 0, sysdate, null);
+
+insert into member(
+    member_id, member_pw, member_nick,
+    member_tel, member_email, member_birth,
+    member_post, member_basic_addr, member_detail_addr
+)
+values(?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+
+
+
+
+

@@ -1,0 +1,75 @@
+/*
+    서브 쿼리의 사용
+*/
+
+-- Q) 가장 최근에 만든 상품의 정보
+-- 1. 가장 마지막 시간을 구하고 그와 같은 상품을 조회
+SELECT*FROM PRODUCT WHERE MADE = (SELECT MAX(MADE) FROM PRODUCT);
+-- 2. 상품을 최신순으로 정렬하고 첫번째를 조회(TOP순위 구현,범위)
+-- 결과의 순서에 해당하는 항목을 알아야 함
+SELECT PRODUCT .*, ROWNUM FROM PRODUCT;
+
+SELECT PRODUCT .*, ROWNUM FROM PRODUCT ORDER BY MADE DESC;      -- 어순 안맞음 ROWNUM을 나중에
+SELECT TMP.*, ROWNUM FROM(SELECT PRODUCT .* FROM PRODUCT ORDER BY MADE DESC)TMP;    -- TMP 임시별칭
+SELECT TMP.*, ROWNUM FROM(SELECT PRODUCT .* FROM PRODUCT ORDER BY MADE DESC)TMP WHERE ROWNUM=1; 
+
+SELECT TMP.*, ROWNUM FROM(
+SELECT PRODUCT .* FROM PRODUCT ORDER BY MADE DESC
+)TMP WHERE ROWNUM BETWEEN 1 AND 3;                      -- 상위 3개
+
+
+-- Q) 가장 먼저 가입한 회원 정보
+-- 1. 집계함수 사용
+SELECT*FROM MEMBER WHERE MEMBER_JOIN=(SELECT MIN(MEMBER_JOIN)FROM MEMBER);
+-- 2. ROWNUM 사용
+SELECT TMP .*, ROWNUM FROM (SELECT MEMBER .*FROM MEMBER ORDER BY MEMBER_JOIN ASC)TMP WHERE ROWNUM =1;
+
+-- ROWNUM을 연구하면 페이징처리가 가능하다.
+SELECT TMP .*, ROWNUM FROM (
+SELECT MEMBER .*FROM MEMBER ORDER BY MEMBER_JOIN ASC
+)TMP WHERE ROWNUM BETWEEN 1 AND 10;
+
+-- ROWNUM은 반드시 1부터 부여된다.
+SELECT TMP .*, ROWNUM FROM (
+SELECT MEMBER .*FROM MEMBER ORDER BY MEMBER_JOIN ASC
+)TMP WHERE ROWNUM BETWEEN 2 AND 10;
+
+-- TOP N QUERY 
+-- ROWNUM 번호를 먼저 부여 후 검사 (번호 부여하면서 검사 X)  RN -> ROWNUM의별칭(별칭 이유 : ROWNUM은 계속 생김)
+SELECT * FROM(
+    SELECT TMP .*, ROWNUM RN FROM (
+        SELECT MEMBER .*FROM MEMBER ORDER BY MEMBER_JOIN ASC
+    )TMP    
+) WHERE RN BETWEEN 2 AND 10;
+
+/*
+##공식##
+    SELECT * FROM(
+        SELECT TMP .*, ROWNUM RN FROM (
+            ?조회구문?
+        )TMP    
+    ) WHERE RN BETWEEN ?시작? AND ?종료?;
+*/
+
+-- 가격 순으로 상품 3개 조회
+SELECT * FROM(
+    SELECT TMP .*, ROWNUM RN FROM (
+       SELECT*FROM PRODUCT ORDER BY PRICE DESC
+    )TMP    
+) WHERE RN BETWEEN 1 AND 3;
+
+-- 포켓몬 번호순으로 5개 조회
+SELECT * FROM(
+    SELECT TMP .*, ROWNUM RN FROM(
+        SELECT*FROM POCKETMON ORDER BY NO ASC
+        )TMP
+        )WHERE RN BETWEEN 1 AND 5;
+
+-- 학생 성적순으로 2등,3등 조회
+select*from student;
+select * from(
+    select tmp .*, rownum rn from(
+    select*from student order by (korean+english+math) desc
+    )tmp
+    )where rn between 2 and 3;
+
