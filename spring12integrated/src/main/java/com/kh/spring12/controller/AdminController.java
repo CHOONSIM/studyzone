@@ -99,6 +99,7 @@ public class AdminController {
 //		attr.addAttribute("memberPw", memberPw);
 		
 //		일시적으로 세션에 보관한 뒤 바로 삭제하는 방식으로 전달
+//		- 리다이렉트는 무조건 GET 방식으로 처리되므로 POST는 불가능
 		session.setAttribute("memberPw", memberPw);
 		return"redirect:passwordFinish";
 	}

@@ -27,7 +27,7 @@
 			<td>${memberDto.memberBirth }</td>
 			<td>${memberDto.memberLevel }</td>
 			<td>
-				<a href="detail?memberId=${memberDto.memberId} &page=${page}">»ó¼¼</a>
+				<a href="detail?memberId=${memberDto.memberId}">»ó¼¼</a>
 				<a href="#">º¯°æ</a>
 				<a href="exit?memberId=${memberDto.memberId }&page=${page}">Å»Åð</a>
 			</td>
