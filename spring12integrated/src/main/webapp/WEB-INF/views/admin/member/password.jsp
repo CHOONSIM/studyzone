@@ -1,13 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<h2>юох╦©К ╨Я╧п╧Ьхё ╪Ёа╓</h2>
-<h2>${memberPw } ╥н ╨╞╟Ф╣г╬З╫ю╢о╢ы.</h2>
+<h2>Л²╪М ▄Л ╘ К╧└К╟─К╡┬М≤╦ Л└╓Л═∙</h2>
+<h2>${memberPw } К║° КЁ─Й╡╫К░≤Л≈┬Л┼╣К▀┬К▀╓.</h2>
 
 <hr>
-<h4><a href="detail?memberId=${memberDto.memberId} &page=${page}">╩С╪╪а╤х╦</a></h4>
-<h4><a href="list">╦Я╥ою╦╥н</a></h4>
+<h4><a href="detail?memberId=${memberDto.memberId} &page=${page}">Л┐│Л└╦Л║╟М ▄</a></h4>
+<h4><a href="list">К╙╘К║²Л°╪К║°</a></h4>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

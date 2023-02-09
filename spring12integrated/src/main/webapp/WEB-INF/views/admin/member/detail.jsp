@@ -55,7 +55,7 @@
 </table>
 
 <!-- 회원 관리메뉴 -->
-<h3><a href="#">개인정보 변경</a></h3> 
+<h3><a href="edit?memberId=${memberDto.memberId }">개인정보 변경</a></h3> 
 <h3><a href="password?memberId=${memberDto.memberId }">일회용 비밀번호 변경</a></h3> 
 <h3><a href="exit?memberId=${memberDto.memberId }">회원탈퇴</a></h3>
 

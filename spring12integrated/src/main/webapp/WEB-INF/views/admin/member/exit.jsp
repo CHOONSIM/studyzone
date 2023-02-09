@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
     <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
     
-    <h2>ΘΈΏψ Ε»Επ</h2>
+    <h2>νμ› νƒν‡΄</h2>
     
     <form action="exit"  method="post">
-    <button>Ε»Επ</button>
+    <button>νƒν‡΄</button>
     
     </form>
     <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

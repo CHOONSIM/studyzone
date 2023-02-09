@@ -1,8 +1,6 @@
 package com.kh.spring12.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,13 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spring12.component.RandomComponent;
 import com.kh.spring12.dao.MemberDao;
+import com.kh.spring12.dao.PocketmonStatDao;
+import com.kh.spring12.dao.SubjectStatDao;
 import com.kh.spring12.dto.MemberDto;
+import com.kh.spring12.dto.PocketmonStatDto;
+import com.kh.spring12.dto.SubjectStatDto;
 
 @Controller
 @RequestMapping("/admin")
@@ -104,8 +108,73 @@ public class AdminController {
 		session.removeAttribute("memberPw");
 		model.addAttribute("memberPw",memberPw );
 		return"/WEB-INF/views/admin/member/password.jsp";
-
 	}
+	
+//	회원 정보 변경
+	@GetMapping("/member/edit")
+	public String memberEdit(
+			@RequestParam String memberId,
+			Model model) {
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		model.addAttribute("memberDto", memberDto);
+		return "/WEB-INF/views/admin/member/edit.jsp";
+	}
+	
+	@PostMapping("/member/edit")
+	public String memberEdit(
+			@ModelAttribute MemberDto memberDto,
+			RedirectAttributes attr) {
+//		정보변경
+		memberDao.changeInformationByAdmin(memberDto);
+		attr.addAttribute("memberId", memberDto.getMemberId());
+		return "redirect:detail";
+	}
+	
+	
+/*---------------------------------------------------------------------------------*/
+	
+//	포켓몬 현황
+	@Autowired
+	private PocketmonStatDao pocketmonStatDao;
+	
+	@GetMapping("/stat/pocketmon")
+	public String pocketmon(Model model) {
+		List<PocketmonStatDto> list = pocketmonStatDao.selectList();
+		model.addAttribute("list", list);
+		return"/WEB-INF/views/admin/stat/pocketmon.jsp";
+	}
+	
+	
+//	강의 과목 현황
+	@Autowired
+	private SubjectStatDao subjectStatDao;
+	
+	@GetMapping("/stat/subject")
+	public String subject(Model model) {
+		List<SubjectStatDto> list = subjectStatDao.selectList();
+		model.addAttribute("list", list);
+		return"/WEB-INF/views/admin/stat/subject.jsp";
+	}
+	
+//	멤버현황
+//	@Autowired
+//	private MemberStatDao memberStatDao;
+//	
+//	@GetMapping("/stat/subject")
+//	public String subject(Model model) {
+//		List<MemberStatDto> list = subjectStatDao.selectList();
+//		model.addAttribute("list", list);
+//		return"/WEB-INF/views/admin/stat/member.jsp";
+//	}
+//	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

@@ -175,6 +175,22 @@ public class MemberDao {
 		return"";
 	}
 	
+//	관리자용 회원 정보 변경
+	public boolean changeInformationByAdmin(MemberDto memberDto) {
+		String sql="update member set "
+				+ "member_nick=?, member_tel=?, member_birth=?,"
+				+ "member_email=?, member_post=?, member_basic_addr=?, member_detail_addr=?,"
+				+ "member_level=?, member_point=?"
+				+ "where member_id =?";
+		Object[] param= {
+				memberDto.getMemberNick(), memberDto.getMemberTel(),
+				memberDto.getMemberEmail(), memberDto.getMemberBirth(),
+				memberDto.getMemberPost(), memberDto.getMemberBasicAddr(),
+				memberDto.getMemberDetailAddr(), memberDto.getMemberLevel(),
+				memberDto.getMemberPoint(), memberDto.getMemberId()
+		};
+		return jdbcTemplate.update(sql,param) > 0;
+	}
 	
 
 }
