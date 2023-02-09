@@ -16,9 +16,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spring12.component.RandomComponent;
 import com.kh.spring12.dao.MemberDao;
+import com.kh.spring12.dao.MemberStatDao;
 import com.kh.spring12.dao.PocketmonStatDao;
 import com.kh.spring12.dao.SubjectStatDao;
 import com.kh.spring12.dto.MemberDto;
+import com.kh.spring12.dto.MemberStatDto;
 import com.kh.spring12.dto.PocketmonStatDto;
 import com.kh.spring12.dto.SubjectStatDto;
 
@@ -31,6 +33,12 @@ public class AdminController {
 	
 	@Autowired
 	private RandomComponent randomComponent;		// 컨트롤러, 랜덤 컴포넌트 등록이 되어있어야함
+	
+//	관리자 홈
+	@GetMapping("/home")
+	public String home() {
+		return"/WEB-INF/views/admin/home.jsp";
+	}
 	
 	@GetMapping("/member/list")
 	public String memberList(
@@ -157,16 +165,25 @@ public class AdminController {
 	}
 	
 //	멤버현황
-//	@Autowired
-//	private MemberStatDao memberStatDao;
-//	
-//	@GetMapping("/stat/subject")
-//	public String subject(Model model) {
-//		List<MemberStatDto> list = subjectStatDao.selectList();
+	@Autowired
+	private MemberStatDao memberStatDao;
+	
+//	@GetMapping("/stat/member")
+//	public String member(Model model) {
+//		List<MemberStatDto> list = memberStatDao.selectList();
 //		model.addAttribute("list", list);
 //		return"/WEB-INF/views/admin/stat/member.jsp";
 //	}
-//	
+	
+	@GetMapping("/stat/member")
+	public String member(
+			Model model,
+			@RequestParam (required = false,
+			defaultValue = "member_level asc")String sort){
+		model.addAttribute("list", memberStatDao.selectList(sort));
+		return"/WEB-INF/views/admin/stat/member.jsp";
+	}
+	
 	
 	
 	
