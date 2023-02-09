@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
 /*
  * 인터셉터(Interceptor)
@@ -14,8 +15,8 @@ import org.springframework.web.servlet.HandlerInterceptor;
  * - HandlerInterceptor 상속
  * 	- 다음 메소드를 재정의하여 사용
  * 		- preHandle - 컨트롤러가 실해되기 직전 시점에 간섭
- * 		- postHandle
- * 		- afterCompletion
+ * 		- postHandle - 컨트롤러 실행 직후 시점에 간섭(화면은 아직 생성되지 않음)
+ * 		- afterCompletion - 화면까지 다 생성된 후 간섭
  */
 @Service
 
@@ -30,5 +31,24 @@ public class TestInterceptor implements HandlerInterceptor {
 		System.out.println("테스트입터셉터");
 //		return false;	//차단
 		return true;
+	}
+	
+	@Override
+	public void postHandle(
+			HttpServletRequest request, 				//요청객체
+			HttpServletResponse response, 			//응답객체
+			Object handler,								//실행한 컨트롤러 정보
+			ModelAndView modelAndView)			//컨트롤러에서 반환한 데이터 + 화면정보
+					throws Exception {
+	}
+	
+	@Override
+	public void afterCompletion(
+			HttpServletRequest request, 				//요청객체	
+			HttpServletResponse response, 			//응답객체
+			Object handler, 								//실행한 컨트롤러 정보
+			Exception ex)									//예외 정보(발생 안했으면 null)
+			throws Exception {
+		
 	}
 }
