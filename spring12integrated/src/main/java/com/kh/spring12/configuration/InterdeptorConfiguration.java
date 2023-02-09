@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.kh.spring12.interceptor.MemberInterceptor;
 import com.kh.spring12.interceptor.TestInterceptor;
 
 /*
@@ -17,8 +18,13 @@ import com.kh.spring12.interceptor.TestInterceptor;
 
 @Configuration
 public class InterdeptorConfiguration implements WebMvcConfigurer{
+	
 	@Autowired
 	private TestInterceptor testInterceptor;
+	
+	@Autowired
+	private MemberInterceptor memberInterceptor;
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 //		인터셉터 등록 메소드
@@ -33,5 +39,16 @@ public class InterdeptorConfiguration implements WebMvcConfigurer{
 		registry.addInterceptor(testInterceptor)
 			.addPathPatterns("/**");						// 전부다
 		WebMvcConfigurer.super.addInterceptors(registry);
+		
+//		2. MemberInterceptor를 다음 페이지에 설정하겠다!
+//		- /member로 시작하는 주소중에서 /join, /joinFinish, /login, /find 제외
+		registry.addInterceptor(memberInterceptor)
+		.addPathPatterns("/member/**", "/admin/**")
+		.excludePathPatterns(
+				"/member/join",
+				"/member/joinFinish",
+				"/member/login",
+				"/member/find",
+				"/member/exitFinish");
 	}
 }
