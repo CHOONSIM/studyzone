@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.kh.spring12.interceptor.AdminInterceptor;
 import com.kh.spring12.interceptor.MemberInterceptor;
 import com.kh.spring12.interceptor.TestInterceptor;
 
@@ -24,6 +25,9 @@ public class InterdeptorConfiguration implements WebMvcConfigurer{
 	
 	@Autowired
 	private MemberInterceptor memberInterceptor;
+	
+	@Autowired
+	private AdminInterceptor adminInterceptor;
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -50,5 +54,9 @@ public class InterdeptorConfiguration implements WebMvcConfigurer{
 				"/member/login",
 				"/member/find",
 				"/member/exitFinish");
+		
+//		3. 관리자 전용 검사 인터셉터
+		registry.addInterceptor(adminInterceptor).addPathPatterns("/admin/**");
+		
 	}
 }

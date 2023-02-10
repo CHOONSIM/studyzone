@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+//관리자만 접근하도록 하는 인터셉터
+
 @Service
 public class AdminInterceptor implements HandlerInterceptor{
 @Override
@@ -20,14 +22,12 @@ public boolean preHandle(
 		String memberLevel = (String)session.getAttribute("memberLevel");
 		String memberId = (String)session.getAttribute("memberId");
 		
-		if(memberId != null) {
-			return true;
-		}
-		if(memberLevel == "관리자") {
+//		없는 경우를 반드시 먼저 검사해야한다.
+		if(memberLevel != null&& memberLevel.equals("관리자")) {
 			return true;
 		}
 		else {	
-			response.sendRedirect("/member/login");		
+			response.sendError(403);		
 			return false;
 		}
 	}
