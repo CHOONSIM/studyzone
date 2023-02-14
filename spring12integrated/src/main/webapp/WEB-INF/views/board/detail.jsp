@@ -11,6 +11,11 @@
 	<tbody>
 		<tr>
 			<td>
+				<h2>${boardDto.boardHead}</h2>
+			</td>
+		</tr>
+		<tr>
+			<td>
 				<h2>${boardDto.boardTitle}</h2>
 			</td>
 		</tr>
