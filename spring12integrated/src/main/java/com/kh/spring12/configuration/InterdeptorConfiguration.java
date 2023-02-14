@@ -47,13 +47,14 @@ public class InterdeptorConfiguration implements WebMvcConfigurer{
 //		2. MemberInterceptor를 다음 페이지에 설정하겠다!
 //		- /member로 시작하는 주소중에서 /join, /joinFinish, /login, /find 제외
 		registry.addInterceptor(memberInterceptor)
-		.addPathPatterns("/member/**", "/admin/**")
+		.addPathPatterns("/member/**", "/admin/**","/board/**")
 		.excludePathPatterns(
 				"/member/join",
 				"/member/joinFinish",
 				"/member/login",
 				"/member/find",
-				"/member/exitFinish");
+				"/member/exitFinish",
+				"/board/list");
 		
 //		3. 관리자 전용 검사 인터셉터
 		registry.addInterceptor(adminInterceptor).addPathPatterns("/admin/**");
