@@ -39,6 +39,8 @@ public class BoardController {
 			model.addAttribute("keyword", keyword);
 			model.addAttribute("list", boardDao.selectList(column, keyword));
 		}
+//		검색 여부와 관계없이 공지사항을 3개 조회해서 Model에 첨부
+		model.addAttribute("noticeList", boardDao.selectNoticeList(1, 3));
 			return "/WEB-INF/views/board/list.jsp";
 	}
 //	public String list(

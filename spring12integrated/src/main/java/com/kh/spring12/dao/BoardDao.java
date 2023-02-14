@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import com.kh.spring12.dto.BoardDto;
 
@@ -74,26 +73,38 @@ public class BoardDao {
 //			return"/WEB-INF/views/board/write.jsp";
 //	}
 
-public List<BoardDto> selectList() {
-	String sql = "select * from board order by board_no desc";
-	return jdbcTemplate.query(sql, mapper);
-}
-
-public List<BoardDto> selectList(String column, String keyword) {
-	String sql = "select * from board "
-					+ "where instr(#1, ?) > 0 "
-					+ "order by board_no desc";
-	sql = sql.replace("#1", column);
-	Object[] param = {keyword};
-	return jdbcTemplate.query(sql, mapper, param);
-}
-
-public BoardDto selectOne(int boardNo) {
-	String sql = "select * from board where board_no = ?";
-	Object[] param = {boardNo};
-	List<BoardDto> list = jdbcTemplate.query(sql, mapper, param);
-	return list.isEmpty() ? null : list.get(0);
-}
+//		공지사항만 조회하는 기능
+	public List<BoardDto> selectNoticeList(int begin, int end){
+		String sql = "select*from("
+				+ "select rownum rn, tmp.*from ("
+				+ "select*from board where board_head='공지' "
+				+ "order by board_no desc"
+				+ ")tmp"
+				+ ")where rn between ?and?";
+		Object[]param = {begin,end};
+		return jdbcTemplate.query(sql, mapper, param);
+				
+	}
+	public List<BoardDto> selectList() {
+		String sql = "select * from board order by board_no desc";
+		return jdbcTemplate.query(sql, mapper);
+	}
+	
+	public List<BoardDto> selectList(String column, String keyword) {
+		String sql = "select * from board "
+						+ "where instr(#1, ?) > 0 "
+						+ "order by board_no desc";
+		sql = sql.replace("#1", column);
+		Object[] param = {keyword};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+	
+	public BoardDto selectOne(int boardNo) {
+		String sql = "select * from board where board_no = ?";
+		Object[] param = {boardNo};
+		List<BoardDto> list = jdbcTemplate.query(sql, mapper, param);
+		return list.isEmpty() ? null : list.get(0);
+	}
 
 //번호를 생성하면서 등록하는 방법
 //1. 시퀀스 번호를 듀얼 테이블을 사용하여 조회
