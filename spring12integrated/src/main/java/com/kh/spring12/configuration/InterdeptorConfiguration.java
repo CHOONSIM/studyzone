@@ -6,6 +6,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.kh.spring12.interceptor.AdminInterceptor;
+import com.kh.spring12.interceptor.BoardManageInterceptor;
 import com.kh.spring12.interceptor.MemberInterceptor;
 import com.kh.spring12.interceptor.TestInterceptor;
 
@@ -28,6 +29,9 @@ public class InterdeptorConfiguration implements WebMvcConfigurer{
 	
 	@Autowired
 	private AdminInterceptor adminInterceptor;
+	
+	@Autowired
+	private BoardManageInterceptor boardManageInterceptor;
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -59,5 +63,8 @@ public class InterdeptorConfiguration implements WebMvcConfigurer{
 //		3. 관리자 전용 검사 인터셉터
 		registry.addInterceptor(adminInterceptor).addPathPatterns("/admin/**");
 		
+//		4. 작성자 본인 및 관리자 검사 인터셉터
+		registry.addInterceptor(boardManageInterceptor)
+					.addPathPatterns("/board/edit","/board/delete");
 	}
 }
