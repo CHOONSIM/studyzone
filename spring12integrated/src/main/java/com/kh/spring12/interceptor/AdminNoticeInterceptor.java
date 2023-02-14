@@ -36,6 +36,9 @@ public class AdminNoticeInterceptor implements HandlerInterceptor{
 				return true;
 			}		
 		}
+		else {		//공지가 아니면 검사 자체를 할 필요가 없이 통과
+			return true;
+		}
 		response.sendError(403);
 		return false;
 	}
