@@ -1,6 +1,7 @@
 package com.kh.spring12.controller;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.spring12.dao.BoardDao;
 import com.kh.spring12.dto.BoardDto;
 import com.kh.spring12.service.BoardService;
+import com.kh.spring12.vo.PaginationVO;
 
 @Controller
 @RequestMapping("/board")
@@ -31,21 +33,42 @@ public class BoardController {
 	private BoardService boardService;
 	
 //	게시글 리스트
+//	@GetMapping("/list")
+//	public String boardList(Model model,
+//			@RequestParam(required = false, defaultValue = "name")String column,
+//			@RequestParam(required = false, defaultValue = "")String keyword) {
+//		if(keyword.equals("")) {
+//			model.addAttribute("list", boardDao.selectList());
+//		}
+//		else {//키워드가 있다면 -> 검색
+//			model.addAttribute("column", column);
+//			model.addAttribute("keyword", keyword);
+//			model.addAttribute("list", boardDao.selectList(column, keyword));
+//		}
+////		검색 여부와 관계없이 공지사항을 3개 조회해서 Model에 첨부
+//		model.addAttribute("noticeList", boardDao.selectNoticeList(1, 3));
+//			return "/WEB-INF/views/board/list.jsp";
+//	}
+	
+	
+//	(+추가)ModelAttribute는 자동 수신 외 기능이 하나 더 있음
+//	-------> Model에 자동으로 추가됨(이름은 설정해야함)
 	@GetMapping("/list")
-	public String boardList(Model model,
-			@RequestParam(required = false, defaultValue = "name")String column,
-			@RequestParam(required = false, defaultValue = "")String keyword) {
-		if(keyword.equals("")) {
-			model.addAttribute("list", boardDao.selectList());
-		}
-		else {//키워드가 있다면 -> 검색
-			model.addAttribute("column", column);
-			model.addAttribute("keyword", keyword);
-			model.addAttribute("list", boardDao.selectList(column, keyword));
-		}
-//		검색 여부와 관계없이 공지사항을 3개 조회해서 Model에 첨부
+	public String list(
+			@ModelAttribute("vo") PaginationVO vo, 
+			Model model) {
+//		vo에 딱 한가지 없는 데이터가 게시글 개수(목록/검색이 다름)
+		int totalCount = boardDao.selectCount(vo);
+		vo.setCount(totalCount);
+		
+//		공지사항
 		model.addAttribute("noticeList", boardDao.selectNoticeList(1, 3));
-			return "/WEB-INF/views/board/list.jsp";
+		
+//		게시글
+		List<BoardDto> list = boardDao.selectList(vo);
+		model.addAttribute("list", list);
+		
+		return "/WEB-INF/views/board/list2.jsp";
 	}
 
 	@GetMapping("/detail")

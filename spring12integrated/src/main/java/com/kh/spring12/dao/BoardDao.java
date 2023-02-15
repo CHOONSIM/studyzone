@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spring12.dto.BoardDto;
+import com.kh.spring12.vo.PaginationVO;
 
 @Repository
 public class BoardDao {
@@ -163,5 +164,47 @@ public boolean updateReadcount(int boardNo) {
 	Object[] param = {boardNo};
 	return jdbcTemplate.update(sql, param) > 0;
 }
-
+	
+//	페이징 적용된 조회 및 카운트
+	public int selectCount(PaginationVO vo) {
+			if(vo.isSearch()) {																		//검색
+				String sql = "select count(*) from board where instr(#1,?)>0";
+				sql = sql.replace("#1", vo.getColumn());
+				Object[] param = {vo.getKeyword()};
+				return jdbcTemplate.queryForObject(sql, int.class, param);
+			}
+			else {																						//목록
+				String sql = "select count(*) from board";
+				return jdbcTemplate.queryForObject(sql, int.class);				
+			}
+	}
+	
+	public List<BoardDto> selectList(PaginationVO vo){
+		if(vo.isSearch()){																			//검색
+			String sql ="select*from ( "
+					+ "select rownum rn, TMP.*from( "
+							+ "select * from board "
+							+ "where instr(#1,?) >0 "
+							+ "connect by prior board_no = board_parent "
+							+ "start with board_parent is null "
+							+ "order siblings by board_group desc, board_no asc "
+							+ ")TMP "
+							+ ") where rn between? and ?";
+			sql = sql.replace("#1", vo.getColumn());
+			Object[] param = {vo.getKeyword(), vo.getBegin(), vo.getEnd()};
+			return jdbcTemplate.query(sql, mapper, param);
+		}
+		else {																							//목록
+			String sql ="select*from ( "
+					+ "select rownum rn, TMP.*from( "
+					+ "select * from board "
+					+ "connect by prior board_no = board_parent "
+					+ "start with board_parent is null "
+					+ "order siblings by board_group desc, board_no asc "
+					+ ")TMP "
+					+ ") where rn between? and ?";
+			Object[] param = {vo.getBegin(),vo.getEnd()};
+			return jdbcTemplate.query(sql, mapper, param);
+		}
+	}
 }
