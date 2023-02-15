@@ -34,7 +34,7 @@ public class AdminNoticeInterceptor implements HandlerInterceptor{
 			boolean isAdmin = memberLevel.equals("관리자");
 			if(isAdmin) {		// 관리자라면
 				return true;
-			}		
+			}
 		}
 		else {		//공지가 아니면 검사 자체를 할 필요가 없이 통과
 			return true;

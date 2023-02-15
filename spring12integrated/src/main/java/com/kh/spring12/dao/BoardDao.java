@@ -100,8 +100,8 @@ public class BoardDao {
 	public List<BoardDto> selectList(String column, String keyword) {
 		String sql = "select * from board "
 						+ "where instr(#1, ?) > 0 "
-						+ "connect by prior board_no = board_parent"
-						+ "start with board_parent is null"
+						+ "connect by prior board_no = board_parent "
+						+ "start with board_parent is null "
 						+ "order siblings by board_group desc, board_no asc";
 		sql = sql.replace("#1", column);
 		Object[] param = {keyword};
@@ -122,15 +122,18 @@ public int sequence() {
 	String sql = "select board_seq.nextval from dual";
 	return jdbcTemplate.queryForObject(sql, int.class);
 }
+//이 기능은 새글 답글 관계없이 동일하게 구현
 public void insert(BoardDto boardDto) {
 	String sql = "insert into board("
 			+ "board_no, board_writer, board_title, board_content, "
-			+ "board_head, board_time, board_read, board_like, board_reply) "
-			+ "values(?, ?, ?, ?, ?, sysdate, 0, 0, 0)";
+			+ "board_head, board_time, board_read, board_like, board_reply, "
+			+ "board_group, board_parent, board_depth) "
+			+ "values(?, ?, ?, ?, ?, sysdate, 0, 0, 0, ?, ?, ?)";
 	Object[] param = {
 		boardDto.getBoardNo(), boardDto.getBoardWriter(),
 		boardDto.getBoardTitle(), boardDto.getBoardContent(),
-		boardDto.getBoardHead()
+		boardDto.getBoardHead(), boardDto.getBoardGroup(),
+		boardDto.getBoardParent(), boardDto.getBoardDepth()
 	};
 	jdbcTemplate.update(sql, param);
 }

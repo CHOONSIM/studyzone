@@ -17,7 +17,7 @@ public class BoardDto {
 	public int boardLike;
 	public int boardReply;
 	public int boardGroup;
-	public int boardParent;
+	public Integer boardParent;		//null이 가능함
 	public int boardDepth;
 	
 	//가상의 Getter를 추가하여 현재시각을 기준으로 비교 후
@@ -38,5 +38,16 @@ public class BoardDto {
 			else {
 				return writeStr.substring(0, 10);//"yyyy-MM-dd"
 			}
+		}
+		
+//		새글인지 여부를 확인하는 명령
+		public boolean isNew() {
+			return boardParent == null;
+		}
+		
+//		답글인지 여부를 확인하는 명령
+		public boolean isAnswer() {
+//			return boardParent != null;
+			return !isNew();
 		}
 }

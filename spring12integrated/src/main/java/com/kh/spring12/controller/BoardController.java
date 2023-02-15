@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spring12.dao.BoardDao;
 import com.kh.spring12.dto.BoardDto;
+import com.kh.spring12.service.BoardService;
 
 @Controller
 @RequestMapping("/board")
@@ -25,6 +26,9 @@ public class BoardController {
 	
 	@Autowired
 	private BoardDao boardDao;
+	
+	@Autowired
+	private BoardService boardService;
 	
 //	게시글 리스트
 	@GetMapping("/list")
@@ -43,23 +47,7 @@ public class BoardController {
 		model.addAttribute("noticeList", boardDao.selectNoticeList(1, 3));
 			return "/WEB-INF/views/board/list.jsp";
 	}
-//	public String list(
-//			Model model,
-//			@RequestParam(required = false, defaultValue = "1")int page,
-//			@RequestParam(required = false, defaultValue = "0")int size) {
-//			model.addAttribute("page",page);
-//			model.addAttribute("size", size);
-//			
-//			int totalCount = boardDao.selectCount();
-//			model.addAttribute("totalCount", totalCount);
-//			
-//			int totalPage = (totalCount + size-1)/size;
-//			model.addAttribute("totalPage", totalPage);
-//			
-//			List<BoardDto>list = boardDao.selectListPaging(page,size);
-//			model.addAttribute("list", list);
-//			return "/WEB-INF/views/board/list.jsp";
-//	}
+
 	@GetMapping("/detail")
 	public String detail(@RequestParam int boardNo, 
 						Model model, HttpSession session) {
@@ -116,23 +104,49 @@ public class BoardController {
 	}
 	
 	@GetMapping("/write")
-	public String write() {
+	public String write(@RequestParam(required=false)Integer boardParent,
+			Model model) {
+		model.addAttribute("boardParent", boardParent);
 		return "/WEB-INF/views/board/write.jsp";
 	}
 	
+//	@PostMapping("/write")
+//	public String write(
+//			@ModelAttribute BoardDto boardDto,//3개(말머리,제목,내용)
+//			HttpSession session, RedirectAttributes attr
+//			) {
+////		번호와 회원아이디를 추출
+//		int boardNo = boardDao.sequence();
+//		String memberId = (String)session.getAttribute("memberId");
+//		
+////		작성한 게시글 정보에 첨부
+//		boardDto.setBoardNo(boardNo);
+//		boardDto.setBoardWriter(memberId);
+//		
+////		게시글 등록
+//		boardDao.insert(boardDto);
+//		
+////		상세페이지로 이동
+//		attr.addAttribute("boardNo", boardNo);
+//		return "redirect:detail";
+//	}
+	
 	@PostMapping("/write")
-	public String write(
-			@ModelAttribute BoardDto boardDto,//3개(말머리,제목,내용)
-			HttpSession session, RedirectAttributes attr
-			) {
-		int boardNo = boardDao.sequence();
-		String memberId = (String)session.getAttribute("memberId");
+	private String write(@ModelAttribute BoardDto boardDto,
+			HttpSession session, RedirectAttributes attr) {
 		
-		boardDto.setBoardNo(boardNo);
+//		컨트롤러에서만 가능한 작업은 컨트롤러에서 처리
+//		- 사용자의 요청을 처리하는 것
+//		- 세션 사용
+//		- 리다이렉트 관련 처리
+//		- 그 외 사용자 요청 처리 관련 도구 사용
+		String memberId = (String)session.getAttribute("memberId");
 		boardDto.setBoardWriter(memberId);
 		
-		boardDao.insert(boardDto);
+//		나머지 일반 프로그래밍 코드는 서비스를 호출하여 처리
+		int boardNo = boardService.write(boardDto);
 		
+//		상세페이지로 이동
 		attr.addAttribute("boardNo", boardNo);
 		return "redirect:detail";
 	}
