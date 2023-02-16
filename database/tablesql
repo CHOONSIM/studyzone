@@ -340,5 +340,68 @@ MINUS : 차집합
     UNION ALL
     SELECT*FROM BOARD_OTHER;
 
+
+-- 답변형 게시판 테이블을 아예 새로 만들고 싶다면
+drop table board;
+drop sequence board_seq;
+create table board(
+board_no number primary key,
+board_writer references member(member_id) on delete set null,
+board_title varchar2(300) not null,
+board_content varchar2(4000) not null,
+board_time date default sysdate not null,
+board_head char(6) check(board_head in ('정보', '유머', '공지')),
+board_read number default 0 not null check(board_read >= 0),
+board_like number default 0 not null check(board_like >= 0),
+board_reply number default 0 not null check(board_reply >= 0),
+board_group number not null check(board_group > 0),
+board_parent number check(board_parent > 0),
+board_depth number default 0 not null check(board_depth >= 0)
+);
+create sequence board_seq start with 1001;
+
+
+SELECT * FROM BOARD
+CONNECT BY PRIOR BOARD_NO=BOARD_PARENT
+START WITH BOARD_PARENT IS NULL
+ORDER SIBLINGS BY BOARD_GROUP DESC, BOARD_NO ASC;
+
 commit;
+
+-- 첨부파일 테이블
+
+create table attachment (
+attachment_no number primary key,
+attachment_name varchar2(256) not null,
+attachment_type varchar2(60) not null,
+attachment_size number not null
+);
+
+create sequence attachment_seq;
+drop table attachment;
+drop sequence attachment_seq;
+
+-- 포켓몬 이미지 연결 테이블
+create table pocketmon_image (
+pocketmon_no not null references pocketmon(no) on delete cascade,
+attachment_no not null references attachment(attachment_no) on delete cascade
+);
+
+select*from pocketmon;
+select*from attachment;
+select*from pocketmon_image;
+drop table attachment;
+drop table pocketmon_image;
+
+create table member_profile(
+member_id not null references member(member_id) on delete cascade,
+attachment_no not null references attachment(attachment_no) on delete cascade,
+primary key(member_id, attachment_no)
+);
+
+select*from member;
+select*from attachment;
+select*from member_profile;
+
+drop table attachment;
 
