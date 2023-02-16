@@ -4,7 +4,8 @@
 
 <h1>회원 가입 정보 입력</h1>
 
-<form action="join" method="post">
+<form action="join" method="post" enctype="multipart/form-data">
+	프로필 이미지 : <input type="file" name="attach" accept=".png, .gif, .jpg"><br><br>
 	아이디 : <input type="text" name="memberId"required><br><br>
 	비밀번호 :  <input type="text" name="memberPw"required><br><br>
 	닉네임 : <input type="text" name="memberNick"required><br><br>
