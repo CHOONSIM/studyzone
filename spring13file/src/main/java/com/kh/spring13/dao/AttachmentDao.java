@@ -15,7 +15,7 @@ public class AttachmentDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	private RowMapper<AttachmentDto> ampper = new RowMapper<AttachmentDto>() {
+	private RowMapper<AttachmentDto> mapper = new RowMapper<AttachmentDto>() {
 
 		@Override
 		public AttachmentDto mapRow(ResultSet rs, int rowNum) throws SQLException {
