@@ -2,6 +2,7 @@ package com.kh.spring13.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -107,6 +108,21 @@ public class FileController {
 				.build());
 			
 		}
+		return "redirect:/";
+		
+//		전송되는 파일이 여러개라면 1. 배열 또는 2. 리스트 형태로 수신한다.
+		
+	}
+	
+//	@PostMapping("/upload5")
+//	public String upload5(@RequestParam MultipartFile[] attaches) {
+//		System.out.println("전송갯수 : " + attaches.length);
+//		return "redirect:/";
+//	}
+	
+	@PostMapping("/upload5")
+	public String upload5(@RequestParam List<MultipartFile> attaches) {
+		System.out.println("전송갯수 : " + attaches.size());
 		return "redirect:/";
 	}
 	

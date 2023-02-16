@@ -52,3 +52,18 @@
 	이미지 : <input type="file" name="attach" accept=".png, .gif, .jpg"><br><br>
 	<button>등록</button>
 </form>
+
+<hr>
+
+<!-- 
+	파일을 여러 개 첨부하기
+	1. input 태그를 여러 개 만든다. - 개수 제한을 하고 싶을때 사용
+	2. input 태그에 multiple 옵션을 추가한다 - 개수 무제한(제한하려면 프로그래밍 코드가 필요)
+ -->
+
+<h2>파일 여러개 보내기</h2>
+
+<form action = "upload5" method = "post" enctype="multipart/form-data">
+	<input type="file" name="attaches" multiple accept="image/*">
+	<button>전송</button>
+</form>
