@@ -183,6 +183,7 @@ public boolean updateReadcount(int boardNo) {
 		if(vo.isSearch()){																			//검색
 			String sql ="select*from ( "
 					+ "select rownum rn, TMP.*from( "
+					
 							+ "select * from board "
 							+ "where instr(#1,?) >0 "
 							+ "connect by prior board_no = board_parent "
