@@ -14,7 +14,7 @@ import com.kh.spring12.dao.MemberDao;
 import com.kh.spring12.dao.MemberProfileDao;
 import com.kh.spring12.dto.MemberDto;
 import com.kh.spring12.dto.MemberProfileDto;
-import com.kh.spring13.dto.AttachmentDto;
+import com.kh.spring12.dto.AttachmentDto;
 
 @Service
 public class MemberService {

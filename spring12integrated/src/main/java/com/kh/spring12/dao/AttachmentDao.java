@@ -47,7 +47,7 @@ public class AttachmentDao {
 		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	
-	public void insert(com.kh.spring13.dto.AttachmentDto attachmentDto) {
+	public void insert(AttachmentDto attachmentDto) {
 		String sql = "insert into attachment( "
 				+ "attachment_no, attachment_name, "
 				+ "attachment_type, attachment_size "
