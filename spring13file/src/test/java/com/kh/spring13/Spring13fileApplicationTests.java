@@ -1,10 +1,10 @@
-package com.kh.spring13file1;
+package com.kh.spring13;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Spring13file1ApplicationTests {
+class Spring13fileApplicationTests {
 
 	@Test
 	void contextLoads() {
