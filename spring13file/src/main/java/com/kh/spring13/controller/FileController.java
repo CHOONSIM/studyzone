@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.spring13.dao.AttachmentDao;
 import com.kh.spring13.dao.PocketmonDao;
 import com.kh.spring13.dao.PocketmonImageDao;
+import com.kh.spring13.dao.PocketmonWithImageDao;
 import com.kh.spring13.dto.AttachmentDto;
 import com.kh.spring13.dto.PocketmonDto;
 import com.kh.spring13.dto.PocketmonImageDto;
@@ -229,5 +230,14 @@ public class FileController {
 												).build().toString()
 					)
 					.body(resource);
+	}
+	
+	@Autowired
+	private PocketmonWithImageDao pocketmonWithImageDao;
+	
+	@GetMapping("/pocketmon/list")
+	public String pocketmonList(Model model) {
+			model.addAttribute("list", pocketmonWithImageDao.selectList());
+			return"/WEB-INF/views/list.jsp";
 	}
 }
