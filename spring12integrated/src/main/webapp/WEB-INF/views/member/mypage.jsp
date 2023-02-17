@@ -7,6 +7,16 @@
 
 <h2>내 정보</h2>
 
+<!--  프로필 이미지 유무에 따라 이미지를 선택하여 표시 -->
+<c:choose>
+	<c:when test="${profile != null }">
+		<img width="200" height="200" src="/attachment/download?attachmentNo=${profile.attachmentNo }">
+	</c:when>
+	<c:otherwise>
+		<img width="200" height="200" src="/image/user.jpg">
+	</c:otherwise>
+</c:choose>
+
 <table border ="1" width="400">
 	<tbody>
 		<tr>

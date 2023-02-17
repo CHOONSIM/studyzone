@@ -110,6 +110,7 @@ public class MemberController {
 //	1. 세션에서 회원 아이디 추출
 //	2. 추출한 아이디로 대상의 정보를 상세조회
 //	3. 상세조회한 결과를 Model에 첨부
+//	4. 회원 프로필 이미지가 있다면 첨부
 	
 	@GetMapping("/mypage")
 	public String mypage(
@@ -118,6 +119,7 @@ public class MemberController {
 		String memberId = (String) session.getAttribute("memberId");
 		MemberDto memberDto = memberDao.selectOne(memberId);
 		model.addAttribute("memberDto",memberDto);
+		model.addAttribute("profile",memberProfileDao.selectOne(memberId));
 		return "/WEB-INF/views/member/mypage.jsp";
 	}
 	

@@ -71,7 +71,7 @@
 <!--		    <version>10.1.5</version>-->
 		</dependency>
 		
-		<!--Apache commons IO 라이브러리는 버전 필수 입력-->
+		<!--Apache commons IO 라이브러리는 버전 필수 입력 , 파일 입출력 쉽게-->
 		<dependency>
     		<groupId>commons-io</groupId>
     		<artifactId>commons-io</artifactId>

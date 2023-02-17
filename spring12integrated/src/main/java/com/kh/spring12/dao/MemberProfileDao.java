@@ -2,6 +2,7 @@ package com.kh.spring12.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -34,5 +35,12 @@ public class MemberProfileDao {
 				memberProfileDto.getMemberId(), memberProfileDto.getAttachmentNo()
 		};
 		jdbcTemplate.update(sql, param);
+	}
+	
+	public MemberProfileDto selectOne(String memberId) {
+		String sql = "select * from member_profile where member_id =?";
+		Object[] param = {memberId};
+		List<MemberProfileDto> list = jdbcTemplate.query(sql, mapper, param);
+		return list.isEmpty() ? null : list.get(0);
 	}
 }
