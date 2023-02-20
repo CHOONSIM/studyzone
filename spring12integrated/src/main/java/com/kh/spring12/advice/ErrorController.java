@@ -25,6 +25,7 @@ public class ErrorController {
 		return"/WEB-INF/views/error/sorry.jsp";
 	}
 //	404예외만 따로 처리할 수 있도록 추가 메소드를 구성
+//	- 이 예외는 다른 예외로 변경 할 수 없다.
 	@ExceptionHandler(NoHandlerFoundException.class)
 	public String notFound(Exception ex) {
 		
