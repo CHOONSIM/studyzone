@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
+import javax.annotation.PostConstruct;
+
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kh.spring12.configuration.FileUploadProperties;
 import com.kh.spring12.dao.AttachmentDao;
 import com.kh.spring12.dto.AttachmentDto;
 
@@ -24,10 +27,20 @@ import com.kh.spring12.dto.AttachmentDto;
 @RequestMapping("/attachment")
 public class AttachmentController {
 	
-	private final File dir = new File("D:/upload");
 	
 	@Autowired
 	private AttachmentDao attachmentDao;
+	
+	@Autowired
+	private FileUploadProperties fileUploadProperties;
+	
+	private File dir;
+	@PostConstruct
+	public void init() {
+		dir = new File(fileUploadProperties.getPath());
+		dir.mkdirs();
+	}
+	
 	
 	@GetMapping("/download")
 	public ResponseEntity<ByteArrayResource> download(

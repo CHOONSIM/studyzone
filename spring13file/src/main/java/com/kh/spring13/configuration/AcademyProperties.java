@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Data
 @Component
-@ConfigurationProperties(prefix = "academy")			//prefix = 접두사, suffix = 접미사
+@ConfigurationProperties(prefix = "custom.academy")			//prefix = 접두사, suffix = 접미사
 public class AcademyProperties {
 	private String name;			// academy.name
 	private String location;		//academy.location
