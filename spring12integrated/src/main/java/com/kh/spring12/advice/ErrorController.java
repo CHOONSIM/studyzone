@@ -28,11 +28,21 @@ public class ErrorController {
 //	- 이 예외는 다른 예외로 변경 할 수 없다.
 	@ExceptionHandler(NoHandlerFoundException.class)
 	public String notFound(Exception ex) {
-		
 //		ex.printStackTrace();		(오류추적)
 		return"/WEB-INF/views/error/404.jsp";
 	}
-//	405 - 처리가능한메소드가없음
-//	403 - 권한이 없음
-//	401 - 자격이 없음
+
+//	403 - 권한이 없음 : 직접 만든 RequirePermissionException으로 대체하여 처리
+	@ExceptionHandler(RequirePermissionException.class)
+	public String forbidden(Exception ex) {
+		return "/WEB-INF/views/error/403.jsp";
+	}
+	
+//	401 - 자격이 없음 : 직접 만든 RequireLoginException으로 대체처리
+//	- 사용자가 봐야하는 페이지는 로그인 페이지
+	@ExceptionHandler(RequireLoginException.class)
+	public String unAuthorizes(Exception ex) {
+	return"/WEB-INF/views/member/login.jsp";		// 주소는 유지하고 화면만 변경
+//	return"redirect:/member/login";						//재접속을 지시
+	}
 }

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.kh.spring12.advice.RequireLoginException;
+
 //비회원이 회원 기능에 접근하는 것을 차단하기 위한 인터셉터
 
 @Service
@@ -26,8 +28,9 @@ public boolean preHandle(
 		return true;
 	}
 	else {						//비회원 - 로그인페이지로 이동시킴(redirect)
-		response.sendRedirect("/member/login");			//return"redirect:/member/login"
-		return false;
+//		response.sendRedirect("/member/login");			//return"redirect:/member/login"
+//		return false;
+		throw new RequireLoginException("로그인 후 이용 가능합니다.");
 		}
 	}
 }
