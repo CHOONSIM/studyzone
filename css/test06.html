@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>폼 디자인</title>
+    <style>
+        /*
+        화면에 요소(태그)를 배치할떄 배치 방향을 정할 수 있다.
+        - inline은 줄바꿈 없이 배치(System.out.print() 처럼 배치)
+        - block은 모든 태그를 줄바꿈하면서 배치(System.out.println() 처럼 배치)
+        
+        margin을 사용하여 외부 여백을 제어할 수 있다.
+        - (주의) margin은 특별한 이유가 없으면 좌우는 주지 않는다.(태그의 위치가 밀림)
+
+        width와 height를 사용하여 폭과 높이를 지정할 수 있다.
+        - (주의) height는 특별한 이유가 없으면 주지 않는다.
+        */
+        h1{
+
+        }
+        input{
+            font-size: 20px;
+            display : block;
+
+            margin-top: 10px;
+            margin-bottom: 10px;
+
+            padding : 0.5em;
+
+            width : 300px;
+        }
+        button{
+            font-size: 20px;
+            display : block;
+            margin: 10px 0px;   /*2개 설정 시 상하, 좌우 */
+            margin: 10px 0px 10px 0px;  /*4개 설정 시 상,우,하,좌(시계방향)*/
+            
+            padding : 0.5em;
+
+            width : 300px;
+        }
+    </style>
+</head>
+<body>
+    <form action="#" method="post">
+        <h1>로그인</h1>
+        <input type="text" name="memberId">
+        <input type="password" name="memberPw">
+        <button>로그인</button>
+    </form>
+</body>
+</html>
