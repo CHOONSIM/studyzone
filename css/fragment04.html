@@ -1,42 +1,108 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>성적 등록 페이지 구현</title>
+    <title>Document</title>
     <link rel="stylesheet" type="text/css" href="commons.css">
+    <style>
+        div {
+            border: 1px dotted gray;
+        }
+        
+        /*
+            외부 여백(margin)을 부여할 수 있도록 설정(10~50px)
+            .mt - margin top
+            .mb - margin bottom
+            .ms - margin start(left)
+            .me - margin end(right)
+            내부 여백(padding)을 부여할 수 있도록 설정(10~50px)
+            .pt - padding top
+            .pb - padding bottom
+            .ps - padding start(left)
+            .pe - padding end(right)
+        */
+        .mt-10 { margin-top: 10px; }
+        .mt-20 { margin-top: 20px; }
+        .mt-30 { margin-top: 30px; }
+        .mt-40 { margin-top: 40px; }
+        .mt-50 { margin-top: 50px; }
 
+        .mb-10 { margin-bottom: 10px; }
+        .mb-20 { margin-bottom: 20px; }
+        .mb-30 { margin-bottom: 30px; }
+        .mb-40 { margin-bottom: 40px; }
+        .mb-50 { margin-bottom: 50px; }
+
+        .ms-10 { margin-left: 10px; }
+        .ms-20 { margin-left: 20px; }
+        .ms-30 { margin-left: 30px; }
+        .ms-40 { margin-left: 40px; }
+        .ms-50 { margin-left: 50px; }
+
+        .me-10 { margin-right: 10px; }
+        .me-20 { margin-right: 20px; }
+        .me-30 { margin-right: 30px; }
+        .me-40 { margin-right: 40px; }
+        .me-50 { margin-right: 50px; }
+
+        .pt-10 { padding-top: 10px; }
+        .pt-20 { padding-top: 20px; }
+        .pt-30 { padding-top: 30px; }
+        .pt-40 { padding-top: 40px; }
+        .pt-50 { padding-top: 50px; }
+
+        .pb-10 { padding-bottom: 10px; }
+        .pb-20 { padding-bottom: 20px; }
+        .pb-30 { padding-bottom: 30px; }
+        .pb-40 { padding-bottom: 40px; }
+        .pb-50 { padding-bottom: 50px; }
+
+        .ps-10 { padding-left: 10px; }
+        .ps-20 { padding-left: 20px; }
+        .ps-30 { padding-left: 30px; }
+        .ps-40 { padding-left: 40px; }
+        .ps-50 { padding-left: 50px; }
+
+        .pe-10 { padding-right: 10px; }
+        .pe-20 { padding-right: 20px; }
+        .pe-30 { padding-right: 30px; }
+        .pe-40 { padding-right: 40px; }
+        .pe-50 { padding-right: 50px; }
+
+    </style>
 </head>
 <body>
-    <div class="container-400">
+    <div class="container-500 mt-50">
         <div class="row center">
-            <h1>학생 성적 등록</h1>
+            <h1>과목 정보 등록</h1>
         </div>
-        <hr>
-        <div class="row left">
-            <a href="#">신규학생 성적 등록</a></div>
         <div class="row">
-            <label>이름</label>
-            <input type="text"name="name" required placeholder="학생이름"
-                         class="form-input w-50"></div>
+            <label>과목명</label>
+            <input type="text" name="name" required class="form-input w-100">
+        </div>
         <div class="row">
-            <label>국어</label>
-            <input type="number"name="korean" required placeholder="국어점수"
-                          class="form-input w-50"></div>
+            <label>과목 시간</label>
+            <input type="number" name="period" required class="form-input w-100">
+        </div>
         <div class="row">
-             <label>영어</label>
-             <input type="number"name="english" required placeholder="영어점수"
-                          class="form-input w-50"></div>
-         <div class="row">
-            <label>수학</label>
-            <input type="number"name="math" required placeholder="수학점수"
-                          class="form-input w-50"></div>
+            <label>수강료</label>
+            <input type="number" name="price" required class="form-input w-100">
+        </div>
+        <div class="row">
+            <label class="w-100">강의 유형</label>
+            <select name="type" required class="form-input">
+                <option value="">선택</option>
+                <option>오프라인</option>
+                <option>온라인</option>
+                <option>혼합</option>
+            </select>
+        </div>
         <div class="row right">
-            <button class="form-btn positive w-10">등록</button>
+            <a class="form-btn neutral">목록</a>
+            <button class="form-btn positive">등록</button>
         </div>
     </div>
-
-
 </body>
 </html>

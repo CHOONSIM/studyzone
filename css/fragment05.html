@@ -4,10 +4,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>학생정보 페이지 구현</title>
+    <title>성적 등록 페이지 구현</title>
     <link rel="stylesheet" type="text/css" href="commons.css">
+    <style>
+        div{
+            border: 1px dotted gray;
+        }
+    </style>
 </head>
 <body>
-    <div></div>
+    <div class="container-400">
+        <div class="row center">
+            <h1>학생 성적 등록</h1>
+        </div>
+        <hr>
+        <div class="row left">
+            <a href="#">신규학생 성적 등록</a></div>
+        <div class="row">
+            <label>이름</label>
+            <input type="text"name="name" required placeholder="학생이름"
+                         class="form-input w-50"></div>
+        <div class="row">
+            <label>국어</label>
+            <input type="number"name="korean" required placeholder="국어점수"
+                          class="form-input w-50"></div>
+        <div class="row">
+             <label>영어</label>
+             <input type="number"name="english" required placeholder="영어점수"
+                          class="form-input w-50"></div>
+         <div class="row">
+            <label>수학</label>
+            <input type="number"name="math" required placeholder="수학점수"
+                          class="form-input w-50"></div>
+        <div class="row right">
+            <button class="form-btn positive w-10">등록</button>
+        </div>
+    </div>
+
+
 </body>
 </html>
