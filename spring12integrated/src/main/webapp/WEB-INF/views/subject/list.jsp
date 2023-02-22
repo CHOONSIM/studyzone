@@ -5,7 +5,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 	<h1>강의 목록/검색</h1><br>
-	<h2><a href="insertInput">신규 강의 등록</a></h2><br>
+	<h2><a href="insert">신규 강의 등록</a></h2><br>
 	<h2><a href="list">목록</a></h2><br><br>
 		<form action="list"method="get">
 			<select name ="column">

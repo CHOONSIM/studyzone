@@ -5,7 +5,7 @@
 
 	<h1>학생 성적 ${mode }</h1>
 	<hr>
-	<h3><a href="insertInput">신규 학생 성적 등록</a></h3>
+	<h3><a href="insert">신규 학생 성적 등록</a></h3>
 	<h3><a href="list">학생 성적 목록</a></h3>
 		<form action="list"method="get">
 			<select name = "column">
