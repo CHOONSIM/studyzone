@@ -64,6 +64,18 @@
     border-radius: 0.2em;
     cursor: pointer;
 }
+ /*
+    a 태그를 버튼과 동일한 모양으로 만들 수 있도록 개조
+    - display가 inline 이므로 block 속성이 들어가게 개조(폭설정)   
+     - text-align으로 글자를 가운데 정렬
+     - text-decoration으로 밑줄 제거
+*/
+    a.form-btn{
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+}
+
 /*버튼 스타일*/
 /*.form-btn과 .positive가 같이 있으면*/
 .form-btn.positive {
@@ -91,6 +103,7 @@
   .w-100{width: 100%;}
   .w-70{width: 70%;}
   .w-50{width: 50%;}
+  .w-40{width: 40%;}
   .w-30{width: 30%;}
   .w-10{width: 10%;}
 
