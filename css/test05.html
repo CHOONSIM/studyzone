@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS의 주요 속성</title>
+    <style>
+        /*
+        CSS의 주요 속성
+        - color : 글자색상
+        - background-??? : 배경속성
+        - font-??? : 글꼴 속성
+        - padding : 텍스트 박스 안쪽 여백
+        - border-?? : 테두리 속성
+
+        속성에 따라 방향을 지정할 수 있다.
+        - top, left, right, bottom
+        */
+        h1{
+            color : blue;
+            color : rgb(255, 0, 255);
+            color : rgba(0, 0, 0, 0.5);
+            color : #fab1a0;
+            color : hsl(90, 100%, 70%);
+
+            background-color: #ffeaa7;
+            background: rgb(39,77,4);
+            background: linear-gradient(90deg, rgba(39,77,4,1) 0%, rgba(31,136,20,1) 20%, rgba(255,255,255,1) 100%);
+        }
+        input{
+                font-family: '맑은 고딕';
+                font-size : 20px;
+
+                padding : 15px;
+                padding : 0.5em;     /*글자 반개 높이(글자크기가 설정 되어있어야 함*/
+
+                border : none;
+                border : 1px solid black;
+                /*
+                    축약표현과 세부표현이 겹치면
+                    세부표현이 이김
+                */
+                border-width : 1px;
+                border-style : solid;
+                border-color :black;
+
+                border-radius : 50%;
+                border-radius : 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>디자인 샘플</h1>
+
+    <input type="text" placeholder="입력" value="테스트">
+
+</body>
+</html>

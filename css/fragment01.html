@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1. 기초공사</title>
+    <Style>
+        /*
+            모든 홈페이지의 화면은 N줄 1칸 형태라고 본다
+            필요한 태그는 외부div(Container ,전체영역)와 내부div(row ,줄) 두 가지이다.
+
+            - div는 기본적으로 폭이 100%이므로 원하는 크기로 변경해야 함
+         */
+        * {
+            box-sizing: border-box;
+        }
+        div {
+            /* border :1px dotted gray; */
+        }
+        /* 
+            container는 표시될 폭과 정렬방식을 가운데로 설정 
+            가운데라고만 하면 너무 애매하므로 다음과 같이 세분화
+            1. 내용물을 가운데 정렬한다. (text-align)
+            2. 자신을 가운데 정렬한다. (margin auto)
+                - auto는 자동으로 계산해서 가능한 값을 부여하라는 의미
+        */
+        .container {
+            width : 300px;
+            margin : 0 auto;
+        }
+        /* row와 row 사이에는 일정한 간격을 부여 */
+        .row{
+            margin : 10px 0px;
+        }
+
+        /*
+            입력창, 버튼에 관련된 디자인
+            .form-input : 입력창
+            .form-btn : 버튼
+            같은 형태로 쓰기 때문에 색상 등을 제외한 나머지 크기가 동일해야 함
+        */
+        .form-input{
+            font-size: 22px;
+            padding: 0.25em;
+            outline: none;      /*선택 시 강조효과 제거*/
+            border: 2px solid #636e72;
+            border-radius: 0.2em;
+        }
+
+        /*
+            버튼은 역할에 따라 색상이 다름
+            - 긍정 버튼은 초록~파랑 계열
+            - 부정 버튼은 주황~빨강 계열
+            - 중립 버튼은 흑백 계열
+        */
+        .form-btn{
+            font-size: 22px;
+            padding: 0.25em;
+            border-width: 2px;
+            border-style: solid;
+            border-radius: 0.2em;
+        }
+        .positive {
+            background-color: #74b9ff;
+            border-color: #74b9ff;
+            color: white
+        }
+        .negative {
+            background-color: #ff7675;
+            border-color: #ff7675;
+            color: white;
+        }
+        .neutral {
+            background-color: #dfe6e9;
+            border-color: #dfe6e9;
+            color: #2d3436;
+        }
+
+        /* 폭 설정 클래스 */
+        .w-100{
+            width: 100%;
+        }
+
+        /* 내용물 정렬 클래스 */
+        .center {
+            text-align: center;
+        }
+    </Style>
+</head>
+<body>
+    <div class="container">
+        <div class="row center">
+            <h1>로고</h1>
+        </div>
+        <div class="row">
+            <input type="text" name="ID" placeholder="아이디"
+                    class="form-input w-100">
+        </div>
+        <div class="row">
+            <input type="text" name="PW" placeholder="비밀번호"
+                    class="form-input w-100">
+        </div>
+        <div class="row">
+            <button class="form-btn positive w-100">로그인</button>
+        </div>
+    </div>
+
+</body>
+</html>
