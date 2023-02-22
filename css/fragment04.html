@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>과목 정보 등록</title>
     <link rel="stylesheet" type="text/css" href="commons.css">
     <style>
         div {
@@ -71,11 +71,21 @@
         .pe-40 { padding-right: 40px; }
         .pe-50 { padding-right: 50px; }
 
+    /*
+        label 디자인
+        - label은 inline이 기본값이다
+        - .form-label은 inline-block으로 변경
+    */
+    .form-label{
+        display: inline-block;
+    }
     </style>
 </head>
 <body>
-    <div class="container-500 mt-50">
-        <div class="row center">
+    <form action="??" method="post" autocomplete="off">
+
+        <div class="container-500 mt-50">
+            <div class="row center">
             <h1>과목 정보 등록</h1>
         </div>
         <div class="row">
@@ -91,7 +101,7 @@
             <input type="number" name="price" required class="form-input w-100">
         </div>
         <div class="row">
-            <label class="w-100">강의 유형</label>
+            <label class="form-label w-25">강의 유형</label>
             <select name="type" required class="form-input">
                 <option value="">선택</option>
                 <option>오프라인</option>
@@ -103,6 +113,13 @@
             <a class="form-btn neutral">목록</a>
             <button class="form-btn positive">등록</button>
         </div>
+        <div class="row">
+            <button class="form-btn positive w-100">등록</button>
+        </div>
+        <div class="row">
+            <a class="form-btn neutral w-100" href="list">목록</a>
+        </div>
     </div>
+</form>
 </body>
 </html>
