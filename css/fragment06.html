@@ -10,9 +10,16 @@
         div{
             border:1px dotted gray;
         }
+        /*
+            textarea는 리사이즈(resize)에 대한 설정이 필요하다
+            - resize : vertical;  - 수직변경만
+            - resize : none;     - 변경 X
+
+            만약 resize가 vertical이면 최소높이가 지정되어야 한다.
+        */
         .form-textarea{
-            width: 100%;
-            height: 300px;
+            resize: vertical;
+            min-height: 20em;
         }
     </style>
 </head>
@@ -24,8 +31,8 @@
                 <h1>새 글작성</h1>
             </div>
             <div class="row">
-                <label class="form-label w-10">말머리</label>
-                <select name="type" required class="form-input ">
+                <label class="form-label w-100">말머리</label>
+                <select name="borderHead" required class="form-input w-20 ">
                     <option value="">선택</option>
                     <option>공지</option>
                     <option>유머</option>
@@ -37,7 +44,11 @@
                 <input type="text" name="boardTitle"required class="form-input w-100" placeholder="제목을 입력하세요.">
             </div>
             <div class="row">
-                <textarea name="boardContent" required class="form-textarea" placeholder="내용을 입력하세요."></textarea>
+                <!-- 
+                    textarea 디자인 시 cols 는 width와 충돌이 발생하므로 하나만 사용
+                    rows 역시 줄이는 것이 가능하므로 디자인 적인 가치가 별로 없다
+                -->
+                <textarea name="boardContent" required class="form-textarea w-100 style=min-height:300px;"placeholder="내용을 입력하세요."></textarea>
             </div>
             <div class="row">
                 <button class="form-btn positive w-100">게시</button>

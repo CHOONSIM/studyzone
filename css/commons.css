@@ -51,6 +51,20 @@
 }
 
 /*
+ textarea는 리사이즈(resize)에 대한 설정이 필요하다
+    - resize : vertical;  - 수직변경만
+    - resize : none;     - 변경 X
+
+    만약 resize가 vertical이면 최소높이가 지정되어야 한다.
+*/
+        .form-textarea{
+            resize: vertical;
+            min-height: 20em;
+        }
+
+
+
+/*
     버튼은 역할에 따라 색상이 다름
     - 긍정 버튼은 초록~파랑 계열
     - 부정 버튼은 주황~빨강 계열
