@@ -25,10 +25,16 @@
             2. 자신을 가운데 정렬한다. (margin auto)
                 - auto는 자동으로 계산해서 가능한 값을 부여하라는 의미
         */
-        .container {
-            width : 300px;
-            margin : 0 auto;
-        }
+        .container-200 {width : 200px; margin : 0 auto;}
+        .container-300 {width : 300px; margin : 0 auto;}
+        .container-400 {width : 400px; margin : 0 auto;}
+        .container-500 {width : 500px; margin : 0 auto;}
+        .container-600 {width : 600px; margin : 0 auto;}
+        .container-700 {width : 700px; margin : 0 auto;}
+        .container-800 {width : 800px; margin : 0 auto;}
+        .container-900 {width : 900px; margin : 0 auto;}
+        .container-1000 {width : 1000px; margin : 0 auto;}
+        
         /* row와 row 사이에는 일정한 간격을 부여 */
         .row{
             margin : 10px 0px;
@@ -47,6 +53,9 @@
             border: 2px solid #636e72;
             border-radius: 0.2em;
         }
+        .form-input:focus{  /*커서가 위치했을 때*/
+            border-color: black;
+        }
 
         /*
             버튼은 역할에 따라 색상이 다름
@@ -60,32 +69,41 @@
             border-width: 2px;
             border-style: solid;
             border-radius: 0.2em;
+            cursor: pointer;
         }
-        .positive {
+        /*버튼 스타일*/
+        /*.form-btn과 .positive가 같이 있으면*/
+        .form-btn.positive {
             background-color: #74b9ff;
             border-color: #74b9ff;
             color: white
         }
-        .negative {
+        .form-btn.negative {
             background-color: #ff7675;
             border-color: #ff7675;
             color: white;
         }
-        .neutral {
+        .form-btn.neutral {
             background-color: #dfe6e9;
             border-color: #dfe6e9;
             color: #2d3436;
         }
+        .form-btn:hover{
+            filter:brightness(107%);    /*원래보다 7% 밝게*/
+        }
 
         /* 폭 설정 클래스 */
-        .w-100{
-            width: 100%;
-        }
+        .w-100{width: 100%;}
+        .w-70{width: 70%;}
+        .w-50{width: 50%;}
+        .w-30{width: 30%;}
+        .w-10{width: 10%;}
 
         /* 내용물 정렬 클래스 */
-        .center {
-            text-align: center;
-        }
+        .center {text-align: center;}
+        .left {text-align: left;}
+        .right {text-align: right;}
+
     </Style>
 </head>
 <body>
@@ -95,7 +113,7 @@
             2. 줄(.row)을 만든다.
             3. 줄 내부에 항목을 배치한다.
     -->
-    <div class="container">
+    <div class="container-400">
         <div class="row center">
             <h2>로그인</h2>
         </div>
@@ -117,7 +135,7 @@
             <button class="form-btn neutral w-100">회원가입</button>
         </div>
         <div class="row center">
-            <a href="#">아이디가 기억나지 않습니다.</a></div>
+            <a href="#">아이디 찾기</a></div>
 
     </div>
 </body>

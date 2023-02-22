@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+/*
+    commons.css
+
+    이 파일에는 자주 사용하는 작은 화면에 대한 클래스가 존재
+
+    제작일자 : 2023-02-22
+    제작자 : 제작자
+
+*/
+
+* {
+    box-sizing: border-box;
+    font-family: '맑은 고딕';
+}
+
+
+/* 
+            container는 표시될 폭과 정렬방식을 가운데로 설정 
+            가운데라고만 하면 너무 애매하므로 다음과 같이 세분화
+            1. 내용물을 가운데 정렬한다. (text-align)
+            2. 자신을 가운데 정렬한다. (margin auto)
+                - auto는 자동으로 계산해서 가능한 값을 부여하라는 의미
+        */
+.container-200 {width : 200px; margin : 0 auto;}
+.container-300 {width : 300px; margin : 0 auto;}
+.container-400 {width : 400px; margin : 0 auto;}
+.container-500 {width : 500px; margin : 0 auto;}
+.container-600 {width : 600px; margin : 0 auto;}
+.container-700 {width : 700px; margin : 0 auto;}
+.container-800 {width : 800px; margin : 0 auto;}
+.container-900 {width : 900px; margin : 0 auto;}
+.container-1000 {width : 1000px; margin : 0 auto;}
+
+ /* row와 row 사이에는 일정한 간격을 부여 */
+ .row{
+    margin : 10px 0px;
+}
+
+
+.form-input{
+    font-size: 22px;
+    padding: 0.25em;
+    outline: none;      /*선택 시 강조효과 제거*/
+    border: 2px solid #636e72;
+    border-radius: 0.2em;
+}
+.form-input:focus{  /*커서가 위치했을 때*/
+    border-color: black;
+}
+
+/*
+    버튼은 역할에 따라 색상이 다름
+    - 긍정 버튼은 초록~파랑 계열
+    - 부정 버튼은 주황~빨강 계열
+    - 중립 버튼은 흑백 계열
+*/
+.form-btn{
+    font-size: 22px;
+    padding: 0.25em;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 0.2em;
+    cursor: pointer;
+}
+/*버튼 스타일*/
+/*.form-btn과 .positive가 같이 있으면*/
+.form-btn.positive {
+    background-color: #74b9ff;
+    border-color: #74b9ff;
+    color: white
+}
+.form-btn.negative {
+    background-color: #ff7675;
+    border-color: #ff7675;
+    color: white;
+}
+.form-btn.neutral {
+    background-color: #dfe6e9;
+    border-color: #dfe6e9;
+    color: #2d3436;
+}
+.form-btn:hover{
+    filter:brightness(107%);    /*원래보다 7% 밝게*/
+}
+
+
+
+  /* 폭 설정 클래스 */
+  .w-100{width: 100%;}
+  .w-70{width: 70%;}
+  .w-50{width: 50%;}
+  .w-30{width: 30%;}
+  .w-10{width: 10%;}
+
+  /* 내용물 정렬 클래스 */
+  .center {text-align: center;}
+  .left {text-align: left;}
+  .right {text-align: right;}
