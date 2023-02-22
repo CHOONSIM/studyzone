@@ -50,6 +50,15 @@
     border-color: black;
 }
 
+
+     /*
+            추가 스타일
+            - 파일 선택창은 테두리를 나오게 하지 않겠다
+        */
+        input[type=file].form-input{
+            border-color: transparent;
+        }
+
 /*
  textarea는 리사이즈(resize)에 대한 설정이 필요하다
     - resize : vertical;  - 수직변경만

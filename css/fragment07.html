@@ -10,19 +10,28 @@
         div{
             border: 1px dotted gray;
         }
+
+        /*
+            추가 스타일
+            - 파일 선택창은 테두리를 나오게 하지 않겠다
+        */
+        input[type=file].form-input{
+            border-color: transparent;
+        }
     </style>
 </head>
 <body>
     <form action="??" method="post" autocomplete="off">
         
-        <div class="container-500 mt-50">
+        <div class="container-600 mt-50">
             
             <div class="row center">
                 <h1>회원가입 정보 입력</h1>
             </div>
             <hr>
             <div class="row">
-                <input type="file" name="attach" enctype=".JPG, .GIF, .PNG" class="form-input w-100">
+                <label class="form-label w-100">프로필 이미지</label>
+                <input type="file" name="attach" enctype=".JPG, .GIF, .PNG" class="form-input">
             </div>
             
             <div class="row">
@@ -56,17 +65,16 @@
         </div>
         
         <div class="row">
-            <label>우편번호</label>
+            <label>주소</label>
             <input type="number" name="memberPost" class="form-input w-100" placeholder="숫자만 입력">
+            <button class="form-btn neutral">주소 찾기</button>
         </div>
 
         <div class="row">
-            <label>기본주소</label>
             <input type="text" name="memberBasicAddr" class="form-input w-100" placeholder="기본주소 입력">
         </div>
         
         <div class="row">
-            <label>상세주소</label>
             <input type="text" name="memberDetailAddr" class="form-input w-100" placeholder="상세주소 입력">
             
             <hr>
