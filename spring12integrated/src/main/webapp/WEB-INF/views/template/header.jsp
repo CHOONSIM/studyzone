@@ -6,6 +6,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>내가 만든 홈페이지</title>
+	<!-- 디자인 파일 불러오기 -->
+	<link rel="stylesheet" type="text/css" href="/static/css/commons.css">
 </head>
 <body>
 	<!--  홈페이지를 상단(header), 컨텐츠(main), 하단(footer)으로
