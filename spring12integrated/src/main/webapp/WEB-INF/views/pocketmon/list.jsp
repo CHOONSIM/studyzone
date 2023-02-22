@@ -3,7 +3,7 @@
     <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
     
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-	
+	<h1>포켓몬 목록/검색</h1>
 	<h2><a href="insertInput">신규등록</a></h2>
 	
 	<!-- 검색을 위한 검색창도 존재해야함 -->
@@ -41,15 +41,14 @@
 					</td>
 					<td>${pocketmonDto.type }</td>
 					<td >
-					<a href="edit?no=${pocketminDto.no }">수정</a>
+					<a href="edit?no=${pocketmonDto.no }">수정</a>
 					<a href="delete?no=${pocketmonDto.no }">삭제</a>
 					</td>
 				</tr>
 				</c:forEach>
 			</tbody>
 	</table>
+	<br>
 	
-		<hr>
-	<h2>KH정보교육원</h2>
 	
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
