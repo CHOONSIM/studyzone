@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테이블 디자인 예제</title>
+    <link rel="stylesheet" type="text/css" href="commons.css">
+
+    <style>
+        div{
+            border:1px dotted gray;
+        }
+
+        /*
+             메인 클래스를 .table로 설정
+            서브 클래스를 지정
+            - .table-border : 테두리 구현
+        */
+        .table{
+            width:100%;
+            border-spacing: 0;
+        }
+        /*  이렇게 만들면 테이블이 중첩되는 경우 내부 테이블까지 영향을 미침
+        .table th,
+        .table td{
+            padding:0.5em;
+        }
+        */  
+        .table > thead > tr > th,
+        .table > thead > tr > td,
+        .table > tbody > tr > th,
+        .table > tbody > tr > td,
+        .table > tfoot > tr > th,
+        .table > tfoot > tr > td {
+            padding:0.5em;
+        }
+        
+        /*
+         테두리 부여 서브 스타일
+            - 테이블과 칸에 테두리를 부여하고 border-collapse 설정
+         */
+         
+         .table.table-border{
+            border-collapse: collapse;
+         }
+
+         .table.table-border,
+         .table.table-border > thead > tr > th,
+         .table.table-border > thead > tr > td,
+         .table.table-border > tbody > tr > th,
+         .table.table-border > tbody > tr > td,
+         .table.table-border > tfoot > tr > th,
+         .table.table-border > tfoot > tr > td{
+            border:1px solid #636e72;
+         }
+
+         /*
+            hover 서브 스타일
+         */
+         .table.table-hover > tbody > tr
+            :hover{
+                background-color: #2d3436 ;
+                color: #dfe6e9;
+            }
+         
+        /*
+            striped 서브 스타일
+            - :first-child는 첫 번째 항목을 의미
+            - :nth-child(1)은  1번째 항목을 의미
+            - :nth-child(2n)은  n=1,2,3...로 변화할 때 해당 순서를 선택
+        */
+        .table.table-striped > thead > tr,
+        .table.table-striped > tfoot > tr,
+        .table.table-striped > tbody > tr:nth-child(2n){
+            background-color: #2d3436 ;
+            color: #dfe6e9;
+         }
+
+         /*
+            slit 테이블 서브 스타일
+         */
+         .table.table-slit{
+            border-collapse: collapse;
+            border-top: 4px double black;
+            border-bottom: 4px double black;
+         }
+         .table.table-slit > thead{
+            border-bottom:4px double black;
+         }
+         .table.table-slit > tfoot{
+            border-top: 4px double black;
+         }
+         /*
+            마지막 줄은 제외하고 하려면 : not(선택자)를 붙인다
+         */
+         .table.table-slit > tbody > tr:not(last-child){
+            border-bottom: 1px dotted black;
+         }
+
+
+
+    </style>
+</head>
+<body>
+    <!--
+            테이블에 border 속성은 더이상 사용하지 않는다(width도 마찬가지)
+    -->
+    <div class="container-400">
+        <div class="row center">
+            <h1>테이블 예제</h1>
+        </div>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>이름</th>
+                        <th>속성</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>일번</td>
+                        <td>전기</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>이번</td>
+                        <td>풀</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>삼번</td>
+                        <td>불</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>사번</td>
+                        <td>독</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>오번</td>
+                        <td>비행</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>번호</th>
+                        <th>이름</th>
+                        <th>속성</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <div class="row center">
+            <h1>테두리가 있는 테이블</h1>
+        </div>
+        <div class="row">
+            <table class="table table-border">
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>이름</th>
+                        <th>속성</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>일번</td>
+                        <td>전기</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>이번</td>
+                        <td>풀</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>삼번</td>
+                        <td>불</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>사번</td>
+                        <td>독</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>오번</td>
+                        <td>비행</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>번호</th>
+                        <th>이름</th>
+                        <th>속성</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+
+        <div class="row center">
+            <h1>마우스 위치를 강조</h1>
+        </div>
+        <div class="row">
+            <table class="table table-border table-hover">
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>이름</th>
+                        <th>속성</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>일번</td>
+                        <td>전기</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>이번</td>
+                        <td>풀</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>삼번</td>
+                        <td>불</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>사번</td>
+                        <td>독</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>오번</td>
+                        <td>비행</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>번호</th>
+                        <th>이름</th>
+                        <th>속성</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+
+        <div class="row center">
+            <h1>스트라이프 테이블</h1>
+        </div>
+        <div class="row">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>이름</th>
+                        <th>속성</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>일번</td>
+                        <td>전기</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>이번</td>
+                        <td>풀</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>삼번</td>
+                        <td>불</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>사번</td>
+                        <td>독</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>오번</td>
+                        <td>비행</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>번호</th>
+                        <th>이름</th>
+                        <th>속성</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+
+
+        <div class="row center">
+            <h1>슬릿 테이블</h1>
+        </div>
+        <div class="row">
+            <table class="table table-slit">
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>이름</th>
+                        <th>속성</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>일번</td>
+                        <td>전기</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>이번</td>
+                        <td>풀</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>삼번</td>
+                        <td>불</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>사번</td>
+                        <td>독</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>오번</td>
+                        <td>비행</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>번호</th>
+                        <th>이름</th>
+                        <th>속성</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+    </div>
+</body>
+</html>
