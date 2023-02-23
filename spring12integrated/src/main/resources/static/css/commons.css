@@ -121,6 +121,17 @@
 }
 
 
+       /*
+            링크 스타일
+        */
+        a.link{
+            color:#636e72;
+            text-decoration: none;
+        }
+        a.link:hover{
+            color:#0984e3;
+        }
+
 
   /* 폭 설정 클래스 */
   .w-100{width: 100%;}

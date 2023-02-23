@@ -57,7 +57,7 @@
 									</a>
 								</td>
 								<td>${subjectDto.period}</td>
-								<td align="right">${subjectDto.price}</td>
+								<td class="right">${subjectDto.price}</td>
 								<td>${subjectDto.type}</td>
 							</tr>
 							</c:forEach>

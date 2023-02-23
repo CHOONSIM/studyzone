@@ -4,21 +4,26 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<h1>회원 목록</h1>
-<hr>
-
-<table border ="1" width="700">
-	<thead>
-		<tr>
-			<th>아이디</th>
-			<th>닉네임</th>
-			<th>전화번호</th>
-			<th>생년월일</th>
-			<th>등급</th>
-			<th>관리</th>
-		</tr>
-	</thead>
-	<tbody align="center">
+ <div class="container-900">
+        <div class="row center">
+            <h1>회원 목록</h1>
+        </div>
+        
+        <div class="row">검색</div>
+        
+        <div class="row center">
+            <table class="table table-slit table-hover">
+        <thead>
+			<tr>
+				<th>아이디</th>
+				<th>닉네임</th>
+				<th>전화번호</th>
+				<th>생년월일</th>
+				<th>등급</th>
+				<th>관리</th>
+			</tr>
+		</thead>
+	<tbody class="center">
 	<c:forEach var ="memberDto" items="${list }">
 		<tr>
 			<td>${memberDto.memberId }</td>
@@ -27,18 +32,20 @@
 			<td>${memberDto.memberBirth }</td>
 			<td>${memberDto.memberLevel }</td>
 			<td>
-				<a href="detail?memberId=${memberDto.memberId}">상세</a>
-				<a href="edit?memberId=${memberDto.memberId }">변경</a>
-				<a href="exit?memberId=${memberDto.memberId }&page=${page}">탈퇴</a>
-			</td>
-		</tr>
-		</c:forEach>
-	</tbody>
-</table>
+				<a href="detail?memberId=${memberDto.memberId}" class="link">상세</a>
+				<a href="edit?memberId=${memberDto.memberId }" class="link">변경</a>
+				<a href="exit?memberId=${memberDto.memberId }&page=${page}" class="link">탈퇴</a>
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+            </table>
+        </div>
+    </div>
 
-<br>
 <hr>
 <br>
+<div class="row">
 <!-- 
 	페이지 네비게이터 구현 
 	for(int i = 1; i<=totalPage;i++){}
@@ -53,6 +60,7 @@
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
+</div>
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
