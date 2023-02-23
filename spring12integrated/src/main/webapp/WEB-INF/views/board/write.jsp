@@ -40,6 +40,7 @@
 		</c:otherwise>
 	</c:choose>
 	
+	<textarea name="boardContent" required rows="10" cols="60"></textarea> <br><br>
 	<button>등록</button>
 </form>
 
