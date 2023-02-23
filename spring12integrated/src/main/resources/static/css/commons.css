@@ -309,3 +309,45 @@
          .table.table-slit > tbody > tr:not(last-child){
             border-bottom: 1px dotted black;
          }
+
+
+         /*
+            페이지네이션(Pagination) 디자인
+            - a 태그에 폭 설정이 불가능하므로 display를 변경(inline-block)
+            - 활성화 상태를 .on으로 정의하고 :hover와 동일하게 처리
+
+            (주의)
+            border는 폭,높이에 영향을 미치므로 추가/제거가 반복될 경우
+            투명 테두리를 설정해둬야 한다
+
+            대안으로는 그림자(box-shadow)를 사용하는 방법이 있다.
+            box-shadow: x위치 y위치 번짐 퍼짐 색상;
+        */
+        .pagination{
+            text-align: center;
+        }
+        .pagination > a{
+            display: inline-block;
+            color: #636e72;
+            text-decoration: none;
+            font-size: 16px;
+            min-width: 3em;
+            height: 3em;
+            padding: 1em;
+            text-align:  center;
+            border: 1px solid transparent;
+        }
+        .pagination > a.on,
+        .pagination > a:hover:not(.disabled){
+            /* border-color: black; */
+            color: red;
+            font-weight: bold;
+            box-shadow: 0px 0px 0px 1px black;
+        }
+        
+        .pagination > a.disabled{
+        	cursor: not-allowed;
+        }
+        
+        
+        
