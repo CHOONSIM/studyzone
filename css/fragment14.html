@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>배경 이미지</title>
+    <title>배경 이미지 제어</title>
     <link rel="stylesheet" type="text/css" href="commons.css">
     <link rel="stylesheet" type="text/css" href="test.css">
     <style>
@@ -14,9 +14,37 @@
                 - 이미지는 크기 표준화가 어려우므로 width, height 속성 사용
             [2] background-image 사용
         */
+        .form-input-search{
+            /*url은 이 파일 위치를 기준으로 경로를 계산(상대경로) */
+            background-image: url("./image/search.jpg");
+            /*
+                cover - 큰쪽에 이미지를 맞춤
+                contain - 작은 쪽에 이미지를 맞춤
+                두 개 부여하면 앞이 폭, 뒤가 높이
+            */
+            background-size: auto 75%;
+            background-repeat: no-repeat;
+            /*
+                위치선정은 x,y순으로 하며
+                - px
+                - %
+                - 키워드(x - left/center/right , y - top/center/bottom)
+            */
+            background-position: left 5px center;
+
+            /* 글자 입력란을 오른쪽으로 밀기 위해 여백을 부여 */
+            padding-left: 2em;
+        }
     </style>
 </head>
 <body>
-   
+   <div class="container-500">
+    <div class="row center">
+        <h1>배경 이미지</h1>
+    </div>
+    <div class="row">
+        <input type="text" class="form-input w-100 form-input-search">
+    </div>
+   </div>
 </body>
 </html>
