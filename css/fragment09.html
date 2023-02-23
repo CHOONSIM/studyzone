@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>과정 목록</title>
+    <link rel="stylesheet" type="text/css" href="commons.css">
+    <style>
+        /*
+            테스트 스타일
+            - 원하는 태그에 test를 추가하면 해당 영역 내부가 점선으로 표시
+            - 설령 다른 테두리 설정이 있다고 해도 무시하고 처리하도록 구현
+            - div 뿐 아니라 모든 비어있는 영역 태그에 적용
+            - div, main, header, footer, nav, aside, article, p, label, span, ul, ol, li, a
+        */
+        [test] div,
+        [test] main,
+        [test] header,
+        [test] footer,
+        [test] nav,
+        [test] aside,
+        [test] article,
+        [test] p,
+        [test] label,
+        [test] span,
+        [test] ul,
+        [test] ol,
+        [test] li,
+        [test] a
+        {
+            border:1px dotted black;
+        }
+    </style>
+</head>
+<body test>
+    <div class="container-500">
+        <div class="row center">
+            <h1>강의 정보</h1>
+        </div>
+        <div class="row">
+            <form>
+            <select name="column" class="form-input">
+                <option value="">선택</option>
+                <option value="name">과정명</option>
+                <option value="period">강의시간</option>
+                <option value="type">강의유형</option>
+
+            </select>
+            <input type="search" name="keyword" required
+                        class="form-input" placeholder="검색어">
+            <button type="submit" class="form-btn neutral">검색</button>
+        </form>
+        </div>
+        <div class="row">
+            <table class="table table-slit table-hover">
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>과정명</th>
+                        <th>강의시간</th>
+                        <th>수강료</th>
+                        <th>강의유형</th>
+
+                    </tr>
+                </thead>
+                <tbody class="center">
+                    <tr>
+                        <td>1</td>
+                        <td>자바 마스터과정</td>
+                        <td>90</td>
+                        <td>100000</td>
+                        <td>온라인</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>자바 마스터과정</td>
+                        <td>90</td>
+                        <td>100000</td>
+                        <td>온라인</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>자바 마스터과정</td>
+                        <td>90</td>
+                        <td>100000</td>
+                        <td>오프라인</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</body>
+</html>
