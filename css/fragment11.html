@@ -15,44 +15,29 @@
     <div class="container-900">
         <div class="row center">
             <h1>자유게시판</h1>
+        <div class="row center">
             <h5>남을 비방하는 경우 예고 없이 삭제될 수 있습니다.</h5>
         </div>
-        <div class="row left">
-            <a class="form-btn neutral" href="write">글쓰기</a>
+        </div>
+        <div class="row right">
+            <a href="#" class="form-btn positive">글쓰기</a>
         </div>
         <div class="row">
-            <table class="table table-border">
+            <table class="table table-border table-hover">
                 <thead>
                     <tr>
                         <th>번호</th>
-                        <th>제목</th>
+                        <th class="w-40">제목</th>
                         <th>작성자</th>
                         <th>작성일<th>
                         <th>조회수</th>
                         <th>좋아요</th>
-                        <th>그룹</th>
-                        <th>대상</th>
-                        <th>차수</th>
                     </tr>
                 </thead>
                 <tbody class="center">
                     <tr>
                         <th>??</th>
-                        <th>??</th>
-                        <th>??</th>
-                        <th>??</th>
-                        <th>??</th>
-                        <th>??</th>
-                        <th>??</th>
-                        <th>??</th>
-                        <th>??</th>
-                    </tr>
-                    <tr>
-                        <th>??</th>
-                        <th>??</th>
-                        <th>??</th>
-                        <th>??</th>
-                        <th>??</th>
+                        <th class="left">??</th>
                         <th>??</th>
                         <th>??</th>
                         <th>??</th>
@@ -60,10 +45,7 @@
                     </tr>
                     <tr>
                         <th>??</th>
-                        <th>??</th>
-                        <th>??</th>
-                        <th>??</th>
-                        <th>??</th>
+                        <th class="left">??</th>
                         <th>??</th>
                         <th>??</th>
                         <th>??</th>
@@ -71,19 +53,35 @@
                     </tr>
                     <tr>
                         <th>??</th>
-                        <th>??</th>
-                        <th>??</th>
-                        <th>??</th>
-                        <th>??</th>
+                        <th class="left">??</th>
                         <th>??</th>
                         <th>??</th>
                         <th>??</th>
                         <th>??</th>
                     </tr>
+
                 </tbody>
             </table>
         </div>
-        <div class="row">페이징</div>
+        <div class="row right">
+            <a href="#" class="form-btn positive">글쓰기</a>
+        </div>
+        <div class="row pagination">
+            <a href="#">&laquo;</a>
+            <a href="#">&lt;</a>
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#" class="on">5</a>
+            <a href="#">6</a>
+            <a href="#">7</a>
+            <a href="#">8</a>
+            <a href="#">9</a>
+            <a href="#">10</a>
+            <a href="#">&gt;</a>
+            <a href="#">&raquo;</a>
+        </div>
         <div class="row">
             <form>
                 <select name="column" class="form-input">
@@ -96,6 +94,7 @@
 
                 <input type="search" name="keyword" requiered
                     class=form-input placeholder="검색어">
+
                 <button type="submit" class="form-btn neutral">검색</button>
             </form>
         </div>
