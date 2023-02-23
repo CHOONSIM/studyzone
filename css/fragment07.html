@@ -65,25 +65,27 @@
         </div>
         
         <div class="row">
-            <label>주소</label>
-            <input type="number" name="memberPost" class="form-input w-100" placeholder="숫자만 입력">
-            <button class="form-btn neutral">주소 찾기</button>
+            <label class="form-label w-100 mb-10">주소</label>
+            <input type="text" name="memberPost" class="form-input"
+                    placeholder="우편번호">
+            <button type="button" class="form-btn neutral">우편번호 찾기</button>
         </div>
-
         <div class="row">
-            <input type="text" name="memberBasicAddr" class="form-input w-100" placeholder="기본주소 입력">
+            <input type="text" name="memberBasicAddr" class="form-input w-100"
+                    placeholder="기본주소">
         </div>
-        
         <div class="row">
-            <input type="text" name="memberDetailAddr" class="form-input w-100" placeholder="상세주소 입력">
-            
-            <hr>
-            
-            <div class="row right">
-                <button class="form-btn positive">게시</button>
-            </div>
-            
+            <input type="text" name="memberDetailAddr" class="form-input w-100"
+                    placeholder="상세주소">
         </div>
-    </form>
-    </body>
-    </html>
+        <div class="row">
+            <label class="form-label w-100">프로필 이미지</label>
+            <input type="file" name="attach" class="form-input"
+                style="border:1px transparent solid;">
+        </div>
+        <div class="row">
+            <button type="submit" class="form-btn positive w-100">회원 가입</button>
+        </div>
+    </div>
+</body>
+</html>
