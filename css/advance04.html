@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사이드바 만들기</title>
+    <link rel="stylesheet" type="text/css" href="commons.css">
+    <link rel="stylesheet" type="text/css" href="test.css">
+    <style>
+        aside{
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 210px;
+            z-index: 999;
+            background-color: #ffeaa7;
+
+            /* 
+                특정항목의 변화를 부드럽게 처리
+                transition: 항목 딜레이 지속시간 타이밍함수;
+
+                타이밍 함수
+                - linear : 한결같은 속도
+                - ease-in : 시작은 느리게
+                - ease-out : 끝을 느리게
+                - ease-in-out : 시직과 끝을 느리게
+            */
+            transition: left 0.15s ease-out;
+
+            padding-top: 70px;
+        }
+        section{
+            padding-top: 70px;
+        }
+        #toggle-menu:checked ~ aside{
+            left: -225px;
+            /* margin-left: -210px; */
+            /* transform: translate(-100%,0); */
+        }
+
+        #toggle-menu{
+            /* display: none; */
+            position: fixed;
+            top: 5px;
+            right: 5px;
+        }
+
+        #toggle-menu-btn{
+            position: fixed;
+            display: block;
+
+            top: 10px;
+            right: 10px;
+            left: 10px;
+            z-index: 1000;
+
+            width: 75px;
+            height: 75px;
+
+            cursor: pointer;
+
+            background: url("./image/close.png") no-repeat left top / contain;
+        }
+        #toggle-menu:checked~#toggle-menu-btn{
+            background-image: url("./image/menu.jpg")
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        시맨틱 태크(semantic tag)
+        - div와 같이 하나의 태그가 너무 다양한 용도로 사용되는 것을 방지하기 위해 사용
+        - 기능이 같더라도 용도별로 태그를 구분하여 생성하였다
+        - 웹 표준에서 권장하는 사항인데 잘 지켜지지 않는다.
+        - main - 홈페이지 전체
+        - aside - 사이드 메뉴
+        - section - 본문
+    -->
+    <main>
+        <input type="checkbox" id="toggle-menu" checked>
+        <label for="toggle-menu" id="toggle-menu-btn"></label>
+        <aside>
+            <div class="container-200">
+                <div class="row">
+                    <h1>MENU</h1>
+                </div>
+            </div>
+        </aside>
+        <section>
+
+            <h1>Lorem ipsum</h1>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore 
+            magna aliqua. Fusce id velit ut tortor pretium viverra. Id diam maecenas ultricies mi eget mauris pharetra et ultrices.
+             Lectus vestibulum mattis ullamcorper velit sed ullamcorper. Nullam non nisi est sit amet facilisis magna etiam tempor. 
+             Sem nulla pharetra diam sit amet nisl suscipit. Mi eget mauris pharetra et. Felis donec et odio pellentesque diam.
+              Lacus luctus accumsan tortor posuere ac ut. Neque vitae tempus quam pellentesque nec nam aliquam. 
+              Enim tortor at auctor urna nunc id. Nunc sed augue lacus viverra vitae congue eu consequat ac. 
+              Netus et malesuada fames ac turpis egestas integer. Lectus arcu bibendum at varius vel pharetra. 
+              Eros donec ac odio tempor.
+
+            Mi proin sed libero enim sed faucibus turpis. Dolor sit amet consectetur adipiscing elit. Iaculis eu non diam phasellus vestibulum lorem sed. 
+            Sed lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi. Et netus et malesuada fames ac turpis egestas. 
+            Aenean euismod elementum nisi quis eleifend quam adipiscing vitae proin. Enim sed faucibus turpis in. 
+            Suspendisse sed nisi lacus sed viverra tellus in hac habitasse. Tincidunt tortor aliquam nulla facilisi cras fermentum odio.
+             Mattis pellentesque id nibh tortor. In hac habitasse platea dictumst quisque sagittis purus sit amet. 
+             Cursus risus at ultrices mi tempus imperdiet nulla. Vestibulum lectus mauris ultrices eros in cursus. 
+             Nunc consequat interdum varius sit amet mattis vulputate. Tempor orci eu lobortis elementum nibh tellus molestie nunc non. 
+             Mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Lectus sit amet est placerat. Nisl nisi scelerisque eu ultrices vitae auctor eu augue.
+
+            Dictumst vestibulum rhoncus est pellentesque elit. Est pellentesque elit ullamcorper dignissim cras tincidunt lobortis. 
+            Iaculis eu non diam phasellus vestibulum lorem sed. Suscipit adipiscing bibendum est ultricies integer quis auctor. 
+            Lectus nulla at volutpat diam. Id ornare arcu odio ut sem nulla pharetra diam sit. Morbi quis commodo odio aenean sed. 
+            Sed id semper risus in hendrerit gravida rutrum quisque non. Senectus et netus et malesuada fames. 
+            Posuere ac ut consequat semper viverra nam libero justo. Elit ut aliquam purus sit amet luctus venenatis lectus. 
+            Turpis cursus in hac habitasse platea dictumst. Ultricies mi quis hendrerit dolor magna eget est lorem. 
+            Morbi leo urna molestie at elementum eu. Pellentesque id nibh tortor id aliquet lectus proin nibh nisl.
+
+            Venenatis cras sed felis eget. Vel eros donec ac odio tempor orci dapibus ultrices in. 
+            Vitae congue eu consequat ac felis donec et odio pellentesque. Duis tristique sollicitudin nibh sit amet. 
+            Augue mauris augue neque gravida in fermentum et sollicitudin. Ante metus dictum at tempor commodo ullamcorper. 
+            Mauris cursus mattis molestie a iaculis. Nullam eget felis eget nunc lobortis mattis. 
+            Et malesuada fames ac turpis egestas integer eget. Tortor pretium viverra suspendisse potenti nullam ac tortor vitae purus. 
+            Tellus rutrum tellus pellentesque eu tincidunt tortor aliquam nulla facilisi. Id cursus metus aliquam eleifend. 
+            Ullamcorper eget nulla facilisi etiam dignissim diam. Ac ut consequat semper viverra nam libero justo laoreet sit.
+
+            Fermentum et sollicitudin ac orci. Convallis a cras semper auctor neque. In est ante in nibh mauris cursus mattis. 
+            Et malesuada fames ac turpis egestas maecenas pharetra convallis posuere. Etiam sit amet nisl purus in. 
+            Vitae sapien pellentesque habitant morbi tristique. Mattis rhoncus urna neque viverra justo. 
+            Semper feugiat nibh sed pulvinar. Adipiscing diam donec adipiscing tristique risus nec feugiat in fermentum. 
+            Interdum velit euismod in pellentesque massa placerat duis ultricies lacus.
+             Nascetur ridiculus mus mauris vitae ultricies leo integer. Diam maecenas ultricies mi eget mauris pharetra et. 
+             Diam vulputate ut pharetra sit amet aliquam id.
+        </section>
+    </main>
+</body>
+</html>
