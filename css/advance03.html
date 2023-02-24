@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>체크박스를 이용한 토글 디자인</title>
+    <link rel="stylesheet" type="text/css" href="commons.css">
+    <link rel="stylesheet" type="text/css" href="test.css">
+    <style>
+        /*
+            연계선택자
+            + 는 "바로 뒤"라는 의미를 가진다
+            ~ 은 "뒤 전체"라는 의미를 가진다
+
+            반대는 없음(앞)
+        */
+        input[type=checkbox] + span{
+            color: red;
+        }
+        input[type=checkbox]:checked+span{
+            color: blue;
+        }
+        #lb-ck{
+            display: none;
+        }
+        input[type=checkbox] + label{
+            color: #b2bec3;
+        }
+        input[type=checkbox]:checked+label{
+            color: black;
+        }
+
+        /*
+            메뉴 버튼 만들기
+        */
+        #menu{
+            display: none;
+        }
+        #menu + label{
+            display: block;
+            width: 100px;
+            height: 100px;
+
+            background-image: url("./image/menu.jpg");
+            background-repeat: no-repeat;
+            background-position: left top;
+            background-size: contain;
+
+            cursor: pointer;
+        }
+        #menu:checked + label{
+            background-image: url("./image/close.png");
+        }
+    </style>
+</head>
+<body>
+    <!--
+            span은 inline div 이다.
+            - inline이므로 폭 설정이 안됨
+
+            label도 inline div이다.
+            - for 속성을 통해서 특정 입력창을 타겟으로 삼을 수 있다.
+            - 대상에 반드시 ID가 부여되어 있어야 한다
+    -->
+    <div class="container-500">
+        <div class="row">
+            <h1>토글(toggle) 디자인</h1>
+        </div>
+        <div class="row">
+            <input type="checkbox">
+            <span>동의합니다</span>
+        </div>
+        <div class="row">
+            <input type="checkbox" id="lb-ck">
+            <label for="lb-ck">동의합니다</label>
+        </div>
+        <div class="row">
+            <input type="checkbox" id="menu">
+            <label for="menu">1</label>
+        </div>
+    </div>
+</body>
+</html>

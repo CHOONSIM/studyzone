@@ -446,3 +446,65 @@
         input[name=memberPw]{
             background-image:url("./image/lock.png")
         }
+
+
+
+
+
+          /* 
+        (참고) 
+        z-index가 없어도 fixed가 가장 높게 나온다 
+        opacity는 내부의 모든 항목의 불투명도를 조절
+        일반적으로 전체화면에서는 background-color로 불투명도를 조절
+        */
+
+        .fullscreen{
+            background-color: rgba(0,0,0,0,2);
+            /* background-color: transparent; */
+            background-color: black;
+            opacity: 0.5;
+            
+            position: fixed;
+
+            top:0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 9999;
+        }
+
+        .fullscreen > .fullscreen-container{
+            /* background-color: white; */
+            background-image: url("./image/loading.gif");
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: left top;
+
+            /*폭 높이는 설정*/
+            width: 80px;
+            height: 80px;
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+
+            
+            /*
+            가운데 배치하는 방법
+            크기의 절반만큼 반대방향으로 이동
+            1. margin 사용
+                - 장점 : 안되는 브라우저가 없음
+                - 단점 : 크기를 알아야 함
+                margin-left: -150px;
+                margin-top: -200px;
+
+            2. transform 함수 사용(위치, 각도, 기울기, 확대 등을 처리하는 함수)
+                - 장점 : 이동크기 계산이 필요없음
+                - 단점 : 구버전 IE에서 안됨
+            
+            3. display:flex 사용
+            4. display:grid 사용
+            */
+            transform: translate(-50%, -50%);
+            
+        }
