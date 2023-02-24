@@ -8,10 +8,133 @@
     <link rel="stylesheet" type="text/css" href="commons.css">
     <link rel="stylesheet" type="text/css" href="test.css">
     <style>
-        
+        .box{
+            width:100px;
+            height:100px;
+            border:1px solid black;
+        }
+        /*
+            static은 position 미설정시 자동 부여
+            어떠한 위치조정도 불가
+        */
+        .s1{
+            top:100px;
+            left:100px;
+        }
+
+        /*
+            relative는 미세 위치조정이 가능하며
+            속성명은 top, left, tight, bottom, z-index 
+
+            relative부터는 겹침 현상이 발생한다
+            z-index는 겹쳤을 때 누가 먼저 나와야 하는지를 정하는 속성
+            z-index:1 이면 1순위가 아니라 1층에 배치한다는 뜻
+        */
+
+        .r1{
+            background-color: green;
+            left:20px;
+            bottom:20px;
+        }
+        .r2{
+            background-color: yellow;
+            right:10px;
+            top:10px;
+            z-index:2;
+        }
+        .r3{
+            background-color: red;
+            z-index: 1;
+        }
+        /*
+            position:absolute로 설정하면 어떠한 태그의 영향도 받지 않고
+            위치 설정이 가능
+
+            위치 설정과 배치 순서 키워드( top, left, tight, bottom, z-index ) 사용 가능
+
+            relative는 static일 떄의 위치가 기준이지만
+            absolute는 페이지가 기준이다
+
+            (중요) 만약 relative, absolute, fixed 포지션 내부에 위치한다면
+            해당 영역이 기준이 된다.
+
+            한 번 위치가 정해지면 변경되지 않으므로 스크롤을 굴리면 이동함
+
+        */
+
+        .a1{
+            background-color: green;
+        }
+        .a2{
+            background-color: yellow;
+        }
+        .a3{
+            background-color: red;
+        }
+
+        /*
+            position:fixed 역시 절대 배치 중 하나
+
+            페이지를 기준으로 하는 absolute와 다르게
+            fixed는 브라우저(화면)를 기준으로 함
+
+            위치 조정 모두 가능
+        */
+
+        .f1{
+            background-color: green;
+            top:10px;
+            left:10px;
+        }
+        .f2{
+            background-color: yellow;
+        }
+        .f3{
+            background-color: red;
+        }
+
     </style>
 </head>
 <body>
-    
+    <div class="container-500">
+        <div class="row">
+            <h1>Position 예제</h1>
+        </div>
+        <!--
+            position에 대한 언급이 없으면 static position이라 부른다.
+            - 위치가 변하지 않는다.
+            - 현재 태그의 위치는 앞 태그 위치의 영향을 받는다.
+
+        -->
+        <div class="box s1">s1</div>
+        <div class="box">s2</div>
+        <div class="box">s3</div>
+
+        <!--
+            position을 relative로 설정하면 static과 동일하게 배치되며
+            미세한 위치조정이 가능해진다.
+        -->
+        <div class="row">
+            <div class="box r1" style="position:relative">r1</div>
+            <div class="box r2" style="position:relative">r2</div>
+            <div class="box r3" style="position:relative">r3</div>
+        </div>
+        <!--
+            position을 absolute로 설정하면...
+        -->
+        <div class="row">
+            <div class="box a1" style="position:absolute">a1</div>
+            <div class="box a2" style="position:absolute">a2</div>
+            <div class="box a3" style="position:absolute">a3</div>
+        </div>
+
+        <div class="row">
+            <div class="box f1" style="position: fixed;">f1</div>
+            <div class="box f2" style="position: fixed;">f2</div>
+            <div class="box f3" style="position: fixed;">f3</div>
+        </div>
+
+    </div>
+
 </body>
 </html>
