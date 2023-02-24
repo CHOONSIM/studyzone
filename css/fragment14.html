@@ -35,6 +35,33 @@
             /* 글자 입력란을 오른쪽으로 밀기 위해 여백을 부여 */
             padding-left: 2em;
         }
+
+        
+        .form-input-bg{
+            /*
+                cover - 큰쪽에 이미지를 맞춤
+                contain - 작은 쪽에 이미지를 맞춤
+                두 개 부여하면 앞이 폭, 뒤가 높이
+            */
+            background-size: auto 75%;
+            background-repeat: no-repeat;
+            /*
+                위치선정은 x,y순으로 하며
+                - px
+                - %
+                - 키워드(x - left/center/right , y - top/center/bottom)
+            */
+            background-position: left 5px center;
+
+            /* 글자 입력란을 오른쪽으로 밀기 위해 여백을 부여 */
+            padding-left: 2em;
+        }
+        input[name=memberId]{
+            background-image:url("./image/user.jpg")
+        }
+        input[name=memberPw]{
+            background-image:url("./image/lock.png")
+        }
     </style>
 </head>
 <body>
@@ -45,6 +72,13 @@
     <div class="row">
         <input type="text" class="form-input w-100 form-input-search">
     </div>
+    <div class="row">
+        <input type="text" name="memberId"class="form-input w-100 form-input-bg">
+    </div>
+    <div class="row">
+        <input type="password" name="memberPw" class="form-input w-100 form-input-bg">
+    </div>
+    
    </div>
 </body>
 </html>
