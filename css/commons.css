@@ -139,6 +139,7 @@
   .w-70{width: 70%;}
   .w-50{width: 50%;}
   .w-40{width: 40%;}
+  .w-33{width: 33.3333%;}
   .w-30{width: 30%;}
   .w-10{width: 10%;}
 
@@ -508,4 +509,18 @@
             */
             transform: translate(-50%, -50%);
             
+        }
+
+
+        
+        .float-box::after{
+            content:"";
+            display: block;
+            clear: both;
+        }
+        .float-box > .float-left{
+            float: left;
+        }
+        .float-box > .float-right{
+            float: right;
         }

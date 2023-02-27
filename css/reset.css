@@ -35,6 +35,9 @@
     * {
         box-sizing: border-box;
     }
+    /* 웹폰트 설정 */
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
     html{
-        font-family: '맑은 고딕';
+        font-family: 'Noto Sans KR', sans-serif;
     }
