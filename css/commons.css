@@ -10,6 +10,12 @@
 
 */
 
+/* reset.css 로 이동하였음 향후 제거*/
+* {
+    box-sizing: border-box;
+    font-family: '맑은 고딕';
+}
+
 
 /* 
             container는 표시될 폭과 정렬방식을 가운데로 설정 
