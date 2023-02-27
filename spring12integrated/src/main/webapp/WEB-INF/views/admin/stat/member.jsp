@@ -3,7 +3,7 @@
     <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
  <h1>회원 현황</h1>
  
  <!--  각종 정렬과 관련된 링크 -->
@@ -47,4 +47,4 @@
 </table>
 
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>

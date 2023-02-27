@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/adminHeader.jsp"></jsp:include>
 
  <div class="container-900">
         <div class="row center">
@@ -50,17 +50,19 @@
 	페이지 네비게이터 구현 
 	for(int i = 1; i<=totalPage;i++){}
 -->
-<c:forEach var ="i" begin="1" end="${totalPage}" step ="1">
-	<c:choose>
-		<c:when test="${page==i }">					<!-- 현재 페이지 -->
-			${i }
-		</c:when>
-		<c:otherwise>
-			<a href="list?page=${i }">${i }</a>		<!-- 현재페이지가 아닌 경우 -->
-		</c:otherwise>
-	</c:choose>
-</c:forEach>
+
+		<c:forEach var="i" begin="1" end="${totalPage}" step="1">
+			<c:choose>
+				<c:when test="${page == i}"><!-- 현재페이지 -->
+					${i}
+				</c:when>
+				<c:otherwise>
+					<a href="list?page=${i}">${i}</a><!-- 현재페이지가 아닌 경우 -->
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+    </div>
 </div>
 
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
