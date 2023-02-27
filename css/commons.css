@@ -559,3 +559,158 @@
 
 
 
+             /* main을 제어해서 홈페이지 전체 폭과 정렬을 제어 */
+             main{
+                width: 1000px;
+                margin: 0 auto;
+            }
+    
+            /* 내부 영역에 기본 여백을 부여 */
+            header, footer{
+                padding: 3em;
+            }
+    
+            /* section은 다단 레이아웃이 가능하도록 배치 */
+            section{
+                display: flex;
+            }
+            
+            aside{
+                width: 150px;
+            }
+            
+            article{
+                flex-grow: 1;
+                padding: 1em;
+                min-height: 450px;
+            }
+
+            
+
+
+
+          /*
+             드롭다운(drop down) 메뉴 만들기
+            - 계층형 구조이므로 list 태그로 만든다
+            - 가장 중요한 스킬은 원하는 차수의 메뉴를 선택하는 것
+
+            1차 메뉴 선택자 : .menu > li
+            2차 메뉴 선택자 : .menu > li > ul > li
+            3차 메뉴 선택자 : .menu > li > ul > li > ul > li
+
+            1차 이상 메뉴 : .menu li
+            2차 이상 메뉴 : .menu > li li
+            3차 이상 메뉴 : .menu > li > ul > li li
+
+            (1) 리스트의 모든 스타일을 제거(여백, 표시방식)
+            (2) 모든 a태그의 스타일을 제거
+            (3) 1차 메뉴의 항목들의 표시 방식(display)을 inline-block으로 변경
+            (4) 2차 이상의 메뉴(ul)들 배치 방식(position)을 absolute로 변경
+                모든 메뉴(li)는 기준점 설정을 위해 배치 방식을 relative로 변경
+            (5) 2차 이상의 메뉴(ul)를 숨김 처리
+            (6) 메뉴(li)에 마우스를 올리면(hover) 하위 메뉴를 표시
+            (7) 메누 항목(li) 에 마우스가 올라가면(hover) 색상을 변경
+            (8) 3차 메뉴 이상은 오른쪽에 나오도록 처리
+            (9) 메뉴 내부에 글자가 많을 경우 말줄임표 처리
+            (10) 1차 메뉴 중 오른쪽 메뉴(.right-menu)에 대한 처리
+            (11) 오른쪽 메뉴의 3차 이상 메뉴에 대한 처리
+        */
+        /*
+            (Q) 2차 이상의 메뉴 a태그 글자색 빨강으로 변경
+        */
+
+        /* 2차 메뉴만 */
+        /* .menu > li > ul > li > a {
+            color: red;
+        } */
+        /* .menu ul li:nth-child(n+1){
+            color: red;
+        } */
+
+
+        /* (1) */
+        .menu, .menu ul{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            font-size: 10px;
+            color: white;
+            background-color: #b2bec3
+
+        }
+
+        /* (2) */
+        .menu a{
+            display: block;
+            width: 100%;
+            text-decoration: none;
+            color: inherit;             /*바깥에 있는 설정 따라가기(상속)*/
+
+            padding: 0.5em;
+        }
+
+        /* (3) */
+        .menu > li{
+            display: inline-block;
+            width: 80px;
+        }
+
+        /* (4) 2차 이상*/
+        .menu > li ul {
+            position: absolute;
+            left: 0;
+            top: 100%;
+            width: 80px;
+        }
+
+        .menu, .menu li{
+            position: relative;
+        }
+        
+        /* (5) */
+        .menu > li ul {
+            display: none;
+        }
+
+        /* (6) */
+        .menu li:hover > ul {
+            display: block;
+        }
+
+        /* (7) */
+        .menu li:hover{
+            background-color: #636e72;
+        }
+
+        /* (8) 3차 이상 */
+        .menu > li > ul > li ul{
+            top: 0;
+            left: 100%;
+        }
+
+        /* (9) */
+        .menu a{
+            /* 
+            말줄임표 세트
+            (전제조건) 폭이 확정적이어야 한다.
+            - overflow는 넘치는 화면에 대한 처리를 설정
+            - white-space는 넘치는 항목에 대한 개행 처리를 설정
+            - text-overflow는 글자가 넘칠 경우의 처리를 설정
+            */
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        /* (10) */
+        .menu > li.right-menu{
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        /* (11) */
+        .menu > li.right-menu > ul > li ul{
+            left: auto;
+            right: 100%;
+        }

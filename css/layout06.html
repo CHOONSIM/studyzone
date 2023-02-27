@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홈패이지 레이아웃</title>
+    <link rel="stylesheet" type="text/css" href="load.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link rel="stylesheet" type="text/css" href="commons.css">
+    <link rel="stylesheet" type="text/css" href="test.css">
+    <style>
+      
+    </style>
+</head>
+<body>
+    <!-- 홈페이지를 만들 때 시맨틱(sementic tag) 를 사용하여 의미있게 구현 -->
+
+    <main>
+        <header>
+            <div class="flex-box">
+                <div class="w-25">
+                    <img src="https://via.placeholder.com/200x80?text=LOGO"alt="로고">
+                </div>
+                <div class="w-60">
+                    <h3>테스트 홈페이지</h3>
+                </div>
+            </div>
+
+        </header>
+        <nav>
+            <ul class="menu">
+
+                <li><a href="#">홈</a></li>
+                <li><a href="#">포켓몬관리</a></li>
+                <li><a href="#">과목관리</a></li>
+                <li><a href="#">학생관리</a></li>
+                <li><a href="#">게시판</a></li>
+
+                <li class="right-menu">
+                    <a href="#">회원메뉴</a>
+                    <ul>
+                        <li><a href="#">로그인</a></li>
+                        <li><a href="#">로그아웃</a></li>
+                        <li><a href="#">회원가입</a></li>
+                        <li><a href="#">내정보</a></li>
+                        <li><a href="#">관리메뉴</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </nav>
+        <section>
+            <aside style="border-right:1px solid #B2BEC3">
+                <!-- 관리메뉴는 수직으로 배치(List-Group 형태)-->
+                <div class="flex-box flex-vertical">
+                    <div class="p-10"><h3>관리자 메뉴</h3></div>
+                    <div class="p-10"><a href="#" class="link">회원현황</a></div>
+                    <div class="p-10"><a href="#" class="link">포켓몬 현황</a></div>
+                    <div class="p-10"><a href="#" class="link">강의 개설 현황</a></div>
+                    <div class="p-10"><a href="#" class="link">학생 성적 현황</a></div>
+                </div>
+            </aside>
+            <article>컨텐츠</article>
+        </section>
+        <hr>
+        <footer>풋터</footer>
+    </main>
+</body>
+</html>

@@ -13,14 +13,40 @@
     - ::after 영역을 가상 선택자로 선택하여 생성한 뒤 clear 적용
 */
 
-        .float-box::after{
-            content:"";
-            display: block;
-            clear: both;
-        }
-        .float-box > .float-left{
-            float: left;
-        }
-        .float-box > .float-right{
-            float: right;
-        }
+    .float-box::after{
+        content:"";
+        display: block;
+        clear: both;
+    }
+    .float-box > .float-left{
+        float: left;
+    }
+    .float-box > .float-right{
+        float: right;
+    }
+
+    /* 홈페이지 메인 레이아웃 */
+
+     /* main을 제어해서 홈페이지 전체 폭과 정렬을 제어 */
+     main{
+        width: 1000px;
+        margin: 0 auto;
+    }   
+    /* 내부 영역에 기본 여백을 부여 */
+    header, footer{
+        padding: 3em;
+    }   
+    /* section은 다단 레이아웃이 가능하도록 배치 */
+    section{
+        display: flex;
+    }
+    
+    aside{
+        width: 150px;
+    }
+    
+    article{
+        flex-grow: 1;
+        padding: 1em;
+        min-height: 450px;
+    }

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홈패이지 레이아웃</title>
+    <link rel="stylesheet" type="text/css" href="load.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link rel="stylesheet" type="text/css" href="commons.css">
+    <link rel="stylesheet" type="text/css" href="test.css">
+    <style>
+        /* main을 제어해서 홈페이지 전체 폭과 정렬을 제어 */
+        main{
+            width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* 내부 영역에 기본 여백을 부여 */
+        header, footer{
+            padding: 3em;
+        }
+
+        /* section은 다단 레이아웃이 가능하도록 배치 */
+        section{
+            display: flex;
+        }
+        
+        aside{
+            width: 150px;
+        }
+        
+        article{
+            flex-grow: 1;
+            padding: 1em;
+            min-height: 450px;
+        }
+
+    </style>
+</head>
+<body test>
+    <!-- 홈페이지를 만들 때 시맨틱(sementic tag) 를 사용하여 의미있게 구현 -->
+
+    <main>
+        <header>헤더</header>
+        <nav>메뉴</nav>
+        <section>
+            <aside>사이드바</aside>
+            <article>컨텐츠</article>
+        </section>
+        <footer>풋터</footer>
+    </main>
+</body>
+</html>
