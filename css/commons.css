@@ -510,17 +510,3 @@
             transform: translate(-50%, -50%);
             
         }
-
-
-        
-        .float-box::after{
-            content:"";
-            display: block;
-            clear: both;
-        }
-        .float-box > .float-left{
-            float: left;
-        }
-        .float-box > .float-right{
-            float: right;
-        }

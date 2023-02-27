@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이미지 갤러리 문제</title>
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link rel="stylesheet" type="text/css" href="commons.css">
+    <link rel="stylesheet" type="text/css" href="test.css">
+    <style>
+         .gallery-container {
+            margin: 0 auto;
+            /* width:800px; */
+         }
+         .gallery-container > .gallery-title {
+            margin: 15px 0;
+            padding: 1em;
+            font-size: 3em;
+            text-align: center;
+         }
+         .gallery-container > .gallery-view {
+            padding: 20px;
+         }
+         .gallery-container > .gallery-view::after {
+            content:"";
+            display: block;
+            clear: both;
+         }
+         .gallery-container > .gallery-view > .gallery-item {
+            float: left;
+            width: 25%;
+            padding: 10px;
+         }
+         .gallery-container > .gallery-view > .gallery-item > .gallery-image {
+            width:100%;
+            opacity: 0.65;
+         }
+         .gallery-container > .gallery-view > .gallery-item > .gallery-image:hover {
+            opacity: 1;
+         }
+
+         /* 조건부 스타일 */
+         @media screen and (max-width:960px) {
+            .gallery-container > .gallery-title {
+                font-size: 2.5em;
+            }
+            .gallery-container > .gallery-view > .gallery-item {
+                width:33.3333%;
+            }
+         }
+
+         @media screen and (max-width:640px) {
+            .gallery-container > .gallery-title {
+                font-size: 2em;
+            }
+            .gallery-container > .gallery-view > .gallery-item {
+                width:50%;
+            }
+         }
+
+         @media screen and (max-width:480px) {
+            .gallery-container > .gallery-title {
+                font-size: 1.5em;
+            }
+            .gallery-container > .gallery-view > .gallery-item {
+                width:100%;
+            }
+         }
+    </style>
+</head>
+<body test>
+    <div class="gallery-container">
+        <div class="gallery-title">
+            이미지 갤러리 문제
+        </div>
+        <div class="gallery-view">
+            <div class="gallery-item"><img src="https://via.placeholder.com/300x300?text=IMG" class="gallery-image"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/300x300?text=IMG" class="gallery-image"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/300x300?text=IMG" class="gallery-image"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/300x300?text=IMG" class="gallery-image"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/300x300?text=IMG" class="gallery-image"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/300x300?text=IMG" class="gallery-image"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/300x300?text=IMG" class="gallery-image"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/300x300?text=IMG" class="gallery-image"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/300x300?text=IMG" class="gallery-image"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/300x300?text=IMG" class="gallery-image"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/300x300?text=IMG" class="gallery-image"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/300x300?text=IMG" class="gallery-image"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/300x300?text=IMG" class="gallery-image"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/300x300?text=IMG" class="gallery-image"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/300x300?text=IMG" class="gallery-image"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/300x300?text=IMG" class="gallery-image"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/300x300?text=IMG" class="gallery-image"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/300x300?text=IMG" class="gallery-image"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/300x300?text=IMG" class="gallery-image"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/300x300?text=IMG" class="gallery-image"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/300x300?text=IMG" class="gallery-image"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/300x300?text=IMG" class="gallery-image"></div>
+        </div>
+    </div>
+</body>
+</html>

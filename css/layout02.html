@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이미지 갤러리 문제</title>
+
+    <link rel="stylesheet" type="text/css" href="load.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link rel="stylesheet" type="text/css" href="commons.css">
+    <link rel="stylesheet" type="text/css" href="test.css">
+    <style>
+        .float-box::after {
+            content:"";
+            display: block;
+            clear: both;
+        }
+        .float-box > .float-left {
+            float: left;
+        }
+        .float-box > .float-right {
+            float: right;
+        }
+
+        .p-10 {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body test>
+    <div class="container-800">
+        <div class="row center">
+            <h1>이미지 갤러리 문제</h1>
+        </div>
+        <div class="row float-box">
+            <div class="float-left w-25 p-10"><img width="100%" src="https://via.placeholder.com/300x300?text=IMG" class="image image-blur image-border-hover image-round"></div>
+            <div class="float-left w-25 p-10"><img width="100%" src="https://via.placeholder.com/300x300?text=IMG" class="image image-blur image-border-hover image-round"></div>
+            <div class="float-left w-25 p-10"><img width="100%" src="https://via.placeholder.com/300x300?text=IMG" class="image image-blur image-border-hover image-round"></div>
+            <div class="float-left w-25 p-10"><img width="100%" src="https://via.placeholder.com/300x300?text=IMG" class="image image-blur image-border-hover image-round"></div>
+            <div class="float-left w-25 p-10"><img width="100%" src="https://via.placeholder.com/300x300?text=IMG" class="image image-blur image-border-hover image-round"></div>
+            <div class="float-left w-25 p-10"><img width="100%" src="https://via.placeholder.com/300x300?text=IMG" class="image image-blur image-border-hover image-round"></div>
+            <div class="float-left w-25 p-10"><img width="100%" src="https://via.placeholder.com/300x300?text=IMG" class="image image-blur image-border-hover image-round"></div>
+            <div class="float-left w-25 p-10"><img width="100%" src="https://via.placeholder.com/300x300?text=IMG" class="image image-blur image-border-hover image-round"></div>
+          
+        </div>
+    </div>
+</body>
+</html>
