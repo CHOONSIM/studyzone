@@ -6,4 +6,4 @@
 	<h2><a href="insert">추가 과목 등록하기</a></h2><br><br>
 	<h2><a href="list">목록보기</a></h2>
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>

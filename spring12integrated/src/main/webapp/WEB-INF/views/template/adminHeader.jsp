@@ -68,10 +68,10 @@
                 <!-- 관리메뉴는 수직으로 배치(List-Group 형태)-->
                 <div class="flex-box flex-vertical">
                     <div class="p-10"><h3>관리자 메뉴</h3></div>
-                    <div class="p-10"><a href="/admin.member/list" class="link">회원현황</a></div>
-                    <div class="p-10"><a href="/admin.member/pocketmon" class="link">포켓몬 현황</a></div>
-                    <div class="p-10"><a href="/admin.member/subject" class="link">강의 개설 현황</a></div>
-                    <div class="p-10"><a href="/admin.member/student" class="link">학생 성적 현황</a></div>
+                    <div class="p-10"><a href="/admin/member/list" class="link">회원현황</a></div>
+                    <div class="p-10"><a href="/pocketmon/list" class="link">포켓몬 현황</a></div>
+                    <div class="p-10"><a href="/subject/list" class="link">강의 개설 현황</a></div>
+                    <div class="p-10"><a href="/student/list" class="link">학생 성적 현황</a></div>
                 </div>
             </aside>
             <article>

@@ -73,4 +73,4 @@
  	<h3>비밀번호가 일치하지 않습니다!</h3>
  </c:if>
     
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>

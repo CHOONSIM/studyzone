@@ -6,4 +6,4 @@
 	<a href = "insert">학생 정보 추가 등록</a>
 	<h3><a href="list">학생 성적 목록</a></h3>
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>

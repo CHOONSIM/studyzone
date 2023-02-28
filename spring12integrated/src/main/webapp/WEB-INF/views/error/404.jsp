@@ -4,4 +4,4 @@
  	<br>
  	<h1>찾는 페이지가 없습니다!</h1>
  	<br>
- <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+ <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
