@@ -20,4 +20,4 @@
 	<a href="delete?no=${subjectDto.no }">삭제</a>
 	</h4>
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>

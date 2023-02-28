@@ -26,9 +26,9 @@
         </div>
         
         <div class="row right">
-        	<a href="insert" class="form-btn positive">등록하기</a>
+        	<a href="insertInput" class="form-btn positive">신규등록</a>
         </div>
-        
+
         <div class="row center">
         	<c:choose>
 				<c:when test="${list.isEmpty()}">
@@ -67,10 +67,11 @@
 			</c:choose>
         </div>
         
-        <div class="row right">
-        	<a href="insert" class="form-btn positive">등록하기</a>
+         <div class="row left">
+        	<a href="/admin/home" class="form-btn positive">관리자 홈</a>
         </div>
+        
         
     </div>
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>

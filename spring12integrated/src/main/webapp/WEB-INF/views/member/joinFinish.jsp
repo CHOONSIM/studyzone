@@ -7,4 +7,4 @@
  
  <h2><a href="login">로그인하기</a></h2>
  
-    <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>

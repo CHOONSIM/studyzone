@@ -73,4 +73,4 @@
 	${number}<br>
 </c:forEach>
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>de>
+<jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>de>
