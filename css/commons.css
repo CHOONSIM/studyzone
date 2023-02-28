@@ -715,3 +715,12 @@
             left: auto;
             right: 100%;
         }
+
+        /*메뉴창 수평 안맞는것*/
+        .menu{
+            height: 2.5em;
+        }
+        .menu li{
+            height: 100%
+
+        }     
