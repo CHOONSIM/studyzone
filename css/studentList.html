@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학생 정보 목록</title>
+    <link rel="stylesheet" type="text/css" href="load.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link rel="stylesheet" type="text/css" href="commons.css">
+    <link rel="stylesheet" type="text/css" href="test.css">
+</head>
+<body>
+    <div class="container-700">
+        <div class="row center">
+            <h1>학생 성적 목록</h1>
+        </div>
+        <div class="row center">
+            <form>
+                <select name="column" class="form-input">
+                    <option value="">선택</option>
+                    <option value="no">번호</option>
+                    <option value="name">이름</option>
+                </select>
+                <input type="search" name="keyword" required
+                            class="form-input" placeholder="검색어">
+                <button type="submit" class="form-btn neutral">검색</button>
+            </form>
+        </div>
+
+        <div class="row right">
+        	<a href="insert" class="form-btn positive">등록하기</a>
+        </div>
+
+        <div class="row">
+            <table class="table table-border">
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th width="20%">이름</th>
+                        <th>국어점수</th>
+                        <th>영어점수</th>
+                        <th>수학점수</th>
+                        <th>총 점수</th>
+                        <th>평균 점수</th>
+                    </tr>
+                </thead>
+                <tbody class="center">
+                    <tr>
+                        <td>?</td>
+                        <td>?</td>
+                        <td>?</td>
+                        <td>?</td>
+                        <td>?</td>
+                        <td>?</td>
+                        <td>?</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

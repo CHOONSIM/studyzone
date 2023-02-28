@@ -136,6 +136,7 @@
 
   /* 폭 설정 클래스 */
   .w-100{width: 100%;}
+  .w-75{width: 75%;}
   .w-70{width: 70%;}
   .w-50{width: 50%;}
   .w-40{width: 40%;}
@@ -567,7 +568,7 @@
     
             /* 내부 영역에 기본 여백을 부여 */
             header, footer{
-                padding: 3em;
+                padding: 2em;
             }
     
             /* section은 다단 레이아웃이 가능하도록 배치 */
@@ -585,7 +586,7 @@
                 min-height: 450px;
             }
 
-            
+
 
 
 
