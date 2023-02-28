@@ -136,6 +136,7 @@
 
   /* 폭 설정 클래스 */
   .w-100{width: 100%;}
+  .w-75{width: 75%;}
   .w-70{width: 70%;}
   .w-50{width: 50%;}
   .w-40{width: 40%;}
@@ -585,7 +586,7 @@
                 min-height: 450px;
             }
 
-            
+
 
 
 
@@ -714,3 +715,12 @@
             left: auto;
             right: 100%;
         }
+
+        /*메뉴창 수평 안맞는것*/
+        .menu{
+            height: 2.5em;
+        }
+        .menu li{
+            height: 100%
+
+        }     
