@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+ 
+    <script type="text/javascript">
+
+        // 여러 함수에서 동시에 관리하는 값은 외부에 작성(전역변수, global 변수)
+        var size= 16;
+        //var target = document.querySelector("p");     화면 생성 전이라 불가능
+        
+        function decrease(){
+            if(size <= 10) return;
+            size -= 1;
+
+            // 본문(p태그)의 스타일 변경
+            var p = document.querySelector("p");
+            p.style.fontSize = size + "px";
+
+            // 글자크기(span태그)의 글자 변경
+            var span = document.querySelector("span");
+            span.textContent = size;
+
+            //disabled 사용하여 최대치일때 버튼 못누르게
+        }
+
+        function increase(){
+            if(size >= 30) return;
+
+            size += 1;
+            var p = document.querySelector("p");
+            p.style.fontSize = size + "px";
+            var span = document.querySelector("span");
+            span.textContent = size;
+        }
+    </script>
+
+</head>
+<body>
+    <button onclick="decrease();">-</button>
+    <span>16</span>
+    <button onclick="increase();">+</button>
+
+    <h1>Lorem ipsum</h1>
+    <p class="testParagraph">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+        At elementum eu facilisis sed odio morbi quis commodo. Enim blandit volutpat maecenas volutpat blandit aliquam etiam erat. 
+        Enim sit amet venenatis urna cursus eget nunc scelerisque viverra. Odio eu feugiat pretium nibh. 
+        Pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at. 
+        Lectus urna duis convallis convallis tellus id. Consectetur libero id faucibus nisl tincidunt eget nullam non. 
+        Adipiscing elit pellentesque habitant morbi tristique senectus. 
+        Aliquam ultrices sagittis orci a scelerisque purus. Tortor aliquam nulla facilisi cras fermentum odio eu.
+    </p>
+</body>
+</html>

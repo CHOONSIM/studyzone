@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+ 
+    <script type="text/javascript">
+        var size = 200;
+
+        function dicrease(){
+            if(size <= 100) return;
+            size -= 50;
+
+            function refreshSreen();
+        }
+
+        function increase(){
+            if(size >= 400) return;
+            size += 50;
+
+           function refreshSreen();
+        }
+
+        function refreshSreen(){
+            var p =document.querySelector(".image");
+            p.style.width=size + "px";
+            p.style.height=size + "px";
+
+            var span = document.querySelector("span")
+            span.textContent="현재크기 : " + size + "px";
+        }
+    </script>
+
+</head>
+<body>
+    <button onclick="increase();">+</button>
+    <button onclick="dicrease();">-</button>
+    <span>현재크기 : 200px</span>
+    <hr><br><br>
+    <img class="image" style="border:1px dotted black" src="https://via.placeholder.com/200x200?text=image"alt="image">
+</body>
+</html>
