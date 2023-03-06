@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>입력창 값 읽기</title>
+ 
+    <script type="text/javascript">
+
+        function copy01(){
+//      할일
+//      1. class=input-01인 입력창의 입력값을 불러온다(value)
+//      2. class=view-01인 div에 글자로 설정한다(textContent)
+        var input = document.querySelector(".input-01");
+        var div = document.querySelector(".view-01");
+        div.textContent = input.value;
+        }
+
+        function clear01(){
+//      입력창의 값을 제거한다는 것은 비어있는 문자열로 설정하는 것
+        var input = document.querySelector(".input-01");
+        input.value="";
+        
+        }
+    </script>
+
+</head>
+<body>
+    <!-- 버튼을 누르면 입력창의 입력값을 div로 복사-->
+    <input type="text" class="input-01">
+    <button onclick="copy01();">복사</button>
+    <button onclick="clear01();">지우기</button>
+    <div class="view-01"></div>
+
+</body>
+</html>
