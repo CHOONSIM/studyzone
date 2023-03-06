@@ -7,7 +7,40 @@
     <title>코드 기본요소 배우기</title>
 
     <script type="text/javascript">
+        // 자바스크립트는 문법이 비교적 자유롭다
+        //      1. 문자열의 따옴표가 한 개든 두개든 상관하지 않는다 
+        //      2. 세미콜론을 강제하지 않는다.
+        //      3. 자료형을 명시적으로 구분하지 않는다
 
+        // 출력 - System.out.println()
+        console.log("Hello Javasript");
+        console.log('Hello Javasript');
+        console.log('Hello Javasript')
+
+        // 변수
+        //  - 자바와 같은 컴파일 언어에서는 크기 때문에 자료형이 매우 중요하다
+        //  - 자바스크립트는 스크립트 언어이므로 자료형을 일괄적으로 해석
+        //  - 자바스크립트 버전에 따라 var, const, let등 다양한 키워드를 사용
+        //  - 자료형의 개념은 있으며 정상적인 계산이 아닐경우 오류 발생 혹은 오류 값 처리
+        var a =10;
+        var b = "hello";
+        console.log(a);
+        console.log(b);
+        console.log(a+b);
+        console.log(a-b);   //자바에서 오류나는 코드(오류가 아닌 NaN처리)
+
+        var c = a + 20;
+        console.log(c);
+
+        c++;
+        console.log(c);
+
+        c+=10;
+        console.log(c);
+
+        //  다른점
+        var d = 10 / 3;
+        console.log(d);
     </script>
 
 </head>
