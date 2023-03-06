@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+
+    <script type="text/javascript">
+        function writeDown(){
+            var input = document.querySelector(".input-04");
+            var div = document.querySelector(".view-04");
+            var length = input.value.length;
+            var maxLength = 10;
+
+            if (length > maxLength) {
+                div.style.color = "red";
+            } else {
+                div.style.color = "black";
+            }
+
+            div.innerHTML = length + " / " + maxLength;
+        }
+    </script>
+
+</head>
+<body>
+    (Q) 성장 배경에 대해서 설명해주세요 (최대 1000자 이내)
+    <br>
+    <input type="text" class="input-04" oninput="writeDown();" style="width: 600px; height: 250px;">
+    <div class="view-04"></div>
+</body>
+</html>
