@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+
+    <!-- 
+        클래식 자바스크립트 코드 위치
+        - 스타일과 마찬가지로 HTML보다 미리 불러와서 처리하도록 구현
+        - style보다는 아래 배치
+    -->
+    <script type="text/javascript">
+        alert("hello");
+    </script>
+</head>
+<body>
+    <!--
+        브라우저마다 코드를 해석하고 실행하는 방식이 다르다
+        - 어떤 브라우저는 순차적으로 해석
+        - 어떤 브라우저는 자바스크립트 먼저 해석
+
+        어디서나 동일하게 처리되도록 구성하는 것이 이상적
+    -->
+    
+    <h1>Before</h1>
+
+
+    <h1>After</h1>
+
+    <!--
+        최근 스크립트 배치 위치(body의 맨 마지막)
+        - 최근 홈페이지의 가장 이슈인 홈페이지가 표시되는 속도를 개선하기 위한 위치
+        - 사용자는 홈페이지를 봐야 행동이 가능(ex : 클릭)
+        - HTML/CSS/JS 중에서 유일하게 나중에 불러와도 되는것이 JS
+        - 자바스크립트 로딩을 최 후순위로 미루기 위하여 이곳에 작성
+        - Lazy Loading 방식
+    -->
+</body>
+</html>
