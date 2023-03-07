@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    <style>
+        .full-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+        }
+
+        .full-screen textarea {
+            width: 100%;
+            height: 100%;
+            resize: none;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: red;
+            color: white;
+            padding: 5px;
+            cursor: pointer;
+        }
+    </style>
+    <script type="text/javascript">
+        function fullScreen() {
+            const textarea = document.querySelector('.full-screen textarea');
+            textarea.style.height = window.innerHeight + 'px';
+            textarea.style.width = window.innerWidth + 'px';
+            document.querySelector('.full-screen').style.display = 'block';
+        }
+
+        function closeFullScreen() {
+            const textarea = document.querySelector('.full-screen textarea');
+            textarea.style.height = '300px';
+            textarea.style.width = '100%'; 
+            document.querySelector('.full-screen').style.display = 'none';
+        }
+    </script>
+</head>
+<body>
+    <div class="row container-600">
+        <div class="row">
+            <h1>게시글 작성</h1>
+        </div>
+
+        <div class="row">
+            <label>제목</label>
+            <input type="text" class="form-input w-100">
+        </div>
+
+        <div>
+            <label>내용</label>
+            <button onclick="fullScreen()">전체화면</button>
+            <br>
+            <textarea class="form-input w-100"></textarea>
+            <div class="full-screen" style="display: none;">
+                <textarea></textarea>
+                <div class="close-btn" onclick="closeFullScreen()">닫기</div>
+            </div>
+        </div>
+        
+        <button class="form-btn w-100">글 게시</button>
+    </div>
+</body>
+</html>
