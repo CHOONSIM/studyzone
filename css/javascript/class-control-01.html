@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript 클래스 제어</title>
+    
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+
+    <style>
+        .red {
+            color: red;
+            border: 1px dotted red;
+        }
+
+        .orange {
+            color: orange;
+            border: 1px dotted orange;
+        }
+
+        .yellow {
+            color: yellow;
+            border: 1px dotted yellow;
+        }
+
+    </style>
+
+    <script type="text/javascript">
+//      목표 : 자바스크립트에서 태그에 클래스를 추가 또는 제거하는 것
+//              [1] 태그 객체에 className이라는 속성을 설정     
+//                  - style을 직접 설정하는것처럼 class가 덮어쓰기 됨
+//              [2] 태그 객체에 내장된 classList라는 저장소에 속성을 추가/제거 설정 
+//                  - 추가 : .add() , 제거 : .remove()
+//                  - 기존 클래스는 유지됨
+
+        function changeRed(){
+            var tag = document.querySelector(".text");
+//            tag.style.color = "red";
+//  [1]            tag.className = "red";
+            tag.class.remove("red", "orange", "yellow");
+            tag.classList.add("red");
+        }
+
+        function changeOrange(){
+            var tag = document.querySelector(".text");
+            tag.class.remove("red", "orange", "yellow");
+            tag.classList.add("orange");
+        }
+        
+        function changeYellow(){
+            var tag = document.querySelector(".text");
+            tag.class.remove("red", "orange", "yellow");
+            tag.classList.add("yellow");
+        }
+    </script>
+
+</head>
+<body>
+    <div class="container-500">
+
+        <div class="row center">
+            <h1>클래스 다루기</h1>
+        </div>
+        <div class="row center">
+            <button class="form-btn" onclick="changeRed();">빨강</button>
+            <button class="form-btn" onclick="changeOrange();">주황</button>
+            <button class="form-btn" onclick="changeYellow();">노랑</button>
+        </div>
+        <div class="row center">
+            <h2 class="text">Hello Javascript!</h2>
+        </div>
+    </div>
+</body>
+</html>
