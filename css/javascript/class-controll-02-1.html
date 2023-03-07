@@ -4,77 +4,80 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Javascript 전체화면 내 풀이</title>
+    <title>게시글 전체화면 모드 구현</title>
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="css/load.css">
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/commons.css">
     <link rel="stylesheet" type="text/css" href="css/layout.css">
     <link rel="stylesheet" type="text/css" href="css/test.css">
     <style>
-        .full-screen {
+        .fullscreen {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 9999;
+            top: 1%;
+            left: 1%;
+            right: 1%;
+            bottom: 1%;
+            width: auto;
+            z-index: 999999;
+            background-color: white;
         }
-
-        .full-screen textarea {
-            width: 100%;
-            height: 100%;
-            resize: none;
-        }
-
         .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: red;
-            color: white;
-            padding: 5px;
+            position: fixed;
+            top:2%;
+            right:2%;
+            z-index: 1000000;
+            cursor: pointer;
+            display: none;
+        }
+        .fullscreen-btn {
             cursor: pointer;
         }
-    </style>
-    <script type="text/javascript">
-        function fullScreen() {
-            const textarea = document.querySelector('.full-screen textarea');
-            textarea.style.height = window.innerHeight + 'px';
-            textarea.style.width = window.innerWidth + 'px';
-            document.querySelector('.full-screen').style.display = 'block';
+        .fullscreen-btn:hover,
+        .close-btn:hover {
+            color: red;
         }
-
+        .fullscreen + .close-btn {
+            display: block;
+        }  
+    </style>
+    
+    <script type="text/javascript">
+        function changeFullScreen() {
+            var textarea = document.querySelector("textarea[name=boardContent]");
+            textarea.classList.add("fullscreen");
+        }
         function closeFullScreen() {
-            const textarea = document.querySelector('.full-screen textarea');
-            textarea.style.height = '300px';
-            textarea.style.width = '100%'; 
-            document.querySelector('.full-screen').style.display = 'none';
+            var textarea = document.querySelector("textarea[name=boardContent]");
+            textarea.classList.remove("fullscreen");
         }
     </script>
 </head>
-<body>
-    <div class="row container-600">
-        <div class="row">
+<body test>
+    <div class="container-800">
+        <div class="row center">
             <h1>게시글 작성</h1>
         </div>
-
         <div class="row">
             <label>제목</label>
-            <input type="text" class="form-input w-100">
+            <input type="text" name="boardTitle" class="form-input w-100">
         </div>
-
-        <div>
+        <div class="row">
             <label>내용</label>
-            <button onclick="fullScreen()">전체화면</button>
-            <br>
-            <textarea class="form-input w-100"></textarea>
-            <div class="full-screen" style="display: none;">
-                <textarea></textarea>
-                <div class="close-btn" onclick="closeFullScreen()">닫기</div>
-            </div>
+            <span onclick="changeFullScreen();" class="fullscreen-btn">
+                <i class="fa-solid fa-expand ms-10"></i>
+                전체화면
+            </span>
+            <textarea class="form-input w-100" name="boardContent"></textarea>
+            <i class="fa-solid fa-xmark close-btn" onclick="closeFullScreen();"></i>
         </div>
-        
-        <button class="form-btn w-100">글 게시</button>
+        <div class="row">
+            <button type="submit" class="form-btn w-100 positive">
+                <i class="fa-solid fa-edit"></i>
+                작성하기
+            </button>
+        </div>
     </div>
 </body>
 </html>
