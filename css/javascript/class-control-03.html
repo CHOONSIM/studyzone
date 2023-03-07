@@ -51,6 +51,22 @@
                 memberIdInput.classList.add("invalid");
             }
         }
+
+            function memberPwCheck(){
+            var memberPwInput = document.querySelector("[name=memberPw]");
+            var memberPwReInput = document.querySelector("#passwordRe");
+            var memberPwRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[A-Za-z!@#$0-9]{8,16}$/;
+           
+            memberIdInput.classList.remove("valid", "invalid");
+                
+            if(memberIdRegex.test(memberId)){       //통과
+                memberIdInput.classList.add("valid");
+            }
+            else{                                               //실패
+                memberIdInput.classList.add("invalid");
+            }
+        }
+        
     </script>
 
 </head>
@@ -71,7 +87,8 @@
 
         <div class="row">
             <label>비밀번호</label>
-            <input type="password" name="memberPw" class="form-input w-100">
+            <input type="password" name="memberPw" class="form-input w-100"
+                onblur=>
             <div class="valid-message">비밀번호가 올바른 형식입니다.</div>
             <div class="invalid-message">8~16자 영문 대소문자, 숫자, 특수문자를 반드시 포함해야합니다.</div>
         </div>
