@@ -3,4 +3,4 @@
 document.querySelector("button")            // 버튼을 찾아서
                 .addEventListener("click", function(){  // 클릭하면 실행
             alert("Hello");
-                });
+                }); 
