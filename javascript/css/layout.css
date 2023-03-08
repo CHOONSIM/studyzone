@@ -12,7 +12,7 @@
     - clear 속성을 가진 영역을 반드시 float 사용 후에 배치해야 한다
     - ::after 영역을 가상 선택자로 선택하여 생성한 뒤 clear 적용
 */
-
+ 
     .float-box::after{
         content:"";
         display: block;

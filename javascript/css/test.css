@@ -4,7 +4,7 @@
 - 설령 다른 테두리 설정이 있다고 해도 무시하고 처리하도록 구현
 - div 뿐 아니라 모든 비어있는 영역 태그에 적용
  - div, main, header, footer, nav, aside, article, p, label, span, ul, ol, li, a
-*/
+*/ 
         [test] div,
         [test] main,
         [test] header,
