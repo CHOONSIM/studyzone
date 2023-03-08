@@ -65,7 +65,7 @@ public class InterdeptorConfiguration implements WebMvcConfigurer{
 				"/board/list");
 		
 //		3. 관리자 전용 검사 인터셉터
-		registry.addInterceptor(adminInterceptor).addPathPatterns("/admin/**");
+		registry.addInterceptor(adminInterceptor).addPathPatterns("/admin/**", "/board/deleteAll");
 		
 //		4. 작성자 본인 및 관리자 검사 인터셉터
 		registry.addInterceptor(boardManageInterceptor)
