@@ -13,7 +13,14 @@
     <link rel="stylesheet" type="text/css" href="css/test.css">
     
     <script type="text/javascript">
-
+        function testFunction1(){
+//          console.log("체크 감지");
+            var checkbox = document.querySelector("[name=agree]");
+//          console.log(checkbox.checked);
+//          console.log(checkbox.parentNode);
+            var label = checkbox.parentNode;    // 부모 노드(태그)
+            label.style.color = checkbox.checked ? "green" : "red";
+        }
     </script>
 
 </head>
@@ -23,10 +30,14 @@
         <div class="row">
             <h1>체크박스 제어</h1>
         </div>
-        
+
         <div class="row">
-            <input type="checkbox" name="agree">
-            <label>동의</label>
+<!-- 체크박스도 입력창, 전송이 가능, 밸류 값이 없으면 on으로 전송-->
+            <label>
+                <input type="checkbox" name="agree" vlaue="hello"
+                    onchange="testFunction1();" checked="checked">
+                동의
+            </label>
         </div>
 
     </div>
