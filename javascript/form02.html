@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript 폼 최종코드 완성</title>
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    <style>
+         
+    </style>
+
+    <script type="text/javascript">
+
+        function memberIdCheck() {
+            var memberIdInput = document.querySelector("[name=memberId]");
+            var memberId = memberIdInput.value;
+            var memberIdRegex = /^[a-z][a-z0-9]{7,19}$/;
+            
+            memberIdInput.classList.remove("valid", "invalid");
+            if(memberIdRegex.test(memberId)) {//통과
+                memberIdInput.classList.add("valid");
+            }
+            else {//실패
+                memberIdInput.classList.add("invalid");
+            }
+        }
+
+        function memberPwCheck() {
+            var memberPwInput = document.querySelector("[name=memberPw]");
+            var memberPw = memberPwInput.value;
+            var memberPwRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$])[a-zA-Z0-9!@#$]{8,16}$/;
+
+            memberPwInput.classList.remove("valid", "invalid");
+            if(memberPwRegex.test(memberPw)) {//통과
+                memberPwInput.classList.add("valid");
+            }
+            else {//실패
+                memberPwInput.classList.add("invalid");
+            }
+        }
+
+//      어떻게하면 기존 코드를 활용해서 최소한의 코드로 검사를 할것인가
+//      [1] 아이디 검사 실시
+//      [2] 비밀번호 검사를 실시
+//      [3] valid 클래스가 붙은 입력창의 개수를 세어서 원하는 숫자면 전송
+//          - (추가) 여러개를 선택하려면 document.querySelectorAll("선택자")
+        function formCheck(){
+            memberIdCheck();
+            memberPwCheck();
+            var lisr = document.querySelectorAll(".form-input[name].valid");
+            return list.length == 2;
+        }
+  
+    </script>
+
+</head>
+<body>
+    <form action="http://www.google.com" onsubmit="return formCheck();">
+
+    <div class="container-500">
+        <div class="row center">
+            <h1>form 검사 예제</h1>
+        </div>
+
+        <div class="row">
+            <label>아이디</label>
+            <input type="text" name="memberId" class="form-input w-100"
+                    onblur="memberIdCheck();">
+            <div class="valid-message">아이디 확인</div>
+            <div class="invalid-message">아이디 오류</div>
+        </div>
+
+        <div class="row">
+            <label>비밀번호</label>
+            <input type="text" name="memberPw" class="form-input w-100"
+                    onblur="memberPwCheck();">
+            <div class="valid-message">비밀번호 확인</div>
+            <div class="invalid-message">비밀번호 오류</div>
+        </div>
+
+        <div class="row">
+            <button type="submit" class="form-btn positive w-100">등록</button>
+        </div>
+
+    </div>
+    </form>
+</body>
+</html>

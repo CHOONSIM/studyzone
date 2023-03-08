@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript 이용약관 체크박스 문제</title>
+
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    <style>
+
+    </style>
+    
+    <script type="text/javascript">
+//      한 개가 체크되면 실행할 함수
+//      - 전체 체크박스를 가져와서 체크된 항목 수를 세어 비교
+        function checkUnit(){
+            var checkboxes = document.querySelectorAll(".check-unit");
+            var count = 0;
+            for(var i=0; i < checkboxes.length; i++){
+                if(checkboxes[i].checked)   {       //체크되었다면
+                    count++;
+                }
+            }
+//          console.log(count,checkboxes.length);
+            var isAllCheck = count == checkboxes.length;
+
+            var button = document.querySelector(".next-btn");
+            button.disabled = !isAllCheck;
+        }
+
+//      전체 선택 구현
+//      - 전체 체크박스를 체크했다면 개별 체크박스를 모두 체크
+//      - 전체 체크박스를 체크 해제했다면 개별 체크박스를 모두 체크 해제
+//      - 전체 체크박스의 상태를 그대로 개별 체크박스에 모두 적용
+        function checkAll(){
+            var allCheckbox = document.querySelector(".check-all");         // 1개
+            var checkboxes = document.querySelectorAll(".check-unit");    // 여러개
+
+//          console.log(allCheckbox.checked);
+
+            for(var i=0; i < checkboxes.length; i++){
+                checkboxes[i].checked = allCheckbox.checked;
+            }
+            checkUnit();
+        }
+
+    </script>
+
+</head>
+<body>
+    <div class="container-600">
+        
+        <div class="row center">
+            <h1>회원 정보 이용약관</h1>
+        </div>
+
+        <div class="row mt-40">
+            <textarea class="form-input w-100" readonly>대충 이용약관</textarea>
+        </div>
+        <div class="row right">
+            <label>
+                <input type="checkbox" name="agree" value="1"class="check-unit"
+                    onchange="checkUnit();">
+                동의
+            </label>
+
+        <div class="row mt-40">
+            <textarea class="form-input w-100" readonly>대충 이용약관</textarea>
+        </div>
+        <div class="row right">
+            <label>
+                <input type="checkbox" name="agree" value="2"class="check-unit"
+                    onchange="checkUnit();">
+                동의
+            </label>
+
+            <br><br>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="check-all"
+                     onchange="checkAll();">
+                전체 이용약관에 동의
+            </label>
+        </div>
+
+        <div calss="row">
+            <button type="submit" class="form-btn w-100 positive next-btn" 
+                disabled>다음 단계로 이동</button>
+        </div>
+        </div>
+
+    </div>
+</body>
+</html>

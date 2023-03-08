@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+ 
+    <script type="text/javascript">
+        function checkLength(){
+//          할일
+//          1. name=q1 입력창의 입력값을 불러온다
+//          2. 입력값의 글자수를 카운트한다
+//          3. namw=q1 뒤에 span에 글자수를 표시한다
+            var textarea = document.querySelector("[name=q1]");
+            var span = document.querySelector("[name=q1] + span");
+            span.textContent = textarea.value.length;
+            var len = textarea.value.length;
+            
+            var maxLength = 10;
+//          (+추가) 실제로 1000글자가 넘지 않도록 처리
+//          - 입력을 막을 방법은 없으니 넘어가면 잘라내는 형태로 처리
+//          - IME 방식 입력을 고려해야 하므로 한 글자씩 잘라내도록 처리
+//          - IME(Input Method Editor)는 글자가 모여야 완성되는 방식(동아시아 문자)
+
+//            while(len이 1000이 될 때까지){
+//                textarea의 value를 원래 글자에서 1글자 제거한 형태로 재설정
+//               len--;
+//            }
+
+            while(len > maxLength) {
+                textarea.value = textarea.value.substring(0, len-1);
+                len--;
+            }
+            span.textContent = len;
+        }
+    </script>
+ 
+</head>
+<body>
+    <div class="container-600">
+        <div class="row">
+            <h2>(Q) 성장 배경에 대해서 설명해주세요 (최대 1000자 이내)</h2>
+        </div>
+        <div class="row right">
+            <textarea name="q1" class="form-input w-100" oninput="checkLength();"></textarea>
+            <span>0</span> / 1000
+        </div>
+    </div>
+</body>
+</html>

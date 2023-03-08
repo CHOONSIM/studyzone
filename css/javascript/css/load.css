@@ -1,8 +1,0 @@
-@charset "UTF-8";
-
-/* 
-    css 설정을 위해 미리 import 해야할 내용들을 작성
-    (스타일 중 가장 먼저 불러와야함)
- */
-
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');

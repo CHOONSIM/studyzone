@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript 배열</title>
+
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+     
+    <script type="text/javascript">
+        function checkAll() {
+            var allCheck = document.querySelector(".check-all");
+            var checkboxes = document.querySelectorAll("[name=fruit]");
+            for(var i=0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = allCheck.checked;
+            }
+            purchase();
+        }
+        function purchase() {
+            //체크되어 있는 모든 체크박스를 찾아서 value를 읽어와 금액으로 계산
+            //라벨 뒤에 있는 입력창의 value를 가져와서 수량으로 계산
+            //(1) 전체 체크박스를 불러와서 조건으로 필터링 처리
+            //(2) 체크된 체크박스만 불러와서 처리
+
+            //(참고) value는 자료형이 String이다. 숫자 변경은 parseInt(), parseFloat()가 있다
+            var checkboxes = document.querySelectorAll("[name=fruit]:checked");
+            var total = 0;
+            for(var i=0; i < checkboxes.length; i++) {
+                var price = parseInt(checkboxes[i].value);
+                var qty = parseInt(checkboxes[i].parentNode.nextElementSibling.value);
+                total += price * qty;
+            }
+
+            var result = document.querySelector(".total-price");
+            result.textContent = total;
+        }
+    </script>
+</head>
+<body>
+    <div class="container-600">
+        <div class="row center">
+            <h1>과일 구매 페이지</h1>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" onchange="checkAll();" class="check-all">
+                전체 선택
+            </label>
+        </div>
+        <hr>
+        <div class="row">
+            <label>
+                <input type="checkbox" name="fruit" value="500"
+                    onchange="purchase();">
+                사과(500원)
+            </label>
+            <input type="number" value="1" min="1" step="1" name="count"
+                    oninput="purchase();">
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" name="fruit" value="1000"
+                    onchange="purchase();">
+                오렌지(1000원)
+            </label>
+            <input type="number" value="1" min="1" step="1" name="count"
+                    oninput="purchase();">
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" name="fruit" value="2000"
+                    onchange="purchase();">
+                파인애플(2000원)
+            </label>
+            <input type="number" value="1" min="1" step="1" name="count"
+                    oninput="purchase();">
+        </div>
+        <hr>
+        <div class="row">
+            <button class="form-btn positive">구매하기</button>
+        </div>
+        <hr>
+        <div class="row">
+            예상 결제 금액 : <span class="total-price">0</span>원
+        </div>
+    </div>
+</body>
+</html>
