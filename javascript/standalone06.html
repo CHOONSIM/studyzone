@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+  
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    
+    <script type="text/javascript">
+
+//      독립형 자바스크립트 템플릿
+        window.addEventListener("load",function(){
+            document.querySelector("input[name=memberId]")
+                    .addEventListener("input", function(){
+                    var regex = this.dataset.regex;
+                    var memberId = this.value;
+                    var span = this.nextElementSibling;
+
+                    if(regex.test(memberId)){
+                        span.textContent = "올바른 형식의 아이디입니다.";
+                    }
+                    else{
+                        span.textContent = "아이디는 영문 소문자로 시작해야 하며 숫자를 포함해 8~20자여야 합니다";
+                    }
+            });
+        });
+
+    </script>
+
+</head>
+<body> 
+    <form autocomplete="off">
+
+        <div class="container-600">
+            <div class="row">
+                
+            </div>
+            <div class="row">
+                <label>아이디</label>
+                <input type="text" name="memberId" class="form-input w-100" data-regex=" /^[a-z][a-z0-9]{7,19}$/;">
+                <div>
+                    <span class="">멋진 아이디입니다!</span>
+                </div>
+                <div>
+                    <span>아이디는 영문 소문자로 시작해야 하며 숫자를 포함해 8~20자여야 합니다</span>
+                </div>
+                
+            </div>
+            
+            <div class="row">
+                <label>비밀번호</label>
+                <input type="password" name="memberPw" class="form-input w-100" data-regex=" /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$])[a-zA-Z0-9!@#$]{8,16}$/;">
+                <div>
+                    <span></span>
+                </div>
+            </div>
+            
+            <div class="row">
+                <label>비밀번호 확인</label>
+                <input type="text" name="memberPwCheck" class="form-input w-100">
+                <div>
+                    <span></span>
+                </div>
+            </div>
+            
+            <div class="row">
+                <button type="submit" class="form-btn w-100 positive">가입</button>
+            </div>
+            
+        </div>
+    </form>
+    </body>
+    </html>

@@ -17,7 +17,7 @@
 //      독립형 자바스크립트 템플릿
         window.addEventListener("load",function(){
             var list = document.querySelectorAll("textarea.form-input");
-
+ 
             for(var i=0; i < list.length; i++){
                 list[i].addEventListener("input", function(){
 //                  this == 입력 발생한 창
@@ -25,7 +25,7 @@
                     var span = this.nextElementSibling.children[0];
                     span.textContent = count;
                 });
-            }
+            } 
         });
 
     </script>
