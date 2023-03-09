@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+  
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    
+    <script type="text/javascript">
+
+//      독립형 자바스크립트 템플릿
+        window.addEventListener("load",function(){
+            document.querySelector("textarea.form-input")
+                .addEventListener("input", function(){
+//              this == 입력 발생한 창
+//              this.value == 입력된 글자
+
+                var count = this.value.length;
+//              DOM탐색(Document Object Model)
+//              - 특정 태그를 기준으로 하여 연결된 태그를 조회할 수 있다.
+//              - nextElementSibling, perviousElementSibling
+//              - parentNode, children            
+                var span = this.nextElementSibling.children[0];
+                span.textContent = count;
+            });
+        });
+
+    </script>
+
+</head>
+<body> 
+    <div class="container-600">
+        <div class="row">
+            <h1>자기소개서</h1>
+        </div>
+
+        <div class="row">
+            <h2>(Q) 성장 배경에 대해서 설명해주세요 (최대 1000자 이내)</h2>
+        </div>
+        <div class="row right">
+            <textarea class="form-input w-100 text-zone"></textarea>
+            <div>
+             <span>0</span>/1000
+            </div>
+        </div>
+
+        <div class="row">
+            <h2>(Q) 성장 배경에 대해서 설명해주세요 (최대 1000자 이내)</h2>
+        </div>
+        <div class="row right">
+            <textarea class="form-input w-100 text-zone"></textarea>
+            <div>
+             <span>0</span>/1000
+            </div>
+        </div>
+
+        <div class="row">
+            <h2>(Q) 성장 배경에 대해서 설명해주세요 (최대 1000자 이내)</h2>
+        </div>
+        <div class="row right">
+            <textarea class="form-input w-100 text-zone"></textarea>
+            <div>
+             <span>0</span>/1000
+            </div>
+        </div>
+
+        <div class="row">
+            <h2>(Q) 성장 배경에 대해서 설명해주세요 (최대 1000자 이내)</h2>
+        </div>
+        <div class="row right">
+            <textarea class="form-input w-100 text-zone"></textarea>
+            <div>
+             <span>0</span>/1000
+            </div>
+        </div>
+
+        <div class="row">
+            <h2>(Q) 성장 배경에 대해서 설명해주세요 (최대 1000자 이내)</h2>
+        </div>
+        <div class="row right">
+            <textarea class="form-input w-100 text-zone"></textarea>
+            <div>
+             <span>0</span>/1000
+            </div>
+        </div>
+
+        <div class="row">
+            <button class="form-btn positive w-100">제출하기</button>
+        </div>
+    </div>
+</body>
+</html>
