@@ -32,7 +32,9 @@
             var checkboxes = document.querySelectorAll("[name=fruit] : checked");
             var total = 0;
             for(var i=0; i <checkboxes.length; i++){
-                total += parseInt(checkboxes[i].value);
+                var price = parseInt(checkboxes[i].value);
+                var qty = parseInt(checkboxes[i].parentNode.nextElementSibling.value);
+                total += price * qty;
             }
 
             var result = document.querySelector(".total-price");
