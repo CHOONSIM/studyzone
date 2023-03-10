@@ -23,10 +23,10 @@ window.addEventListener("load",function(){
             }
 */
                 
-            });
             var choice = window.confirm("이동하시겠습니까?");
             if(choice == false){
-                evt.preventDefault();
+            evt.preventDefault();
             }
+        });
     }
 });
