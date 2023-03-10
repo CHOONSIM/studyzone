@@ -30,10 +30,9 @@
 	
 	function formCheck(){
 		var checkboxes = document.querySelector("input[type=checkbox][name=boardNo]:checked");
-		if(checkboxes.length == 0)
+		if(checkboxes.length == 0) return false;
 			return confirm("정말 삭제하시겠습니까?");
 		}
-	}
 	
 </script>
 </c:if>
@@ -44,12 +43,12 @@
     <div class="row center">
         남을 비방하는 경우 예고 없이 삭제될 수 있습니다
     </div>
-    
+    <c:if test="${sessionScope.memberLevel == '관리자'}">
     <form action="delteAll" method="post" onsubmit="return formCheck();">
-
+	</c:if>
     <div class="row right">
     <c:if test="${sessionScope.memberLevel == '관리자' }">
-    	<button type="submit" class="form-btn negative">삭세</button>
+    	<button type="submit" class="form-btn negative">삭제</button>
     </c:if>
         <a href="write" class="form-btn positive">글쓰기</a>
     </div>
@@ -103,6 +102,7 @@
 				<!-- 검색 또는 목록 결과를 출력 -->
 				<c:forEach var="boardDto" items="${list}">
 				<tr>
+				
 				<c:if test="${sessionScope.memberLevel == '관리자' }">
 				<!-- 개별선택 체크 박스를 배치 -->
 				<td>
@@ -110,6 +110,7 @@
 							onchange="checkUnit();">
 				</td>
 				</c:if>
+				
 					<td>${boardDto.boardNo}</td>
 					<td class="left">
 						<!-- boardDepth만큼 띄어쓰기를 실시 -->
@@ -152,7 +153,9 @@
     
         <a href="write" class="form-btn positive">글쓰기</a>
     </div>
+    <c:if test="${sessionScope.memberLevel == '관리자'}">
     </form>
+    </c:if>
     
     <div class="row pagination">
     
