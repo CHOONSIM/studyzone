@@ -13,7 +13,7 @@ window.addEventListener("load",function(){
         confirmLinkList[i].addEventListener("click",function(evt){
 
 //                  안내메시지 설정
-            var text = this.dataset.msg || "이동하시겠습니까?"
+            var text = this.dataset.msg || "이동하시겠습니까??"
 /*                  var text;
             if(!thi.dataset.msg){
                 text="이동하시겠습니까?"
@@ -23,7 +23,7 @@ window.addEventListener("load",function(){
             }
 */
                 
-            var choice = window.confirm("이동하시겠습니까?");
+            var choice = window.confirm("이동하시겠습니까??");
             if(choice == false){
             evt.preventDefault();
             }
