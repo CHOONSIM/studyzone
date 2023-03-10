@@ -728,34 +728,34 @@
 
 
 
-        .valid-message {
+        .valid-msg {
             color: forestgreen;
             display: none;
         }
-        .invalid-message,
-        .invalid-message2,
-        .invalid-message3 {
+        .invalid-msg,
+        .invalid-msg2,
+        .invalid-msg3 {
             color: red;
             display: none;
         }
         /* 
             입력창이 성공상태(.valid)일 경우 
-            뒤에 있는 성공메세지(.valid-message)를 표시 
+            뒤에 있는 성공메세지(.valid-msg)를 표시 
         */
-        .valid ~ .valid-message {
+        .valid ~ .valid-msg {
             display: block;
         }
         /* 
             입력창이 실패상태(.invalid)일 경우 
-            뒤에 있는 실패메세지(.invalid-message)를 표시 
+            뒤에 있는 실패메세지(.invalid-msg)를 표시 
         */
-        .invalid ~ .invalid-message {
+        .invalid ~ .invalid-msg {
             display: block;
         }
-        .invalid2 ~ .invalid-message2 {
+        .invalid2 ~ .invalid-msg2 {
             display: block;
         }
-        .invalid3 ~ .invalid-message3 {
+        .invalid3 ~ .invalid-msg3 {
             display: block;
         }
 
