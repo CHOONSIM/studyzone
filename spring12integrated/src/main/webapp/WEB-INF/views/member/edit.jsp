@@ -3,6 +3,10 @@
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
     
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+    <!-- 다음 우편 API 사용을 위한 CDN -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/CHOONSIM/find-address@latest/find-address.min.js"></script>
+<!--  <script src="/static/js/find-address.min.js"></script> -->
     
 <h1>개인정보 변경</h1>
 
@@ -48,6 +52,7 @@
 			<th rowspan="3">주소</th>
 			<td>
 			<input type="text" name="memberPost" value="${memberDto.memberPost }" placeholder="우편번호">
+			<button type="button" class="form-btn neutral find-address-btn">우편번호 찾기</button>
 			</td>
 		</tr>
 		<tr>
