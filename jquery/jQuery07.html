@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+  
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+
+    <style>
+        .contents ul{
+            padding-left: 1em;
+        }
+    </style>
+
+    <!--jquery cdn-->
+    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+            // 메뉴 아이템의 자식 메뉴 숨기기
+            $('li > ul').hide();
+            
+            // 메뉴 아이템 클릭 시 자식 메뉴 토글
+            $('.contents').find("li").click(function(event) {
+                // 이벤트의 기본 동작(링크 이동 등)을 막음
+                event.stopPropagation();
+                event.preventDefault();
+
+                // 클릭한 메뉴 아이템의 자식 메뉴를 토글
+                $(this).children('ul').toggle();
+            });
+
+            // 부모 메뉴 아이템 클릭 시 자식 메뉴가 열려 있으면 닫기
+            $('li > ul').click(function(event) {
+                event.stopPropagation();
+            });
+            //$('li').click(function() {
+                // 다른 메뉴 아이템 클릭 시 열려 있는 자식 메뉴 닫기
+            //    $(this).siblings().children('ul').hide();
+            //});
+
+            // 문서를 클릭하면 모든 자식 메뉴 닫기
+            $(document).click(function() {
+                $('li > ul').hide();
+            });
+        });
+
+    </script>
+
+</head>
+<body> 
+    <div class="container-600">
+        <div class="row center">
+            <h1>자바목차</h1>
+        </div>
+        <div class="row">
+            <ul class="contents">
+                <li>기본 준비
+                    <ul>
+                        <li>언어의 종류</li>
+                        <li>개발 환경 구축
+                            <ul>
+                                <li>JDK설치</li>
+                                <li>이클립스 설치</li>
+                            </ul>
+                        </li>
+                        <li>기초 프로그램 구현</li>
+                      </ul>
+                </li>
+                <li>데이터
+                  <ul>
+                    <li>자료형</li>
+                    <li>변수
+                        <ul>
+                            <li>정수</li>
+                            <li>실수</li>
+                            <li>논리</li>
+                        </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>입출력
+                    <ul>
+                        <li>출력</li>
+                        <li>입력</li>
+                    </ul>
+                </li>
+              </ul>
+        </div>
+ 
+    </div>
+</body>
+</html>
