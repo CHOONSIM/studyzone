@@ -25,16 +25,48 @@
             // eq(index)는 특정 위치의 객체만 추출하는 명령
             $(".form-btn").eq(0).click(function(){
                 //여기서 this는 버튼
-                $(".target").addClass("dummy");
+                // document.querySelector(".target").classList.add("dummy");
+                $(".target").addClass("dummy dummy2 dummy3");
             });
 
-            $(".form-btn").eq(1).click(function(){});
-            $(".form-btn").eq(2).click(function(){});
-            $(".form-btn").eq(3).click(function(){});
+            $(".form-btn").eq(1).click(function(){
+                // document.querySelector(".target").classList.remove("dummy");
+                // document.querySelector(".target").classList.remove("dummy", "dummy2", "dummy3");
+                $(".target").removeClass("dummy dummy2 dummy3");
+            });
+
+            $(".form-btn").eq(2).click(function(){
+                //document.querySelector(".target").classList.contains("dummy");
+                var isContain = $(".target").hasClass("dummy");
+                console.log(isContain);
+            });
+
+            $(".form-btn").eq(3).click(function(){
+                $(".target").toggleClass("dummy");
+            });
+
+            //표시
+            $(".form-btn").eq(4).click(function(){
+                //$(".target2").show();
+                //$(".target2").slideDown();
+                $(".target2").fadeIn();
+            });
+
+            //숨김
+            $(".form-btn").eq(5).click(function(){
+                //$(".target2").hide();
+                //$(".target2").slideUp();
+                $(".target2").fadeOut();
+            });
+
+            //토글
+            $(".form-btn").eq(6).click(function(){
+                //$(".target2").toggle();
+                //$(".target2").slideToggle();
+                $(".target2").fadeToggle();
+            });
         });
-
     </script>
-
 </head>
 <body> 
     <div class="container-600">
@@ -47,10 +79,25 @@
             <button class="form-btn neutral">검사</button>
             <button class="form-btn neutral">토글</button>
         </div>
-
+     
         <div class="row">
             <h2 class="target">hello jQuery!</h2>
         </div>
+        
+        <div class="row center">
+            <h1>표시 제어</h1>
+        </div>
+
+        <div class="row">
+            <button class="form-btn neutral">표시</button>
+            <button class="form-btn neutral">숨김</button>
+            <button class="form-btn neutral">토글</button>
+        </div>
+
+        <div class="row">
+            <h2 class="target2">hello jQuery!</h2>
+        </div>
+
     </div>
 </body>
 </html>
