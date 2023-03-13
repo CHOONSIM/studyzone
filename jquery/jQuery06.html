@@ -11,12 +11,26 @@
     <link rel="stylesheet" type="text/css" href="css/commons.css">
     <link rel="stylesheet" type="text/css" href="css/layout.css">
     <link rel="stylesheet" type="text/css" href="css/test.css">
+    <style>
+        .dummy{
+            color: red;
+            background-color: yellow;
+        }
+    </style>
     
     <!--jquery cdn-->
     <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script type="text/javascript">
         $(function(){
+            // eq(index)는 특정 위치의 객체만 추출하는 명령
+            $(".form-btn").eq(0).click(function(){
+                //여기서 this는 버튼
+                $(".target").addClass("dummy");
+            });
 
+            $(".form-btn").eq(1).click(function(){});
+            $(".form-btn").eq(2).click(function(){});
+            $(".form-btn").eq(3).click(function(){});
         });
 
     </script>
