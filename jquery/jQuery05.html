@@ -30,7 +30,7 @@
             });
 
             $("#memberPwCheck").on("input",function(){
-                var password = $("[name=memberInput][type=password]").val();
+                var password = $("[name='memberInput'][type='password']").val();
                 var passwordCheck = $(this).val();
 
                 if(password && passwordCheck && password === passwordCheck){
