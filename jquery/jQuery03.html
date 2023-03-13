@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+  
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    
+    <!--jquery cdn-->
+    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            // textarea.form-input에 입력이벤트(input)이 발생하면..
+/*             document.querySelector("textarea.form-input").addEventListener("input",function(){
+                // this == 입력이 발생한 창
+                // console.log(this.value);
+                 var len = this.value.length;
+                // document.querySelector("span").textContent=len;      // 위험
+                 this.nextElementSibling.children[0].textContent = len;   // 추천
+            }); */
+
+            $("textarea.form-input").on("input",function(){
+                // this == 입력이 발생한 창
+                // console.log($(this).val());
+                var len = $(this).val().length;
+                // $("span").text(len);
+                $(this).next().children("span").text(len);
+            });
+        });
+
+    </script>
+
+</head>
+<body> 
+    <div class="container-600">
+        <div class="row center">
+            <h1>자기 소개서</h1>
+        </div>
+
+        <div class="row">
+            <h2>Q) 성장 배경에 대해서 설명(최대 1000자 이내)</h2>
+        </div>
+        <div class="row right">
+            <textarea class="form-input w-100"></textarea>
+            <div>
+                <span>0</span>/1000
+            </div>
+        </div>
+
+        <div class="row">
+            <h2>Q) 성장 배경에 대해서 설명(최대 1000자 이내)</h2>
+        </div>
+        <div class="row right">
+            <textarea class="form-input w-100"></textarea>
+            <div>
+                <span>0</span>/1000
+            </div>
+        </div>
+
+        <div class="row">
+            <h2>Q) 성장 배경에 대해서 설명(최대 1000자 이내)</h2>
+        </div>
+        <div class="row right">
+            <textarea class="form-input w-100"></textarea>
+            <div>
+                <span>0</span>/1000
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
