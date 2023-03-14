@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery SPA(Single Page Application)</title>
+  
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    
+    <!--jquery cdn-->
+    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            // 준비
+            // 1. 첫 번째 이전 버튼을 제거
+            // 2. 마지막 다음 버튼을 제거
+            // 3. 첫 페이지를 제외한 나머지를 숨김
+
+            // 1.
+            $(".prev-btn").first().remove(); 
+
+            // 2.
+            $(".next-btn").last().remove();
+
+            // 3.
+            $(".page").hide().eq(0).show();
+            //$(".page").hide().first().show();
+
+            // 4. 다음 버튼을 누르면 버튼이 속한 페이지를 숨기고 다음 페이지를 표시
+            $(".next-btn").click(function(){    
+                // this == 다음 버튼
+                //$(this).parents(".page").next(".page").show();
+                //$(this).parents(".page").hide();
+                $(this).parents(".page").hide().next(".page").show();
+            }); 
+
+            $(".prev-btn").click(function(){
+                //this == 이전 버튼
+                $(this).parents(".page").hide().prev(".page").show();
+            });
+
+        });
+
+    </script>
+
+</head>
+<body> 
+    <div class="container-600">
+        <div class="row center">
+            <h1>SPA 샘플</h1>
+        </div>
+
+        <div class="row page">
+            <h2>1단계</h2>
+            <img src="https://via.placeholder.com/600x300?text=1">
+            <button class="form-btn neutral prev-btn">이전</button>
+            <button class="form-btn neutral next-btn">다음</button>
+        </div>
+
+        <div class="row page">
+            <h2>2단계</h2>
+            <img src="https://via.placeholder.com/600x300?text=2">
+            <button class="form-btn neutral prev-btn">이전</button>
+            <button class="form-btn neutral next-btn">다음</button>
+        </div>
+
+        <div class="row page">
+            <h2>3단계</h2>
+            <img src="https://via.placeholder.com/600x300?text=3">
+            <button class="form-btn neutral prev-btn">이전</button>
+            <button class="form-btn neutral next-btn">다음</button>
+        </div>
+
+        <div class="row page">
+            <h2>4단계</h2>
+            <img src="https://via.placeholder.com/600x300?text=4">
+            <button class="form-btn neutral prev-btn">이전</button>
+            <button class="form-btn neutral next-btn">다음</button>
+        </div>
+
+        <div class="row page">
+            <h2>5단계</h2>
+            <img src="https://via.placeholder.com/600x300?text=5">
+            <button class="form-btn neutral prev-btn">이전</button>
+            <button class="form-btn neutral next-btn">다음</button>
+        </div>
+        
+
+    </div>
+</body>
+</html>
