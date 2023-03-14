@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+  
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    
+    <!--jquery cdn-->
+    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            // 목표 : 등록버튼을 누르면 정보를 취합해서 템플릿에 넣고 생성 및 추가
+            $(".add-btn").click(function(){
+                //입력값 불러오고 입력창 초기화
+                var no = $("[name=pock-no]").val();
+                $("[name=pock-no]").val("");
+                var name = $("[name=pock-name]").val();
+                $("[name=pock-name]").val("");
+                var type = $("[name=pock-type]").val();
+                $("[name=pock-type]").val("");
+
+                var isValid = no.length > 0 && name.length > 0 && type.length > 0;
+
+                if(!isValid) {
+                    window.alert("정보를 모두 작성하세요.");
+                   return;
+                }
+
+                // 문자열로 된 html을 실제 HTML로 해석 변환하는 명령
+                var template = $("#pock-template").html();
+                var html =$.parseHTML(template);
+
+                $(html).find(".pock-no").text(no);
+                $(html).find(".pock-name").text(name);
+                $(html).find(".pock-type").text(type);
+                $(html).find(".del-btn").click(function(){
+                    var choice = window.confirm("정말 삭제하시겠습니까?");
+                    if(!choice) return;
+                    $(this).parent("td").parent("tr").remove();
+                });
+
+                $(".target").append(html);
+            });
+        });
+        </script>
+
+        <!-- 템플릿 생성-->
+    <script type="text/template" id="pock-template">
+        <tr>
+            <td class="pock-no">1</td>
+            <td class="pock-name">테스트</td>
+            <td class="pock-type">테스트</td>
+            <td>
+                <a href="#" class="link del-btn">삭제</a>
+            </td>
+          </tr>
+    </script>
+</head>
+<body>
+    <div class="container-800">
+        <div class="row center">
+            <h1>포켓몬 등록</h1>
+        </div>
+        <hr>
+         <div class="row center">
+            <input type="text" name="pock-no" class="form-input" placeholder="번호">
+            <input type="text" name="pock-name" class="form-input" placeholder="이름">
+            <input type="text" name="pock-type" class="form-input" placeholder="타입">
+            <button type="button" class="form-btn positive add-btn">등록</button>
+        </div>
+
+        <hr>
+
+        <!-- 할 일이 등록될 위치 -->
+        <div class="row center">
+            <table class="table table-border">
+                <thead>
+                  <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                    <th>속성</th>
+                    <th>관리</th>
+                  </tr>
+                </thead>
+                <tbody class="target center">
+     
+                </tbody>
+              </table>
+        </div>
+    </div>
+</body>
+</html>

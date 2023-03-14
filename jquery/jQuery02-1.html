@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    
+    <!-- jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+            //jQuery는 명령을 체인으로 사용할 수 있다(메소드 체이닝)
+            $(".size-btn-big").click(function(){
+                $(".preview").css("width", "300px")
+                                .css("height", "300px");
+            });
+            $(".size-btn-normal").click(function(){
+                $(".preview").css("width", "200px")
+                                .css("height", "200px");
+            });
+            $(".size-btn-small").click(function(){
+                $(".preview").css("width", "100px")
+                                .css("height", "100px");
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container-800">
+        <div class="row center">
+            <h1>이미지 크기 조절</h1>
+        </div>
+        <div class="row center">
+            <button type="button" class="form-btn neutral size-btn-big">크게</button>
+            <button type="button" class="form-btn neutral size-btn-normal">보통</button>
+            <button type="button" class="form-btn neutral size-btn-small">작게</button>
+        </div>
+        <div class="row center">
+            <img class="preview" src="image/lion.gif" style="width:200px; height:200px;">
+        </div>
+    </div>
+</body>
+</html>
