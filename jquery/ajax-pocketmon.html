@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+  
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    
+    <!--jquery cdn-->
+    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            // 이 범위에서 사용할 수 있는 변수를 생성해서 번호 중복 검사 결과를 저장
+            var isValid = false;
+
+            loadList();
+            function loadList(){
+                $.ajax({
+                    url:"http://localhost:8080/rest/pocketmon/",
+                    success:function(response){
+                        $(".target").empty();
+                        //console.table(response);
+                        for(var i=0; i < response.length;i++){
+                            var template=$("#pocketmon-template").html();
+                            var html=$.parseHTML(template);
+                            
+                            $(html).find(".no").text(response[i].no);
+                            $(html).find(".name").text(response[i].name);
+                            $(html).find(".type").text(response[i].type);
+                            
+                            $(".target").append(html);
+                        }
+                    }
+                });
+            }                
+            
+            // 번호 중복 검사
+            // - 번호 입력창에 blur이벤트가 발생하면
+            // - 서버의 단일조희 페이지로 번호와 함께 요청을 전송
+            // - 서버에서 조회한 결과를 반환
+            // - 결과에 따라 메세지를 작성
+            $("[name=no]").blur(function(){
+                // this == 입력창
+                var no = $(this).val();
+                $.ajax({
+                    url:"http://localhost:8080/rest/pocketmon/"+no,
+                    method:"get",
+                    success:function(response){
+                        // this !== 입력창
+                        //console.log(response);
+                        //response가 "NNNNN"이면 사용 불가 , "NNNNY"면 사용 가능
+                        if(response == "NNNNY"){
+                            // 외부에 변수 등록하여 true/false 논리객체 저장
+                            isValid = true;
+
+                            $("[name=no]").next("span").text("사용가능").css("color","blue");
+                        }
+                        else{
+                            // 외부에 변수 등록하여 true/false 논리객체 저장
+                            isValid = false;
+
+                            $("[name=no]").next("span").text("사용불가").css("color","red");
+                        }
+                    }
+                });
+            });
+            
+            // 등록 버튼을 누르면 isValid의 상태를 보고 등록 처리/차단
+            $(".add-btn").click(function(){
+                console.table(isValid);
+            });
+        });
+    </script>
+
+    <script type="text/template" id="pocketmon-template">
+        <tr class="pocketmon">
+            <td class="no"></td>
+            <td class="name"></td>
+            <td class="type"></td>
+            <td>
+                <a href="#" class="link edit-btn">수정</a>
+                <a href="#" class="link delete-btn">삭제</a>
+            </td>
+        </tr>
+    </script>
+
+</head>
+<body> 
+    <div class="container-600">
+        <div class="row center">
+            <h1>포켓몬스터</h1>
+        </div>
+
+        <!-- 2단으로 분리-->
+        <div class="float-box">
+            <div class="float-left w-40">
+                <div class="row">
+                    <input type="text" name="no" placeholder="번호" class="form-input w-100">
+                    <span></span>
+                </div>
+                <div class="row">
+                    <input type="text" name="name" placeholder="이름" class="form-input w-100">
+                </div>
+                <div class="row">
+                    <input type="text" name="type" placeholder="타입" class="form-input w-100">
+                </div>
+                <div class="row">
+                    <button class="form-btn w-100 positive add-btn">등록</button>
+                </div>
+            </div>
+            
+            <div class="float-right w-60 p-10">
+            <div class="row">
+                <table class="table table-border">
+                    <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>이름</th>
+                            <th>속성</th>
+                            <th>관리</th>
+                        </tr>
+                    </thead>
+                    <tbody class="center target">
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
