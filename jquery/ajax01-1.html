@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+  
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    
+    <!--jquery cdn-->
+    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            // 목표 : 버튼을 누르면 비동기 통신으로 다른 페이지를 불러온다
+            $("button").click(function(){
+                $.ajax({
+                    // 객체
+                    url : "ajax01.json",  // 대상의 주소
+                    success: function(response){    // 성공시 (response는 결과물)
+                        //화면 청소
+                        $(".target").empty();
+
+                        //response의 데이터와 HTML 템플릿을 합쳐서 출력    
+                        for(var i=0; i < response.length; i++){
+                            var template=$("#stu-template").html();
+                            var html=$.parseHTML(template);
+                            $(html).find(".name").text(response[i].name);
+                            $(html).find(".score").text(response[i].score);
+                            $(".target").append(html);
+                        }
+                    }
+                });
+            });
+        });
+
+    </script>
+
+    <script type="text/template" id="stu-template">   <!-- 위에 response와 템플릿 결합-->
+        <div>
+            <span class="name">이름</span>
+            <span class="score">점수</span>
+        </div>
+    </script>
+
+</head>
+<body> 
+    <div class="container-600">
+        <div class="row center">
+            <h1>비동기 통신 예제</h1>
+        </div>
+
+        <div class="row">
+            <button class="form-btn w-100 positive">불러오기</button>
+        </div>
+
+        <div class="row target">
+
+        </div>
+
+    </div>
+</body>
+</html>
