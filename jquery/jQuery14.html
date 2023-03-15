@@ -23,7 +23,7 @@
             $('.page:nth-child(odd)').show(); // 1, 3, 5번 페이지 보이기
 
             $(".modify-btn").click(function(){    
-                modifiedText = $(this).prev("textarea").val();
+                var modifiedText = $(this).prev("textarea").val();
                 $(this).parents(".page").hide().next(".page").show();
             }); 
 
