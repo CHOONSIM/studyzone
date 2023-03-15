@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,8 +28,23 @@ public class PocketmonRestController {
 		@Autowired
 		private PocketmonDao pocketmonDao;
 		
-		@GetMapping("/list")
+		@GetMapping("/")
 		public List<PocketmonDto> list() {
 			return pocketmonDao.selectList();		
 	}
+		@GetMapping("/{no}")
+		public String find(@PathVariable int no) {
+			PocketmonDto dto = pocketmonDao.selectOne(no);
+			if(dto==null) {	// 없다 -> 사용 가능
+				return"NNNNY";
+			}
+			else {		// 있다 -> 사용 불가
+				return"NNNNN";
+			}
+		}
+		
+		@PostMapping("/")		// 클라이언트에 넘겨줄 정보가 없으므로 반환형 void
+		public void insert(@ModelAttribute PocketmonDto pocketmonDto) {
+			pocketmonDao.insert(pocketmonDto);
+		}
 }
