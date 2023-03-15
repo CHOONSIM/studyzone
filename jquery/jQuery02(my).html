@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+  
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    
+    <!--jquery cdn-->
+    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var buttons=$(".size-btn");
+
+            buttons.on("click", function() {
+                var target = $("#target");
+                
+                target.css({
+                    "height": $(this).data("height"),
+                    "width": $(this).data("width")
+                });
+            });
+        });
+
+
+    </script>
+
+</head>
+<body> 
+    <div class="container-600">
+        <div class="row center">
+            <h1>jQuery 이미지 크기 조절</h1>
+        </div>
+        <div class="row center">
+            <button class="form-btn size-btn"  data-height="500px" data-width="500px">매우크게</button>
+            <button class="form-btn size-btn"  data-height="300px" data-width="300px">크게</button>
+            <button class="form-btn size-btn"  data-height="200px" data-width="200px">보통</button>
+            <button class="form-btn size-btn"  data-height="100px" data-width="100px">작게</button>
+        </div>
+        <div class="row center">
+            <img id="target" src='https://picsum.photos/200/200'/>
+        </div>
+    </div>
+</body>
+</html>

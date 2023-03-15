@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+  
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    
+    <!--jquery cdn-->
+    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript">
+        /*
+            생성할 화면이 복잡해질수록 코드만으로 생성은 어려워진다
+            미리 생성될 화면을 만들어서 보관해두고 불러오는 방식을 사용
+            (템플릿 방식)
+        */
+        $(function(){
+            $("#add-btn").click(function(){
+                //입력값 불러오고 입력창 초기화
+                var item = $("#user-input").val();
+                $("#user-input").val("");
+
+                var html = $("#todo-template").html();
+                //console.log(html);
+
+                // 문자열로 된 html을 실제 HTML로 해석 변환하는 명령
+                var parse =$.parseHTML(html);
+
+                $(parse).find(".title").text(item);
+                $(parse).find(".fa-xmark").click(function(){
+                    $(this).parent().remove();
+                });
+
+                $(".target").append(parse);
+            });
+        });
+        </script>
+
+    <!-- 템플릿 생성-->
+    <script type="text/template" id="todo-template">
+        <h2>
+            <span class="title">??</span>
+            <i class="fa-solid fa-xmark"></i>
+        </h2>
+    </script>
+
+
+</head>
+<body>
+    <div class="container-600">
+        <div class="row center">
+            <h1>오늘의 할 일</h1>
+        </div>
+        
+        <div class="row center">
+            <input type="text" id="user-input" class="form-input">
+            <button class="form-btn positive" id="add-btn">등록</button>
+        </div>
+
+        <hr>
+
+        <!-- 할 일이 등록될 위치 -->
+        <div class="row center target"></div>
+    </div>
+</body>
+</html>

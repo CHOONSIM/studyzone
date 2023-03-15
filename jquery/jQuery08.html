@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+  
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    
+    <!--jquery cdn-->
+    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            // 이벤트 없이 체크박스의 현재 상태를 읽는다
+            // - .prop()은 대상의 자바스크립트 속성(상태)을 읽는다.(실제 관리하는 값)
+            // - .attr()은 대상에 표시된 글자를 읽는다.(태그에 표시되는 값)
+            // - 태그에 존재하는 속성이면 .prop()이 좋다
+            // - 태그에 존재하지 않는(만들어진) 속성이면 .attr() 밖에 안된다(ex : data-* )
+
+            console.log($("#ck1").prop("checked"));
+            console.log($("#ck1").attr("checked"));
+            console.log("-----------------------------");
+            console.log($("#ck2").prop("checked"));
+            console.log($("#ck2").attr("checked"));
+            console.log("-----------------------------");
+            console.log($("#ck3").prop("checked"));
+            console.log($("#ck3").attr("checked"));
+
+            // #ck1에 체크 이벤트(change) 설정
+            // $("#ck1").on("change", function(){});
+            $("#ck1").change(function(){
+                var isChecked = $(this).prop("checked");
+                //var isChecked = $(this).attr("checked");
+                console.log(isChecked);
+            });
+        });
+
+    </script>
+
+</head>
+<body> 
+    <div class="container-600">
+        <div class="row center">
+            <h1>prop과 attr의 차이</h1>
+        </div>
+
+        <div class="row">
+            <input type = "checkbox" id="ck1">
+        </div>
+        <div class="row">
+            <input type = "checkbox" id="ck2"checked>
+        </div>
+        <div class="row">
+            <input type = "checkbox" id="ck3" checked="checked">
+        </div>
+
+    </div>
+</body>
+</html>

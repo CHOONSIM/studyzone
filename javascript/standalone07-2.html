@@ -5,23 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Javascript</title>
- 
+  
     <link rel="stylesheet" type="text/css" href="css/load.css">
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/commons.css">
     <link rel="stylesheet" type="text/css" href="css/layout.css">
     <link rel="stylesheet" type="text/css" href="css/test.css">
     
+    <script src="js/confirm-link.js"></script>
     <script type="text/javascript">
-
     </script>
 
 </head>
 <body> 
     <div class="container-600">
         <div class="row">
-            
+            <h1>제목</h1>
         </div>
+
+        <div class="row">
+            <a href="http://www.google.com" onclick="return false">클릭X</a>
+        </div>
+
+        <div class="row">
+            <a href="http://www.google.com" class="confirm-link">구글로 이동</a>
+        </div>
+
+        <div class="row">
+            <a href="http://www.google.com" class="confirm-link" data-msg="삭제하시겠습니까?">구글로 이동</a>
+        </div>
+
     </div>
 </body>
 </html>

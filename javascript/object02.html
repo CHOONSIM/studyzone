@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    
+    <script type="text/javascript">
+//      객체 
+//      - 정보가 모여있는 단위
+//      - 자바에서는 객체를 만들려면 클래스가 필요하다.
+//      - 자바스크립트에서는 클래스가 없어도 객체 생성이 가능하다.
+//      - 자바스크립트에서 클래스는 ES6(신버전)에서 나옴.
+
+//      ES5(구버전)에서 객체를 생성하는 방법
+//      [1] 일회용 객체 생성 - 쉽고 간편하지만 체계가 없음(자바의 Map)
+        var a = {
+             name:"TEST1",
+             score:90
+        };        
+        console.log(a);
+        console.log(a.name, a["name"]);
+        console.log(a.score, a["score"]);
+
+//      [2] 생성자 함수를 사용 - 체계적으로 객체를 생성(자바의 클래스)
+        function Student(name, score){
+            this.name = name;
+            this.score = score;
+            this.setName =function(name){
+                this.name = name;
+            }
+            this.getName = function(){
+                return this.name;
+            }
+        }
+
+        var b = new Student("TEST2", 80);
+        console.log(b);
+//      [1] 과 [2]의 차이는 데이터의 형태가 다르다는 것
+        console.log(a instanceof Student);
+        console.log(b instanceof Student);
+
+//      [Q]객체,변수에 함수를 넣을 수 있는가?
+
+//      c();        // 함수 표현식은 미리 부를 수 없다. (변수는 절차형 프로그래밍에서 먼저 올 수 없음)
+        d();
+
+        var c = function(){         // 함수 표현식(호이스팅 X, hoisting)
+            console.log("hello");
+        };
+        function d(){               // 함수 선언(호이스팅 O,hoisting)
+            console.log("HELLO");
+        };
+        c();
+        d();
+
+//      만약 객체에 변수를 만들고 함수를 넣으면?==> 멤버 메소드가 되나?
+        var stu ={
+            name : "TEST1",
+            score : 100,
+            setName : function(name){
+                this.name = name;
+            },
+            getName : function(){
+                return this.name;
+            },
+            setScore : function(score){
+                if( score < 0 || score > 0) return;
+                this.score = score;
+            },
+            getScore : function(){
+                return this.score;
+            }
+        };
+        console.log(stu.getScore());
+
+    </script>
+
+</head>
+<body> 
+    <div class="container-600">
+        <div class="row center">
+            <h1>제목</h1>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+  
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    
+    <script type="text/javascript">
+
+//      독립형 자바스크립트 템플릿
+        window.addEventListener("load",function(){
+            var buttons =document.querySelectorAll(".size-btn");
+            
+            for(var i=0; i < buttons.length; i++){
+
+                buttons[i].addEventListener("click", function(){
+                    var target = document.querySelector("#target");
+                    
+                    target.style.height = this.dataset.height;
+                    target.style.width = this.dataset.width;
+                });
+            }
+        });
+
+    </script>
+
+</head>
+<body> 
+    <div class="container-600">
+        <div class="row center">
+            <h1>이미지 크기 조절</h1>
+        </div>
+            <div class="row center">
+                <button type="button" class="form-btn size-btn" data-height="500px" data-width="500px">매우크게</button>
+                <button type="button" class="form-btn size-btn" data-height="300px" data-width="300px">크게</button>
+                <button type="button" class="form-btn size-btn" data-height="200px" data-width="200px">보통</button>
+                <button type="button" class="form-btn size-btn" data-height="100px" data-width="100px">작게</button>
+            </div>
+ 
+            <div class="row center">
+                <img id="target" src="https://via.placeholder.com/200x200?text=image"alt="image">
+            </div>
+
+    </div>
+</body>
+</html>

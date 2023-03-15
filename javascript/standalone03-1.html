@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+  
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    
+    <script type="text/javascript">
+
+//      독립형 자바스크립트 템플릿
+        window.addEventListener("load",function(){
+            var buttons = document.querySelectorAll(".color-btn");
+
+            for(var i = 0; i < buttons.length; i++){
+                buttons[i].addEventListener("click", function(){
+                    var target = document.querySelector("#target");
+                    
+                    //              this는 이벤트가 발생한 주인공 태그 객체를 의미한다
+                    //              console.log(this);
+                    
+                    target.style.color = this.dataset.color;
+                });
+            }
+        });
+
+    </script>
+
+</head>
+<body> 
+    <div class="container-600">
+        <div class="row">
+            <h1 id="target">HELLO JAVASCRIPT</h1>
+        </div>
+        <div class="row">
+            <button type="button" class="form-btn neutral color-btn" data-color="red">빨강</button>
+            <button type="button" class="form-btn neutral color-btn" data-color="blue">파랑</button>
+            <button type="button" class="form-btn neutral color-btn" data-color="yellow">노랑</button>
+            <button type="button" class="form-btn neutral color-btn" data-color="purple">보라</button>
+        </div>
+    </div>
+</body>

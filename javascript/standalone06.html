@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    <title>javascript</title>
+    
+    <script type="text/javascript">
+        // 독립형 자바스크립트 템플릿
+        window.addEventListener("load", function(){
+
+//          아이디 비밀번호 체크
+            var inputList = document.querySelectorAll("[name=memberInput]");
+
+            for(var i=0; i<inputList.length; i++) {
+                inputList[i].addEventListener("input", function() {
+                    var memberIdPw = this.value;
+                    var testRegex = new RegExp(this.dataset.regex);
+
+                    if(testRegex.test(memberIdPw)) {
+                        this.classList.remove("valid", "invalid")
+                        this.classList.add("valid")
+                    }
+                    else {
+                        this.classList.remove("valid", "invalid")
+                        this.classList.add("invalid")
+                    }
+                });
+        }
+        
+//          비밀번호 확인 체크
+            var pwCheck = document.getElementById("memberPwCheck");
+            pwCheck.addEventListener("input", function() {
+                
+           var password = document.querySelector("[name='memberInput'][type='password']").value;
+           var passwordCheck = this.value;
+
+           if (password && passwordCheck && password === passwordCheck) {
+            this.classList.remove("invalid", "invalid2");
+            this.classList.add("valid");
+           } else if (passwordCheck) {
+            this.classList.remove("valid", "invalid2");
+            this.classList.add("invalid");
+           } else {
+            this.classList.remove("valid", "invalid");
+            this.classList.add("invalid2");
+           }
+      });
+    });
+    
+    </script>
+</head>
+<body>
+    <form autocomplete="off">
+
+        <div class="container-600">
+            <div class="row center">
+            <h1>클래스를 이용한 화면 제어</h1>
+        </div>
+        
+        <div class="row">
+            <label>아이디</label>
+            <input type="text" name="memberInput" class="form-input w-100" data-regex="^[a-z][a-z0-9]{8,20}$">
+            <div class="valid-msg">멋진 아이디네요!</div>
+            <div class="invalid-msg">아이디는 8~20자의 영문 소문자와 숫자로 작성하세요.</div>
+        </div>
+        <div class="row">
+            <label>비밀번호</label>
+            <input type="password" name="memberInput" class="form-input w-100" data-regex="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[A-Za-z!@#$0-9]{8,16}$">
+            <div class="valid-msg">올바른 비밀번호 형식입니다.</div>
+            <div class="invalid-msg">8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</div>
+        </div>
+        <div class="row">
+            <label>비밀번호 확인</label>
+            <input type="password" id="memberPwCheck" class="form-input w-100">
+            <div class="valid-msg">비밀번호가 일치합니다.</div>
+            <div class="invalid-msg">비밀번호가 일치하지 않습니다.</div>
+            <div class="invalid-msg2">비밀번호를 입력하세요.</div>
+        </div>
+    </div>
+</form>
+</body>
+</html>
