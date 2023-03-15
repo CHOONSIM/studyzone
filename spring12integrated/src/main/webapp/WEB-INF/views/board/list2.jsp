@@ -30,10 +30,9 @@
 	
 	function formCheck(){
 		var checkboxes = document.querySelector("input[type=checkbox][name=boardNo]:checked");
-		if(checkboxes.length == 0)
+		if(checkboxes.length == 0) return false;
 			return confirm("정말 삭제하시겠습니까?");
 		}
-	}
 	
 </script>
 </c:if>
@@ -45,6 +44,7 @@
         남을 비방하는 경우 예고 없이 삭제될 수 있습니다
     </div>
     
+    <c:if test="${sessionScope.memberLevel == '관리자' }">
     <form action="delteAll" method="post" onsubmit="return formCheck();">
 
     <div class="row right">
@@ -77,6 +77,9 @@
             	<!-- 공지사항을 출력 -->
 				<c:forEach var="boardDto" items="${noticeList}">
 				<tr>
+				<c:if test="${sessionScope.memberLevel == '관리자'}">
+				<td></td>
+				</c:if>
 					<td>${boardDto.boardNo}</td>
 					<td class="left">
 						<!-- 제목을 누르면 상세로 이동 -->
@@ -110,6 +113,7 @@
 							onchange="checkUnit();">
 				</td>
 				</c:if>
+				
 					<td>${boardDto.boardNo}</td>
 					<td class="left">
 						<!-- boardDepth만큼 띄어쓰기를 실시 -->
@@ -152,7 +156,10 @@
     
         <a href="write" class="form-btn positive">글쓰기</a>
     </div>
+    
+
     </form>
+    </c:if>
     
     <div class="row pagination">
     
@@ -253,6 +260,7 @@
 			
 			<button type="submit" class="form-btn neutral">검색</button>
 		</form>
+		
     </div>
 </div>
 
