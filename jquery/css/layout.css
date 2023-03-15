@@ -38,7 +38,7 @@
     display:flex와 display:inline-flex의 차이
     - 내부 항목에는 차이가 없음
     - 해당 영역이 display:block이냐 display:inline이냐의 차이가 있음
-*/
+*/ 
 .flex-box {
     display: flex;
 }
