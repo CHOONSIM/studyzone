@@ -68,5 +68,13 @@ public class ReplyDao {
 		Object[]param = {replyNo};
 		jdbcTemplate.update(sql, param);
 	}
+
+
+	public ReplyDto selectOne(int replyNo) {
+		String sql = "select*from reply where reply_no=?";
+		Object[] param= {replyNo};
+		List<ReplyDto>list=jdbcTemplate.query(sql, mapper, param);
+		return list.isEmpty() ? null : list.get(0);
+	}
 	
 }

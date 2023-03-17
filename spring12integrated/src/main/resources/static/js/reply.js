@@ -58,7 +58,9 @@ $(function(){
 					// 내가 쓴 댓글에는 수정/삭제 버튼을 추가 표시
 					if(memberId == response[i].replyWriter){
 						var editButton= $("<i>").addClass("fa-solid fa-edit ms-20")
-																.attr("data-reply-no", response[i].replyNo);
+																.attr("data-reply-no", response[i].replyNo)
+																.attr("data-reply-content", response[i].replyContent)
+																	.click(editReply);
 																
 						var deleteButton= $("<i>").addClass("fa-solid fa-trash ms-10")
 																.attr("data-reply-no", response[i].replyNo)
@@ -70,8 +72,8 @@ $(function(){
 					$(".reply-list").append(html);		//목록 영역에 추가
 				}
 			},
-			error:function(){
-				alert("통신 오류 발생");
+				error:function(){
+					alert("통신 오류 발생");
 			}
 		});
 	};
@@ -89,9 +91,52 @@ $(function(){
 				loadList();
 			},
 			error:function(){
-				alert("통신 오류 발생 \n 잠시 후 다시 실행하세요".)
+				alert("통신 오류 발생 \n 잠시 후 다시 실행하세요.");
 			}
-			
 		})
 	}
+		function editReply(){
+			// this == 수정버튼(data-reply-no라는 이름으로 댓글번호가 존재)
+			// - data-reply-no라는 이름으로 댓글 번호가 존재
+			// - data-reply-content라는 이름으로 댓글 내용이 존재
+			var replyNo=$(this).data("reply-no");
+			var replyContent = $(this).data("reply-content");
+			
+			// 계획
+			// - 입력창과 등록/취소버튼을 생성
+			// - 등록버튼을 누르면 비동기통신으로 댓글을 수정 후 목록 갱신
+			// - 취소버튼을 누르면 생성한 태그를 삭제
+			var textarea=$("<textarea>").addClass("form-input w-100")
+													.attr("placeholder","변경내용작성").val(replyContent);
+			var confirmButton=$("<button>").addClass("form-btn positive ms-10")
+															.text("수정")
+															.click(function(){
+																// 번호와 내용을 비동기 전송 후 목록 갱신
+																$.ajax({
+																	url:"/rest/reply/",
+																	method:"patch",
+																	data:{
+																		replyNo:replyNo,
+																		replyContent:textarea.val()	
+																	},
+																	success:function(response){
+																		loadList();
+																	},
+																	error:function(){
+																		alert("통신 오류 발생 \n 잠시 후에 다시 시도하세요.");
+																	},
+																});
+															});
+			var cancleButton=$("<button>").addClass("form-btn neutral")
+															.text("취소")
+															.click(function(){
+																$(this).parents(".reply-item").prev(".reply-item").show();
+																$(this).parents(".reply-item").remove()
+															});
+			var div=$("<div>").addClass("reply-item right");
+			
+			div.append(textarea).append(cancleButton).append(confirmButton);
+			
+			$(this).parents(".reply-item").hide().after(div);
+		}
 });
