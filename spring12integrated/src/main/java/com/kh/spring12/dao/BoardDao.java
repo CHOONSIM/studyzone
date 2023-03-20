@@ -208,4 +208,16 @@ public boolean updateReadcount(int boardNo) {
 			return jdbcTemplate.query(sql, mapper, param);
 		}
 	}
+	
+	
+	// 댓글 개수 갱신기능
+	public void updateReplycount(int boardNo) {
+		String sql = "update board"
+						+ "set board_reply=("
+							+ "select count(*) from reply where reply_origin=?"
+						+ ")"
+						+ "where board_no=?";
+		Object[] param= {boardNo, boardNo};
+		jdbcTemplate.update(sql, param);
+	}
 }
