@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+  
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    <style>
+        .map {
+            width: 100%;
+            min-height: 300px; /*50vh*/
+
+        }
+    </style>
+    
+    <!--jquery cdn-->
+    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- kakao map cdn-->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6167bfedb6c41882510e79726e507b6a"></script>
+
+    <script type="text/javascript">
+        $(function(){
+
+            // 최초 지도생성
+            var container = document.querySelector('.map');
+            //var container =$(".map").get(0);        // 여기서 get은 자바스크립트 객체를 jquery로 뽑아옴
+		    var options = {
+			center: new kakao.maps.LatLng(37.566232, 126.977829),
+			level: 3
+		};
+
+		var map = new kakao.maps.Map(container, options);
+
+        //이동 버튼 이벤트
+        $(".move-btn").click(function(){
+            var lat = $("[name=lat]").val();
+            var lng = $("[name=lng]").val();
+            if(!lat || !lng) return;
+
+        // 이동할 위도 경도 위치를 생성합니다 
+        var moveLatLon = new kakao.maps.LatLng(lat, lng);
+    
+    // 지도 중심을 부드럽게 이동시킵니다
+    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    map.panTo(moveLatLon);            
+   
+        });
+    });
+	</script>
+</head>
+<body> 
+    <div class="container-600">
+        <div class="row center">
+            <h1>지도 예제</h1>
+        </div>
+
+        <div class="row">
+            <input type="text" class="form-input w-100" name="lat" placeholder="위도">
+        </div>
+        <div class="row">
+            <input type="text" class="form-input w-100" name="lng" placeholder="경도">
+        </div>
+
+        <div class="row">
+            <button type="button" class="form-btn positive w-100 move-btn">이동</button>
+        </div>
+
+        <div class="row">
+            <div class="map"></div>
+        </div>
+    </div>
+</body>
+</html>
