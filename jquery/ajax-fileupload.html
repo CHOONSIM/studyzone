@@ -33,14 +33,20 @@
                 var fd = new FormData();    //Java -> Map fd = new Map();
                 fd.append("attach",this.files[0]);  //fd.put(k,v);
                 $.ajax({
-                    url:"http://localhost:8080/upload3",
+                    url:"http://localhost:8080/rest/file/upload",
                     method:"post",
                     data:fd,
                     processData:false,
                     contentType:false,
                     success:function(response){
-                        console.log(response);
+                        //console.log(response);
                         // 이미지 태그를 만들어서 업로드파일을 미리보기 하도록 처리
+                        // .prop  .attribute 둘다 가능
+                        var img = $("<img>").prop("src","http://localhost:8080/rest/file/download?attachmentNo="+response.attachmentNo)
+                                                    .prop("width",200)
+                                                    .prop("height",200);
+                        //$(".target").append(img);   //계속 추가(게시판 이미지추가)
+                        $(".target").html(img);     //덮어쓰기(회원이미지 교체, 이전이미지 지우는 코드 추가필요)
                     },
                     error:function(){
                         console.error("오류발생");
@@ -62,8 +68,8 @@
             <input type="file" name=attach class="form-input w-100">
         </div>
 
-        <div class="row">
-            <img src="http://localhost:8080/download?attachmentNo=43" width="200" height="200">
+        <div class="row target">
+
         </div>
  
     </div>
