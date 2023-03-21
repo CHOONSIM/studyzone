@@ -17,6 +17,8 @@
     <style>
       
     </style>
+     <!-- jquery cdn -->
+    	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
     <!-- 홈페이지를 만들 때 시맨틱(sementic tag) 를 사용하여 의미있게 구현 -->
