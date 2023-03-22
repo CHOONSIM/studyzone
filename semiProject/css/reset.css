@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+     /* 
+            리셋은 완전히 태그를 개조하는 것을 의미
+            최소한 margin 만큼은 제거하는 것을 목표로 설정
+    */ 
+    html, body, div, span {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-family: inherit;
+        vertical-align: baseline;
+    }
+    /* HTML5 display-role reset for older browsers */
+    article, aside, details, figcaption, figure, 
+    footer, header, hgroup, menu, nav, section {
+        display: block;
+    }
+    body {
+        line-height: 1.4;
+    }
+    /* 폭 설정 기준 및 글꼴 변경*/
+    * {
+        box-sizing: border-box;
+    }
+
+    /* 웹폰트 설정 */
+    html{
+        font-family: 'Noto Sans KR', sans-serif;
+    }
