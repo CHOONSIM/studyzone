@@ -156,6 +156,7 @@ public class BoardController {
 	
 	@PostMapping("/write")
 	private String write(@ModelAttribute BoardDto boardDto,
+			@RequestParam List<Integer>attachmentNo,
 			HttpSession session, RedirectAttributes attr) {
 		
 //		컨트롤러에서만 가능한 작업은 컨트롤러에서 처리
@@ -167,7 +168,7 @@ public class BoardController {
 		boardDto.setBoardWriter(memberId);
 		
 //		나머지 일반 프로그래밍 코드는 서비스를 호출하여 처리
-		int boardNo = boardService.write(boardDto);
+		int boardNo = boardService.write(boardDto, attachmentNo);
 		
 //		상세페이지로 이동
 		attr.addAttribute("boardNo", boardNo);

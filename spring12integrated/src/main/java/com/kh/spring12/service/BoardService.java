@@ -1,5 +1,7 @@
 package com.kh.spring12.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +22,7 @@ public class BoardService {
 //	게시글 등록 서비스
 //	- 컨트롤러에서 게시글 정보(회원 아이디 포함)을 받는다
 //	- 컨트롤러에서 등록된 게시글 번호를 반환한다
-	public int write(BoardDto boardDto) {
+	public int write(BoardDto boardDto, List<Integer> attachmentNo) {
 //		boardDto의 정보를 새글과 답글로 구분하여 처리 후 등록
 //		- 새글일 경우 boardParent가 null이다
 //			- 그룹번호(boardGroup)는 글번호와 동일하게 처리
@@ -52,6 +54,11 @@ public class BoardService {
 		
 //		게시글 등록
 		boardDao.insert(boardDto);
+		
+		//글에 사용된 첨부파일번호(attachmentNo)와 글번호(boardNo)를 연결
+		for(int no : attachmentNo) {
+			boardDao.connect(boardNo,no);
+		}
 	
 		return boardNo;
 	}
