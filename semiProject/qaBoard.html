@@ -12,12 +12,47 @@
     <link rel="stylesheet" type="text/css" href="css/layout.css">
     <link rel="stylesheet" type="text/css" href="css/test.css">
 
-    <style>
-        
-    </style>
+    <!--jquery cdn-->
+    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            loadList();
+            function loadList(){
+
+                $.ajax({
+                    url:"",
+                    success:function(response){
+                        $(".target").empty();
+                        for(var i=0; i < response.length; i++){
+                            var template=$("#qa-template").html();
+                            var html=$.parseHTML(template);
+                            
+                            $(html).find(".qa_no").text(response[i].no);
+                            $(html).find(".qa_head").text(response[i].head);
+                            $(html).find(".qa_title").text(response[i].title);
+                            $(html).find(".member_id").text(response[i].id);
+                            $(html).find(".qa_date").text(response[i].date);
+                            
+                            $(".target").append(html);
+                        }
+                    }
+                });
+            }
+    });
+ </script>
+    <tr class="qa">
+        <td class="no"></td>
+        <td class="head"></td>
+        <td class="title"></td>
+        <td class="id"></td>
+        <td class="date"></td>
+    </tr>
+ <script>
+
+ </script>
 </head>
 <body>
-    <div class="container-900">
+    <div class="container-1000">
         <div class="row">
             <h1>Q&A 게시판</h1>
         </div>
@@ -28,23 +63,31 @@
 
         <hr>
         <div class="row">
-            <span> 번호</span>
-            <span> 카테고리</span>
-            <span> 제목</span>
-            <span> 작성자</span>
-            <span> 작성일</span>
-            <span> 조회수</span>
+            <table class="table table-border">
+                <thead>
+                    <tr>
+                        <th class="w-10">번호</th>
+                        <th class="w-10">카테고리</th>
+                        <th class="w-40">제목</th>
+                        <th class="w-15">작성자</th>
+                        <th class="w-15">작성일</th>
+                        <th class="w-10">조회수</th>
+                    </tr>
+                </thead>
+                <tbody class="center target">
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <hr>
-        <div class="row">
-            <span class="row">12</span>
-            <span class="row">구매문의</span>
-            <span class="row">구매문의</span>
-            <span class="row">닉네임</span>
-            <span class="row">2023-03-22</span>
-            <span class="row">5</span>
-
-        </div>
+      
         <div class="row">
 
         </div>
