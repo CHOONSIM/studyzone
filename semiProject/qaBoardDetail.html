@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Javascript</title>
+    <title>Q&A 상세</title>
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="css/load.css">
@@ -22,18 +22,8 @@
             var data = [
                 {
                     no:1,
-                    title:"1번댓글제목",
-                    content:"1번댓글내용"
-                },
-                {
-                    no:2,
-                    title:"2번댓글제목",
-                    content:"2번댓글내용"
-                },
-                {
-                    no:3,
-                    title:"3번댓글제목",
-                    content:"3번댓글내용"
+                    title:"1번 질문 제목",
+                    content:"1번 질문 내용"
                 }
             ];
 
@@ -68,6 +58,15 @@
                     $(this).parents(".view-panel").hide()
                                 .prev(".edit-panel").show();
                 });
+                $(viewHtml).find(".delete-btn").click(function(){
+                    var choice = window.confirm("정말 삭제하시겠습니까?");
+                                if(choice == false) return;
+
+                                //var no = $(this).parent().prev().prev().prev().text();
+                                //var no = $(this).attr("data-no");
+                                var no = $(this).data("no");//읽기만 가능 
+                });
+
                 $(".target").append(viewHtml);
             }
 
@@ -86,14 +85,16 @@
     <script type="text/template" id="view-template">
         <div class="view-panel right" style="min-height:150px;">
             <div class="contents left">테스트1번글</div>
-            <button class="form-btn negative edit-btn">수정</button>
+            <button class="form-btn neutral edit-btn">수정</button>
+            <button class="form-btn neutral delete-btn">삭제</button>
+            <button class="form-btn neutral list-btn">목록으로</button>
         </div>
     </script>
 </head>
 <body>
-    <div class="container-600">
-        <div class="row center">
-            <h1>댓글</h1>
+    <div class="container-1000">
+        <div class="row">
+            <h1>Q&A 상세</h1>
         </div>
         
         <div class="row target">
