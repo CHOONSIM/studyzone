@@ -10,7 +10,7 @@ $(function(){
 	
 	// .reply-insert-btn을 누르면 작성한 내용을 등록하는 처리 구현
 	$(".reply-insert-btn").click(function(){
-		var content = $("[name=replyContent]").val();	// 입력값 불러오기
+		var content = $("[name=qaAnswer]").val();	// 입력값 불러오기
 		if(content.trim().length==0)return;		// 공백입력 방지, 의미없는 값 차단
 		
 		$.ajax({
@@ -18,11 +18,11 @@ $(function(){
 			method:"post",
 			data:{
 				replyOrigin: replyOrigin,
-				replyContent: content
+				qaAnswer: content
 			},
 			success:function(response){
 				loadList();		// 목록 불러오기
-				$("[nmae=replyContent]").val("");		// 입력창 청소
+				$("[nmae=qaAnswer]").val("");		// 입력창 청소
 			},
 			error:function(){
 				alert("통신 오류가 발생 잠시 후 다시 시도하세요.");
@@ -45,7 +45,7 @@ $(function(){
 					var html = $.parseHTML(template);		// 사용할 수 있게 변환하고
 					
 					$(html).find(".replyWriter").text(response[i].replyWriter);
-					$(html).find(".replyContent").text(response[i].replyContent);
+					$(html).find(".qaAnswer").text(response[i].qaAnswer);
 					$(html).find(".replyTime").text(response[i].replyTime);
 					
 					// 작성자 본인의 댓글에는 태그를 생성해서 추가 표시
@@ -59,7 +59,7 @@ $(function(){
 					if(memberId == response[i].replyWriter){
 						var editButton= $("<i>").addClass("fa-solid fa-edit ms-20")
 																.attr("data-reply-no", response[i].replyNo)
-																.attr("data-reply-content", response[i].replyContent)
+																.attr("data-reply-content", response[i].qaAnswer)
 																	.click(editReply);
 																
 						var deleteButton= $("<i>").addClass("fa-solid fa-trash ms-10")
@@ -100,14 +100,14 @@ $(function(){
 			// - data-reply-no라는 이름으로 댓글 번호가 존재
 			// - data-reply-content라는 이름으로 댓글 내용이 존재
 			var replyNo=$(this).data("reply-no");
-			var replyContent = $(this).data("reply-content");
+			var qaAnswer = $(this).data("reply-content");
 			
 			// 계획
 			// - 입력창과 등록/취소버튼을 생성
 			// - 등록버튼을 누르면 비동기통신으로 댓글을 수정 후 목록 갱신
 			// - 취소버튼을 누르면 생성한 태그를 삭제
 			var textarea=$("<textarea>").addClass("form-input w-100")
-													.attr("placeholder","변경내용작성").val(replyContent);
+													.attr("placeholder","변경내용작성").val(qaAnswer);
 			var confirmButton=$("<button>").addClass("form-btn positive ms-10")
 															.text("수정")
 															.click(function(){
@@ -117,7 +117,7 @@ $(function(){
 																	method:"patch",
 																	data:{
 																		replyNo:replyNo,
-																		replyContent:textarea.val()	
+																		qaAnswer:textarea.val()	
 																	},
 																	success:function(response){
 																		loadList();
