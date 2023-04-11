@@ -1,6 +1,7 @@
 package com.kh.springhome.repo;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,12 @@ public class PocketmonRepositoryImpl2 implements PocketmonRepository {
 	public boolean delete(int no) {
 		int result=sqlSession.delete("pocketmon.delete",no);
 		return result > 0;
+	}
+
+	@Override
+	public List<PocketmonDto> selectList(String column, String keyword) {
+		Map param = Map.of("column",column,"keyword",keyword);
+		return sqlSession.selectList("pocketmon.search",param);
 	}
 	
 }

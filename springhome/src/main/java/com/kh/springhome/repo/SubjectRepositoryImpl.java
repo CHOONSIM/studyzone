@@ -64,5 +64,13 @@ public class SubjectRepositoryImpl implements SubjectRepository{
 		Object[] param = {no};
 		return jdbcTemplate.update(sql, param) > 0;
 	}
+
+	@Override
+	public List<SubjectDto> selectList(String column, String keyword) {
+		String sql = "select*from subject where instr(#1,?) > 0";
+		sql = sql.replace("#1", column);
+		Object[] param = {keyword};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
 	
 }

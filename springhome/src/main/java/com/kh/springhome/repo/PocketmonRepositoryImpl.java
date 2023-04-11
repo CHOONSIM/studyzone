@@ -75,5 +75,14 @@ public class PocketmonRepositoryImpl implements PocketmonRepository{
 		Object[] param = {no};
 		return jdbcTemplate.update(sql, param) > 0;
 	}
+
+	@Override
+	public List<PocketmonDto> selectList(String column, String keyword) {
+		String sql = "select*from pocketmon where instr(#1,?) > 0"
+				+ "order by #1 asc";
+		sql = sql.replace("#1", column);
+		Object[] param = {keyword};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
 	
 }

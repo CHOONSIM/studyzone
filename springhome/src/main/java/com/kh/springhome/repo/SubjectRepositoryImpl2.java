@@ -1,6 +1,7 @@
 package com.kh.springhome.repo;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,12 @@ public class SubjectRepositoryImpl2 implements SubjectRepository {
 	public boolean delete(int no) {
 		int result=sqlSession.delete("subject.delete",no);
 		return result > 0;
+	}
+
+	@Override
+	public List<SubjectDto> selectList(String column, String keyword) {
+		Map param = Map.of("column",column,"keyword",keyword);
+		return sqlSession.selectList("subject.search",param);
 	}
 	
 }

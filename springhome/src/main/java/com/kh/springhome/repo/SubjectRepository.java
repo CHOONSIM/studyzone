@@ -9,6 +9,7 @@ import com.kh.springhome.dto.SubjectDto;
 public interface SubjectRepository {
 	void insert(SubjectDto Dto);
 	List<SubjectDto> selectList();
+	List<SubjectDto> selectList(String column, String keyword);
 	SubjectDto selectOne(int no);
 	boolean update(SubjectDto Dto);
 	boolean delete(int no);
