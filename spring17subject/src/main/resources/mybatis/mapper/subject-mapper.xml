@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="subject">
+    	
+    	<select id="selectList" resultType="SubjectDto">
+    		select * from subject order by no asc
+    	</select>
+    	
+    	<select id="selectOne" resultType="SubjectDto" parameterType="int">
+    		select * from subject where no=#{no}
+    	</select>
+    	
+    	<select id="listOrFind" resultType="SubjectDto">
+    		select * from subject
+    		<if test = "no != null">
+    			where no = #{no}
+    		</if>
+    	</select>
+    	
+    	<insert id="add" parameterType="SubjectDto">
+    		insert into subject(no,name,period,price,type) 
+    		values(subject_seq.nextval, #{name}, #{period}, #{price}, #{type})
+    	</insert>
+    	
+    	<update id="edit" parameterType="SubjectDto">
+   			update subject set name=#{name}, period=#{period}, price=#{price}, type=#{type} 
+    		where no=#{no}
+		</update>
+		
+		<delete id="delete" parameterType="int">
+			delete subject where no = #{no}
+		</delete>
+    	
+    </mapper>
