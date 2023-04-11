@@ -34,11 +34,5 @@
 		<delete id="delete" parameterType="int">
 			delete subject where no = #{no}
 		</delete>
-		
-		<select id="search" resultType="SubjectDto">
-			select*from subject
-			where instr(${column}, #{keyword})>0
-			order by ${column} asc
-		</select>
     	
     </mapper>

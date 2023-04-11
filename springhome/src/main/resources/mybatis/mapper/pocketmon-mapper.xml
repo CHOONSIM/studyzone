@@ -35,18 +35,4 @@
 		insert into pocketmon(no,name,type) values(#{no},#{name},#{type})
 	</insert>
 	
-	<!-- 
-	키워드 검색 
-		- column등을 설정할 때는 있는 그대로 정적(  ${ }  ) 할당한다. 
-		- keyword(데이터)를 설정할 때는 형태에 맞게 동적(  #{ }  ) 할당한다.
-			- 데이터에 정적 바인딩을 할 경우 sql인젝션 해킹을 당함
-	-->
-	<select id="search" resultType="PocketmonDto">
-		select*from pocketmon
-		where instr(${column}, #{keyword})>0
-		order by ${column} asc
-	</select>
-	
-	
-	
 </mapper>
