@@ -50,4 +50,15 @@
 		order by ${column} asc
 	</select>
 	
+	<!-- 
+		특수한 조회 구문
+		- group by, count, max, min, sum, avg 처럼 테이블이 그대로 나오지 않는 경우
+	 -->
+	 <select id="countAll" resultType="int">
+	 	select count(*)from pocketmon
+	 </select>
+	 
+	 
+	 
+	
 </mapper>
