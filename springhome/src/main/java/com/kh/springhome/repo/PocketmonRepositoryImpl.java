@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.springhome.dto.PocketmonDto;
 
-@Repository
+//@Repository
 public class PocketmonRepositoryImpl implements PocketmonRepository{
 
 	@Autowired

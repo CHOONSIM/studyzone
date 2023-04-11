@@ -26,7 +26,7 @@
         </div>
         
         <div class="row right">
-        	<a href="insertInput" class="form-btn positive">신규등록</a>
+        	<a href="insert" class="form-btn positive">신규등록</a>
         </div>
 
         <div class="row center">

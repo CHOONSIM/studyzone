@@ -18,7 +18,7 @@
         </div>
         <div class="row">
             <label>수강료</label>
-            <input type="number" name="price" required class="form-input w-100">
+            <input type="text" name="price" required class="form-input w-100">
         </div>
         <div class="row">
             <label class="form-label w-25">강의 유형</label>
@@ -31,7 +31,7 @@
         </div>
         <div class="row right">
             <a class="form-btn neutral">목록</a>
-            <button class="form-btn positive">등록</button>
+            <button class="form-btn positive" type="submit">등록</button>
         </div>
     </div>
 </form>

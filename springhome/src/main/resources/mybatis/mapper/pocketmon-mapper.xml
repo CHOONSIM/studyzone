@@ -35,6 +35,15 @@
 		insert into pocketmon(no,name,type) values(#{no},#{name},#{type})
 	</insert>
 	
+  	<update id="edit" parameterType="PocketmonDto">
+  		update pocketmon set name=#{name} 
+   		where no=#{no}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete pocketmon where no = #{no}
+	</delete>
+	
 	<select id="search" resultType="PocketmonDto">
 		select*from pocketmon
 		where instr(${column}, #{keyword})>0
