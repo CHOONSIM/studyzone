@@ -25,7 +25,7 @@ public class Test06 {
 		Map<String, Object>param = new HashMap<>();
 		param.put("column", "name");
 		param.put("keyword", "테스");
-		List<SubjectDto>list = sqlSession.selectList("subject.selectOne",param);
+		List<SubjectDto>list = sqlSession.selectList("subject.search",param);
 		for(SubjectDto dto : list) {
 			log.debug("dto = {}",dto);
 		}
