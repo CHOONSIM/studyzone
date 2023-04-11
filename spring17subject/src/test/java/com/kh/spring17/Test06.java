@@ -22,6 +22,11 @@ public class Test06 {
 	
 	@Test
 	public void Test() {
+//		목록
+//		List<SubjectDto>list = sqlSession.selectList("subject.search");
+//		List<SubjectDto>list = sqlSession.selectList("subject.search",null);
+		
+//		검색
 		Map<String, Object>param = new HashMap<>();
 		param.put("column", "name");
 		param.put("keyword", "테스");
