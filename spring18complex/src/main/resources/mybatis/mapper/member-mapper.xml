@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ↑XML헤더 반드시 첫번째 줄에 위치해야함 -->
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- dtd 선언 -->
+
+<!-- mapper에는 SQL구문을 작성하고 namespace는 구분을 위한 별칭 -->
+<mapper namespace="member">
+	
+	<!-- 
+		조건을 활용한 복합(올인원) 검색 구현 
+		- 문자열 : 유사검색을 기본원칙으로 하되 등급은 일치하는 항목을 검색
+		- 숫자 : 유사 검색은 하지 않고 일치검색 또는 구간검색 (primaryKey라면 유사검색)
+		- 날짜 : 지정한 당일 검색 혹은 구간 검색
+		
+		사용할 수 있는 태그
+		- <bind> : 구문 내에서 변수를 생성하는 역할
+		- <if> : 구문 내에서 논리에 의한 조건부 SQL을 작성하는 역할
+		- <choose> : 구문 내에서 여러가지 중 한가지를 선택하는 역할
+		- <foreach> : 제공되는 데이터 배열에 의해 반복 구문을 생성하는 역할
+	-->
+	
+	<select id="complexSearch" resultType="memberDto">
+		select*from member
+		<if test="memberId != null and !memberId.equals('')">
+		where instr(member_id, #{memberId}) > 0
+		</if>
+	</select>
+	
+</mapper>
