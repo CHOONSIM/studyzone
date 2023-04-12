@@ -39,6 +39,7 @@
 		<bind name="beginJoinDateExist" value="beginJoinDate != null and !beginJoinDate.equals('')"/>
 		<bind name="endJoinDateExist" value="endJoinDate != null and !endJoinDate.equals('')"/>
 		<bind name="searchLoginDaysExist" value="searchLoginDays != null and !searchLoginDays.equals('')"/>
+		<bind name="orderListExist" value="orderList != null and orderList.size()>0"/>
 		
 		select*from member
 		
@@ -158,13 +159,26 @@
 					and member_join <= to_date(#{endJoinDate} || '' || '23:59:59' , 'YYYY-MM-DD HH24:MI:SS')
 					]]>
 				</when>
-				
 				<otherwise></otherwise>
-				
 			</choose>
 		
-		
-			
 		</where>
+		
+		<!-- 
+			정렬
+				- 있을 수도, 없을 수도 있다
+				- 많을 수도 있다.
+				- foreach로 처리
+		 		
+		 		order by 항목1 asc/desc, 항목2 asc/desc, ....
+		 -->
+		 <if test="orderListExist">
+		 order by
+		 	<foreach collection="orderList" item="order" separator=",">
+		 		${order}
+		 	</foreach>
+		 </if>
+		 
+		 
 	</select>
 </mapper>

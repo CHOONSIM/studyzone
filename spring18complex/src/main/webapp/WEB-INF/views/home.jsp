@@ -32,6 +32,28 @@
     			</select>
     			<br><br>
     			
+    	<!-- 정렬 옵션 -->
+    	1차 정렬 : 
+    			<select name="orderList">
+    				<option value="">선택하세요</option>
+    				<option value="member_id asc">아이디순</option>
+    				<option value="member_join desc">최근 가입순</option>
+    				<option value="member_login desc">최근 로그인순</option>
+    				<option value="member_point desc">포인트 많은순</option>
+    			</select>
+    			
+    	 		<br><br>
+    	 		
+    	2차 정렬 :
+    			<select name="orderList">
+    				<option value="">선택하세요</option>
+    				<option value="member_id asc">아이디순</option>
+					<option value="member_join desc">최근 가입순</option>
+    				<option value="member_login desc">최근 로그인순</option>
+    				<option value="member_point desc">포인트 많은순</option>
+    			</select>
+    			
+    			
     	<button type="submit">검색</button>
     </form>
     

@@ -22,6 +22,8 @@ public class MemberController {
 	public String home(
 			@ModelAttribute("vo") MemberComplexSearchVO vo,
 			Model model) {
+		vo.refreshOrderList(); //비어있는 값을 제거(dao에서 처리)
+		
 		List<MemberDto> list = sqlSession.selectList("member.complexSearch", vo);
 		model.addAttribute("list",list);
 		return"/WEB-INF/views/home.jsp";
