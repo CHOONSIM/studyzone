@@ -17,7 +17,7 @@
 		
 		사용할 수 있는 태그
 		- <bind> : 구문 내에서 변수를 생성하는 역할
-		- <where> : 조건절을 자동으로 
+		- <where> : 조건절을 자동 생성하는 역할
 		- <if> : 구문 내에서 논리에 의한 조건부 SQL을 작성하는 역할
 		- <choose> : 구문 내에서 여러가지 중 한가지를 선택하는 역할
 		- <foreach> : 제공되는 데이터 배열에 의해 반복 구문을 생성하는 역할
@@ -179,6 +179,67 @@
 		 	</foreach>
 		 </if>
 		 
-		 
+	</select>
+	
+	<!-- 
+		회원별 게시글 목록 조회
+		- 회원을 먼저 조회한 뒤 게시글을 회원별로 조회(회원수+1번 조회)(N+1)
+	 -->
+	
+	<!-- 
+		resultMap은 myBatis가 자동으로 처리할 수 없는 
+		조회 결과의 할당을 수동으로 설정하는 구문
+		- <result>는 조회 결과의 특정 컬럼을 특정 필드에 연결
+			- column은 데이터베이스 항목명
+			- property는 변수명
+			- javaType은 자바 자료형
+			- jdbcType은 데이터베이스 자료형
+			
+		- <association>은 내부에 존재하는 클래스 객체를 의미
+		
+	 	- <collection>은 내부에 존재하는 컬렉션 객체를 의미(ex : List)
+	 		- property는 컬렉션의 변수명
+	 		- javaType은 컬렉션의 자료형
+	 		- ofType은 저장데이터의 자료형(제네릭 타입)
+	 		- select는 컬렉션을 채우기 위한 서브 쿼리
+	 		- column은 select를 실행할 때 전달할 항목
+	 		
+	 	-<property>는 변수 이름을 의미
+	 -->
+	<resultMap type="MemberWithBoardVO" id="mbvo">
+		<association property="memberDto">
+			<result column="member_id" property="memberId"/>
+			<result column="member_pw" property="memberPw"/>
+			<result column="member_nick" property="memberNick"/>
+			<result column="member_tel" property="memberTel"/>
+			<result column="member_email" property="memberEmail"/>
+			<result column="member_birth" property="memberBirth"/>
+			<result column="member_post" property="memberPost"/>
+			<result column="member_basic_addr" property="memberBasicAddr"/>
+			<result column="member_detail_addr" property="memberDetailAddr"/>
+			<result column="member_level" property="memberLevel"/>
+			<result column="member_point" property="memberPoint"/>
+			<result column="member_join" property="memberJoin"/>
+			<result column="member_login" property="memberLogin"/>
+		</association>
+		
+		<collection property="boardList" select="boardByMember"
+			javaType="java.util.List" ofType="BoardDto"
+			column="member_id">
+			
+		</collection>
+		
+	</resultMap>
+	<select id="memberWithBoard" resultMap="mbvo">
+		select*from member
+		<where>
+			<if test="memberId != null and !memberId.equals('')">
+				and member_id = #{memberId}
+			</if>
+		</where>
+	</select>
+	
+	<select id="boardByMember" resultType="BoardDto">
+		select*from board where board_writer = #{memberId}
 	</select>
 </mapper>
