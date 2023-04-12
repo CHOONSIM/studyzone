@@ -12,21 +12,159 @@
 	<!-- 
 		조건을 활용한 복합(올인원) 검색 구현 
 		- 문자열 : 유사검색을 기본원칙으로 하되 등급은 일치하는 항목을 검색
-		- 숫자 : 유사 검색은 하지 않고 일치검색 또는 구간검색 (primaryKey라면 유사검색)
+		- 숫자 : 유사 검색은 하지 않고 일치검색 또는 구간검색
 		- 날짜 : 지정한 당일 검색 혹은 구간 검색
 		
 		사용할 수 있는 태그
 		- <bind> : 구문 내에서 변수를 생성하는 역할
+		- <where> : 조건절을 자동으로 
 		- <if> : 구문 내에서 논리에 의한 조건부 SQL을 작성하는 역할
 		- <choose> : 구문 내에서 여러가지 중 한가지를 선택하는 역할
 		- <foreach> : 제공되는 데이터 배열에 의해 반복 구문을 생성하는 역할
+		
+		
 	-->
 	
 	<select id="complexSearch" resultType="memberDto">
+		<!-- 구문 내에서 사용할 변수 선언 -->
+		<bind name="memberIdExist" value="memberId != null and !memberId.equals('')"/>
+		<bind name="memberNickExist" value="memberNick != null and !memberNick.equals('')"/>
+		<bind name="memberLevelExist" value="memberLevelList !=null and memberLevelList.size()>0"/>
+		<bind name="memberEmailExist" value="memberEmail != null and !memberEmail.equals('')"/>
+		<bind name="memberTelExist" value="memberTel != null and !memberTel.equals('')"/>
+		<bind name="memberBirthExist" value="memberBirth != null and !memberBirth.equals('')"/>
+		<bind name="memberAddressExist" value="memberAddress != null and !memberAdress.equals('')"/>
+		<bind name="minPointExist" value="minPoint != null and !minPoint.equals('')"/>
+		<bind name="maxPointExist" value="maxPoint != null and !maxPoint.equals('')"/>
+		<bind name="beginJoinDateExist" value="beginJoinDate != null and !beginJoinDate.equals('')"/>
+		<bind name="endJoinDateExist" value="endJoinDate != null and !endJoinDate.equals('')"/>
+		<bind name="searchLoginDaysExist" value="searchLoginDays != null and !searchLoginDays.equals('')"/>
+		
 		select*from member
-		<if test="memberId != null and !memberId.equals('')">
-		where instr(member_id, #{memberId}) > 0
+		
+		<!-- 조건절 -->
+		<where>
+		
+		<!-- 아이디 : 유사-->
+			<if test="memberIdExist">
+				and instr(member_id, #{memberId}) > 0
+			</if>
+			
+		<!-- 닉네임 : 유사-->
+			<if test="memberNickExist">
+				and instr(member_nick, #{memberNick}) > 0
+			</if>
+		
+		<!-- 이메일 : 유사-->
+		<!-- 
+			(주의) XML은 태그 형식을 사용하므로 부등호 사용 불가
+			(해결) 해석을 하지 않는 영역을 생성(CDATA 영역)
+						<![CDATA[ 구문  ]]>
+		 -->
+		<if test="memberEmailExist">
+		<![CDATA[
+			and 0 < instr(member_email, #{memberEmail})
+		]]>
 		</if>
+		
+		<!-- 전화번호 : 일치-->
+		<if test="memberTelExist">
+			and member_tel=#{memberTel}
+		</if>
+		
+		<!-- 생년월이 : 시작 -->
+		<if test="memberBirthExist">
+			and member_birth like #{memberBirth} || '%'
+<!-- 			and instr(member_birth, #{memberBirth})=1  풀서치라 느림 -->
+		</if>
+		
+		<!-- 주소 : 기본주소 + 상세주소 : 유사  -->
+		<if test="memberAddressExist">
+			and(
+			instr(member_basic_addr, #{memberAddress})>0 
+			or 
+			instr(member_detail_addr, #{memberAddress}) > 0
+			)
+<!-- 			and instr(A||B, ?) > 0 성능 느림-->
+		
+		</if>
+			
+			
+		<!-- 
+		등급 
+			- 등급은 여러 개 있을 수 있으므로 in 구문으로 조회
+			- 데이터 개수만큼 in 구문을 완성하도록 foreach 사용
+		-->
+			<if test="memberLevelExist">
+				and member_level in
+				<foreach collection="memberLevelList"
+					open="(" close=")" item="memberLevel" separator=",">
+					#{memberLevel}
+				</foreach>
+			</if>
+			
+		<!-- 
+			포인트 : 구간
+				- 최소포인트(minPoint)와 최대포인트(maxPoint)를 이용하여 구간검색을 진행
+		 		- 총 3가지 경우(최소만, 최대만, 둘다) 를 처리
+		 		- choose 구문 사용
+		 -->
+		 	<choose>
+		 		<when test="maxPointExist and maxPointExist">
+		 			and member_point between #{minPoint} and #{maxPoint}
+		 		</when>
+		 		<when test="maxPointExist">
+		 			and member_point >= #{minpoint}
+		 		</when>
+		 		<when test="maxPointExist">
+		 			<![CDATA[
+		 			and member_point <= #{maxPoint}
+		 			]]>
+		 		</when>
+		 		<otherwise></otherwise>
+		 	</choose>
+		
+		<!-- 로그인 : 최근?일 검색 -->
+			<if test="searchLoginDaysExist">
+			
+		<!--  방법 1 : 날짜만 뺄셈으로 변경(시간이 유지되서 만나이처럼 됨) -->
+<!-- 				and member_login between sysdate-#{searchLoginDays} and sysdate -->
+
+		<!--  방법 2 : 날짜를 뺄셈으로 구한 뒤 시간을 자정으로 변경 -->
+					and member_login between 
+					to_date(
+						to_char(sysdate-#{searchLoginDays}, 'YYYY-MM-DD'),
+						'YYYY-MM-DD'
+					)
+					and sysdate
+			</if>
+		
+		<!-- 가입일 : 기간검색 -->
+			<choose>
+				<when test="beginJoinDateExist and endJoinDateExist">
+					and member_join between 
+						to_date(#{beginJoinDate} || '' || '00:00:00' , 'YYYY-MM-DD HH24:MI:SS')
+						and
+						to_date(#{endJoinDate} || '' || '23:59:59' , 'YYYY-MM-DD HH24:MI:SS')
+		
+				</when>
+				
+				<when test="beginJoinDateExist">
+					and member_join >= to_date(#{beginJoinDate} || '' || '00:00:00' , 'YYYY-MM-DD HH24:MI:SS')
+				</when>
+				
+				<when test="endJoinDateExist">
+					<![CDATA[
+					and member_join <= to_date(#{endJoinDate} || '' || '23:59:59' , 'YYYY-MM-DD HH24:MI:SS')
+					]]>
+				</when>
+				
+				<otherwise></otherwise>
+				
+			</choose>
+		
+		
+			
+		</where>
 	</select>
-	
 </mapper>
