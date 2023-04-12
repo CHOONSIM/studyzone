@@ -40,8 +40,8 @@ public class Test01 {
 //		param.put("memberAddress", "서울시");
 //		param.put("minPoint", "100");
 //		param.put("maxPoint", "10000");
-		param.put("beginJoinDate", "2023-02-08");
-		param.put("endJoinDate", "2023-02-09");
+//		param.put("beginJoinDate", "2023-02-08");
+//		param.put("endJoinDate", "2023-02-09");
 //		param.put("searchLoginDays", 30);
 		List<MemberDto>list=sqlSession.selectList("member.complexSearch", param);
 		log.debug("개수={}",list.size());
