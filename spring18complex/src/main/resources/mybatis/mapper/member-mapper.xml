@@ -33,7 +33,7 @@
 		<bind name="memberEmailExist" value="memberEmail != null and !memberEmail.equals('')"/>
 		<bind name="memberTelExist" value="memberTel != null and !memberTel.equals('')"/>
 		<bind name="memberBirthExist" value="memberBirth != null and !memberBirth.equals('')"/>
-		<bind name="memberAddressExist" value="memberAddress != null and !memberAdress.equals('')"/>
+		<bind name="memberAddressExist" value="memberAddress != null and !memberAddress.equals('')"/>
 		<bind name="minPointExist" value="minPoint != null and !minPoint.equals('')"/>
 		<bind name="maxPointExist" value="maxPoint != null and !maxPoint.equals('')"/>
 		<bind name="beginJoinDateExist" value="beginJoinDate != null and !beginJoinDate.equals('')"/>
