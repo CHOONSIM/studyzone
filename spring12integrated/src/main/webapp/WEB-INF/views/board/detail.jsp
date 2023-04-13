@@ -22,10 +22,10 @@
 	var boardWriter = "${boardDto.boardWriter}";
 </script>
 <script src="/static/css/reply.js/"></script>
-<script type="text/template" id="reply-tempalte">
+<script type="text/template" id="reply-template">
 	<div class="reply-item">
 		<div class="replyWriter"></div>
-		<div class="replyContent"></div>
+		<div class="qaAnswer"></div>
 		<div class="replyTime"></div>
 	</div>
 </script>
@@ -78,15 +78,15 @@
 		<div class="row">
 		<c:choose>
 			<c:when test="${sessionScope.memberId !=null })">
-				<textarea name="replyContent" class="form-input w-100"
+				<textarea name="qaAnswer" class="form-input w-100"
 					placeholder="댓글 내용을 작성하세요"></textarea>
 			</c:when>
 			<c:otherwise>
-				<textarea name="replyContent" class="form-input w-100"
+				<textarea name="qaAnswer" class="form-input w-100"
 					placeholder="로그인 후 댓글 작성이 가능합니다."></textarea>
 			</c:otherwise>
 		</c:choose>
-			<textarea name="replyContent" class="form-input w-100"></textarea>
+			<textarea name="qaAnswer" class="form-input w-100"></textarea>
 		</div>
 		<c:if test="${sessionScope.memberId !=null }">
 		<div class="row right">

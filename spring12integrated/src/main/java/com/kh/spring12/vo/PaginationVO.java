@@ -11,7 +11,7 @@ public class PaginationVO {
 	private String column = "boardTitle";
 	private String keyword = "";
 	private int page = 1;
-	private int size = 10;
+	private int size = 1;
 	private int count;
 	private int blockSize = 10;
 	

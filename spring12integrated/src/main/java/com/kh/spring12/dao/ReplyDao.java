@@ -29,7 +29,7 @@ public class ReplyDao {
 				.replyNo(rs.getInt("reply_no"))
 				.replyWriter(rs.getString("reply_writer"))
 				.replyOrigin(rs.getInt("reply_origin"))
-				.replyContent(rs.getString("reply_content"))
+				.qaAnswer(rs.getString("reply_content"))
 				.replyTime(rs.getDate("reply_time"))
 				.build();
 	};

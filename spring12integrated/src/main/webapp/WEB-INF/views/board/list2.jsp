@@ -171,7 +171,7 @@
 		
 		<!-- 이전 -->
 		<c:choose>
-			<c:when test="${vo.preview}">
+			<c:when test="${vo.prev}">
 				<a href="list?${vo.parameter}&page=${vo.prevPage}">&lt;</a>
 			</c:when>
 			<c:otherwise>
