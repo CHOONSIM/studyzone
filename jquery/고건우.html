@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 화면 구현 테스트</title>
+  
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    
+    <!--jquery cdn-->
+    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript">
+          $(function(){
+            $("#loginForm").submit(function(event) {
+                // 페이지 이동 막기
+                event.preventDefault();
+
+                // 테스트
+                var userId = $("[name=userId]").val();
+                var userPw = $("[name=userPw]").val();
+                var userIdRegex = /^[a-z][a-z0-9]{8,20}$/;
+                var userPwRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[A-Za-z!@#$0-9]{8,16}$/;
+                var isUserIdValid = userIdRegex.test(userId);
+                var isUserPwValid = userPwRegex.test(userPw);
+
+                if (!isUserIdValid) {
+                    $("[name=userId]").next().css("color","red").text("아이디를 올바로 작성하세요");
+                }
+                if (!isUserPwValid) {
+                    $("[name=userPw]").next().css("color","red").text("비밀번호를 올바로 작성하세요");
+                }
+
+                // 두개 다 일치한다면
+                if (isUserIdValid && isUserPwValid) {
+                    this.submit();
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function() {
+            // 두 개의 체크박스 중 하나만 체크되도록 처리
+            $('[name=student]').change(function() {
+                $('[name=general]').prop('checked', !$(this).is(':checked'));
+            });
+            $('[name=general]').change(function() {
+                $('[name=student]').prop('checked', !$(this).is(':checked'));
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <form autocomplete="off" id="loginForm" method="post" action="/login">
+    <div class="container-500">
+        <div class="row center">
+            <h1>로그인</h1>
+        </div>
+
+        <div class="row center mt-50 mb-50">
+            <label for="student" class="checkbox-label">
+                <input type="checkbox" name="student" id="student" class="checkbox-input" checked>
+                <span class="checkbox-custom"></span>
+                <span class="checkbox-text">수강생</span>
+            </label>
+            <label for="general" class="checkbox-label">
+                <input type="checkbox" name="general" id="general" class="checkbox-input">
+                <span class="checkbox-custom"></span>
+                <span class="checkbox-text">일반회원</span>
+            </label>
+        </div>
+
+        <div class="row center">
+            <input type="text" name="userId" id="userId" class="form-input w-100" required placeholder="아이디(*이메일 형식 입력불가)">
+            <span></span>
+        </div>
+
+        <div class="row center">
+            <input type="password" name="userPw" id="userPw" class="form-input w-100" required placeholder="비밀번호">
+            <span></span>
+        </div>
+
+        <div class="row center mt-30 mb-30">
+            <button type="submit" class="form-btn w-100 negative">로그인</button>
+        </div>
+
+        <div class="row left">
+            <label for="saveUserId" class="checkbox-label">
+                <input type="checkbox" name="saveUserId" id="saveUserId" class="checkbox-input">
+                <span class="checkbox-text">아이디 저장</span>
+            </label>
+        </div>
+
+    </div>
+    </form>
+</body>
+</html>
