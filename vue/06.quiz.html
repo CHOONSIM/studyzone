@@ -83,11 +83,11 @@
             },
             computed:{
                 memberIdValid(){
-                    var regex = /^[a-z][a-z0-9]{7,19}$/;
+                    const regex = /^[a-z][a-z0-9]{7,19}$/;
                     return regex.test(this.memberId);
                 },
                 memberPwValid(){
-                    var regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[A-Za-z0-9!@#$]{8,16}$/;
+                    const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[A-Za-z0-9!@#$]{8,16}$/;
                     return regex.test(this.memberPw);
                 },
                 memberPwCheckValid(){
