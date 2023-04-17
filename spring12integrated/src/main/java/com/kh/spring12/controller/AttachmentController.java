@@ -23,7 +23,7 @@ import com.kh.spring12.dao.AttachmentDao;
 import com.kh.spring12.dto.AttachmentDto;
 
 //첨부파일의 다운로드를 처리하는 컨트롤러
-@RestController
+@RestController		//@Controller + @ResponseBody(화면을 쓰지 않겠다)
 @RequestMapping("/attachment")
 public class AttachmentController {
 	

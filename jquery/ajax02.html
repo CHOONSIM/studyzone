@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+  
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    
+    <!--jquery cdn-->
+    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $(".load-btn").click(function(){
+                $.ajax({
+                    url:"http://localhost:8080/rest/pocketmon/list",
+                    success:function(response){
+                        $(".target").empty();
+                        //console.table(response);
+                        for(var i=0; i < response.length;i++){
+                            var template=$("#pocketmon-template").html();
+                            var html=$.parseHTML(template);
+
+                            $(html).find(".no").text(response[i].no);
+                            $(html).find(".name").text(response[i].name);
+                            $(html).find(".type").text(response[i].type);
+
+                            $(".target").append(html);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script type="text/template" id="pocketmon-template">
+        <tr class="pocketmon">
+            <td class="no"></td>
+            <td class="name"></td>
+            <td class="type"></td>
+            <td>
+                <a href="#" class="link edit-btn">수정</a>
+                <a href="#" class="link delete-btn">삭제</a>
+            </td>
+        </tr>
+    </script>
+
+</head>
+<body> 
+    <div class="container-600">
+        <div class="row center">
+            <h1>포켓몬스터</h1>
+        </div>
+        <div class="row">
+            <button class="form-btn positive load-btn">불러오기</button>
+        </div>
+        <div class="row">
+            <table class="table table-border">
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>이름</th>
+                        <th>속성</th>
+                        <th>관리</th>
+                    </tr>
+                </thead>
+                <tbody class="center target">
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

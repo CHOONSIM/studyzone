@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>VueJS</title>
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    
+</head>
+<body>
+    <!--
+        VueJS는 제어 영역을 반드시 설정해야 한다.
+    -->
+    <div id="app" class="container-800">
+
+        <div class="row center">
+            <h1>포켓몬스터 목록</h1>
+        </div>
+
+        <!--등록화면-->
+        <div class="row center">
+            <input type="text" v-model.number="no" placeholder="번호">
+            <input type="text" v-model="name" placeholder="이름">
+            <input type="text" v-model="type" placeholder="속성">
+            <button v-on:click="addItem">등록</button>
+        </div>
+
+        <!--목록화면-->
+        <!-- <div class="row" v-for="(변수,index)in 추출대상" v-bind:key="프라이머리키(불변값)"> -->
+        <div class="row" v-for="(pocketmon, index) in pocketmonList" v-bind:key="pocketmon.no">
+        
+        <!-- 단순 출력이 목표라면 사본, 변경이 목표면 원본을 사용 -->
+        <!-- 사본 출력 -->
+        <!--         
+            번호 : {{pocketmon.no}},
+            이름 : {{pocketmon.name}},
+            속성 : {{pocketmon.type}} 
+        -->
+
+        <!-- 원본 출력 -->
+            <div v-if="pocketmonList[index].edit == false">
+                번호 : {{pocketmonList[index].no}},
+                이름 : {{pocketmonList[index].name}},
+                속성 : {{pocketmonList[index].type}}
+                <i class="fa-solid fa-edit ms-20" v-on:click="changeToEdit(index)"></i>
+                <i class="fa-solid fa-trash ms-20" v-on:click="deleteItem(index)"></i>
+            </div>
+            <div v-if="pocketmonList[index].edit == true">
+                번호 : <input type="text" v-model="pocketmonList[index].no">,
+                이름 : <input type="text" v-model="pocketmonList[index].name">,
+                속성 : <input type="text" v-model="pocketmonList[index].type">
+                <i class="fa-solid fa-xmark ms-20" v-on:click="changeToDefault(index)"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <!--
+        VueJS는 Lazy Loading 방식으로 제어 영역에 대한 프로그래밍 구현 
+
+        무조건 최신버전
+        <script src="https://unpkg.com/vue@next"></script>
+    -->
+    <script src="https://unpkg.com/vue@3.2.36"></script>
+    <script>
+        Vue.createApp({
+            // 데이터 설정 영역
+            data(){
+                return{
+                    // 화면에서 사용할 데이터 선언
+                
+                    //포켓몬스터 정보 배열
+                    pocketmonList:[
+                        {no:1, name:"테스트1", type:"타입1", edit:false},
+                        {no:2, name:"테스트2", type:"타입2", edit:false},
+                        {no:3, name:"테스트3", type:"타입3", edit:false},
+                        {no:4, name:"테스트4", type:"타입4", edit:false},
+                        {no:5, name:"테스트5", type:"타입5", edit:false},
+                    ],
+                    no:"",
+                    name:"",
+                    type:"",
+                };
+            },
+             // 데이터 실시간 계산 영역
+            // - 사용하고 싶은 변수명으로 함수를 선언
+            // - 함수 내부에는 보여주고 싶은 값을 코드로 반환하도록 작성
+            // - Vue에 등록한 값에 접근할 때 반드시 this를 붙여야함
+            // - 코드가 길면 안됨(무리가 많이 감)
+            computed:{
+
+            },
+            methods:{
+                changeToEdit(index){
+                    this.pocketmonList[index].edit = true;
+                },
+                changeToDefault(index){
+                    this.pocketmonList[index].edit = false;
+                },
+                deleteItem(index){
+                    this.pocketmonList.splice(index, 1);
+                },
+                addItem(){
+                    // 유효성 검사
+                    var data ={
+                        no:this.no, name:this.name, type:this.type, edit:false,
+                    };
+                    this.pocketmonList.push(data);
+
+                    // 초기화
+                    this.no = "";
+                    this.name = "";
+                    this.type = "";
+                },
+            },
+            //뷰 인스턴스의 생성 시점에 따른 간섭처리 구현
+            // - create 시점에서는 데이터가 생성된다
+            // - mount 시점에서는 화면이 생성된다(=화면에 Vue가 부착된다.)
+
+            beforeCreate(){
+                // 생성 전에는 데이터가 없다
+                console.log("before create")
+                console.log(this.pocketmonList);
+            },
+            created(){
+                console.log("after create")
+                console.log(this.pocketmonList);
+            },
+            beforeMount(){
+                // mount 전에는 v-로 만든 화면이 존재하지 않는다.
+                // console.log(document.querySelector("#app"));
+                console.log(document.querySelectorAll(".row"));
+
+            },
+            mounted(){
+                // mount 후에는 v-로 만든 화면이 모두 존재한다
+                console.log(document.querySelectorAll(".row"));
+            },
+            beforeUpdate(){
+                // update 전에는 데이터가 바뀌기 전 상태이다
+                console.log("before update");
+                console.log(this.pocketmonList);
+                
+            },
+            updated(){
+                // update 후에는 데이터가 바뀌고 난 상태이다
+                console.log("after update");
+                console.log(this.pocketmonList);
+            },
+        }).mount("#app");
+    </script>
+
+
+
+</body>
+</html>

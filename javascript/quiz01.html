@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+ 
+    <script type="text/javascript">
+        function verifyId(){
+            var memberId = document.querySelector("[name=memberId]");
+            var spanId = document.querySelector("[name=spanId]");
+            var regexId = /^[a-z][a-z0-9]{8,20}$/;
+
+            if(regexId.test(memberId.value)){
+                spanId.style = "color: green";
+                spanId.textContent = "멋진 아이디네요!";
+            }
+            else{
+                spanId.style.color = "red";
+                spanId.textContent = "아이디는 8~20자의 영문 소문자와 숫자로 작성하세요."; 
+            }
+        } 
+        
+        function verifyPw(){
+            var memberPw = document.querySelector("[name=memberPw]");
+            var spanPw = document.querySelector("[name=spanPw]");
+            var regexPw = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[A-Za-z!@#$0-9]{8,16}$/;
+ 
+            if(regexPw.test(memberPw.value)){
+                spanPw.style = "color: green";
+                spanPw.textContent = "올바른 비밀번호 입니다."
+            }
+            else{
+                spanPw.style.color = "red";
+                spanPw.textContent = "8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container-400">
+        <div class="row">
+            <h1>23-03-06 과제</h1>
+        </div>
+        <hr><br>
+
+        <div class="row left">
+            <h3>아이디</h3>
+            <input type="text" name="memberId" class="form-input w-50" onblur="verifyId();">
+        </div>
+        <div class="row left">
+            <span name="spanId"></span>
+        </div>
+        <br>
+
+        <div class="row left">
+            <h3>비밀번호</h3>
+            <input type="password" name="memberPw" class="form-input w-50" onblur="verifyPw();">
+        </div>
+        <div class="row left">
+            <span name="spanPw"></span>
+        </div>
+
+        <button>회원가입</button>
+    </div>
+</body>
+</html>

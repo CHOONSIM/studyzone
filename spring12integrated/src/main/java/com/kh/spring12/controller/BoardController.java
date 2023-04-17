@@ -156,6 +156,7 @@ public class BoardController {
 	
 	@PostMapping("/write")
 	private String write(@ModelAttribute BoardDto boardDto,
+			@RequestParam List<Integer>attachmentNo,
 			HttpSession session, RedirectAttributes attr) {
 		
 //		컨트롤러에서만 가능한 작업은 컨트롤러에서 처리
@@ -167,7 +168,7 @@ public class BoardController {
 		boardDto.setBoardWriter(memberId);
 		
 //		나머지 일반 프로그래밍 코드는 서비스를 호출하여 처리
-		int boardNo = boardService.write(boardDto);
+		int boardNo = boardService.write(boardDto, attachmentNo);
 		
 //		상세페이지로 이동
 		attr.addAttribute("boardNo", boardNo);
@@ -204,6 +205,18 @@ public class BoardController {
 		boardDao.update(boardDto);
 		attr.addAttribute("boardNo", boardDto.getBoardNo());
 		return "redirect:detail";
+	}
+	
+//	관리자를 위한 전체 삭제 기능
+//	- boardNo=1 & boardNo=2 & boardNo=3 형태로 전송됨
+//	- List<Integer> 형태로 수신하거나 int[] 형태로 수신해야함
+//	- @RequestParam에 value를 적으면 수신이름을 별도로 지정할 수 있음
+	@PostMapping("/deleteAll")
+	public String deleteAll(@RequestParam (value="boardNo")List<Integer>list) {
+		for(int boardNo : list) {
+		boardDao.delete(boardNo);
+		}
+		return"redirect:list";
 	}
 
 }

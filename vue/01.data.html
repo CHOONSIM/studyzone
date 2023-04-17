@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>VueJS Data</title>
+</head>
+<body>
+    <!--
+        VueJS는 제어 영역을 반드시 설정해야 한다.
+    -->
+    <div id="app">
+        <!--
+            단방향 연결 : 
+                - 데이터가 변하면 자동으로 바뀌어서 출력
+                - 화면에서 값을 변화시킬 방법은 없음
+        -->
+        <h3>{{text}}</h3>
+        <h3>{{text.length}}</h3>
+        <h3>{{number}}</h3>
+        <h3>{{active}}</h3>
+        <h3>{{list}}</h3>
+        <h3>{{list[0]}}</h3>
+        <h3>{{student.name}}</h3>
+        <h3>{{student.score}}</h3>
+
+        <!--
+            양방향 연결 : 
+                - Vue의 데이터를 변화시킬 수 있는 연결
+                - v-model 속성을 사용하여 데이터를 지정
+                - 입력창에만 가능(input / select / textarea)
+                - 한글은 IME 방식이어서 바로 반영이 안됨(추가 입력 처리 필요)
+                    - v-on:input="text=$event.target.value"
+        -->
+        <br>
+        <hr>
+        <br>
+        <input type="text" v-model="text" v-on:input="text=$event.target.value">
+        <br><br>
+        <input type="range" v-model="number" min="0" max="1000">
+        <span>{{number}}</span>
+        <br><br>
+        <input type="checkbox" v-model="active">{{active}}
+        <br><br>
+
+    </div>
+
+    <!--
+        VueJS는 Lazy Loading 방식으로 제어 영역에 대한 프로그래밍 구현 
+
+        무조건 최신버전
+        <script src="https://unpkg.com/vue@next"></script>
+    -->
+    <script src="https://unpkg.com/vue@3.2.36"></script>
+    <script>
+        Vue.createApp({
+            // 데이터 설정 영역
+            data(){
+                return{
+                    // 화면에서 사용할 데이터 선언(자바스크립트 객체 형식)
+                    text:"뷰 백그라운드 데이터",
+                    number:1000,
+                    active:true,
+                    list:[30, 50, 20, 10, 40],
+                    student:{
+                        name:"테스트",
+                        score:40,
+                    },
+                };
+            },
+        }).mount("#app");
+    </script>
+
+
+
+</body>
+</html>

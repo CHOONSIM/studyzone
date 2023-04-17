@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<!-- 다음 우편 API 사용을 위한 CDN -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/CHOONSIM/find-address@latest/find-address.min.js"></script>
+<!--  <script src="/static/js/find-address.min.js"></script> -->
 
 <form action="join" method="post" enctype="multipart/form-data">
         <div class="row center">
@@ -45,6 +49,7 @@
         <div class="row">
             <label>우편번호</label>
             <input type="number" name="memberPost" class="form-input w-100" placeholder="숫자만 입력">
+            <button type="button" class="form-btn neutral find-address-btn">우편번호 찾기</button>
         </div>
 
         <div class="row">
@@ -55,7 +60,7 @@
         <div class="row">
             <label>상세주소</label>
             <input type="text" name="memberDetailAddr" class="form-input w-100" placeholder="상세주소 입력">
-
+		</div>
             <hr>
 
         <div class="row right">

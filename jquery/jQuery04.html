@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+  
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    
+    <!--jquery cdn-->
+    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript">
+
+        // value, text, html의 차이
+        $(function(){
+            // #origin의 입력 발생 시 #preview1, 2, 3에 각각 출력
+            $("#origin").on("input", function(){
+                // this == #origin
+                var input = $(this).val();
+
+                $("#preview1").val(input);   //value 설정
+                $("#preview2").text(input);     //textContent 설정
+                $("#preview3").html(input);   //innerHTML 설정
+
+            });
+        });
+ 
+    </script>
+
+</head>
+<body> 
+    <div class="container-600">
+        <div class="row center">
+            <h1>value, text, html 비교</h1>
+        </div>
+        <div class="row">
+            <input type="text" class="form-input w100" id="origin">
+        </div>
+        
+        <div class="row">
+            <h2>vlaue 설정</h2>
+        </div>
+        <div class="row">
+            <input type="text" class="form-input w100" id="preview1">
+        </div>
+
+        <div class="row">
+            <h2>text 설정</h2>
+        </div>
+        <div class="row" id="preview2"></div>
+
+        <div class="row">
+            <h2>html 설정</h2>
+        </div>
+        <div class="row" id="preview3"></div>
+    </div>
+</body>
+</html>

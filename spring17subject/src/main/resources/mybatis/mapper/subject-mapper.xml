@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="subject">
+    	
+    	<select id="selectList" resultType="SubjectDto">
+    		select * from subject order by no asc
+    	</select>
+    	
+    	<select id="selectOne" resultType="SubjectDto" parameterType="int">
+    		select * from subject where no=#{no}
+    	</select>
+    	
+    	<select id="listOrFind" resultType="SubjectDto">
+    		select * from subject
+    		<if test = "no != null">
+    			where no = #{no}
+    		</if>
+    	</select>
+    	
+    	<insert id="add" parameterType="SubjectDto">
+    		insert into subject(no,name,period,price,type) 
+    		values(subject_seq.nextval, #{name}, #{period}, #{price}, #{type})
+    	</insert>
+    	
+    	<update id="edit" parameterType="SubjectDto">
+   			update subject set name=#{name}, period=#{period}, price=#{price}, type=#{type} 
+    		where no=#{no}
+		</update>
+		
+		<delete id="delete" parameterType="int">
+			delete subject where no = #{no}
+		</delete>
+		
+		<!-- 
+			키워드 검색
+			 - myBatis에서 제공하는 조건 태그를 사용하여 원하는 상황에 맞게 처리
+			 - 조건 내에서는 전달된 데이터의 이름을 별도의 표시없이 사용
+			 - 조건 내에서는 논리 연산이 영문임(and, or)
+		 -->
+		<select id="search" resultType="SubjectDto">
+			select*from subject
+			<if test="column != null and keyword != null">
+			where instr(${column}, #{keyword})>0
+			order by ${column} asc
+			</if>
+		</select>
+    	
+    </mapper>

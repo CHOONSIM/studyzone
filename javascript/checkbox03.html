@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript 배열</title>
+
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    
+    <script type="text/javascript">
+//      자바스크립트도 여러 개의 데이터 처리를 위해 배열을 갖고 있다.
+//      - 배열 역시 자바와 유사한 형태를 띈다
+//      - 차이점은 크기가 늘어난다는 것
+
+//      [1] 크기만 정하는 방식(비추천)
+//      var a = new Array(5);       // 5칸
+
+//      [2] 데이터를 알고 있을 때의 방식(추천)
+        var b = [10, 20, 30 , 40, 50];
+        console.log(b);
+        console.log(b[0]);
+
+        for(var i=0; i<b.length; i++){
+            console.log(i);
+        }
+
+//      배열에 데이터를 추가
+//      - push()를 사용하면 자바의 List.add() 효과 발생
+        var c = [];
+//        c[10] = 10;
+        c.push(10);
+        c.push(20);
+        c.push(30);
+        console.log(c);
+
+//      태그를 전체적으로 불러오고 싶다면 document.querySelectorAll() 사용
+//      - 대상이 여러 개이므로 배열 형태로 나온다
+//      - 인덱스를 통해 개별 태그에 접근하여 설정을 진행해야 한다.
+        function changeRed(){
+            var list = document.querySelectorAll("h1");
+
+            for(var i=0; i < list.length; i++){
+                list[i].style.color = "red";
+            }
+        }
+        function changeOrigin(){
+            var list = document.querySelectorAll("h1");
+            for(var i=0; i<list.length; i++){
+                list[i].style.color = "black";
+            }
+        }
+        function changeBlue(){
+            var list = document.querySelectorAll("h1");
+            for(var i=0; i < list.length; i++){
+                list[i].style.color = "blue";
+            }
+        }
+    </script>
+
+</head>
+<body> 
+    <h1>첫번째</h1>
+    <h1>두번째</h1>
+    <h1>세번째</h1>
+    <h1>네번째</h1>
+    <h1>다섯번째</h1>
+    <button onclick="changeRed();">빨강</button>
+    <button onclick="changeOrigin();">검정</button>
+    <button onclick="changeBlue();">파랑</button>
+
+</body>
+</html>

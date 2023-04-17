@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+  
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    
+    <script type="text/javascript">
+
+//      독립형 자바스크립트 템플릿
+        window.addEventListener("load",function(){
+            document.querySelector(".target-size")
+                    .addEventListener("input", function(){
+//              this == 범위 선택창
+                var image = document.querySelector(".target");
+                image.width = this.value;
+                image.height = this.value;
+
+                this.nextElementSibling.textContent = this.value;
+                });
+        });
+ 
+    </script>
+
+</head>
+<body> 
+    <div class="container-600">
+        <div class="row center">
+            <h1>이미지 크기 조절</h1>
+        </div>
+            <div class="row center">
+                <input type="range" min="100" max="500" value="200" step="1"
+                    class="target-size">
+                <span>200</span>
+            </div>
+
+            <div class="row center">
+                <img class="target" src="https://via.placeholder.com/200x200?text=image" width="200" height="200">
+            </div>
+
+    </div>
+</body>
+</html>

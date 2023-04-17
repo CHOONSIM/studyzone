@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+  
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    <style>
+        .contents, .contents ul{
+            list-style: none;
+        }
+        .contents ul{
+            padding-left: 1em;
+        }
+    </style>
+    <!--jquery cdn-->
+    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        // 메뉴(li)를 클릭하면 하위메뉴를 표시/숨김 처리
+
+        //(중요)
+        //- 이벤트 확산(propagation)을 방지해야 원하는 겨로가가 나온다
+        //- 중첩된 구조에서만 신경쓰면 됨
+
+        //$(".contents li").click(function(){
+        $(".contents").find("li").click(function(e){
+            e.stopPropagation();    // 이벤트 확산 방지
+
+            //this == click한 메뉴(li)
+            //$(this).children("ul").toggle();
+            $(this).children("ul").slideToggle().toggleClass("fold");
+        });
+    });
+
+    </script>
+
+</head>
+<body> 
+    <div class="container-600">
+        <div class="row center">
+            <h1>자바 목차</h1>
+        </div>
+        <div class="row">
+            <ul class="contents">
+                <li>기본 준비
+                    <ul>
+                        <li>언어의 종류</li>
+                        <li>개발 환경 구축
+                            <ul>
+                                <li>JDK설치</li>
+                                <li>이클립스 설치</li>
+                            </ul>
+                        </li>
+                        <li>기초 프로그램 구현</li>
+                      </ul>
+                </li>
+                <li>데이터
+                  <ul>
+                    <li>자료형</li>
+                    <li>변수
+                        <ul>
+                            <li>정수</li>
+                            <li>실수</li>
+                            <li>논리</li>
+                        </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>입출력
+                    <ul>
+                        <li>출력</li>
+                        <li>입력</li>
+                    </ul>
+                </li>
+              </ul>
+        </div>
+ 
+    </div>
+</body>
+</html>

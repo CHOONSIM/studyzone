@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript 이용약관 체크박스 문제</title>
+
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    <style>
+        .form-btn.positive[disabled],
+        .form-btn.positive[disabled]:hover {
+            cursor: not-allowed;
+            background-color: lightblue;
+            border-color: lightblue;
+            filter: none;
+        }
+    </style>
+    
+    <script type="text/javascript">
+        function testFunction1(){
+            var checkbox = document.querySelector("[name=agree]");
+            var button = document.querySelector("[name=nextBtn]");
+            button.disabled = !checkbox.checked;
+//            if(checkbox.checked){
+//                button.disabled = false;
+//            }
+//            else{
+//                button.disabled = true;
+//            }
+            var label = checkbox.parentNode;
+            label.style.color = checkbox.checked ? "green" : "red";
+        }
+
+    </script>
+
+</head>
+<body>
+    <div class="container-600">
+        
+        <div class="row center">
+            <h1>회원 정보 이용약관</h1>
+        </div>
+
+        <div class="row">
+            <textarea class="form-input w-100" readonly>대충 이용약관</textarea>
+        </div>
+
+        <div class="row right">
+            <label>
+                <input type="checkbox" name="agree"
+                    onchange="testFunction1();" checked="checked">
+                동의
+            </label>
+
+        <div calss="row">
+            <button type="submit" name="nextBtn"class="form-btn w-100 positive" 
+                disabled>다음 단계로 이동</button>
+        </div>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head> 
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript 문자열</title>
+ 
+    <script type="text/javascript">
+//      자바스크립트도 문자열이 있다
+//      - 문자열은 글자 배열 형태로 처리된다
+//      - 문자열 비교는 비교연산으로 한다(equals가 아님)
+//      - 정규표현식 사용 가능
+        var a = 'Hello world';
+        var b = "Hello world";
+
+        console.log(a);
+        console.log(a[0]);         // 자바에서는 .charAt( )
+        console.log(a.length);   // 자바에서는 .length( )
+        console.log(a == b);    // 자바에서는 .equals( )
+        console.log(a.startsWith("Hello"));     // 자바와 동일
+        console.log(a.endsWith("world"));     // 자바와 동일
+//        console.log(a.contains("w"));       // 없음
+        console.log(a.indexOf("w"));        // 자바와 동일
+        console.log(a.substring(0,4));       // 자바와 동일  
+        console.log(a.toUpperCase());      // 자바와 동일
+
+
+//      정규표현식 검사
+//      - 자바스크립트에서 정규표현식은 표시 기호가 다름
+//      - 정규표현식 객체에 있는 .test( ) 명령으로 문자열을 검사
+        var userId = "member1234";//검사할 값
+        var userIdRegex = /^[a-z][a-z0-9]{7,19}$/;//정규표현식
+        var userIdValid = userIdRegex.test(userId);//검사 명령
+        console.log(userIdValid);
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

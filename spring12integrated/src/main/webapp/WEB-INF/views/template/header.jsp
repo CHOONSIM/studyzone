@@ -19,6 +19,10 @@
     <style>
         
     </style>
+    <!--링크 확인창 출력을 위한 CDN -->
+        <script src="https://cdn.jsdelivr.net/gh/CHOONSIM/find-address@latest/find-address.min.js"></script>
+	 <!-- jquery cdn -->
+    	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
     <!--

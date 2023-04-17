@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+  
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    
+    <!--jquery cdn-->
+    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            // jQuery는 선택하는 잗업부터 시작한다.
+
+            // .red-btn을 선택한 뒤 css를 color=red로 변경하라 (button이 바뀜)
+            // $(".red-btn").css("color", "red");
+
+            // .red-btn을 클릭시(이벤트)
+            // $("red-btn").on("click",function(){});
+
+            // click처럼 사용 빈도가 빈번한 작업들은 축약명령 존재(input은 없음)
+            $(".red-btn").click(function(){
+                // .target의 글자색상을 빨강으로 변경
+                $(".target").css("color","red");
+            });
+
+            $(".blue-btn").click(function(){
+                $(".target").css("color","blue");
+            });
+            
+        });
+
+    </script>
+
+</head>
+<body> 
+    <div class="container-600">
+        <div class="row center">
+            <h1 class="target">Hello jQuery!</h1>
+        </div>
+        <div class="row">
+            <button class="form-btn neutral red-btn">Red</button>
+            <button class="form-btn neutral blue-btn">Blue</button>
+        </div>
+ 
+    </div>
+</body>
+</html>

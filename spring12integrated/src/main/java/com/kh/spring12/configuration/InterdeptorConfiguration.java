@@ -48,9 +48,9 @@ public class InterdeptorConfiguration implements WebMvcConfigurer{
 //		- *가 2개면 해당 엔드포인트와 그 이하의 모든 내용을 의미
 //		
 //		 1. TestInterceptor를 모든 주소에 설정하겠다.
-		registry.addInterceptor(testInterceptor)
-			.addPathPatterns("/**");						// 전부다
-		WebMvcConfigurer.super.addInterceptors(registry);
+//		registry.addInterceptor(testInterceptor)
+//			.addPathPatterns("/**");						// 전부다
+//		WebMvcConfigurer.super.addInterceptors(registry);
 		
 //		2. MemberInterceptor를 다음 페이지에 설정하겠다!
 //		- /member로 시작하는 주소중에서 /join, /joinFinish, /login, /find 제외
@@ -65,7 +65,7 @@ public class InterdeptorConfiguration implements WebMvcConfigurer{
 				"/board/list");
 		
 //		3. 관리자 전용 검사 인터셉터
-		registry.addInterceptor(adminInterceptor).addPathPatterns("/admin/**");
+		registry.addInterceptor(adminInterceptor).addPathPatterns("/admin/**", "/board/deleteAll");
 		
 //		4. 작성자 본인 및 관리자 검사 인터셉터
 		registry.addInterceptor(boardManageInterceptor)

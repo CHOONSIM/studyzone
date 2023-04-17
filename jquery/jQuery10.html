@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+  
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    
+    <!--jquery cdn-->
+    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            // [1] 버튼 비활성화
+            $(".next-btn").prop('disabled', true);
+
+            // [2] 개별 체크박스 이벤트 설정
+            $(".check-unit").change(function(){
+                var isValid = $(".check-unit").length == $(".check-unit:checked").length;
+                $(".check-all").prop("checked",isValid);
+            });
+
+            // [3] 전체 체크박스 이벤트 설정
+            $(".check-all").change(function(){
+                var isChecked =$(this).prop("checked");
+                $(".check-unit").prop("checked", isChecked);
+            });
+
+            // [4] 버튼에 대한 처리
+            $(".check-unit, .check-all").change(function(){
+                var isValid = $(".check-unit").length == $(".check-unit:checked").length;
+                $(".next-btn").prop("disabled",!isValid);
+            });
+      });
+
+    </script>
+
+</head>
+<body> 
+      <div class="container-600">
+        
+        <div class="row center">
+            <h1>체크박스 제어</h1>
+        </div>
+
+        <div class="row">
+            <label>
+                <input type="checkbox" class="check-all">
+                전체 이용약관에 동의
+            </label>
+        </div>
+
+        <div class="row mt-40">
+            <textarea class="form-input w-100" readonly>대충 이용약관</textarea>
+        </div>
+        <div class="row right">
+            <label>
+                <input type="checkbox"class="check-unit">
+                동의
+            </label>
+
+        <div class="row mt-40">
+            <textarea class="form-input w-100" readonly>대충 이용약관</textarea>
+        </div>
+        <div class="row right">
+            <label>
+                <input type="checkbox"class="check-unit">
+                동의
+            </label>
+
+        <div class="row mt-40">
+            <textarea class="form-input w-100" readonly>대충 이용약관</textarea>
+        </div>
+        <div class="row right">
+            <label>
+                <input type="checkbox"class="check-unit">
+                동의
+            </label>
+
+            <br><br>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="check-all">
+                전체 이용약관에 동의
+            </label>
+        </div>
+
+        <div calss="row">
+            <button type="submit" class="form-btn w-100 positive next-btn" 
+                disabled>다음 단계로 이동</button>
+        </div>
+        </div>
+
+    </div>
+</body>
+</html>
