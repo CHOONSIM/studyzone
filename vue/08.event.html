@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>이벤트 예제</title>
+
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    
+</head>
+<body>
+    <!--
+        VueJS는 제어 영역을 반드시 설정해야 한다.
+    -->
+    <div id="app">
+        <h1>이벤트 예제</h1>
+        <input type="text" v-model.number="count">
+
+        <!--
+            버튼을 클릭하면 코드가 실행되도록 구현
+            v-on:click="코드" → 클릭 시 코드를 실행
+            v-on:click="함수이름" → 클릭 시 함수를 Vue가 호출하도록 위탁
+            v-on:click="함수()" → 클릭 시 함수를 내가 호출
+
+            함수 이름만 전달하는 것과 함수를 호출하는 것은 "주인공"의 차이가 있다
+            this가 누구인가, 이벤트 정보가 전달 되는가의 차이가 발생
+
+            만약 함수를 직접 호출하면서 이벤트 정보도 얻고  싶다면
+            Vue에서 제공하는 기본 이벤트 객체인 $event를 사용할 수 있다.
+        -->
+        <button v-on:click="count++">+1</button>
+        <button v-on:click="plusOne">+1</button>
+        <button v-on:click="plusOne()">+1</button>
+        <button v-on:click="plusOne($event)">+1</button>
+
+
+        <button v-on:click="plus" disabled>+1</button>
+        <button v-on:click="plus(1)">+1</button>
+
+    </div>
+
+    <!--
+        VueJS는 Lazy Loading 방식으로 제어 영역에 대한 프로그래밍 구현 
+
+        무조건 최신버전
+        <script src="https://unpkg.com/vue@next"></script>
+    -->
+    <script src="https://unpkg.com/vue@3.2.36"></script>
+    <script>
+        Vue.createApp({
+            // 데이터 설정 영역
+            data(){
+                return{
+                // 화면에서 사용할 데이터 선언
+                    count:0,
+                };
+            },
+            computed:{
+
+            },
+            // 메소드 영역
+            // - 코드를 저장해두고 필요 시 호출할 수 있다
+            // - 필요하다면 매개변수를 설정할 수 있고, 반환값을 가질 수 잇다
+            methods:{
+                plusOne(){
+                    // 부르는 방식에 따라 전달되는 값이 다름
+                    // Vue가 부르면 이벤트 정보가 전달됨
+                    // 내가 부르면 이벤트 정보가 전돨되지 않음
+                    console.log(arguments)
+                    this.count++;
+                },
+                plus(value){
+                    this.count += value;
+                }
+            },
+        }).mount("#app");
+    </script>
+</body>
+</html>

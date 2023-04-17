@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>VueJS Data</title>
+</head>
+<body>
+    <!--
+        VueJS는 제어 영역을 반드시 설정해야 한다.
+    -->
+    <div id="app">
+
+        <!-- agree 데이터와 양방향 연결-->
+        <input type="checkbox" v-model="agree">동의합니다.
+
+        <br><br>
+
+        <!-- agree 데이터와 단방향 연결-->
+        <button v-bind:disabled="!agree">다음 단계로</button>
+    </div>
+
+    <!--
+        VueJS는 Lazy Loading 방식으로 제어 영역에 대한 프로그래밍 구현 
+
+        무조건 최신버전
+        <script src="https://unpkg.com/vue@next"></script>
+    -->
+    <script src="https://unpkg.com/vue@3.2.36"></script>
+    <script>
+        // 목표 : 동의를 체크하면 다음 단계로 이동할 수 있도록 버튼을 활성화
+
+        Vue.createApp({
+            // 데이터 설정 영역
+            data(){
+                return{
+                    // 화면에서 사용할 데이터 선언
+                    agree:false,
+                };
+            },
+        }).mount("#app");
+    </script>
+
+
+
+</body>
+</html>
