@@ -5,7 +5,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>VueJS</title>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
     <link rel="stylesheet" type="text/css" href="css/load.css">
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/commons.css">
@@ -16,7 +16,29 @@
     <!--
         VueJS는 제어 영역을 반드시 설정해야 한다.
     -->
-    <div id="app">
+    <div id="app" class="container-500">
+
+        <div class="row center">
+            <h1>포켓몬스터 목록</h1>
+        </div>
+        <!-- <div class="row" v-for="(변수,index)in 추출대상" v-bind:key="프라이머리키(불변값)"> -->
+        <div class="row" v-for="(pocketmon, index) in pocketmonList" v-bind:key="pocketmon.no">
+        
+        <!-- 단순 출력이 목표라면 사본, 변경이 목표면 원본을 사용 -->
+        <!-- 사본 출력 -->
+        
+            번호 : {{pocketmon.no}},
+            이름 : {{pocketmon.name}},
+            속성 : {{pocketmon.type}} 
+       
+
+        <!-- 원본 출력 -->
+        <!-- 
+            번호 : {{pocketmonList[index].no}},
+            이름 : {{pocketmonList[index].name}},
+            속성 : {{pocketmonList[index].type}}
+        -->
+        </div>
 
     </div>
 
@@ -33,7 +55,15 @@
             data(){
                 return{
                     // 화면에서 사용할 데이터 선언
-                  
+                
+                    //포켓몬스터 정보 배열
+                    pocketmonList:[
+                        {no:1, name:"테스트1", type:"타입1"},
+                        {no:2, name:"테스트2", type:"타입2"},
+                        {no:3, name:"테스트3", type:"타입3"},
+                        {no:4, name:"테스트4", type:"타입4"},
+                        {no:5, name:"테스트5", type:"타입5"},
+                    ],
                 };
             },
              // 데이터 실시간 계산 영역
@@ -45,7 +75,12 @@
 
             },
             methods:{
-                
+
             }
         }).mount("#app");
     </script>
+
+
+
+</body>
+</html>
