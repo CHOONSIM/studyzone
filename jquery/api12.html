@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>강의차트예제</title>
+  
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    
+    <!--jquery cdn-->
+    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- chartjs cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+            // 시작하자마자 서버에 비동기 통신으로 데이터를 요청
+            // 요청 주소 - http://localhost:8080/rest/admin/subject
+            // 요청이 성공하면 차트를 생성
+            $.ajax({
+                url : "http://localhost:8080/rest/admin/subject1",
+                method : "get",
+                success:function(response){
+                    // 차트를 여기서 생성
+                    var ctx = document.querySelector('#myChart');
+          
+                    new Chart(ctx, {
+     
+                        type: 'bar',
+
+                        data: {
+                        labels: response.label,
+                        datasets: [
+                            {
+                            label: '과정수',
+                            data: response.data, 
+                            borderWidth: 2,
+                            backgroundColor: ['#ff7675','#74b9ff','#ffeaa7','#55efc4','#a29bfe','#fab1a0' ],
+                            borderColor: ['#d63031', '#0984e3','#fdcb6e','#00b894','#6c5ce7','#e17055'],
+                                }
+                            ]
+                        },
+                        // 차트의 옵션
+                        options: {
+                        scales: {
+                            y: {
+                            beginAtZero: true
+                            }
+                        }
+                        }
+                    });
+                },
+                error:function(){
+                    alert("통신 오류");
+                },
+            })
+
+            $.ajax({
+                url : "http://localhost:8080/rest/admin/subject2",
+                method : "get",
+                success:function(response){
+                    // 차트를 여기서 생성
+                    var ctx = document.querySelector('#myChart2');
+          
+                    new Chart(ctx, {
+     
+                        type: 'bar',
+
+                        data: {
+                        labels: response.label,
+                        datasets: [
+                            {
+                            label: '평균 수강료',
+                            data: response.data, 
+                            borderWidth: 2,
+                            backgroundColor: ['#ff7675','#74b9ff','#ffeaa7','#55efc4','#a29bfe','#fab1a0' ],
+                            borderColor: ['#d63031', '#0984e3','#fdcb6e','#00b894','#6c5ce7','#e17055'],
+                                }
+                            ]
+                        },
+                        // 차트의 옵션
+                        options: {
+                        scales: {
+                            y: {
+                            beginAtZero: true
+                            }
+                        }
+                        }
+                    });
+                },
+                error:function(){
+                    alert("통신 오류");
+                },
+            })
+        });
+    </script>
+
+</head>
+<body> 
+    <div class="container-600">
+        <div class="row center">
+            <h1>강의 개설 현황</h1>
+        </div>
+
+        <div class="row mt-50">
+            <h2>개설된 강의 수</h2>
+        </div>
+        <div class="row">
+            <canvas id="myChart"></canvas>
+        </div>
+
+        <div class="row mt-50">
+            <h2>강의 평균 수강료</h2>
+        </div>
+        <div class="row">
+            <canvas id="myChart2"></canvas>
+        </div>
+
+    </div>
+</body>
+</html>

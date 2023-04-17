@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>차트예제</title>
+  
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    
+    <!--jquery cdn-->
+    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- chartjs cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+            var ctx = document.querySelector('#myChart');
+  
+            // new Chart(캔버스객체, 옵션);
+            new Chart(ctx, {
+
+                //type : 차트의 형태(bar / line / pie / doughnut)
+                type: 'bar',
+
+                //data : 차트를 구성하는 데이터정보
+                // - labels : 항목명
+                // - datasets : 차트 데이터
+                // - label : 데이터의 이름
+                // - data : 항목별 실제 데이터(labels와 개수가 일치해야 한다)
+                data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [
+                    {
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderWidth: 2,
+                    backgroundColor: ['#ff7675','#74b9ff','#ffeaa7','#55efc4','#a29bfe','#fab1a0' ],
+                    borderColor: ['#d63031', '#0984e3','#fdcb6e','#00b894','#6c5ce7','#e17055'],
+                        }
+                    ]
+                },
+                // 차트의 옵션
+                options: {
+                scales: {
+                    y: {
+                    beginAtZero: true
+                    }
+                }
+                }
+            });
+        });
+
+    </script>
+
+</head>
+<body> 
+    <div class="container-600">
+        <div class="row center">
+            <h1>차트예제</h1>
+        </div>
+        
+        <div class="row">
+            <canvas id="myChart"></canvas>
+        </div>
+
+    </div>
+</body>
+</html>

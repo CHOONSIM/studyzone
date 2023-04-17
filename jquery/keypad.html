@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비밀번호 입력 키패드</title>
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <style>
+        .form-btn{
+            background-color: #ccc;
+            border: none;
+            margin: 0;
+            padding: 0;
+            height: 50px;
+            width: 80px;
+        }
+
+        .keypad {
+            background-color: #ccc;
+        }
+
+    </style>
+<script>
+    function add(value) {
+        document.getElementById('input').value += value;
+    }
+
+    function clearInput() {
+        document.getElementById('input').value = '';
+    }
+
+    function backspace() {
+        var input = document.getElementById('input');
+        input.value = input.value.slice(0, -1);
+    }
+
+    function showPassword() {
+			var input = document.getElementById('input');
+			if (input.type === 'password') {
+				input.type = 'text';
+			} else {
+				input.type = 'password';
+			}
+		}
+</script>
+</head>
+<body>
+    <div class="container-300">
+        <div class="row center">
+            <h1>비밀번호 입력</h1>
+        </div>
+        <div class="row center">
+            <input class= "form-input w-100" type="password" id="input" readonly>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" onclick="showPassword()"> 비밀번호 표시
+            </label>
+        </div>
+
+
+    <div class="keypad center w-100">
+        <div class="row">
+			<button class="form-btn" onclick="add('1')">1</button>
+			<button class="form-btn" onclick="add('2')">2</button>
+			<button class="form-btn" onclick="add('3')">3</button>
+		</div>
+		<div class="row">
+            <button class="form-btn" onclick="add('4')">4</button>
+			<button class="form-btn" onclick="add('5')">5</button>
+			<button class="form-btn" onclick="add('6')">6</button>
+		</div>
+		<div class="row">
+            <button class="form-btn" onclick="add('7')">7</button>
+			<button class="form-btn" onclick="add('8')">8</button>
+			<button class="form-btn" onclick="add('9')">9</button>
+		</div>
+		<div class="row">
+            <button class="form-btn" onclick="backspace()">←</button>
+			<button class="form-btn" onclick="add('0')">0</button>
+			<button class="form-btn" onclick="clearInput()">C</button>
+		</div>
+	</div>
+</div>
+</body>
+</html>

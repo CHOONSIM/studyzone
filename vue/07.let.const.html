@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>let과 const를 사용하는 이유</title>
+    <script>
+        // ES5 (EcmaScript 5) - 구버전 자바스크립트(함수만 있음)
+        // ES6 (EcmaScript 6) - 신버전 자바스크립트(클래스 등장)
+        // TS (TypeScript) - 문법이 엄격해진 자바스크립트 강화판
+
+        // 변수 생성 방식
+
+        // ES5 - var (호이스팅으로 인한 범위 무시 현상)
+        // 변수 의미가 없음
+        var a = "hello";
+        var a = 10;
+        console.log(a);
+
+        if(a % 2 == 0){
+            var b = "짝수";
+        }
+        console.log(b);
+
+        // ES6 - let(가변), const(불변,final)
+        let c= "hello"
+        // let c="10";
+        c = "hi"
+        console.log(c);
+
+        if(c.length > 0){
+            let d =10;
+            console.log(d);
+        }
+        // console.log(d);
+
+        const e = "hello";
+        e ="hi";
+        console.log(e);
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
