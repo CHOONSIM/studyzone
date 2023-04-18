@@ -29,8 +29,6 @@
         -->
         <input type="text" v-model="keyword" v-on:input="keyword = $event.target.value">
 
-
-
         <div v-for="(pocketmon, index) in result" :key="pocketmon.no">
             {{pocketmon}}
         </div>
@@ -43,7 +41,10 @@
         <script src="https://unpkg.com/vue@next"></script>
     -->
     <script src="https://unpkg.com/vue@3.2.36"></script>
+    <!-- axios -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- Lodash -->
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
  
     <script>
         Vue.createApp({
@@ -71,6 +72,7 @@
                     // this.result = resp.data;  들어는 가지만 갱신이 안된다
                     this.result.splice(0);                //전체 삭제
                     this.result.push(...resp.data);     //전개연산자로 추가
+                    // console.log("loadResult 실행완료");
                 },
             },
 
@@ -80,15 +82,37 @@
             // - (data가 변하면)computed는 새로운 값을 계산하는 용도(값으로 값을) (비동기 통신X)
             // - (data가 변하면)watch는 특정 코드를 실행하는 용도(computed 이외) (비동기 통신0)
             watch:{
-                // data에 있는 keyword가 변하면 실행할 영역
-                // keyword:function(){},
-                // keyword(){
-                    keyword(cur, old){
-                    //console.log(arguments);     // arguments before ,after를 보여줌
-                    //console.log("keyword watch");
-                    //console.log("before=",old,"after=", cur);
+
+                // [1] 성능 신경 X 구현만한 경우
+                // 입력 빈도가 늘어날수록 서버에 부하가 심해짐
+
+                //     keyword:function(){}, 
+                //     keyword(cur, old){
+                //     this.loadResult();
+                // },
+
+                // [2] 쓰로틀링 적용(lodash)
+                // - 쓰로틀링은 설정한 시간 주기 이하의 이벤트는 무시
+                // - 적용방법 : _.throttle(함수, 시간주기) => 새로운 함수
+                // - 이상적인 시간응ㄴ 약 250ms 정도
+                // keyword : _.throttle(function(){코드},250ms),
+
+                keyword : _.throttle(function(){
+                    // console.log(this);  this== 뷰인스턴스
                     this.loadResult();
-                },
+                }, 250),
+
+                // [3] 디바운스 적용(debounce)
+                // - 디바운스는 설정한 주기만큼의 시간이 지난 뒤 실행
+                // - (ex) 주기가 1000ms라면 마지막 이벤트 발생 후 1000ms 뒤 실행
+                // - 적용방법 : _.debounce(function{함수}, 250ms),
+               
+                // keyword : _.debounce(function(){
+                //     // console.log("debounce 실행");
+                //     this.loadResult();
+                // }, 250),
+
+
             },
         }).mount("#app");
     </script>
