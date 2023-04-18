@@ -2,4 +2,4 @@
     pageEncoding="UTF-8"%>
     <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <h1>ㅈㅅ!</h1>
-	<jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

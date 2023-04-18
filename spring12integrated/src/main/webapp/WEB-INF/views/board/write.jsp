@@ -1,3 +1,52 @@
+<<<<<<< HEAD
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
+<c:choose>
+	<c:when test="${boardParent==null }">
+		<h1>새글작성</h1>
+	</c:when>
+<c:otherwise>
+	<h1>답글작성</h1>
+</c:otherwise>
+</c:choose>
+
+<form action="write" method="post">
+	<%--답글일 때는 정보가 한 개 더 전송되어야 한다(boardParent) --%>
+	<c:if test="${boardParent != null }">
+	<input type ="hidden" name ="boardParent" value="${boardParent }">
+	</c:if>
+	말머리 : 
+	<select name="boardHead">
+		<!-- 없음을 선택하면 값이 비어서 전송되므로 DB에 null로 들어감 -->
+		<option value="">없음</option>
+		<c:if test="${sessionScope.memberLevel=='관리자' }">
+		<option>공지</option>
+		</c:if>
+		<option>유머</option>
+		<option>정보</option>
+	</select>
+	<br><br>
+	
+	<!--  제목  -->
+	<c:choose>
+		<c:when test="${boardParent == null}">
+			제목 : <input type="text" name="boardTitle" required><br><br>
+		</c:when>
+		<c:otherwise>
+			제목 : <input type="text" name="boardTitle" required value="RE: "><br><br>
+		</c:otherwise>
+	</c:choose>
+	
+	<textarea name="boardContent" required rows="10" cols="60"></textarea> <br><br>
+	<button>등록</button>
+</form>
+
+<jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
+=======
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -120,3 +169,4 @@
 	</form>
 
 	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+>>>>>>> refs/heads/main

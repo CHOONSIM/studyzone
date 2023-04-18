@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -31,7 +32,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 //		@Tag - 컨트롤러의 문서상 표시될 이름 설정
 //		@Operation - 작업에 대한 설명 설정
 
-
+@CrossOrigin
 @Tag(name = "포켓몬스터 요청 처리기")
 @RestController
 @RequestMapping("/pocketmon")
