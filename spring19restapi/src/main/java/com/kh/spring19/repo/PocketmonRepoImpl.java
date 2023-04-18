@@ -38,6 +38,11 @@ public class PocketmonRepoImpl implements PocketmonRepo{
 	public boolean delete(int no) {
 		return sqlSession.delete("pocketmon.remove",no)>0;
 	}
+
+	@Override
+	public List<PocketmonDto> selectListByName(String name) {
+		return sqlSession.selectList("pocketmon.searchName",name);
+	}
 	
 	
 }

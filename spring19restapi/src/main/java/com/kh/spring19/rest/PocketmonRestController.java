@@ -175,4 +175,20 @@ public class PocketmonRestController {
 		repo.delete(no);
 	}
 	
+	// 검색을 구현한다면...
+	// [1] 검색이 하나밖에 없는 경우(상세와 중복될 가능성 있음)
+	//		[GET] /pocketmon/{name}
+	
+	// [2] 여러 종류라면 항목을 앞에 추가하여 작성
+	//		[GET] /pocketmon/name/{name}
+	//		[GET] /pocketmon/no/{no}
+	
+	//		[GET] /pocketmon/no/{no}/name/{name}
+	//		두개 이상부터는 POST로 빼버림
+	
+	@GetMapping("/name/{name}")		// 정규표현식 가능 {name:[가-힣]+}
+	public List<PocketmonDto>seachName(@PathVariable String name){
+		return repo.selectListByName(name);
+	}
+	
 }

@@ -10,4 +10,6 @@ public interface PocketmonRepo {
 	PocketmonDto selectOne(int no);
 	boolean update(PocketmonDto dto);
 	boolean delete(int no);
+	
+	List<PocketmonDto> selectListByName(String name);
 }

@@ -7,7 +7,7 @@
    <mapper namespace="subject">
    
    <select id ="selectList" resultType="SubjectDto">
-   		select * from subject
+   		select * from subject order by no asc
    </select>
    
    <select id="selectOne" resultType="SubjectDto" parameterType="int">
