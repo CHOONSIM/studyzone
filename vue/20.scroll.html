@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>VueJS</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+
+
+    
+</head>
+<body>
+    <!--
+        VueJS는 제어 영역을 반드시 설정해야 한다.
+    -->
+    <div id="app">
+
+        <div class="container-800">
+            <div class="row center">
+                <h1>무한스크롤(page : {{page}})</h1>
+            </div>
+            <div class="row center" v-for="(pocketmon, index) in pocketmonList" :key="pocketmon.no">
+                <h2>번호 : {{pocketmon.no}}</h2>
+                <h2>이름 : {{pocketmon.name}}</h2>
+                <h2>속성 : {{pocketmon.type}}</h2>
+                <hr>
+            </div>
+        </div>
+
+    </div>
+
+    <!--
+        VueJS는 Lazy Loading 방식으로 제어 영역에 대한 프로그래밍 구현 
+
+        무조건 최신버전
+        <script src="https://unpkg.com/vue@next"></script>
+    -->
+    <script src="https://unpkg.com/vue@3.2.36"></script>
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- Lodash -->
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+ 
+    <script>
+        Vue.createApp({
+            // 데이터 설정 영역
+            data(){
+                return{
+                    // 화면에서 사용할 데이터 선언
+                    percent:0,
+
+                    // 목록을 위한 데이터
+                    page:1,
+                    pocketmonList:[],
+                    finish:false,
+
+                    // 안전장치
+                    loading:false,
+                };
+            },
+             // 데이터 실시간 계산 영역
+            // - 사용하고 싶은 변수명으로 함수를 선언
+            // - 함수 내부에는 보여주고 싶은 값을 코드로 반환하도록 작성
+            // - Vue에 등록한 값에 접근할 때 반드시 this를 붙여야함
+            // - 코드가 길면 안됨(무리가 많이 감)
+            computed:{
+
+            },
+            methods:{
+                async loadList(){
+                    if(this.loading == true) return;    // 로딩중이면
+                    if(this.finish == true) return;     // 다 불러왔으면
+                    loading=true;
+
+                    // const resp = await axios.get ("http://localhost:8080/pocketmon/page/"+this.page);
+                    const resp = await axios.get ("http://localhost:8080/pocketmon/page/${this.page}");      //js파일에서는 가능
+                    this.pocketmonList.push(...resp.data);
+                    this.page++;
+                    
+                    loading=false;
+
+                    if(resp.data.length < 10){      //데이터가 10개 미만이면 더 읽을게 없다
+                        this.finish = true;
+                    }
+                },
+            },
+            watch:{
+                // percent가 변하면 percent의 값을 읽어와서 80% 이상인지 판정
+                percent(){
+                    if(this.percent>=80){
+                        // console.log("데이터를 불러와라")
+                        this.loadList();
+                    }
+                },
+            },
+            mounted(){
+                // 윈도우 전체에 스크롤 이벤트를 설정(Vue가 아니라 JS를 사용)
+                // - 주의) 스크롤 이벤트는 발생빈도가 엄청나다.
+                // - throttle, debounce 등으로 억제시켜야 한다.
+                // - this를 통일 시키기 위해 arrow function(람다) 사용
+
+                // window.addEventListener("scroll", function(){
+                //     console.log("스크롤 이벤트")
+                // });
+               
+                // window.addEventListener("scroll", _.throttle(function(){
+                //     console.log("스크롤 이벤트")
+                // },250));
+                
+                // 무언갈 실행하려면...
+                // this를 미리 빼놓기
+                const app = this; 
+
+                // 람다 사용!!!!!!
+
+                window.addEventListener("scroll", _.debounce(()=>{
+                    // console.log("스크롤 이벤트")
+                    console.log(this);
+                    // 스크롤은 몇 %위치에 있는가? 를 알고 싶다면
+                    // - 전체 문서의 높이        console.log(document.body.clientHeight);
+                    // - 현재 스크롤의 위치     console.log(window.scrollY);
+                    // - 브라우저의 높이         console.log(window.innerHeight);
+                    // - ScreenFull.js 나 Rallax.js 등 라이브러리 사용 가능
+
+                    //   Math.round 반올림
+                    // 몇% 이상 넘어가면 무언갈 실행
+                    const height = document.body.clientHeight - window.innerHeight;
+                    const current = window.scrollY;
+                    const percent = (current / height) * 100;
+                    console.log("percent = " + Math.round(percent));
+
+                    // data의 percent를 계산된 값으로 갱신
+                    this.percent = Math.round(percent);
+                },250));
+            },
+            created(){
+                this.loadList();
+            },
+        }).mount("#app");
+    </script>

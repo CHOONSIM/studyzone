@@ -51,6 +51,17 @@
             },
             methods:{
                 
-            }
+            },
+            watch:{
+                // data에 있는 keyword가 변하면 실행할 영역
+                // keyword:function(){},
+                // keyword(){
+                    keyword(cur, old){
+                    //console.log(arguments);     // arguments before ,after를 보여줌
+                    //console.log("keyword watch");
+                    //console.log("before=",old,"after=", cur);
+                    this.loadResult();
+                },
+            },
         }).mount("#app");
     </script>
