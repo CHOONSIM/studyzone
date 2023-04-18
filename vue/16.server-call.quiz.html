@@ -19,16 +19,42 @@
     <div id="app">
         <div class="container-600">
             <div class="row">
-                <h1>서버에서 불러온 학생 목록</h1>
+                <h1>학생성적 관리 페이지</h1>
             </div>
             <div class="row" v-for="(student,index) in studentList" v-bind:key="studentList.no">
-                학생번호 : {{studentList[index].no}}<br>
+                <!-- 학생번호 : {{studentList[index].no}}<br>
                 학생이름 : {{studentList[index].name}}<br>
                 영어점수 : {{studentList[index].english}}<br>
                 국어점수 : {{studentList[index].korean}}<br>
                 수학점수 : {{studentList[index].math}}<br>
-                
-                <hr>
+                총 점수 : {{student.english + student.korean + student.math}}<br>
+                평균 점수 : {{((student.english + student.korean + student.math)/3).toFixed(2)}}<br> -->
+
+                <h2>{{student.name}} 님의 성적정보</h2>
+
+                <table class="table table-border">
+                    <thead>
+                        <tr>
+                            <th>국어</th>
+                            <th>영어</th>
+                            <th>수학</th>
+                            <th>총점</th>
+                            <th>평균</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{student.korean}}</td>
+                            <td>{{student.english}}</td>
+                            <td>{{student.math}}</td>
+                            <td>{{getTotal(student)}}</td>
+                            <td>{{getAverage(student)}}</td>
+                        </tr>
+                    </tbody>
+
+
+                </table>
+
             </div>
         </div>
     </div>
@@ -63,29 +89,15 @@
                 async loadData(){
                     const resp = await axios.get("http://localhost:8080/student/");
                     this.studentList.push(...resp.data);
+                },
+                getTotal(student){
+                    return student.korean + student.english + student.math;
+                },
+                getAverage(student){
+                    return this.getTotal(student) / 3
                 }
             },
             created(){
-                // 서버에서 제공하는 포켓몬스터 목록을 가져온다.(비동기 통신 요청)
-                // - jquery
-                // - fetch api
-                // - axios
-
-                // // jquery 사용
-                // const app = this;
-                // $.ajax({
-                //     url:"http://localhost:8080/student/",
-                //     method:"get",
-                //     success:function(resp){
-                //         // 잘못된 방법(원본을 바꾸면 안됨)
-                //         // this.studentList = resp; 
-                        
-                //         //정상적인 방법(원본에 추가)
-                //         // 배열 앞에 점 세개를 찍으면 전개 연산자(풀어헤쳐라)
-                //         app.studentList.push(...resp);                    
-                //     },
-                //     error:function(){}
-                // });
 
                 // // axios 사용
                 // axios.get("http://localhost:8080/student/")

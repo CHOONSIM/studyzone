@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>VueJS</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    
+</head>
+<body>
+    <!--
+        VueJS는 제어 영역을 반드시 설정해야 한다.
+    -->
+    <div id="app">
+
+        <h1>자동완성 예제(검색)</h1>
+        <!--
+            한글 등 IME 입력 이슈에 대응하기 위한 방법
+            - v-model 만으로는 어려우므로 v-on:input을 같이 사용
+            - v-on:input으로 입력 발생 시 수동으로 데이터를 갱신하도록 간성
+            - v-on:input="데이터 = $event.target.value"
+            - $event는 Vue에서 관리하는 이벤트 정보 객체
+
+        -->
+        <input type="text" v-model="keyword" v-on:input="keyword = $event.target.value">
+
+
+
+        <div v-for="(pocketmon, index) in result" :key="pocketmon.no">
+            {{pocketmon}}
+        </div>
+    </div>
+
+    <!--
+        VueJS는 Lazy Loading 방식으로 제어 영역에 대한 프로그래밍 구현 
+
+        무조건 최신버전
+        <script src="https://unpkg.com/vue@next"></script>
+    -->
+    <script src="https://unpkg.com/vue@3.2.36"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+ 
+    <script>
+        Vue.createApp({
+            // 데이터 설정 영역
+            data(){
+                return{
+                    // 화면에서 사용할 데이터 선언
+                  
+                    // 검색어 입력창과 연결할 데이터
+                    keyword:"",
+
+                    //검색 결과 데이터
+                    result: [],
+                };
+            },
+
+            computed:{
+
+            },
+            methods:{
+                async loadResult(){    
+                    if(this.keyword.length == 0) return;    // 검색어가 없을 때 오류 해결
+
+                    const resp = await axios("http://localhost:8080/pocketmon/name/"+this.keyword);
+                    // this.result = resp.data;  들어는 가지만 갱신이 안된다
+                    this.result.splice(0);                //전체 삭제
+                    this.result.push(...resp.data);     //전개연산자로 추가
+                },
+            },
+
+            // 감시 영역(watch)
+            // - data의 변동사항이 생기면 자동으로 실행되는 영역
+            // - computed와 유사한 역할을 수행하지만 다름
+            // - (data가 변하면)computed는 새로운 값을 계산하는 용도(값으로 값을) (비동기 통신X)
+            // - (data가 변하면)watch는 특정 코드를 실행하는 용도(computed 이외) (비동기 통신0)
+            watch:{
+                // data에 있는 keyword가 변하면 실행할 영역
+                // keyword:function(){},
+                // keyword(){
+                    keyword(cur, old){
+                    //console.log(arguments);     // arguments before ,after를 보여줌
+                    //console.log("keyword watch");
+                    //console.log("before=",old,"after=", cur);
+                    this.loadResult();
+                },
+            },
+        }).mount("#app");
+    </script>

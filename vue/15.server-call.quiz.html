@@ -19,7 +19,7 @@
     <div id="app">
         <div class="container-600">
             <div class="row">
-                <h1>서버에서 불러온 강의 목록</h1>
+                <h1>과목 관리 페이지</h1>
             </div>
             <div class="row" v-for="(subject,index) in subjectList" v-bind:key="subjectList.no">
                 강의번호 : {{subjectList[index].no}}<br>
@@ -57,42 +57,23 @@
             },
             methods:{
                 // 메소드 생성 시 async 키워드를 쓰면 동기화된 처리를 보장
-                // - async 메소드에서는 await 키워드 사용이 가능
+                // - async 메소드에서는 await 키워드 사용이 가능(비동기를 동기처럼 코드 작성 가능 실행도 마찬가지)
+                // ...이 배열 앞에 붙으면 전개 연산자(spread operator)라고함 (반복문대신 풀어헤쳐줌)
                 async loadData(){
                     const resp = await axios.get("http://localhost:8080/subject/");
                     this.subjectList.push(...resp.data);
                 }
             },
             created(){
-                // 서버에서 제공하는 포켓몬스터 목록을 가져온다.(비동기 통신 요청)
-                // - jquery
-                // - fetch api
-                // - axios
 
-                // // jquery 사용
-                // const app = this;
-                // $.ajax({
-                //     url:"http://localhost:8080/subject/",
-                //     method:"get",
-                //     success:function(resp){
-                //         // 잘못된 방법(원본을 바꾸면 안됨)
-                //         // this.subjectList = resp; 
-                        
-                //         //정상적인 방법(원본에 추가)
-                //         // 배열 앞에 점 세개를 찍으면 전개 연산자(풀어헤쳐라)
-                //         app.subjectList.push(...resp);                    
-                //     },
-                //     error:function(){}
-                // });
-
-                // // axios 사용
-                // axios.get("http://localhost:8080/subject/")
-                //     .then(resp=>{                                   // then-성공
-                //         console.log(resp);                         
-                //         this.subjectList.push(...resp.data);
-                //     })        
-                //     .catch(err=>{                                       // catch-에러
-                //     });        
+                // axios 사용
+                axios.get("http://localhost:8080/subject/")
+                    .then(resp=>{                                   // then-성공
+                        console.log(resp);                         
+                        this.subjectList.push(...resp.data);
+                    })        
+                    .catch(err=>{                                       // catch-에러
+                    });        
 
                 this.loadData();
             },
