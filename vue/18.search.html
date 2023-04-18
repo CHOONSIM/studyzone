@@ -20,7 +20,7 @@
 
         <h1>자동완성 예제(검색)</h1>
 
-        <input type="text" v-model="keyword" v-on:input="loadResult">
+        <input type="text" v-model="keyword" v-on:input="keyword = $">
         <input type="text" v-model="keyword" v-on:input="loadResult($event)">
 
 

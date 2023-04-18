@@ -21,7 +21,7 @@
         <h1>자동완성 예제(검색)</h1>
 
         <input type="text" v-model="keyword" v-on:input="loadResult">
-        <input type="text" v-model="keyword" v-on:input="loadResult($event)">
+        <!-- <input type="text" v-model="keyword" v-on:input="loadResult($event)"> -->
 
 
         <div v-for="(pocketmon, index) in result" :key="pocketmon.no">
