@@ -12,4 +12,5 @@ public interface PocketmonRepo {
 	boolean delete(int no);
 	
 	List<PocketmonDto> selectListByName(String name);
+	List<PocketmonDto> selectListByPaging(int page);
 }
