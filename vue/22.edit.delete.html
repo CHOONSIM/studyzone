@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>VueJS</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    
+</head>
+<body>
+    <!--
+        VueJS는 제어 영역을 반드시 설정해야 한다.
+    -->
+    <div id="app">
+        <div class="container-800">
+            <div class="row center"><h1>포켓몬 수정/삭제</h1>
+            </div>
+
+            <div class="row" v-for="(pocketmon, index) in pocketmonList" :key="pocketmon.no">
+
+                <!--
+                    목록에서 직접 수정할 경우 상태값을 추가로 설정하여 화면을 변화
+                    - edit라는 이름으로 true/false를 설정하여 구현
+                    - 최초에는 없으므로 indefined 상태이며 이 때는 일반모드로
+                    - 현재 pocketmon과 pocketmonList[index] 의 차이가 없어진 것으로 보임
+                    - 출력 시 pocketmon 사용, 변경 시 pocketmon:ist[index] 사용으로 고정
+                -->
+                <br>
+                <div v-if="pocketmon.edit == true">
+                    <div>번호 : {{pocketmon.no}}</div>
+                    <div>이름 : <input v-model="pocketmonList[index].name"></div>
+                    <div>속성 : <input v-model="pocketmonList[index].type"></div>
+
+                    <button type="button"v-on:click="cancleEdit(index)">취소</button>
+                    <button type="button" v-on:click="sendEdit(index)">저장</button>
+                </div>
+                <hr>
+                <br>
+                <div v-else>
+                    <div>번호 : {{pocketmon.no}}</div>
+                    <div>이름 : {{pocketmon.name}}</div>
+                    <div>속성 : {{pocketmon.type}}</div>
+
+                    <button type="button" v-on:click="changeEdit(index)">수정</button>
+                    <button type="button" v-on:click="deleteItem(index)">삭제</button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--
+        VueJS는 Lazy Loading 방식으로 제어 영역에 대한 프로그래밍 구현 
+
+        무조건 최신버전
+        <script src="https://unpkg.com/vue@next"></script>
+    -->
+    <script src="https://unpkg.com/vue@3.2.36"></script>
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- Lodash -->
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+ 
+        <script>
+            Vue.createApp({
+                // 데이터 설정 영역
+                data(){
+                    return{
+                        // 화면에서 사용할 데이터 선언
+                        pocketmonList:[],
+                        pocketmonListCopy:[],
+                    };
+                },
+                // 데이터 실시간 계산 영역
+                // - 사용하고 싶은 변수명으로 함수를 선언
+                // - 함수 내부에는 보여주고 싶은 값을 코드로 반환하도록 작성
+                // - Vue에 등록한 값에 접근할 때 반드시 this를 붙여야함
+                // - 코드가 길면 안됨(무리가 많이 감)
+                computed:{
+
+                },
+                methods:{
+                    async loadList(){
+                        const resp = await axios.get("http://localhost:8080/pocketmon/");
+                        
+                        this.pocketmonList.splice(0);
+                        this.pocketmonListCopy.splice(0);
+
+
+                        this.pocketmonList.push(...resp.data);
+                        // lodash에서 제공하는 깊은 복사 명령 사용
+                        const copy = _.cloneDeep(resp.data);
+                        this.pocketmonListCopy.push(...copy);
+                    },
+                    changeEdit(index){
+                        this.pocketmonList[index].edit = true;
+                    },
+                    cancleEdit(index){
+                        // 지금까지 작업한 내용을 초기화
+                        this.pocketmonList[index].name = this.pocketmonListCopy[index].name;
+                        this.pocketmonList[index].type = this.pocketmonListCopy[index].type;
+                        this.pocketmonList[index].edit = false;
+                    },
+
+                    // 지정한 위치의 데이터를 서버로 전송하여 수정처리
+                    async sendEdit(index){
+                        const url = "http://localhost:8080/pocketmon/";
+                        const data =  this.pocketmonList[index];
+                        const resp = await axios.put(url, data);
+                        // console.log(resp);
+
+                        // 입력창만 제거 (문제 : 사본이 고치기 전 상태)
+                        // this.pocketmonList[index].edit = false;
+                        // + 사본 코드를 변경하도록 처리
+
+                        // 목록 다시 불러오기(문제 : 원본 데이터가 남아있음)
+                        this.loadList();
+                    },
+
+                    async deleteItem(index){
+                        const choice = window.confirm("정말 삭제하시겠습니까?");
+                        if(choice == false) return;
+
+                        const no =  this.pocketmonList[index].no;
+                        const url = "http://localhost:8080/pocketmon/"+no;
+                        const resp = await axios.delete(url);
+                        console.log(resp);
+
+                        this.loadList();
+                    },
+                },
+                watch:{
+
+                },
+                created(){      // hook : 특정 시점에 자동 실행되는 코드
+                    this.loadList();
+                },
+            }).mount("#app");
+        </script>
+    </body>
+    </html>
