@@ -30,7 +30,7 @@
                     - 현재 pocketmon과 pocketmonList[index] 의 차이가 없어진 것으로 보임
                     - 출력 시 pocketmon 사용, 변경 시 pocketmon:ist[index] 사용으로 고정
                 -->
-
+                <br>
                 <div v-if="pocketmon.edit == true">
                     <div>번호 : {{pocketmon.no}}</div>
                     <div>이름 : <input v-model="pocketmonList[index].name"></div>
@@ -40,14 +40,16 @@
                     <button type="button" v-on:click="sendEdit(index)">저장</button>
                 </div>
                 <hr>
-
+                <br>
                 <div v-else>
                     <div>번호 : {{pocketmon.no}}</div>
                     <div>이름 : {{pocketmon.name}}</div>
                     <div>속성 : {{pocketmon.type}}</div>
 
                     <button type="button" v-on:click="changeEdit(index)">수정</button>
-                    <hr>
+                    <button type="button" v-on:click="deleteItem(index)">삭제</button>
+
+
                 </div>
 
             </div>
@@ -112,13 +114,25 @@
                         const url = "http://localhost:8080/pocketmon/";
                         const data =  this.pocketmonList[index];
                         const resp = await axios.put(url, data);
-                        console.log(resp);
+                        // console.log(resp);
 
                         // 입력창만 제거 (문제 : 사본이 고치기 전 상태)
                         // this.pocketmonList[index].edit = false;
                         // + 사본 코드를 변경하도록 처리
 
                         // 목록 다시 불러오기(문제 : 원본 데이터가 남아있음)
+                        this.loadList();
+                    },
+
+                    async deleteItem(index){
+                        const choice = window.confirm("정말 삭제하시겠습니까?");
+                        if(choice == false) return;
+
+                        const no =  this.pocketmonList[index].no;
+                        const url = "http://localhost:8080/pocketmon/"+no;
+                        const resp = await axios.delete(url);
+                        console.log(resp);
+
                         this.loadList();
                     },
                 },
