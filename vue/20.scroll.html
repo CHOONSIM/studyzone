@@ -60,8 +60,8 @@
                     finish:false,
 
                     // 안전장치
-                    loading:false,
-                };
+                    loading:false
+                }
             },
              // 데이터 실시간 계산 영역
             // - 사용하고 싶은 변수명으로 함수를 선언
@@ -75,14 +75,14 @@
                 async loadList(){
                     if(this.loading == true) return;    // 로딩중이면
                     if(this.finish == true) return;     // 다 불러왔으면
-                    loading=true;
+                    this.loading=true;
 
-                    // const resp = await axios.get ("http://localhost:8080/pocketmon/page/"+this.page);
-                    const resp = await axios.get ("http://localhost:8080/pocketmon/page/${this.page}");      //js파일에서는 가능
+                    const resp = await axios.get ("http://localhost:8080/pocketmon/page/"+this.page);
+                    // const resp = await axios.get ('http://localhost:8080/pocketmon/page/${this.page}');      //js파일에서는 가능
                     this.pocketmonList.push(...resp.data);
                     this.page++;
                     
-                    loading=false;
+                    this.loading=false;
 
                     if(resp.data.length < 10){      //데이터가 10개 미만이면 더 읽을게 없다
                         this.finish = true;
