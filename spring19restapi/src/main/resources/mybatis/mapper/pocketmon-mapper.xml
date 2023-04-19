@@ -42,7 +42,7 @@
 		select * from pocketmon
 		where name like #{name} || '%'
 	</select>
-	
+	  
 	<!-- SQL 구문 조각 생성 -->
 	<sql id="topNheader">
 		select * from(

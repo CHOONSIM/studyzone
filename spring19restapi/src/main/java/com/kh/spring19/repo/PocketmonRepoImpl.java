@@ -44,13 +44,13 @@ public class PocketmonRepoImpl implements PocketmonRepo{
 	public List<PocketmonDto> selectListByName(String name) {
 		return sqlSession.selectList("pocketmon.searchName",name);
 	}
-
+  
 	@Override
 	public List<PocketmonDto> selectListByPaging(int page) {
-		int end = page * 10;
-		int begin = end - 9;
-		Map<String,Object> param = Map.of("begin", begin,"end",end);
-		return sqlSession.selectList("pocketmon.infinite",param);
+	    int end = page * 10;
+	    int begin = end - 9;
+	    Map<String,Object> param = Map.of("begin", begin, "end", end);
+	    return sqlSession.selectList("pocketmon.infinite", param);
 	}
 	
 	

@@ -189,7 +189,7 @@ public class PocketmonRestController {
 	@GetMapping("/name/{name}")		// 정규표현식 가능 {name:[가-힣]+}
 	public List<PocketmonDto>searchName(@PathVariable String name){
 		return repo.selectListByName(name);
-	}
+	}  
 	
 	// 무한스크롤을 위한 백엔드 페이징 목록 구현
 	// - 페이지번호를 알려준다면 10개를 기준으로 해당 페이지 번호의 데이터를 반환
