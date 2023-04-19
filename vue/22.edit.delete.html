@@ -66,67 +66,69 @@
     <!-- Lodash -->
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
  
-    <script>
-        Vue.createApp({
-            // 데이터 설정 영역
-            data(){
-                return{
-                    // 화면에서 사용할 데이터 선언
-                    pocketmonList:[],
-                    pocketmonListCopy:[],
-                };
-            },
-             // 데이터 실시간 계산 영역
-            // - 사용하고 싶은 변수명으로 함수를 선언
-            // - 함수 내부에는 보여주고 싶은 값을 코드로 반환하도록 작성
-            // - Vue에 등록한 값에 접근할 때 반드시 this를 붙여야함
-            // - 코드가 길면 안됨(무리가 많이 감)
-            computed:{
-
-            },
-            methods:{
-                async loadList(){
-                    const resp = await axios.get("http://localhost:8080/pocketmon/");
-                    
-                    this.pocketmonList.splice(0);
-                    this.pocketmonListCopy.splice(0);
-
-
-                    this.pocketmonList.push(...resp.data);
-                    // lodash에서 제공하는 깊은 복사 명령 사용
-                    const copy = _.cloneDeep(resp.data);
-                    this.pocketmonListCopy.push(...copy);
+        <script>
+            Vue.createApp({
+                // 데이터 설정 영역
+                data(){
+                    return{
+                        // 화면에서 사용할 데이터 선언
+                        pocketmonList:[],
+                        pocketmonListCopy:[],
+                    };
                 },
-                changeEdit(index){
-                    this.pocketmonList[index].edit = true;
+                // 데이터 실시간 계산 영역
+                // - 사용하고 싶은 변수명으로 함수를 선언
+                // - 함수 내부에는 보여주고 싶은 값을 코드로 반환하도록 작성
+                // - Vue에 등록한 값에 접근할 때 반드시 this를 붙여야함
+                // - 코드가 길면 안됨(무리가 많이 감)
+                computed:{
+
                 },
-                cancleEdit(index){
-                    // 지금까지 작업한 내용을 초기화
-                    this.pocketmonList[index].name = this.pocketmonListCopy[index].name;
-                    this.pocketmonList[index].type = this.pocketmonListCopy[index].type;
-                    this.pocketmonList[index].edit = false;
+                methods:{
+                    async loadList(){
+                        const resp = await axios.get("http://localhost:8080/pocketmon/");
+                        
+                        this.pocketmonList.splice(0);
+                        this.pocketmonListCopy.splice(0);
+
+
+                        this.pocketmonList.push(...resp.data);
+                        // lodash에서 제공하는 깊은 복사 명령 사용
+                        const copy = _.cloneDeep(resp.data);
+                        this.pocketmonListCopy.push(...copy);
+                    },
+                    changeEdit(index){
+                        this.pocketmonList[index].edit = true;
+                    },
+                    cancleEdit(index){
+                        // 지금까지 작업한 내용을 초기화
+                        this.pocketmonList[index].name = this.pocketmonListCopy[index].name;
+                        this.pocketmonList[index].type = this.pocketmonListCopy[index].type;
+                        this.pocketmonList[index].edit = false;
+                    },
+
+                    // 지정한 위치의 데이터를 서버로 전송하여 수정처리
+                    async sendEdit(index){
+                        const url = "http://localhost:8080/pocketmon/";
+                        const data =  this.pocketmonList[index];
+                        const resp = await axios.put(url, data);
+                        console.log(resp);
+
+                        // 입력창만 제거 (문제 : 사본이 고치기 전 상태)
+                        // this.pocketmonList[index].edit = false;
+                        // + 사본 코드를 변경하도록 처리
+
+                        // 목록 다시 불러오기(문제 : 원본 데이터가 남아있음)
+                        this.loadList();
+                    },
                 },
+                watch:{
 
-                // 지정한 위치의 데이터를 서버로 전송하여 수정처리
-                async sendEdit(index){
-                    const url = "http://localhost:8080/pocketmon/";
-                    const data =  this.pocketmonList[index];
-                    const resp = await axios.put(url, data);
-                    console.log(resp);
-
-                    // 입력창만 제거 (문제 : 사본이 고치기 전 상태)
-                    // this.pocketmonList[index].edit = false;
-                    // + 사본 코드를 변경하도록 처리
-
-                    // 목록 다시 불러오기(문제 : 원본 데이터가 남아있음)
+                },
+                created(){      // hook : 특정 시점에 자동 실행되는 코드
                     this.loadList();
                 },
-            },
-            watch:{
-
-            },
-            created(){      // hook : 특정 시점에 자동 실행되는 코드
-                this.loadList();
-            },
-        }).mount("#app");
-    </script>
+            }).mount("#app");
+        </script>
+    </body>
+    </html>
