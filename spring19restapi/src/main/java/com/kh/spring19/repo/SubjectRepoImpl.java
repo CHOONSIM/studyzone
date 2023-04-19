@@ -1,6 +1,7 @@
 package com.kh.spring19.repo;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,19 @@ public class SubjectRepoImpl implements SubjectRepo{
 	@Override
 	public boolean delete(int no) {
 		return sqlSession.delete("subject.remove",no)>0;
+	}
+
+	@Override
+	public List<SubjectDto> selectListByName(String name) {
+		return sqlSession.selectList("subject.searchName",name);
+	}
+
+	@Override
+	public List<SubjectDto> selectListByPaging(int page) {
+		int end = page * 10;
+		int begin = end - 9;
+		Map<String,Object> param = Map.of("begin", begin,"end",end);
+		return sqlSession.selectList("subject.infinite", param);
 	}
 	
 }

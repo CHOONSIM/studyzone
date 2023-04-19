@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.NoHandlerFoundException;
@@ -73,7 +74,10 @@ public class PocketmonRestController {
 	
 	@PostMapping("/")
 //	public void add(@ModelAttribute PocketmonDto dto) {
-	public void add(@ParameterObject @ModelAttribute PocketmonDto dto) {
+	public void add(
+			@ParameterObject 	//문서에 형태를 표시하기 위한 (문서용)
+			@RequestBody		// JSON 형태 전송을 수신할 수 있음(axios)(처리용)
+			PocketmonDto dto) {
 		repo.insert(dto);
 	}
 	
@@ -160,7 +164,11 @@ public class PocketmonRestController {
 	}
 	
 	@PutMapping("/")
-	public void edit(@ModelAttribute PocketmonDto dto) throws NoHandlerFoundException {
+//	public void edit(@ModelAttribute PocketmonDto dto) throws NoHandlerFoundException {
+	public void edit(
+			@ParameterObject 
+			@RequestBody PocketmonDto dto
+			) throws NoHandlerFoundException {
 		PocketmonDto find = repo.selectOne(dto.getNo());
 		if(find == null) 
 			throw new NoHandlerFoundException(null, null, null);
