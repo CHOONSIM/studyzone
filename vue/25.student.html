@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Student</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    
+</head>
+<body>
+    <!--
+        VueJS는 제어 영역을 반드시 설정해야 한다.
+    -->
+    <div id="app">
+
+    </div>
+
+    <!--
+        VueJS는 Lazy Loading 방식으로 제어 영역에 대한 프로그래밍 구현 
+
+        무조건 최신버전
+        <script src="https://unpkg.com/vue@next"></script>
+    -->
+    <script src="https://unpkg.com/vue@3.2.36"></script>
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- Lodash -->
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+ 
+        <script>
+            Vue.createApp({
+                // 데이터 설정 영역
+                data(){
+                    return{
+                        // 화면에서 사용할 데이터 선언
+                    
+                    };
+                },
+                // 데이터 실시간 계산 영역
+                // - 사용하고 싶은 변수명으로 함수를 선언
+                // - 함수 내부에는 보여주고 싶은 값을 코드로 반환하도록 작성
+                // - Vue에 등록한 값에 접근할 때 반드시 this를 붙여야함
+                // - 코드가 길면 안됨(무리가 많이 감)
+                computed:{
+
+                },
+                methods:{
+                    
+                },
+                watch:{
+                    // data에 있는 keyword가 변하면 실행할 영역
+                    // keyword:function(){},
+                    // keyword(){
+                        keyword(cur, old){
+                        //console.log(arguments);     // arguments before ,after를 보여줌
+                        //console.log("keyword watch");
+                        //console.log("before=",old,"after=", cur);
+                        this.loadResult();
+                    },
+                },
+            }).mount("#app");
+            
+        </script>
+    </body>
+    </html>
