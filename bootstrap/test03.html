@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반응형 화면 배치</title>
+
+    <style>
+        /* 메인 스타일 - 데스크탑*/
+        *{
+            box-sizing: border-box;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .gallery > .item {
+            width:25%;
+            padding:10px;
+            transition: width 0.1s ease-out;;
+        }
+
+        .gallery > .item > img {
+            width:100%
+        }
+
+        /*조건부 스타일 - 태블릿*/
+        @media screen and (max-width:992px){            /* max-width:??px  ??px 이하일때 */
+            .gallery > .item {
+                width:50%;
+            }
+        }
+
+        /*조건부 스타일 - 모바일*/
+        @media screen and (max-width:768px){            
+            .gallery > .item {
+                width:100%;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    <div class="gallery">
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+        <div class="item"><img src="http://via.placeholder.com/150x150?text=p"></div>
+
+    </div>
+</body>
+</html>
