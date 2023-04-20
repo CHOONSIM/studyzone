@@ -73,6 +73,38 @@
                     </div>
                 </div>
 
+                <div class="row mt-4" id="paging">
+                    <div class="col d-flex justify-content-center align-items-center">
+                        <ul class="pagination">
+                            <li class="page-item">
+                              <a class="page-link" href="#">&laquo;</a>
+                            </li>
+                            <li class="page-item" v-for="index in (end-begin+1)" :key="index"
+                                    v-bind:class="{active:(index+begin-1) == page}">
+                                    <!-- v-bind:class="{이름:상황}" -->
+                              <a class="page-link" href="#"
+                                    v-on:click.prevent="page=index+begin-1">{{index+begin-1}}</a>
+                            </li>
+                            <li class="page-item">
+                              <a class="page-link" href="#">&raquo;</a>
+                            </li>
+                          </ul>
+                    </div>
+                </div>
+
+                <script src="https://unpkg.com/vue@3.2.36"></script>
+                <script>
+                    Vue.createApp({
+                        data(){
+                            return{
+                                page:15,
+                                begin:11,
+                                end:20,
+                            };
+                        },
+                        
+                    }).mount("#paging");
+                </script>
 
             </div>
         </div>
