@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+    <style>
+        div {
+            border: 1px dotted gray;
+        }
+    </style>
+</head>
+<body>
+
+    <!--
+      container - 화면이 배치될 기본 위치
+        1. container - 기본 컨테이너이며 폭에 반응하여 자동 조정(뚝뚝끊김)
+        2. container-fluid - 폭의 변화에 부드럽게 반응하는 컨테이너(100%)
+    -->
+    <div class="container-fluid mt-4">
+
+      <!-- 
+        row - 한 줄 영역
+      -->
+        <div class="row text-center">
+
+            <!--
+            한 칸 영역
+            -->
+            <div class="col">
+                <h1>레이아웃 배치</h1>
+            </div>
+        </div>
+
+      <!-- 
+        row와 col을 적절하게 사용하여 화면을 분할하여 구현
+            - col의 개수만큼 화면이 단으로 구분됨(폭의 영향이 없음)
+            - col-3과 같이 비율을 설정할 수 있다(총 12칸으로 구현됨)
+      -->
+        <div class="row mt-4">
+                <div class="col">
+                    <h2>폭에 영향을 받지 않는 배치</h2>
+                </div>
+        </div>
+
+        <div class="row">
+            <div class="col">1</div>
+            <div class="col">2</div>
+            <div class="col">3</div>
+            <div class="col">4</div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">1</div>
+            <div class="col-9">2</div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">좌측</div>
+            <div class="col-6">가운데</div>
+            <div class="col-3">우측</div>
+        </div>
+
+        <div class="row">
+            <div class="offset-3 col-6">가운데</div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                <h2>폭에 영향을 받는 배치</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg">Large</div>
+            <div class="col-lg">Large</div>
+            <div class="col-lg">Large</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md">Medium</div>
+            <div class="col-md">Medium</div>
+            <div class="col-md">Medium</div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm">Small</div>
+            <div class="col-sm">Small</div>
+            <div class="col-sm">Small</div>
+        </div>
+
+        <!--혼합배치 : 넓을때는 4칸 , 중간일 땐 2칸, 좁을 땐 1칸-->
+        <div class="row">
+            <div class="col-lg-3 col-md-6">Mixed</div>
+            <div class="col-lg-3 col-md-6">Mixed</div>
+            <div class="col-lg-3 col-md-6">Mixed</div>
+            <div class="col-lg-3 col-md-6">Mixed</div>
+        </div>
+
+        <!-- 여백배치 : 크기에 맞는 여백 사용(offset,col 사이즈 맞추기)-->
+        <div class="row">
+            <div class="offset-lg-3 col-lg-6">Large</div>
+            <div class="offset-md-3 col-md-6">Medium</div>
+            <div class="offset-sm-3 col-sm-6">Small</div>
+        </div>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
