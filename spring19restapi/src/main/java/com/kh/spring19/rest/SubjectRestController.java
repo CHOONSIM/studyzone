@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.NoHandlerFoundException;
@@ -66,7 +67,10 @@ public class SubjectRestController {
 	)
 	
 	@PostMapping("/")
-	public void add(@ParameterObject @ModelAttribute SubjectDto dto){
+//	public void add(@ParameterObject @ModelAttribute SubjectDto dto){
+	public void add(
+			@ParameterObject 
+			@RequestBody SubjectDto dto){
 		repo.insert(dto);
 	}
 	@Operation(
@@ -149,7 +153,9 @@ public class SubjectRestController {
 	}
 	
 	@PutMapping("/")
-	public void edit(@ModelAttribute SubjectDto dto) {
+//	public void edit(@ModelAttribute SubjectDto dto) {
+	public void edit(
+			@RequestBody SubjectDto dto) {
 		SubjectDto find = repo.selectOne(dto.getNo());
 		if(find == null)
 			repo.update(dto);
@@ -160,6 +166,16 @@ public class SubjectRestController {
 		if(dto == null) 
 			throw new NoHandlerFoundException(null, null, null);
 		repo.delete(no);
+	}
+	
+	@GetMapping("/name/{name}")
+	public List<SubjectDto>searchName(@PathVariable String name){
+		return repo.selectListByName(name);
+	}
+	
+	@GetMapping("/page/{page}")
+	public List<SubjectDto>paging(@PathVariable int page){
+		return repo.selectListByPaging(page);
 	}
 }
 	
