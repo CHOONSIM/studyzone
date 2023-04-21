@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module이란 무엇인가</title>
+
+    <!-- 모듈이 없는 경우는 모든 스크립트가 순서대로 통합된다-->
+    <script>
+        const a = 10;
+        const b = 20;
+        const c = 30;
+    </script>
+    <script>
+        console.log(a);
+        console.log(b);
+        console.log(c);
+    </script>
+
+    <!-- 
+        모듈을 사용하면 모듈 내에서 export/import를 통해
+        불러오거나 내보낼 항목을 지정할 수 있다
+
+        +순서의 의미가 없어진다.
+    -->
+    <!-- <script src="./26.mudule.js"></script> -->
+    <script type="module">
+        // 26.module.js에서 a라는 이름으로 내보내진 데이터를 불러오겠다.
+        import {a,b} from "./26.module.js";
+        
+        // 26.module.js에서 default export된 항목을 hello라는 이름으로 불러오겠다.
+        // -> default export는 단 한번밖에 작성할 수 없다.
+        import hello from "./26.module.js";     
+
+        console.log("Module");
+        console.log(a,b);
+        console.log(hello);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
