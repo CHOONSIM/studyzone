@@ -43,7 +43,13 @@
                     <div class="row mt-4">
                         <label class="col-sm-3 col-form-label">번호</label>
                         <div class="col-sm-9">
-                            <input type="text" name="no" class="form-control rounded" v-model.number="pocketmon.no">
+                            <input type="text" name="no" class="form-control rounded" 
+                                v-model.number="pocketmon.no" :class="pocketmonClass.no"
+                                    v-on:blur="checkNo">
+
+                            <!--피드백 설정-->
+                            <div class="valid-feedback">사용할 수 있는 번호입니다.</div>
+                            <div class="invalid-feedback">{{noErrorFeedback}}</div>
                         </div>
                     </div>
 
@@ -51,7 +57,13 @@
                     <div class="row mt-4">
                         <label class="col-sm-3 col-form-label">이름</label>
                         <div class="col-sm-9">
-                            <input type="text" name="name" class="form-control rounded" v-on:input="pocketmon.name = $event.target.value" v-model="pocketmon.name">
+                            <input type="text" name="name" class="form-control rounded" 
+                                v-on:input="pocketmon.name = $event.target.value" v-model="pocketmon.name" 
+                                    :class="pocketmonClass.name" v-on:blur="checkName">
+
+                            <!--피드백 설정-->
+                            <div class="valid-feedback">사용할 수 있는 이름입니다.</div>
+                            <div class="invalid-feedback">이름은 한글 7자 이내로 가능합니다.</div>
                         </div>
                     </div>
 
@@ -59,7 +71,12 @@
                     <div class="row mt-4">
                         <label class="col-sm-3 col-form-label">속성</label>
                         <div class="col-sm-9">
-                            <input type="text" name="type" class="form-control rounded"  v-on:input="pocketmon.type = $event.target.value" v-model="pocketmon.type">
+                            <input type="text" name="type" class="form-control rounded"
+                                v-on:input="pocketmon.type = $event.target.value" v-model="pocketmon.type" 
+                                    :class="pocketmonClass.type" v-on:blur="checkType">
+
+                            <!--피드백 설정-->
+                            <div class="invalid-feedback">존재하는 속성값만 입력 가능합니다.</div>
                         </div>
                     </div>
 
@@ -99,8 +116,11 @@
                     // 화면에서 사용할 데이터 선언
                     pocketmon:{
                         no:"",
+                        noCheck:false,
                         name:"",
                         type:"",
+
+                        //잘못된 형식 선별
                         get noValid(){
                             const value = parseInt(this.no);
                             return value > 0;               // 숫자 이외(음수포함)는 막을 수 있음
@@ -114,9 +134,33 @@
                             return list.includes(this.type);
                         },
                         get allValid(){
-                            return this.noValid && this.nameValid && this.typeValid;
+                            return this.noValid && this.noCheck
+                                && this.nameValid && this.typeValid;
                         },
                     },
+
+                    // 입력창에 is-valid 또는 is-invalid를 붙이면 판정 효과가
+                    // - v-bind:class로 작성하기에는 너무 코드가 길고 복잡함
+                    // - 객체로 만들어서 입력창에 연결시키면 좋을듯
+                    pocketmonClass : {
+                        no : {
+                            "is-valid" : false,
+                            "is-invalid" : false,
+                        },
+                        name : {
+                            "is-valid" : false,
+                            "is-invalid" : false,
+                        },
+                        type : {
+                            "is-valid" : false,
+                            "is-invalid" : false,
+                        },
+                    },
+
+                    // 상태에 따른 피드백 메세지를 준비
+                
+                    noErrorFeedback:"",
+
                 };
             },
             computed:{
@@ -127,13 +171,89 @@
                 // 이벤트 객체를 1번 매개변수에 자동으로 설정해준다
                 sendData(e){
                     // 유효성 검사
+                    if(this.pocketmon.allValid == false) return;
 
                     // e.target이 form이므로 submit()으로 전송을 지시
                     e.target.submit();
                 },
+
+                checkNo(){
+                    this.pocketmonClass.no["is-valid"] = false;
+                    this.pocketmonClass.no["is-invalid"] = false;
+
+                    // 형식검사 중복검사 둘다 통과
+                    if(this.pocketmon.noCheck && this.pocketmon.noValid){
+                        this.pocketmonClass.no["is-valid"] = true;
+                    }
+                    else if(this.pocketmon.noValid){        // 형식 검사만 통과
+                        this.pocketmonClass.no["is-invalid"] = true;
+                        this.noErrorFeedback= "이미 사용중인 번호입니다.";
+                    }
+                    else{
+                        this.pocketmonClass.no["is-invalid"] = true;
+                        this.noErrorFeedback= "잘못된 형식의 번호입니다.";
+
+                    }
+
+                    if(this.pocketmon.noValid){
+                        // this.pocketmonClass.no.is-valid = true;  이름에 대쉬 불가
+                        this.pocketmonClass.no["is-valid"] = true;
+                    }
+                    else{
+                        this.pocketmonClass.no["is-invalid"] = true;
+                    }
+                },
+
+                checkName(){
+                    this.pocketmonClass.name["is-valid"] = false;
+                    this.pocketmonClass.name["is-invalid"] = false;
+                    
+                    if(this.pocketmon.nameValid){
+                        this.pocketmonClass.name["is-valid"] = true;
+                    }
+                    else{
+                        this.pocketmonClass.name["is-invalid"] = true;
+                    }
+                },
+
+                checkType(){
+                    this.pocketmonClass.type["is-valid"] = false;
+                    this.pocketmonClass.type["is-invalid"] = false;
+
+                    if(this.pocketmon.typeValid){
+                        this.pocketmonClass.type["is-valid"] = true;
+                    }
+                    else{
+                        this.pocketmonClass.type["is-invalid"] = true;
+                    }
+                },
+                async checkNoConflict(){
+                    if(this.pocketmon.noValid == false) return;         // 형식검사가 통과될때만 중복검사 실행
+
+                    const url = "http://localhost:8080/rest/pocketmon/" + this.pocketmon.no;
+                    const resp = await axios.get(url);
+                    // this.pocketmon.noCheck = (resp.data == "NNNNY");
+                    if(resp.data == "NNNNY"){
+                        this.pocketmon.noCheck = true;
+                    }
+                    else{
+                        this.pocketmon.noCheck = false;
+                    }
+                },
             },
             watch:{
+                // no에 대한 중복검사를 실시
+                // - debounce 500ms 시점
 
+                // no만
+                // "pocketmon.no":function(){},
+                // no,name,type 모두
+                // pocketmon:{deep:true, handler:function(){}},
+
+                "pocketmon.no":_.debounce(function(value){
+                    // console.log(value, this.pocketmon.no);
+                    this.checkNoConflict();
+                }, 500),
             },
         }).mount("#app");
         
