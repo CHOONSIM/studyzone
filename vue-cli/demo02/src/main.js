@@ -9,6 +9,7 @@ import "bootswatch/dist/lux/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js"
 
 
+
 // 이미 개발된 라우터 모듈을 불러오도록 구현(index.js는 경로에서 생략 가능)
 import {router} from './utils/router'
 // import {router} from './utils/router/index.js'
