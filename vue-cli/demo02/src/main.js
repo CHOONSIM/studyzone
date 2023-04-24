@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 
 createApp(App).mount('#app')
-
+ 
 /*
     CDN 방식일 때는
     Vue.createApp({}).mount("#app");과 같이 작성했음
