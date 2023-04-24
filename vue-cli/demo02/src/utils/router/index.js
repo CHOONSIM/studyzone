@@ -26,6 +26,7 @@ import MainContent from "@/components/MainContent.vue";
 import DevInfo from "@/components/DevInfo.vue"
 import PocketmonManage from "@/components/PocketmonManage.vue"
 import SubjectManage from "@/components/SubjectManage.vue"
+import NotFound from "@/components/error/NotFound.vue"
 
 
 
@@ -51,6 +52,11 @@ const router = createRouter({
         {path:"/pocketmon", component:PocketmonManage},
 
         {path:"/subject", component:SubjectManage},
+
+        // 위에 해당하지 않는 모든 페이지는 NotFound.vue로 연결한다
+        // - wildcard(*)는 작동하지 않는다
+        // - 패턴을 알려주기 위한 별도의 식을 작성해야 한다.
+        {path:"/:pathMatch(.*)", component:NotFound},
     ],
 });
 
