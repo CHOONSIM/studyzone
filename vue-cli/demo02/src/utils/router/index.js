@@ -24,6 +24,10 @@ createWebHashHistory
 import { createRouter, createWebHashHistory} from "vue-router";
 import MainContent from "@/components/MainContent.vue";
 import DevInfo from "@/components/DevInfo.vue"
+import PocketmonManage from "@/components/PocketmonManage.vue"
+import SubjectManage from "@/components/SubjectManage.vue"
+
+
 
 // 라우터 생성
 const router = createRouter({
@@ -43,6 +47,10 @@ const router = createRouter({
 
         // 주소 (info)로 들어올 경우 컴포넌트 (DevInfo.vue)를 표시한다
         {path:"/info", component:DevInfo},
+
+        {path:"/pocketmon", component:PocketmonManage},
+
+        {path:"/subject", component:SubjectManage},
     ],
 });
 
