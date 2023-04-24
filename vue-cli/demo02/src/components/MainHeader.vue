@@ -1,6 +1,15 @@
 <template>
   <div class="header">
       <h1>{{ title }}</h1>
+
+      <!-- 메뉴 구현 -->
+      <a href="#">홈</a>
+      &nbsp;
+      <a href="#">게시판</a>
+      &nbsp;
+      <a href="#">로그인</a>
+      &nbsp;
+      <a href="#">정보</a>
   </div>
 </template>
 
