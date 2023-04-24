@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>VueJS</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.2.3/lux/bootstrap.min.css">
+
+    
+</head>
+<body>
+
+    <div class="container-fluid mt-4" id="app">
+
+        <div class="row">
+            <div class="offset-md-2 col-md-8">
+          <h1>비밀번호 입력</h1>
+        </div>
+        <div class="row mt-4">
+            <div class="col">
+                <input class="form-control rounded" type="password" v-model="password" readonly>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <label>
+                <input type="checkbox" v-model="showPassword"> 비밀번호 표시
+            </label>
+        </div>
+        <div class="keypad mt-4">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                      <button class="btn btn-outline-secondary btn-md" @click="add('1')">1</button>
+                      <button class="btn btn-outline-secondary btn-md" @click="add('2')">2</button>
+                      <button class="btn btn-outline-secondary btn-md" @click="add('3')">3</button>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <button class="btn btn-outline-secondary" @click="add('4')">4</button>
+                      <button class="btn btn-outline-secondary" @click="add('5')">5</button>
+                      <button class="btn btn-outline-secondary" @click="add('6')">6</button>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <button class="btn btn-outline-secondary" @click="add('7')">7</button>
+                      <button class="btn btn-outline-secondary" @click="add('8')">8</button>
+                      <button class="btn btn-outline-secondary" @click="add('9')">9</button>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <button class="btn btn-outline-secondary" @click="add('0')">0</button>
+                    </div>
+                  </div>
+            </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <button class="btn btn-success btn-sm w-100" @click="shuffle()">섞기</button>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <button class="btn btn-warning btn-sm w-100" @click="clearInput()">지우기</button>
+        </div>
+    </div>
+    
+</div>
+</div>
+
+    <script src="https://unpkg.com/vue@3.2.36"></script>
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- Lodash -->
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+
+    <script>
+        Vue.createApp({
+          data() {
+            return {
+              keypadValues: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
+              password: '',
+              showPassword: false,
+            };
+          },
+          computed: {
+            shuffledKeypadValues() {
+              return _.shuffle(this.keypadValues);
+            },
+          },
+          methods: {
+            add(value) {
+              this.password += value;
+            },
+            clearInput() {
+              this.password = '';
+            },
+            shuffle() {
+                let buttons = document.querySelectorAll('.keypad button');
+                buttons = Array.from(buttons);
+                buttons.sort(() => Math.random() - 0.5);
+                const keypad = document.querySelector('.keypad');
+                buttons.forEach((button) => {
+                    keypad.insertBefore(button, keypad.lastChild);
+                });
+                },
+          },
+          watch: {
+            showPassword(newValue) {
+              const input = document.querySelector('.form-control');
+              input.type = newValue ? 'text' : 'password';
+            },
+          },
+        }).mount("#app");
+      </script>
+
+    </body>
+    </html>
