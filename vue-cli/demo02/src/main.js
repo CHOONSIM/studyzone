@@ -25,5 +25,15 @@ app.config.globalProperties.$http = axios;
 
 // - 라우터를 사용하도록 설정해야함(use 함수 사용)
 // createApp(App).use(router).mount('#app')
-app.use(router).mount('#app');
+app.use(router);
+
+// Vuex를 사용하도록 설정해야함
+import { storage } from './utils/vuex';
+app.use(storage);
+
+// 생성된 app을 id=app 영역을 제어할 수 있도록 설정
+app.mount('#app');
+
+
+// vue용도는 use 나머지는 다름
  
