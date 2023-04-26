@@ -19,8 +19,8 @@
     <div id="app">
         <!--이메일 입력줄-->
         <div>
-            <input type="text" v-model="email" placeholder="이메일 입력">
-            <button v-on:click="sendCertMail" v-bind:disabled="sending">
+            <input v-on:keyup.enter="sendCertMail" type="text" v-model="email" placeholder="이메일 입력" v-bind:disabled="checkResult == 'Y'">
+            <button v-on:click="sendCertMail" v-bind:disabled="sending" v-if="checkResult !== 'Y' ">
 
                 <span v-if="sending == false">
                     <span v-if="sendingCount == 0">인증번호 보내기</span>
@@ -34,9 +34,18 @@
         </div>
 
         <!--인증번호 입력줄-->
-        <div v-if="sendingCount > 0">
-            <input type="text" v-model="secret" placeholder="인증번호 입력">
+        <div v-if="checkResult !='Y' && sendingCount > 0">
+            <input v-on:keyup.enter="sendCheck" type="text" v-model="secret" placeholder="인증번호 입력">
             <button v-on:click="sendCheck">확인</button>
+
+            <div v-if="checkResult =='N'">잘못된 인증번호입니다.</div>
+        </div>
+
+        <div v-else-if="checkResult == 'Y'">
+            인증성공
+            <a href="#" v-on:click.prevent = "checkResult = null">
+                다시 인증하기
+            </a>
         </div>
     </div>
 
@@ -65,6 +74,9 @@
 
                         // 이메일을 몇번 보냈는지 기록하는 변수
                         sendingCount:0,
+
+                        //이메일 인증 결과를 기록하는 변수(null / Y / N)
+                        checkResult : null,
                     };
                 },
                 // 데이터 실시간 계산 영역
@@ -92,10 +104,10 @@
                             email : this.email,
                             secret : this.secret
                         };
-                        const response = await axios.post(url,data);
-
+                        const resp = await axios.post(url,data);
                         //완료작업
-
+                        // console,log(resp.date);
+                        this.checkResult = resp.data; //Y또는N
                     },
                 },
 
