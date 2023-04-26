@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>VueJS</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    
+</head>
+<body>
+    <!--
+        VueJS는 제어 영역을 반드시 설정해야 한다.
+    -->
+    <div id="app">
+        <!--이메일 입력줄-->
+        <div>
+            <input type="text" v-model="email" placeholder="이메일 입력">
+            <button v-on:click="sendCertMail" v-bind:disabled="sending">
+
+                <span v-if="sending == false">
+                    <span v-if="sendingCount == 0">인증번호 보내기</span>
+                    <span v-else>인증번호 재전송</span>
+                </span>
+                <span v-else>
+                    <i class="fa-solid fa-cog fa-spin"></i>
+                    전송중...
+                </span>
+            </button>
+        </div>
+
+        <!--인증번호 입력줄-->
+        <div v-if="sendingCount > 0">
+            <input type="text" v-model="secret" placeholder="인증번호 입력">
+            <button v-on:click="sendCheck">확인</button>
+        </div>
+    </div>
+
+    <!--
+        VueJS는 Lazy Loading 방식으로 제어 영역에 대한 프로그래밍 구현 
+
+        무조건 최신버전
+        <script src="https://unpkg.com/vue@next"></script>
+    -->
+    <script src="https://unpkg.com/vue@3.2.36"></script>
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- Lodash -->
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+ 
+        <script>
+            Vue.createApp({
+                // 데이터 설정 영역
+                data(){
+                    return{
+                        // 화면에서 사용할 데이터 선언
+                        email:"",
+
+                        //이메일이 발송중인지를 기록하는 변수
+                        sending:false,
+
+                        // 이메일을 몇번 보냈는지 기록하는 변수
+                        sendingCount:0,
+                    };
+                },
+                // 데이터 실시간 계산 영역
+                // - 사용하고 싶은 변수명으로 함수를 선언
+                // - 함수 내부에는 보여주고 싶은 값을 코드로 반환하도록 작성
+                // - Vue에 등록한 값에 접근할 때 반드시 this를 붙여야함
+                // - 코드가 길면 안됨(무리가 많이 감)
+                computed:{
+
+                },
+                methods:{
+                    async sendCertMail(){
+                        this.sending = true;
+
+                        const url = "http://localhost:8080/cert/";
+                        const data = {email:this.email};
+                        const resp = await axios.post(url,data);
+
+                        this.sending = false;
+                        this.sendingCount++;
+                    },
+                    async sendCheck(){
+                        const url="http://localhost:8080/cert/check";
+                        const data = {
+                            email : this.email,
+                            secret : this.secret
+                        };
+                        const response = await axios.post(url,data);
+
+                        //완료작업
+
+                    },
+                },
+
+                watch:{
+                    
+                },
+            }).mount("#app");
+            
+        </script>
+    </body>
+    </html>
