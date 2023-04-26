@@ -8,7 +8,7 @@
     	
     	<!-- 이메일에 인증번호 발송 시 해당 내용을 저장할 수 있는 기능 -->
     	<insert id="add">
-    		insert into cert(email, secret) values(#{email}, #{secret})
-    	</insert>
+			insert into cert(email, secret) values(#{email}, #{secret})
+		</insert>	
     	
     </mapper>
