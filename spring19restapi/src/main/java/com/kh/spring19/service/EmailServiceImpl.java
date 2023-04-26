@@ -21,7 +21,7 @@ import com.kh.spring19.dto.CertDto;
 import com.kh.spring19.repo.CertRepo;
 
 @Service
-public class EmailSerivceImpl implements EmailService {
+public class EmailServiceImpl implements EmailService {
 
 	@Autowired
 	private RandomGenerator generator;
