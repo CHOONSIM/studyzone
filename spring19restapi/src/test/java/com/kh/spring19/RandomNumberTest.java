@@ -21,4 +21,6 @@ public class RandomNumberTest {
 		log.debug("6자리={}", generator.number(6));
 		log.debug("7자리={}", generator.number(7));
 	}
+	
+	
 }
