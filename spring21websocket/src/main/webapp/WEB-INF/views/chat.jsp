@@ -39,7 +39,20 @@
 		
 		// [1] 연결 버튼을 누르면 연결 되도록 구현
 		$(".btn-connect").click(function(){
-			const url = "ws://localhost:8080/ws/chat";
+			
+			// 고정된 주소
+ 			//const url = "ws://localhost:8080/ws/chat";
+			
+			// 변화하는 주소에 맞게 자동 계산되도록 구현
+			let url="";
+			if(location.protocol == "http:")
+				url += "ws://";
+			else
+				url +="wss://";
+			url += location.host;
+			url += "/ws/chat";
+			
+			
 			window.socket = new WebSocket(url);
 			
 			// 실제로 연결이 됐는지, 끊어졌는지 알 방법이 없다
