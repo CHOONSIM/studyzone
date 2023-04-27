@@ -1,7 +1,13 @@
 package com.kh.spring21.websocket;
 
+import java.io.IOException;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
+
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.CloseStatus;
+import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
@@ -27,13 +33,39 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class BasicWebsocketServer extends TextWebSocketHandler{
 
+	// 사용자를 저장하기 위한 Collection 생성
+//	private Set<WebSocketSession> set = new ConcurrentSkipListSet<>();
+	private Set<WebSocketSession> set = new CopyOnWriteArraySet<>();
+//	private Set<WebSocketSession> set = Collections.synchronizedSet(new HashSet<>());
+	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		log.debug("사용자 접속");
+		
+		// 사용자를 Collention에 추가
+		set.add(session);
+		
+		log.debug("사용자 접속. 현재 ={}명", set.size());
+		log.debug("session={}",session);
+		
 	}
 	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		log.debug("사용자 종료");
+		
+		// 사용자를 Collention에 제거
+		set.remove(session);
+		
+		log.debug("사용자 종료. 현재 ={}명",set.size());
+		log.debug("session={}",session);
+	}
+	
+	// 메세지를 보낼 때에는 메세지 객체를 만들고
+	// WebSocketSession의 sendMessage() 를 사용한다
+	@Scheduled(cron="*/10 * * * * *")
+	public void macro() throws IOException {
+		TextMessage message = new TextMessage("Hello Websocket");
+		for(WebSocketSession session:set) {
+			session.sendMessage(message);
+		}
 	}
 }
