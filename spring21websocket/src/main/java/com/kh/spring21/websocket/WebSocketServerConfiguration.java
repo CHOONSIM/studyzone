@@ -16,6 +16,9 @@ public class WebSocketServerConfiguration implements WebSocketConfigurer{
 	
 	@Autowired
 	private ChatWebsocketServer chatWebsocketServer;
+	
+	@Autowired
+	private SockJsWebSocketServer sockJsWebSocketServer;
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 //		basicWebsocketServer 를 어딘가에 등록하겠다
@@ -27,6 +30,10 @@ public class WebSocketServerConfiguration implements WebSocketConfigurer{
 		registry.addHandler(basicWebsocketServer, "/ws/basic");
 		
 		registry.addHandler(chatWebsocketServer, "/ws/chat");
+		
+		// SockJs를 사용하도록 웹소켓 서버를 등록
+		registry.addHandler(sockJsWebSocketServer, "/ws/sockjs")	//등록하고
+			.withSockJS();	// sockjs를 쓴다고 선언
 	}
 
 }

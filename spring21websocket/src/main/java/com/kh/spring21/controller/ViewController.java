@@ -18,4 +18,10 @@ public class ViewController {
 	public String chat() {
 		return "chat";
 	}
+	
+	@GetMapping("/sockjs")
+	public String sockjs() {
+		//return "/WEB_INF/views/sockjs.jsp";
+		return "sockjs";
+	}
 }
