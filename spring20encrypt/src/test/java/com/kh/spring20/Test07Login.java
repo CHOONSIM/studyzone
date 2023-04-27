@@ -9,9 +9,9 @@ import com.kh.spring20.repo.SecurityRepo;
 
 import lombok.extern.slf4j.Slf4j;
 
-@SpringBootTest
 @Slf4j
-public class Test06Join {
+@SpringBootTest
+public class Test07Login {
 
 	@Autowired
 	private SecurityRepo securityRepo;
@@ -22,6 +22,7 @@ public class Test06Join {
 		dto.setMemberId("yoyyo4");
 		dto.setMemberPw("keonwoo7421");
 		
-		securityRepo.insert(dto);
+		boolean result = securityRepo.login(dto);
+		log.debug("result={}",result);
 	}
 }
