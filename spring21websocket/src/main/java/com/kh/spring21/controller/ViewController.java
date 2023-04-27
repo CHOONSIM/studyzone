@@ -13,4 +13,9 @@ public class ViewController {
 		//return "/WEB_INF/views/basic.jsp";
 		return "basic";
 	}
+	
+	@GetMapping("/chat")
+	public String chat() {
+		return "chat";
+	}
 }
