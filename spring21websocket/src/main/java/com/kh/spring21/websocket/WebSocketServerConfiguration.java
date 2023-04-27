@@ -21,7 +21,7 @@ public class WebSocketServerConfiguration implements WebSocketConfigurer{
 //		basicWebsocketServer 를 어딘가에 등록하겠다
 //		만들어둔 웹소켓 서버를 등록하는 코드를 작성
 //		-주의-
-//		- 어떠한 주소와도 겹치면 안됨(비어있는 페이지로 설정)
+//		- 어떠한 주소와도 겹치면 안됨(HTTP도포함)(비어있는 페이지로 설정)
 		
 //		BasicWebsocketServer를 ws://localhost:8080/ws/basic 주소에서 사용하겠습니다.
 		registry.addHandler(basicWebsocketServer, "/ws/basic");
