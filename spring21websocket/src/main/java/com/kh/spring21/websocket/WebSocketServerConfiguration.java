@@ -14,6 +14,8 @@ public class WebSocketServerConfiguration implements WebSocketConfigurer{
 	@Autowired
 	private BasicWebsocketServer basicWebsocketServer;
 	
+	@Autowired
+	private ChatWebsocketServer chatWebsocketServer;
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 //		basicWebsocketServer 를 어딘가에 등록하겠다
@@ -24,6 +26,7 @@ public class WebSocketServerConfiguration implements WebSocketConfigurer{
 //		BasicWebsocketServer를 ws://localhost:8080/ws/basic 주소에서 사용하겠습니다.
 		registry.addHandler(basicWebsocketServer, "/ws/basic");
 		
+		registry.addHandler(chatWebsocketServer, "/ws/chat");
 	}
 
 }
