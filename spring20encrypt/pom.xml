@@ -107,6 +107,14 @@
 		    <version>1.15.4</version>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+		<!-- Spring Security에서 제공하는 암호화 모듈 의존성-->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		</dependency>
+
+		
 	</dependencies>
 
 	<build>
