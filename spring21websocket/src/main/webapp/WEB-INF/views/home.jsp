@@ -1,17 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <h1>웹소켓 예제 모음</h1>
 
-<!-- 로그인 화면 : 로그아웃 상태일 때-->
-<form action="login" method="post">
-	<input type="text" name="memberId" required placeholder="아이디">
-	<input type="password" name="memberPw" required placeholder="비밀번호">
-	<button type="submit">로그인</button>
-</form>
+<c:choose>
+	<c:when test="${memberId == null }">
+		<!-- 로그인 화면 : 로그아웃 상태일 때-->
+		<form action="login" method="post">
+			<input type="text" name="memberId" required placeholder="아이디">
+			<input type="password" name="memberPw" required placeholder="비밀번호">
+			<button type="submit">로그인</button>
+		</form>
+	</c:when>
+	<c:otherwise>
+		<!-- 사용자 정보 : 로그인 상태일 때 -->
+		<h2>
+		아이디 : ${sessionScope.memberId },
+		등급 : ${sessionScope.memberLevel }
+		<a href="logout">로그아웃</a>
+		</h2>
+	</c:otherwise>
+</c:choose>
 
-<!-- 사용자 정보 : 로그인 상태일 때 -->
-<h2>
-아이디 : ${sessionScope.memberId },
-등급 : ${sessionScope.memberLevel }
-<a href="logout">로그아웃</a>
-</h2>
+<h2><a href="basic">기본 웹소켓 채팅</a></h2>
+<h2><a href="chat">채팅</a></h2>
+<h2><a href="sockjs">SockJs채팅</a></h2>
+<h2><a href="json">JSON채팅</a></h2>
+
+<h2><a href="member">회원 전용 채팅</a></h2>

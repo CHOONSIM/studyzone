@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
+import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
 
 //웹소켓 사용 설정 파일
 @Configuration
@@ -23,6 +24,9 @@ public class WebSocketServerConfiguration implements WebSocketConfigurer{
 	@Autowired
 	private JsonWebSocketServer jsonWebSocketServer;
 	
+	@Autowired
+	private MemberWebSocketServer memberWebSocketServer;
+	
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 //		basicWebsocketServer 를 어딘가에 등록하겠다
@@ -40,6 +44,12 @@ public class WebSocketServerConfiguration implements WebSocketConfigurer{
 			.withSockJS();	// sockjs를 쓴다고 선언
 		
 		registry.addHandler(jsonWebSocketServer, "/ws/json")
+			.withSockJS();
+		
+		// HttpSessionHandshakeInterceptor를 통해
+		// HttpSession의 정보를 WebSocketSession으로 전달하도록 설정한다
+		registry.addHandler(memberWebSocketServer, "/ws/member")
+			.addInterceptors(new HttpSessionHandshakeInterceptor())
 			.withSockJS();
 	}
 

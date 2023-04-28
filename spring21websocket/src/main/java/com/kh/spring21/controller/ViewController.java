@@ -67,4 +67,9 @@ public class ViewController {
 		return "redirect:/view/";
 	}
 	
+	@GetMapping("/member")
+	public String member() {
+		return "member";
+	}
+	
 }
