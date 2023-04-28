@@ -29,4 +29,5 @@
 <h2><a href="sockjs">SockJS 채팅</a></h2>
 <h2><a href="json">JSON 채팅</a></h2>
 
-<h2><a href="member">회원 전용 채팅</a></h2>
+<h2><a href="member">회원 전용 채팅(jQuery)</a></h2>
+<h2><a href="vuemember">회원 전용 채팅(Vue)</a></h2>

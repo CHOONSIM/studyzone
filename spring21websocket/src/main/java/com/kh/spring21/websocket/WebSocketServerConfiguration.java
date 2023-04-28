@@ -27,6 +27,9 @@ public class WebSocketServerConfiguration implements WebSocketConfigurer{
 	@Autowired
 	private MemberWebSocketServer memberWebSocketServer;
 	
+	@Autowired
+	private VueMemberWebSocketServer vueMemberWebSocketServer;
+	
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 //		basicWebsocketServer 를 어딘가에 등록하겠다
@@ -49,6 +52,10 @@ public class WebSocketServerConfiguration implements WebSocketConfigurer{
 		// HttpSessionHandshakeInterceptor를 통해
 		// HttpSession의 정보를 WebSocketSession으로 전달하도록 설정한다
 		registry.addHandler(memberWebSocketServer, "/ws/member")
+			.addInterceptors(new HttpSessionHandshakeInterceptor())
+			.withSockJS();
+		
+		registry.addHandler(vueMemberWebSocketServer, "/ws/vuemember")
 			.addInterceptors(new HttpSessionHandshakeInterceptor())
 			.withSockJS();
 	}
