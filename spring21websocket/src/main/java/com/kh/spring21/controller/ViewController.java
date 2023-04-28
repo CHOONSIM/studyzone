@@ -72,4 +72,9 @@ public class ViewController {
 		return "member";
 	}
 	
+	@GetMapping("/vuemember")
+	public String vuemember() {
+		return "vuemember";
+	}
+	
 }

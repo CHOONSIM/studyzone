@@ -10,6 +10,9 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kh.spring21.vo.MemberMessageVO;
+
 import lombok.extern.slf4j.Slf4j;
 
 // 목표 : 비회원은 보기만, 회원은 전송도 가능한 채팅 서버
@@ -20,6 +23,9 @@ public class MemberWebSocketServer extends TextWebSocketHandler {
 
 	// 사용자 저장소
 	private Set<WebSocketSession>users = new CopyOnWriteArraySet<>();
+	
+	// 메세지 해석기
+	private ObjectMapper mapper = new ObjectMapper();
 	
 	
 	// 사용자가 들어왔을 때 실행 되는 기능
@@ -52,6 +58,21 @@ public class MemberWebSocketServer extends TextWebSocketHandler {
 		
 		// 비회원 차단
 		if(memberId == null || memberLevel == null)return;
+		
+		//메세지 해석 및 신규 메세지 생성 & 전송(사용자에게)
+		MemberMessageVO vo = mapper.readValue(message.getPayload(), MemberMessageVO.class);
+		vo.setTime(System.currentTimeMillis());
+		vo.setMemberId(memberId);
+		vo.setMemberLevel(memberLevel);
+		
+		//메세지 만들어서
+		String json = mapper.writeValueAsString(vo);
+		TextMessage jsonMessage =new TextMessage(json);
+		
+		// broadcast(전체전송)
+		for(WebSocketSession user : users) {
+			user.sendMessage(jsonMessage);
+		}
 	}
 	
 }

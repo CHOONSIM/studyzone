@@ -36,6 +36,14 @@
   [2] WebSocket을 지원하지 않는 브라우저는 풀링방식으로 자동 변환한다
   [3] 주기적으로 라이브핑으로 보내 생존여부를 체크해준다(heartbeat) 
   -->
+<script type="text/template" id="message-template">
+	<div class="message">
+		<h2 class="memberId">보낸사람</h2>
+		<p class="content">내용</p>
+		<span class="time">HH:mm</span>
+	</div>
+</script>
+  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
 
 <!-- 모멘트(시간) -->
@@ -48,7 +56,6 @@
 	$(function(){
 		
 		// 시작하자마자 연결
-	
 			
 			//SockJS를 사용하여 달라지는 부분(주소, 연결생성)
 			const url = "${pageContext.request.contextPath}/ws/member";
@@ -74,10 +81,22 @@
 			window.socket.onmessage = function(e){
 				// 수신한 데이터(e.data)가 JSON 문자열 형태이므로 해석 후 처리
 				const data = JSON.parse(e.data);		//안에 content와 time이 있음
-				const time = moment(data.time).format("YYYY-MM-DD HH:mm:ss");
+				const time = moment(data.time).format("HH:mm");
 // 				const time = moment(data.time).fromNow();	// 몇초,분 전
-				$("<p>").text(data.content + "/" + time).appendTo(".message-wrapper");
-			};
+				
+				var template = $("#message-template").html();
+				var html = $.parseHTML(template);
+				$(html).find(".memberId").text(data.memberId);
+				$(html).find(".content").text(data.content);
+				$(html).find(".time").text(time);
+				
+				switch(data.memberLevel){
+					case"우수회원": $(html).find(".memberId").css("color", "dodgeblue");
+					break;
+					case"관리자":  $(html).find(".memberId").css("color", "red");
+				}
+				$(".message-wrapper").append(html);
+				}
 		
 		
 		// [2] 페이지 나가면 종료이므로 처리 X
