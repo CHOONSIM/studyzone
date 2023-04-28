@@ -19,6 +19,10 @@ public class WebSocketServerConfiguration implements WebSocketConfigurer{
 	
 	@Autowired
 	private SockJsWebSocketServer sockJsWebSocketServer;
+	
+	@Autowired
+	private JsonWebSocketServer jsonWebSocketServer;
+	
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 //		basicWebsocketServer 를 어딘가에 등록하겠다
@@ -34,6 +38,9 @@ public class WebSocketServerConfiguration implements WebSocketConfigurer{
 		// SockJs를 사용하도록 웹소켓 서버를 등록
 		registry.addHandler(sockJsWebSocketServer, "/ws/sockjs")	//등록하고
 			.withSockJS();	// sockjs를 쓴다고 선언
+		
+		registry.addHandler(jsonWebSocketServer, "/ws/json")
+			.withSockJS();
 	}
 
 }

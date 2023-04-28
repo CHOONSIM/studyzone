@@ -24,4 +24,10 @@ public class ViewController {
 		//return "/WEB_INF/views/sockjs.jsp";
 		return "sockjs";
 	}
+	
+	@GetMapping("/json")
+	public String json() {
+		//return "/WEB_INF/views/json.jsp";
+		return "json";
+	}
 }
