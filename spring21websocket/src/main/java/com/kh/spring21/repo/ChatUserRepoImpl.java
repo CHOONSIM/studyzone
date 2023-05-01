@@ -27,7 +27,7 @@ public class ChatUserRepoImpl implements ChatUserRepo{
 	@Override
 	public boolean check(ChatUserDto userDto) {
 //		return sqlSession.selectOne("chatUser.check",userDto) != null;
-		ChatUserDto findDto = sqlSession.selectOne("chatUser.check");
+		ChatUserDto findDto = sqlSession.selectOne("chatUser.check", userDto);
 		if(findDto == null) return false;
 		else return true;
 	}

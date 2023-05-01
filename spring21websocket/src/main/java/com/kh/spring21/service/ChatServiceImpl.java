@@ -77,16 +77,20 @@ public class ChatServiceImpl implements ChatService{
 		
 		// 참여자 등록(DB) - 기존에 참여중이 아닌 경우 실행
 		boolean isWaitingRoom = roomName.equals(WebSocketConstant.WAITING_ROOM);
+		if(isWaitingRoom)return;	//대기실이면 이후의 작업을 모두 취소
+		
 		ChatUserDto userDto = new ChatUserDto();
 		userDto.setRoomName(roomName);
 		userDto.setMemberId(user.getMemberId());
 		boolean isJoin = chatUserRepo.check(userDto);
-		if(!isWaitingRoom && !isJoin ) {		//if(대기실이 아니면 && 참여한적이 없으면)
+		
+		if(isJoin) return; 		// 참여한 적ㅇ이 있다면 이후의 작업을 모두 취소
+		
 		ChatUserDto dto = new ChatUserDto();
 		dto.setRoomName(roomName);
 		dto.setMemberId(user.getMemberId());
 		chatUserRepo.add(dto);
-		}
+		
 
 		log.debug("{}님이 {} 방에 참여하였습니다",user.getMemberId(), roomName);
 	}
