@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<h1>웹소켓 회원전용 채팅 예제(SockJS 사용)</h1>
+<h1>채널1번 예제(사용자 클래스화)</h1>
 <h2>${sessionScope.memberId }, ${sessionScope.memberLevel }</h2>
 
 <br>
@@ -58,7 +58,7 @@
 		// 시작하자마자 연결
 			
 			//SockJS를 사용하여 달라지는 부분(주소, 연결생성)
-			const url = "${pageContext.request.contextPath}/ws/member";
+			const url = "${pageContext.request.contextPath}/ws/channel1";
 			
 			window.socket = new SockJS(url);
 			
