@@ -77,4 +77,9 @@ public class ViewController {
 		return "vuemember";
 	}
 	
+	@GetMapping("/channel1")
+	public String channel1() {
+		return "channel1";
+	}
+	
 }
