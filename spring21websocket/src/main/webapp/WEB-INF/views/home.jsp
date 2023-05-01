@@ -36,4 +36,9 @@
 <h2><a href="channel2">채널2번 예제(채팅방 클래스화)</a></h2>
 <h2><a href="channel3">채널3번 예제(채널 클래스화)</a></h2>
 <h2><a href="channel4">채널4번 예제(채널간 이동)</a></h2>
+<h2>채널5번 예제(채널을 선택하여 입장)</h2>
+<form action="channel5">
+	<input type="text" name="room" placeholder="채널명 입력" required>
+	<button type="submit">입장</button>
+</form>
 
