@@ -1,6 +1,5 @@
 package com.kh.spring21.websocket;
 
-import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -56,10 +55,6 @@ public class ChannelWebSocketServer1 extends TextWebSocketHandler {
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		
 		// 회원 정보를 생성
-		Map<String,Object>attr = session.getAttributes();
-		String memberId = (String) attr.get("memberId");
-		String memberLevel = (String) attr.get("memberLevel");
-		
 		UserVO vo = new UserVO(session);
 
 		// 회원이 아니면 차단(VO 객체안에 판단)
