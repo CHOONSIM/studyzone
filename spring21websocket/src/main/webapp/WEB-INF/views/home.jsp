@@ -32,5 +32,6 @@
 <h2><a href="member">회원 전용 채팅(jQuery)</a></h2>
 <h2><a href="vuemember">회원 전용 채팅(Vue)</a></h2>
 
-<h2><a href="channel1">채널1번 예제</a></h2>
+<h2><a href="channel1">채널1번 예제(사용자 클래스화)</a></h2>
+<h2><a href="channel2">채널2번 예제(단일 채널)</a></h2>
 

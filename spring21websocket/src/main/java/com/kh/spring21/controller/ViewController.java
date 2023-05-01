@@ -82,4 +82,9 @@ public class ViewController {
 		return "channel1";
 	}
 	
+	@GetMapping("/channel2")
+	public String channel2() {
+		return "channel2";
+	}
+	
 }
