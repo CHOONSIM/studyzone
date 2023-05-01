@@ -41,7 +41,7 @@ public class ChannelWebSocketServer4 extends TextWebSocketHandler {
 		// [1] 자료형이 일치해야함(UserVO)
 		// [2] 비교기준이 설정되어 있어야함(hashCode, equals)
 		UserVO user = new UserVO(session);
-		String roomName = "1";
+		String roomName = channel.findUser(user);
 		channel.exit(user, roomName);
 	}
 	
