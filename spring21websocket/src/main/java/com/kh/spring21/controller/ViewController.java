@@ -104,5 +104,11 @@ public class ViewController {
 		return "channel5";
 	}
 	
+	@GetMapping("/channel6")
+	public String channel6() {
+		//return "/WEB_INF/views/channel5.jsp";
+		return "channel6";
+	}
+	
 	
 }

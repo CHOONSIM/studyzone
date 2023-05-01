@@ -41,4 +41,9 @@
 	<input type="text" name="room" placeholder="채널명 입력" required>
 	<button type="submit">입장</button>
 </form>
+<h2>채널6번 예제(채널을 선택하여 입장+서비스화 DB)</h2>
+<form action="channel6">
+	<input type="text" name="room" placeholder="채널명 입력" required>
+	<button type="submit">입장</button>
+</form>
 

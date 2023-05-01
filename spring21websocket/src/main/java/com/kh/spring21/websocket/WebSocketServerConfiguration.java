@@ -45,6 +45,9 @@ public class WebSocketServerConfiguration implements WebSocketConfigurer{
 	@Autowired
 	private ChannelWebSocketServer5 channelWebSocketServer5;
 	
+	@Autowired
+	private ChannelWebSocketServer6 channelWebSocketServer6;
+	
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 //		basicWebsocketServer 를 어딘가에 등록하겠다
@@ -79,6 +82,7 @@ public class WebSocketServerConfiguration implements WebSocketConfigurer{
 			.addHandler(channelWebSocketServer3, "/ws/channel3")
 			.addHandler(channelWebSocketServer4, "/ws/channel4")
 			.addHandler(channelWebSocketServer5, "/ws/channel5")
+			.addHandler(channelWebSocketServer6, "/ws/channel6")
 			.addInterceptors(new HttpSessionHandshakeInterceptor())
 			.withSockJS();
 	}
