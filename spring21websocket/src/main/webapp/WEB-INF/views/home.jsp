@@ -35,4 +35,5 @@
 <h2><a href="channel1">채널1번 예제(사용자 클래스화)</a></h2>
 <h2><a href="channel2">채널2번 예제(채팅방 클래스화)</a></h2>
 <h2><a href="channel3">채널3번 예제(채널 클래스화)</a></h2>
+<h2><a href="channel4">채널4번 예제(채널간 이동)</a></h2>
 
