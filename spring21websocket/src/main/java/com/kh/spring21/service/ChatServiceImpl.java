@@ -50,7 +50,7 @@ public class ChatServiceImpl implements ChatService{
 		if(containsRoom(roomName)) return;		//있으면 중단, 없으면 만들기
 		rooms.put(roomName, new RoomVO());
 		
-		// DB등록
+		// 방 등록 DB
 		boolean isWaitingRoom = roomName.equals(WebSocketConstant.WAITING_ROOM);
 		if(!isWaitingRoom && chatRoomRepo.find(roomName) == null) {
 		ChatRoomDto dto = new ChatRoomDto();
@@ -62,7 +62,7 @@ public class ChatServiceImpl implements ChatService{
 	public void deleteRoom(String roomName) {
 		rooms.remove(roomName);
 		
-		// 방 제거 코드 DB등록
+		// 방 제거 DB
 	}
 	
 	public boolean containsRoom(String roomName) {
@@ -84,7 +84,7 @@ public class ChatServiceImpl implements ChatService{
 		userDto.setMemberId(user.getMemberId());
 		boolean isJoin = chatUserRepo.check(userDto);
 		
-		if(isJoin) return; 		// 참여한 적ㅇ이 있다면 이후의 작업을 모두 취소
+		if(isJoin) return; 		// 참여한 적이 있다면 이후의 작업을 모두 취소
 		
 		ChatUserDto dto = new ChatUserDto();
 		dto.setRoomName(roomName);
