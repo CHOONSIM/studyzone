@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import lombok.Data;
 
-@Data
+@Data 
 @Component
 @ConfigurationProperties(prefix = "custom.kakaopay")
 public class KakaoPayProperties {

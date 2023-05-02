@@ -7,7 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-public class KakaoPayConfiguration {
+public class KakaoPayConfiguration { 
 	
 	@Autowired
 	private KakaoPayProperties props;
