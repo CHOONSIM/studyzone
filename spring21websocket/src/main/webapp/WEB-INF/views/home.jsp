@@ -47,3 +47,10 @@
 	<button type="submit">입장</button>
 </form>
 
+<hr>
+
+<h1>채팅방 목록</h1>
+<c:forEach var="chatRoom" items="${chatRoomList }">
+	<h3><a href="channel6?room=${chatRoom.roomName }">${chatRoom.roomName }"</a></h3>
+</c:forEach>
+

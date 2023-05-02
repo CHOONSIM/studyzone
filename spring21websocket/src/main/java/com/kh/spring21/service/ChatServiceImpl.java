@@ -11,8 +11,10 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kh.spring21.dto.ChatMessageDto;
 import com.kh.spring21.dto.ChatRoomDto;
 import com.kh.spring21.dto.ChatUserDto;
+import com.kh.spring21.repo.ChatMessageRepo;
 import com.kh.spring21.repo.ChatRoomRepo;
 import com.kh.spring21.repo.ChatUserRepo;
 import com.kh.spring21.vo.ChannelReceiveVO;
@@ -40,6 +42,9 @@ public class ChatServiceImpl implements ChatService{
 	
 	@Autowired
 	private ChatUserRepo chatUserRepo;
+	
+	@Autowired
+	private ChatMessageRepo chatMessageRepo;
 	
 	
 	//channelVO에서 구현했던 모든 메소드
@@ -107,11 +112,19 @@ public class ChatServiceImpl implements ChatService{
 		}
 	
 	// - 방에 메세지를 전송하는 기능(그룹채팅)
-	public void broadcastRoom(TextMessage jsonMessage, String roomName) throws IOException {
+	public void broadcastRoom(UserVO user, String roomName, TextMessage jsonMessage) throws IOException {
 		if(containsRoom(roomName) == false) return;
 		
 		RoomVO room = rooms.get(roomName);
 		room.broadcast(jsonMessage);
+		
+		//메세지 발송 기록 등록
+		// - 사용자 아이디, 방이름, 메세지내용 필요함
+		ChatMessageDto dto = new ChatMessageDto();
+		dto.setMemberId(user.getMemberId());
+		dto.setRoomName(roomName);
+		dto.setMessageBody(jsonMessage.getPayload());
+		chatMessageRepo.add(dto);
 	}
 	
 	// - 사용자가 존재하는 방의 이름을 찾는 기능
@@ -168,7 +181,6 @@ public class ChatServiceImpl implements ChatService{
 				// 메세지를 수신(ChannelReceiveVO)
 				// - 이 메세지의 type을 분석하여 작업에 맞는 처리를 수행
 				ChannelReceiveVO receiveVO = mapper.readValue(message.getPayload(), ChannelReceiveVO.class);
-				System.out.println(receiveVO);
 				
 				//채팅메세지인 경우
 				if(receiveVO.getType() == WebSocketConstant.CHAT) {
@@ -194,7 +206,7 @@ public class ChatServiceImpl implements ChatService{
 					String jsonStr = mapper.writeValueAsString(msg);
 					TextMessage jsonMessage = new TextMessage(jsonStr);
 					
-					this.broadcastRoom(jsonMessage, roomName); 	// 방에 메세지를 보내
+					this.broadcastRoom(user, roomName, jsonMessage); 	// 방에 메세지를 보내
 				}
 				//입장메세지인 경우
 				else if(receiveVO.getType() == WebSocketConstant.JOIN) {
