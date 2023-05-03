@@ -14,4 +14,17 @@ public class PaymentDto {
 	private int paymentRemain;
 	private Date paymentTime;
 	private String memberId;
+	
+	//결제상태
+	public String getPaymentStatus() {
+		if(paymentTotal == paymentRemain) {
+			return"승인완";
+		}
+		else if(paymentRemain == 0) {
+			return"완전취소";
+		}
+		else {
+			return"부분취소";
+		}
+	}
 }

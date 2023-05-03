@@ -1,17 +1,21 @@
 package com.kh.spring22.controller;
 
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.spring22.dto.PaymentDto;
+import com.kh.spring22.repo.PaymentRepo;
 import com.kh.spring22.service.KakaoPayService;
 import com.kh.spring22.vo.KakaoPayApproveRequestVO;
 import com.kh.spring22.vo.KakaoPayApproveResponseVO;
@@ -83,5 +87,17 @@ public class PayController {
 	@GetMapping("/test1/clear")
 	public String test1Clear() {
 		return "pay/clear";
+	}
+	
+	@Autowired
+	private PaymentRepo paymentRepo;
+	
+	@GetMapping("/list")
+	public String list(Model model) {
+//		String memberId = (String)session.getAttribute("memberId");
+		String memberId = "adminuser200";
+		List<PaymentDto>list = paymentRepo.selectByMember(memberId);
+		model.addAttribute("list",list);
+		return"/pay/list";
 	}
 }

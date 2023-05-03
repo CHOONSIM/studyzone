@@ -20,5 +20,13 @@
 		)
 	</insert>
 	
-	
+	<!-- 결제내역 조회 기능(전체/회원별/...) -->
+	<select id="selectAll" resultType="PaymentDto">
+		select*from payment order by payment_no desc
+	</select>
+	<select id="selectByMember" resultType="PaymentDto">
+		select*from payment 
+		where member_id = #{memberId}
+		order by payment_no desc
+	</select>
 </mapper>
