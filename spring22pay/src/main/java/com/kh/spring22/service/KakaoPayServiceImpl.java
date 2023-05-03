@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.kh.spring22.configuration.KakaoPayProperties;
 import com.kh.spring22.vo.KakaoPayApproveRequestVO;
@@ -17,6 +18,9 @@ import com.kh.spring22.vo.KakaoPayApproveResponseVO;
 import com.kh.spring22.vo.KakaoPayReadyRequestVO;
 import com.kh.spring22.vo.KakaoPayReadyResponseVO;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class KakaoPayServiceImpl implements KakaoPayService{
 	
@@ -31,10 +35,10 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 	
 	@Override
 	public KakaoPayReadyResponseVO ready(KakaoPayReadyRequestVO vo) throws URISyntaxException {
-		//주소생성
+		//주소 생성
 		URI uri = new URI("https://kapi.kakao.com/v1/payment/ready");
 		
-		//바디생성
+		//바디 생성
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
 		body.add("cid", properties.getCid());
 		body.add("partner_order_id", vo.getPartner_order_id());
@@ -43,19 +47,29 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 		body.add("quantity", String.valueOf(vo.getQuantity()));
 		body.add("total_amount", String.valueOf(vo.getTotal_amount()));
 		body.add("tax_free_amount", "0");
-		body.add("approval_url", "http://localhost:8080/success");
-		body.add("fail_url", "http://localhost:8080/fail");
-		body.add("cancel_url", "http://localhost:8080/cancel");
 		
-		//바디 + 헤더
+		//현재 접속중인 주소를 계산하는 도구를 사용(ServletUriComponentsBuilder)
+		//(주의) 테스트에서는 http://localhost 로 나온다
+		//String contextPath = ???;
+		String currentPath = ServletUriComponentsBuilder
+												.fromCurrentRequestUri()
+												.toUriString();
+		log.debug("currentPath = {}", currentPath);
+		
+		body.add("approval_url", currentPath+"/success");
+		body.add("fail_url", currentPath+"/fail");
+		body.add("cancel_url", currentPath+"/cancel");
+		
+		//바디+헤더
 		HttpEntity entity = new HttpEntity(body, headers);
 		
 		//요청 전송
-		KakaoPayReadyResponseVO response = template.postForObject(uri, entity, KakaoPayReadyResponseVO.class);
+		KakaoPayReadyResponseVO response = 
+				template.postForObject(uri, entity, KakaoPayReadyResponseVO.class);
 		
 		return response;
 	}
-
+	
 	@Override
 	public KakaoPayApproveResponseVO approve(KakaoPayApproveRequestVO vo) throws URISyntaxException {
 		//주소 설정
@@ -69,12 +83,14 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 		body.add("tid", vo.getTid());
 		body.add("pg_token", vo.getPg_token());
 		
-		//헤더 + 바디
-//		HttpEntity entity = new HttpEntity(body, headers);
-		HttpEntity <MultiValueMap<String,String>> entity = new HttpEntity<>(body, headers);
+		//헤더+바디
+		//HttpEntity entity = new HttpEntity(body, headers);
+		HttpEntity<MultiValueMap<String, String>> entity = 
+												new HttpEntity<>(body, headers);
 		
 		//전송
-		KakaoPayApproveResponseVO response = template.postForObject(uri, entity, KakaoPayApproveResponseVO.class);
+		KakaoPayApproveResponseVO response = 
+				template.postForObject(uri, entity, KakaoPayApproveResponseVO.class);
 		
 		return response;
 	}
