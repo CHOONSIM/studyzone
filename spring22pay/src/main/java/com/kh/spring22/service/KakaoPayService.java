@@ -4,6 +4,8 @@ import java.net.URISyntaxException;
 
 import com.kh.spring22.vo.KakaoPayApproveRequestVO;
 import com.kh.spring22.vo.KakaoPayApproveResponseVO;
+import com.kh.spring22.vo.KakaoPayOrderRequestVO;
+import com.kh.spring22.vo.KakaoPayOrderResponseVO;
 import com.kh.spring22.vo.KakaoPayReadyRequestVO;
 import com.kh.spring22.vo.KakaoPayReadyResponseVO;
 
@@ -17,5 +19,5 @@ public interface KakaoPayService {
 	KakaoPayApproveResponseVO approve(KakaoPayApproveRequestVO vo) throws URISyntaxException;
 	
 	// 조회 - order
-//	KakaoPayOrderResponseVO order(KakaoPayOrderRequestVO vo);
+	KakaoPayOrderResponseVO order(KakaoPayOrderRequestVO vo) throws URISyntaxException;
 }
