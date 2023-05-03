@@ -5,9 +5,10 @@ payment_tid varchar2(20) not null,
 payment_name varchar2(300) not null,
 payment_total number not null,
 payment_remain number not null,
-payment_time date sysdate not null,
+payment_time date not null,
 member_id varchar2(20) not null
 );
+create SEQUENCE payment_seq;
 
 select*from table payment;
 delete table payment;
