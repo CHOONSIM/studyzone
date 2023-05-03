@@ -29,7 +29,7 @@ public class Test04 {
 		vo.setPartner_user_id( UUID.randomUUID().toString());
 		vo.setItem_name("용산 아파트");
 		vo.setQuantity(1);
-		vo.setTotal_amount(10000000);
+		vo.setTotal_amount(100000);
 		
 		//처리
 		KakaoPayReadyResponseVO response = kakaoPayService.ready(vo);
