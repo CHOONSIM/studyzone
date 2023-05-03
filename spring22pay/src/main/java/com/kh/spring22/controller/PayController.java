@@ -37,7 +37,8 @@ public class PayController {
 			) throws URISyntaxException {
 		//정보추가(주문자번호, 주문번호)
 		vo.setPartner_order_id(UUID.randomUUID().toString());
-		vo.setPartner_user_id(UUID.randomUUID().toString());
+//		vo.setPartner_user_id((String)session.getAttribute("memberId"));
+		vo.setPartner_user_id("adminuser200");
 		
 		//준비요청
 		KakaoPayReadyResponseVO response = kakaoPayService.ready(vo);

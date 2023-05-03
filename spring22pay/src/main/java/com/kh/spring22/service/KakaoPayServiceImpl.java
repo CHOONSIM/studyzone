@@ -13,6 +13,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.kh.spring22.configuration.KakaoPayProperties;
+import com.kh.spring22.dto.PaymentDto;
+import com.kh.spring22.repo.PaymentRepo;
 import com.kh.spring22.vo.KakaoPayApproveRequestVO;
 import com.kh.spring22.vo.KakaoPayApproveResponseVO;
 import com.kh.spring22.vo.KakaoPayReadyRequestVO;
@@ -32,6 +34,9 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 	
 	@Autowired
 	private KakaoPayProperties properties;
+	
+	@Autowired
+	private PaymentRepo paymentRepo;
 	
 	@Override
 	public KakaoPayReadyResponseVO ready(KakaoPayReadyRequestVO vo) throws URISyntaxException {
@@ -91,6 +96,22 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 		//전송
 		KakaoPayApproveResponseVO response = 
 				template.postForObject(uri, entity, KakaoPayApproveResponseVO.class);
+		
+		//실제 결제가 이루어진 후 내역 중 필요한 것을 데이터베이스 저장
+		// [1] 결제번호 생서
+		int paytmentNo = paymentRepo.sequence();
+		//[2] 결제정보 DTO 생성
+		PaymentDto paymentDto = new PaymentDto();
+		paymentDto.setPaymentNo(paytmentNo);										//결제 시퀀스번호
+		paymentDto.setPaymentTid(response.getTid());									//거래번호
+		paymentDto.setPaymentName(response.getItem_name());					//거래이름
+		paymentDto.setPaymentTotal(response.getAmount().getTotal());			//결제금액
+		paymentDto.setPaymentRemain(response.getAmount().getTotal());		//잔금
+		paymentDto.setPaymentTime(response.getApproved_at());					//승인시각
+		paymentDto.setMemberId(response.getPartner_user_id());					//주문회원
+		
+//		[3] 등록
+		paymentRepo.save(paymentDto);
 		
 		return response;
 	}
