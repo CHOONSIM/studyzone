@@ -9,6 +9,3 @@ payment_time date not null,
 member_id varchar2(20) not null
 );
 create SEQUENCE payment_seq;
-
-select*from table payment;
-delete table payment;
