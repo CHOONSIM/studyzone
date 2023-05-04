@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.spring22.dto.ItemDto;
 import com.kh.spring22.dto.PaymentDto;
 import com.kh.spring22.repo.ItemRepo;
 import com.kh.spring22.repo.PaymentRepo;
@@ -178,12 +179,34 @@ public class PayController {
 	
 	//객체 배열 형태로 전송되는 데이터를 수신하는 처리(ex: data[0].qty)(@ModelAttribute List못받음 클래스만들어서 넣기)
 	@PostMapping("/test2")
-	public String test2(@ModelAttribute PurchaseListVO listVO) {
+	public String test2(@ModelAttribute PurchaseListVO listVO) throws URISyntaxException {
+		// 전달받은 내용에서 결제 정보를 생성
+		String name="";
+		int total=0;
+		int count = 0;
+		
 		log.debug("데이터 개수 ={}",listVO.getData().size());
 		for(PurchaseVO vo : listVO.getData()) {
-			log.debug("vo ={}", vo);
+//			log.debug("vo ={}", vo);
+			//[1] vo에 있는 상품번호로 상품정보(ItemDto)를 불러와야 한다.
+			ItemDto itemDto = itemRepo.find(vo.getItemNo());
+			
+			//[2] 상품이름과 상품가격을 조회하여 필요한 정보를 계산한다.
+			name = itemDto.getItemName();
+			total += itemDto.getItemDiscount() * vo.getQty();
+			count ++;
 		}
-		return null;
+		
+		KakaoPayReadyRequestVO request = new KakaoPayReadyRequestVO();
+		request.setPartner_order_id(UUID.randomUUID().toString());
+		request.setPartner_user_id("adminuser200");
+		request.setItem_name(name+"외"+(count-1)+"건");
+		request.setQuantity(1);
+		request.setTotal_amount(total);
+		
+		KakaoPayReadyResponseVO response = kakaoPayService.ready(request);
+		
+		return "redirect:" + response.getNext_redirect_pc_url();
 		
 	}
 }
