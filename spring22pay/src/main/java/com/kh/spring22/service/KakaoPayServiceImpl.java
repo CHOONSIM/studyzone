@@ -118,14 +118,25 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 		return response;
 	}
 
+	
 	@Override
 	public KakaoPayOrderResponseVO order(KakaoPayOrderRequestVO vo) throws URISyntaxException {
-		//주소 설정
+		//주소생성
 		URI uri = new URI("https://kapi.kakao.com/v1/payment/order");
 		
+		//바디생성
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+		body.add("cid", properties.getCid());
+		body.add("tid", vo.getTid());
 		
+		//헤더+바디
+		HttpEntity entity = new HttpEntity(body,headers);
 		
-		return null;
+		//전송
+		KakaoPayOrderResponseVO response = template.postForObject(uri, entity, KakaoPayOrderResponseVO.class);
+		
+		//반환	
+		return response;
 	}
 	
 }
