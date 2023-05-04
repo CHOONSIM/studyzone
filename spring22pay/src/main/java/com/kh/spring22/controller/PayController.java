@@ -31,7 +31,12 @@ import com.kh.spring22.vo.KakaoPayOrderRequestVO;
 import com.kh.spring22.vo.KakaoPayOrderResponseVO;
 import com.kh.spring22.vo.KakaoPayReadyRequestVO;
 import com.kh.spring22.vo.KakaoPayReadyResponseVO;
+import com.kh.spring22.vo.PurchaseListVO;
+import com.kh.spring22.vo.PurchaseVO;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/pay")
 public class PayController {
@@ -169,5 +174,16 @@ public class PayController {
 	public String test2(Model model) {
 		model.addAttribute("itemList",itemRepo.list());
 		return"pay/test2";
+	}
+	
+	//객체 배열 형태로 전송되는 데이터를 수신하는 처리(ex: data[0].qty)(@ModelAttribute List못받음 클래스만들어서 넣기)
+	@PostMapping("/test2")
+	public String test2(@ModelAttribute PurchaseListVO listVO) {
+		log.debug("데이터 개수 ={}",listVO.getData().size());
+		for(PurchaseVO vo : listVO.getData()) {
+			log.debug("vo ={}", vo);
+		}
+		return null;
+		
 	}
 }
