@@ -11,4 +11,5 @@ public interface PaymentRepo {
 	List<PaymentDto> selectAll();
 	List<PaymentDto> selectByMember(String memberId);
 	PaymentDto find(int paymentNo);
+	void cancelRemain(int paymentNo);	// 삭제가 아니라 update 기능
 }

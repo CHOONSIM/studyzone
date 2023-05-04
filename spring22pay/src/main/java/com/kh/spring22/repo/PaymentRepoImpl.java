@@ -41,5 +41,10 @@ public class PaymentRepoImpl implements PaymentRepo{
 	public PaymentDto find(int paymentNo) {
 		return sqlSession.selectOne("payment.find", paymentNo);
 	}
+
+	@Override
+	public void cancelRemain(int paymentNo) {
+		sqlSession.update("payment.cancelRemain", paymentNo);
+	}
 	
 }

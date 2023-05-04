@@ -8,11 +8,20 @@
 
 <h3>상품명 : ${paymentDto.paymentName}</h3>
 <%-- <h3>총금액 : ${paymentDto.paymentTotal}</h3> --%>
-<%-- <h3>총금액 <fmt:formatNumber value="${paymentDto.paymentTotal}" pattern="#,##0."</h3> --%>
+<h2>총금액 : 
+<fmt:formatNumber value="${paymentDto.paymentTotal}" pattern="#,##0"></fmt:formatNumber>
+원</h2>
 <h3>잔여금액 : ${paymentDto.paymentRemain}</h3>
 <h3>현재상태 : ${paymentDto.paymentStatus}</h3>
 
+<%--결제 취소 버튼 : 잔여금액이 존재한다면 --%>
+<c:if test = "${paymentDto.paymentRemain > 0}">
+	<a href="cancel?paymentNo=${paymentDto.paymentNo}">결제취소</a>
+</c:if>
+
+
 <hr>
+
 <h3>결제상태 : ${response.status}</h3>
 <h3>주문번호 : ${response.partner_order_id}</h3>
 <h3>주문자 : ${response.partner_user_id}</h3>
@@ -33,16 +42,19 @@
 <%-- 카드정보는 카드결제일 때만 나옴 --%>
 <c:if test="${response.payment_method_type == 'CARD'}"></c:if>
 <c:if test="${response.selected_card_info != null}">
+<hr>
 	<h4>카드사 정보 : ${response.selected_card_info.card_corp_name}</h4>
 	<h4>카드 BIN 정보 : ${response.selected_card_info.card_corp_name}</h4>
 	<h4>할부 개월 수 : ${response.selected_card_info.card_bin}</h4>
 	<h4>무이자할부 여부 : ${response.selected_card_info.interest_free_install}</h4>
+<hr>
 </c:if>
 
-<hr>
+
 <%--결제 전체 순서에 따른 내역 --%>
 <h2>결제 순서 및 상세 내역</h2>
 <c:forEach var="paymentAction" items="${response.payment_action_details}">
+<hr>
 	<h4>요청번호 : ${paymentAction.aid}</h4>
 	<h4>거래시각 : ${paymentAction.approved_at}</h4>
 	<h4>총액 : ${paymentAction.amount}원</h4>

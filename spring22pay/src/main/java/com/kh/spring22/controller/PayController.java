@@ -1,9 +1,11 @@
 package com.kh.spring22.controller;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +16,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.NoHandlerFoundException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spring22.dto.PaymentDto;
 import com.kh.spring22.repo.PaymentRepo;
 import com.kh.spring22.service.KakaoPayService;
 import com.kh.spring22.vo.KakaoPayApproveRequestVO;
 import com.kh.spring22.vo.KakaoPayApproveResponseVO;
+import com.kh.spring22.vo.KakaoPayCancelRequestVO;
+import com.kh.spring22.vo.KakaoPayCancelResponseVO;
 import com.kh.spring22.vo.KakaoPayOrderRequestVO;
 import com.kh.spring22.vo.KakaoPayOrderResponseVO;
 import com.kh.spring22.vo.KakaoPayReadyRequestVO;
@@ -95,7 +101,7 @@ public class PayController {
 	@Autowired
 	private PaymentRepo paymentRepo;
 	
-	@GetMapping("/list")
+	@GetMapping("/test1/list")
 	public String list(Model model) {
 //		String memberId = (String)session.getAttribute("memberId");
 		String memberId = "adminuser200";
@@ -104,22 +110,53 @@ public class PayController {
 		return"/pay/list";
 	}
 	
-	@GetMapping("/detail")
+	@GetMapping("/test1/detail")
 	public String detail(@RequestParam int paymentNo, Model model) throws URISyntaxException {
 		//우리 DB에서 정보를 찾아라
-				PaymentDto paymentDto = paymentRepo.find(paymentNo);
+		PaymentDto paymentDto = paymentRepo.find(paymentNo);
 
-				//찾은 정보에서 TID를 조회하여 카카오페이에서 실제 정보를 조회하라
-				KakaoPayOrderRequestVO vo = new KakaoPayOrderRequestVO();
-				vo.setTid(paymentDto.getPaymentTid());
-				KakaoPayOrderResponseVO response = kakaoPayService.order(vo);
+		//찾은 정보에서 TID를 조회하여 카카오페이에서 실제 정보를 조회하라
+		KakaoPayOrderRequestVO vo = new KakaoPayOrderRequestVO();
+		vo.setTid(paymentDto.getPaymentTid());
+		KakaoPayOrderResponseVO response = kakaoPayService.order(vo);
 
-				//모든 정보를 Model에 첨부
-				model.addAttribute("paymentDto", paymentDto);
-				model.addAttribute("response", response);
+		//모든 정보를 Model에 첨부
+		model.addAttribute("paymentDto", paymentDto);
+		model.addAttribute("response", response);
 
-				//상세 페이지 반환
-				return "pay/detail";//"/WEB-INF/views/pay/detail.jsp"
+		//상세 페이지 반환
+		return "pay/detail";//"/WEB-INF/views/pay/detail.jsp"
+	}
+	
+	@GetMapping("/test1/cancel")
+	public String cancel(
+			@RequestParam int paymentNo,
+			HttpServletResponse resp,
+			RedirectAttributes attr
+			) throws URISyntaxException, IOException, NoHandlerFoundException {
+		//[1] paymentNo로 PaymentDto 정보를 조회
+		PaymentDto paymentDto = paymentRepo.find(paymentNo);
+		
+		//써드파티 부르기 전에 검사
+		if(paymentDto == null || paymentDto.getPaymentRemain() == 0)
+//			resp.sendError(500);	//사용자에게 500 에러를 내보내기(수동명령)
+//			return null;
+			throw new NoHandlerFoundException(null, null, null);
+			
+		//[2] 1번에서 구한 정보의 TID와 잔여금액 정보로 카카오에게 취소 요청(써드파티 부르는 곳)
+		KakaoPayCancelRequestVO vo = new KakaoPayCancelRequestVO();
+		vo.setTid(paymentDto.getPaymentTid());
+		vo.setCancel_amount(paymentDto.getPaymentRemain());
+		
+		KakaoPayCancelResponseVO response = kakaoPayService.cancel(vo);
+		
+		//[3] 내 DB의 잔여 금액을 0으로 변경(paymentRepo)
+		paymentRepo.cancelRemain(paymentNo);
+		
+		//[4] 상세페이지로 돌려보내기
+//		return "redirect:detail?paymentNo="+paymentNo;
+		attr.addAttribute("paymentNo", paymentNo);
+		return "redirect:detail";
 	}
 	
 	
