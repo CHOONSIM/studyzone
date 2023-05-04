@@ -13,7 +13,9 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.kh.spring22.configuration.KakaoPayProperties;
+import com.kh.spring22.dto.ItemDto;
 import com.kh.spring22.dto.PaymentDto;
+import com.kh.spring22.repo.ItemRepo;
 import com.kh.spring22.repo.PaymentRepo;
 import com.kh.spring22.vo.KakaoPayApproveRequestVO;
 import com.kh.spring22.vo.KakaoPayApproveResponseVO;
@@ -23,6 +25,8 @@ import com.kh.spring22.vo.KakaoPayOrderRequestVO;
 import com.kh.spring22.vo.KakaoPayOrderResponseVO;
 import com.kh.spring22.vo.KakaoPayReadyRequestVO;
 import com.kh.spring22.vo.KakaoPayReadyResponseVO;
+import com.kh.spring22.vo.PurchaseListVO;
+import com.kh.spring22.vo.PurchaseVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -41,6 +45,9 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 	
 	@Autowired
 	private PaymentRepo paymentRepo;
+	
+	@Autowired
+	private ItemRepo itemRepo;
 	
 	@Override
 	public KakaoPayReadyResponseVO ready(KakaoPayReadyRequestVO vo) throws URISyntaxException {
@@ -156,5 +163,59 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 		//반환
 		return response;
 	}
+
+	@Override
+	public KakaoPayApproveResponseVO approveWithDetail(KakaoPayApproveRequestVO vo, PurchaseListVO listVO)
+			throws URISyntaxException {
+		//주소 설정
+		URI uri = new URI("https://kapi.kakao.com/v1/payment/approve");
+		
+		//바디 설정
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+		body.add("cid", properties.getCid());
+		body.add("partner_order_id", vo.getPartner_order_id());
+		body.add("partner_user_id", vo.getPartner_user_id());
+		body.add("tid", vo.getTid());
+		body.add("pg_token", vo.getPg_token());
+		
+		//헤더+바디
+		//HttpEntity entity = new HttpEntity(body, headers);
+		HttpEntity<MultiValueMap<String, String>> entity = 
+												new HttpEntity<>(body, headers);
+		
+		//전송
+		KakaoPayApproveResponseVO response = 
+				template.postForObject(uri, entity, KakaoPayApproveResponseVO.class);
+		
+		//실제 결제가 이루어진 후 내역 중 필요한 것을 데이터베이스 저장
+		// [1] 결제번호 생서
+		int paytmentNo = paymentRepo.sequence();
+		//[2] 결제정보 DTO 생성
+		PaymentDto paymentDto = new PaymentDto();
+		paymentDto.setPaymentNo(paytmentNo);										//결제 시퀀스번호
+		paymentDto.setPaymentTid(response.getTid());									//거래번호
+		paymentDto.setPaymentName(response.getItem_name());					//거래이름
+		paymentDto.setPaymentTotal(response.getAmount().getTotal());			//결제금액
+		paymentDto.setPaymentRemain(response.getAmount().getTotal());		//잔금
+		paymentDto.setPaymentTime(response.getApproved_at());					//승인시각
+		paymentDto.setMemberId(response.getPartner_user_id());					//주문회원
+		
+//		[3] 등록
+		paymentRepo.save(paymentDto);
+		
+		
+		// 대표 정보와 함께 상세 정보를 등록(PaymentDetail)(외 몇건에 대한 내용)
+		// [1] listVO의 data를 반복
+		for(PurchaseVO purchaseVO : listVO.getData()) {
+		// [2]상품정보를 조회
+			ItemDto itemDto = itemRepo.find(purchaseVO.getItemNo());
+		// [3] PaymentDetailDto를 만들고 정보를 설정한 뒤 등록 처리
+			
+		}
+		
+		return response;
+	}
+
+
 	
 }

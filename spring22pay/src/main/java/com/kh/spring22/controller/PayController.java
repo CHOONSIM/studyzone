@@ -234,6 +234,14 @@ public class PayController {
 		//session.invalidate(); 으로 작성하면 세션이 사라짐(전체가 사라짐, 사용X 골라서 지우기)
 		
 		KakaoPayApproveResponseVO response = kakaoPayService.approve(vo);
+		
+		
+		//결제 상세 내역을 등록하는 코드 필요(외 몇건에 대한 내용)(결제 대표 번호가 필요,approve에 있음)
+		//결제된 데이터가 db에도 남아야함
+		
+		
+		
+		
 		return"redirect:clear";//redirect:/pay/test2/clear
 	}
 	
