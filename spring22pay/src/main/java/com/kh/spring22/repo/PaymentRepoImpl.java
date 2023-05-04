@@ -36,5 +36,10 @@ public class PaymentRepoImpl implements PaymentRepo{
 	public List<PaymentDto> selectByMember(String memberId) {
 		return sqlSession.selectList("payment.selectByMember", memberId);
 	}
+
+	@Override
+	public PaymentDto find(int paymentNo) {
+		return sqlSession.selectOne("payment.find", paymentNo);
+	}
 	
 }

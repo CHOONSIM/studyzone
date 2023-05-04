@@ -22,7 +22,7 @@ public class Test06 {
 	@Test
 	public void test() throws URISyntaxException{
 		KakaoPayOrderRequestVO vo = new KakaoPayOrderRequestVO();
-		vo.setTid("");
+		vo.setTid("T45209f341ce089114dd");
 		
 		KakaoPayOrderResponseVO response = kakaoPayService.order(vo);
 		log.debug("response = {}", response);

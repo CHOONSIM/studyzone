@@ -29,4 +29,9 @@
 		where member_id = #{memberId}
 		order by payment_no desc
 	</select>
+	
+	<select id="find" resultType="PaymentDto">
+		select*from payment where payment_no =#{paymentNo}
+	</select>
+	
 </mapper>

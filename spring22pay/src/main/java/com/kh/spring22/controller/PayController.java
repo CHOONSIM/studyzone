@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.spring22.dto.PaymentDto;
 import com.kh.spring22.repo.PaymentRepo;
 import com.kh.spring22.service.KakaoPayService;
 import com.kh.spring22.vo.KakaoPayApproveRequestVO;
 import com.kh.spring22.vo.KakaoPayApproveResponseVO;
+import com.kh.spring22.vo.KakaoPayOrderRequestVO;
+import com.kh.spring22.vo.KakaoPayOrderResponseVO;
 import com.kh.spring22.vo.KakaoPayReadyRequestVO;
 import com.kh.spring22.vo.KakaoPayReadyResponseVO;
 
@@ -100,4 +103,24 @@ public class PayController {
 		model.addAttribute("list",list);
 		return"/pay/list";
 	}
+	
+	@GetMapping("/detail")
+	public String detail(@RequestParam int paymentNo, Model model) throws URISyntaxException {
+		//우리 DB에서 정보를 찾아라
+				PaymentDto paymentDto = paymentRepo.find(paymentNo);
+
+				//찾은 정보에서 TID를 조회하여 카카오페이에서 실제 정보를 조회하라
+				KakaoPayOrderRequestVO vo = new KakaoPayOrderRequestVO();
+				vo.setTid(paymentDto.getPaymentTid());
+				KakaoPayOrderResponseVO response = kakaoPayService.order(vo);
+
+				//모든 정보를 Model에 첨부
+				model.addAttribute("paymentDto", paymentDto);
+				model.addAttribute("response", response);
+
+				//상세 페이지 반환
+				return "pay/detail";//"/WEB-INF/views/pay/detail.jsp"
+	}
+	
+	
 }
