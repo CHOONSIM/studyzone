@@ -142,20 +142,17 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 	public KakaoPayCancelResponseVO cancel(KakaoPayCancelRequestVO vo) throws URISyntaxException {
 		//주소 생성
 		URI uri = new URI("https://kapi.kakao.com/v1/payment/cancel");
-		
 		//바디 생성
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
 		body.add("cid", properties.getCid());
 		body.add("tid", vo.getTid());
 		body.add("cancel_amount", String.valueOf(vo.getCancel_amount()));
-		body.add("cancel_tax_free_amount", String.valueOf(vo.getCancel_tax_amount()));
-		
+		body.add("cancel_tax_free_amount", String.valueOf(vo.getCancel_tax_free_amount()));
 		//헤더 + 바디
 		HttpEntity entity = new HttpEntity(body, headers);
-		
-		//전송
-		KakaoPayCancelResponseVO response = template.postForObject(uri, body, KakaoPayCancelResponseVO.class);
-		
+		//전송 및 응답 수신
+		KakaoPayCancelResponseVO response = 
+				template.postForObject(uri, entity, KakaoPayCancelResponseVO.class);
 		//반환
 		return response;
 	}

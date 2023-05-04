@@ -29,7 +29,7 @@
 
 <h3>결제금액 : ${response.amount.total}원</h3>
 <h3>취소금액 : ${response.canceled_amount.total}원</h3>
-<h3>취소가능 : ${response.canceled_available_amount.total}원</h3>
+<h3>취소가능 : ${response.cancel_available_amount.total}원</h3>
 
 <h3>상품명 : ${response.item_name}</h3>
 <h3>상품코드 : ${response.item_code}</h3>
