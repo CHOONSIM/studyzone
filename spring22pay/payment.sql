@@ -9,3 +9,16 @@ payment_time date not null,
 member_id varchar2(20) not null
 );
 create SEQUENCE payment_seq;
+
+--상품 테이블
+create table item(
+item_no number primary key,
+item_name varchar2(60) not null,
+item_price number not null check(item_price >= 0),
+item_discount number not null,
+--check(item_discount < item_price and item_discount >0)
+check(item_discount between 0 and item_price)
+);
+create SEQUENCE item_seq;
+
+select*from item;

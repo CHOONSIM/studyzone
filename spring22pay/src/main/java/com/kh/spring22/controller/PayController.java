@@ -20,6 +20,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spring22.dto.PaymentDto;
+import com.kh.spring22.repo.ItemRepo;
 import com.kh.spring22.repo.PaymentRepo;
 import com.kh.spring22.service.KakaoPayService;
 import com.kh.spring22.vo.KakaoPayApproveRequestVO;
@@ -159,5 +160,14 @@ public class PayController {
 		return "redirect:detail";
 	}
 	
+	//---------------------------------------------------------------------------------------------//
 	
+	@Autowired
+	private ItemRepo itemRepo;
+	
+	@GetMapping("/test2")
+	public String test2(Model model) {
+		model.addAttribute("itemList",itemRepo.list());
+		return"pay/test2";
+	}
 }
