@@ -179,7 +179,8 @@ public class PayController {
 	
 	//객체 배열 형태로 전송되는 데이터를 수신하는 처리(ex: data[0].qty)(@ModelAttribute List못받음 클래스만들어서 넣기)
 	@PostMapping("/test2")
-	public String test2(@ModelAttribute PurchaseListVO listVO) throws URISyntaxException {
+	public String test2(@ModelAttribute PurchaseListVO listVO,
+			HttpSession session) throws URISyntaxException {
 		// 전달받은 내용에서 결제 정보를 생성
 		String name="";
 		int total=0;
@@ -206,7 +207,40 @@ public class PayController {
 		
 		KakaoPayReadyResponseVO response = kakaoPayService.ready(request);
 		
-		return "redirect:" + response.getNext_redirect_pc_url();
+		//flash value(잠깐 쓰는 데이터)
+		//세션에 데이터 임시 첨부(partner_order_id, partner_user_id, tid)
+		//(+추가) 구매내역 (번호+수량)
+		session.setAttribute("partner_order_id", request.getPartner_order_id());
+		session.setAttribute("partner_user_id", request.getPartner_user_id());
+		session.setAttribute("tid", response.getTid());
+		session.setAttribute("listVO",listVO);
 		
+		return "redirect:" + response.getNext_redirect_pc_url();
 	}
+	
+	@GetMapping("/test2/success")
+	public String test2Success(
+			HttpSession session,
+			@ModelAttribute KakaoPayApproveRequestVO vo) throws URISyntaxException {
+		vo.setPartner_order_id((String)session.getAttribute("partner_order_id"));
+		vo.setPartner_user_id((String)session.getAttribute("partner_user_id"));
+		vo.setTid((String)session.getAttribute("tid"));
+		PurchaseListVO listVo = (PurchaseListVO)session.getAttribute("listVO");
+		
+		session.removeAttribute("partner_order_id");
+		session.removeAttribute("partner_user_id");
+		session.removeAttribute("tid");
+		session.removeAttribute("listVO");
+		//session.invalidate(); 으로 작성하면 세션이 사라짐(전체가 사라짐, 사용X 골라서 지우기)
+		
+		KakaoPayApproveResponseVO response = kakaoPayService.approve(vo);
+		return"redirect:clear";//redirect:/pay/test2/clear
+	}
+	
+	//보여줄 페이지 따로 만드는 이유 새로고침에 영향 받지 않으려고
+	@GetMapping("/test2/clear")
+	public String test2Clear() {
+		return "pay/clear";
+	}
+
 }
