@@ -4,17 +4,55 @@
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
    
-<mapper namespace="paymentDetail">
-	
+<mapper namespace="payment">
+	<select id="sequence" resultType="int">
+		select payment_seq.nextval from dual
+	</select>
+
 	<insert id="save">
-		insert into payment_detail(
-			payment_detail_no, payment_no, item_no,
-			item_name, item_price, item_qty
+		insert into payment(
+			payment_no, payment_tid, payment_name, payment_total,
+			payment_remain, payment_time, member_id
 		)
 		values(
-			payment_detail_seq.nextval, #{paymentNo}, #{itemNo},
-			#{itemName}, #{itemPrice}, #{itemQty}
+			#{paymentNo},#{paymentTid},#{paymentName},#{paymentTotal},
+			#{paymentRemain},#{paymentTime},#{memberId}
 		)
 	</insert>
+	
+	<!-- 결제내역 조회 기능(전체/회원별/...) -->
+	<select id="selectAll" resultType="PaymentDto">
+		select*from payment order by payment_no desc
+	</select>
+	<select id="selectByMember" resultType="PaymentDto">
+		select*from payment 
+		where member_id = #{memberId}
+		order by payment_no desc
+	</select>
+	
+	<select id="find" resultType="PaymentDto">
+		select*from payment where payment_no =#{paymentNo}
+	</select>
+	
+	<update id="cancelRemain">
+		update payment
+		set payment_remain = 0
+		where payment_no =#{paymentNo}
+	</update>
+	
+	<!--  
+		결제 대표정보(payment)
+		
+		-ResultMap을 사용한 계층형 조회
+		
+		-결제 대표 정보(PaymentDto)
+		+-결제상세정보(List<PaymentDetailDto>)
+		+-결제상세정보
+		+-결제상세정보
+		+-결제상세정보
+		
+		(PaymentDto, List<PaymentDetailDto>)를 합친 클래스 만들기
+		
+	 -->
 	
 </mapper>
