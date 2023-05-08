@@ -22,3 +22,14 @@ check(item_discount between 0 and item_price)
 create SEQUENCE item_seq;
 
 select*from item;
+
+-- 상세 결제 정보 테이블
+create table payment_detail(
+payment_detail_no number primary key,
+payment_no references payment(payment_no) on delete cascade,
+item_no number not null,
+item_name varchar2(300) not null,
+item_price number not null,
+item_qty number not null,
+);
+create SEQUENCE payment_detail_seq;

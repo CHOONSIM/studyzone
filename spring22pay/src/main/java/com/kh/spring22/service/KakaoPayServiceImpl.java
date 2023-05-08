@@ -14,8 +14,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.kh.spring22.configuration.KakaoPayProperties;
 import com.kh.spring22.dto.ItemDto;
+import com.kh.spring22.dto.PaymentDetailDto;
 import com.kh.spring22.dto.PaymentDto;
 import com.kh.spring22.repo.ItemRepo;
+import com.kh.spring22.repo.PaymentDetailRepo;
 import com.kh.spring22.repo.PaymentRepo;
 import com.kh.spring22.vo.KakaoPayApproveRequestVO;
 import com.kh.spring22.vo.KakaoPayApproveResponseVO;
@@ -48,6 +50,9 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 	
 	@Autowired
 	private ItemRepo itemRepo;
+	
+	@Autowired
+	private PaymentDetailRepo paymentDetailRepo;
 	
 	@Override
 	public KakaoPayReadyResponseVO ready(KakaoPayReadyRequestVO vo) throws URISyntaxException {
@@ -210,7 +215,14 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 		// [2]상품정보를 조회
 			ItemDto itemDto = itemRepo.find(purchaseVO.getItemNo());
 		// [3] PaymentDetailDto를 만들고 정보를 설정한 뒤 등록 처리
+			PaymentDetailDto paymentDetailDto = new PaymentDetailDto();
+			paymentDetailDto.setPaymentNo(paytmentNo);
+			paymentDetailDto.setItemNo(itemDto.getItemNo());
+			paymentDetailDto.setItemName(itemDto.getItemName());
+			paymentDetailDto.setItemPrice(itemDto.getItemPrice());
+			paymentDetailDto.setItemQty(purchaseVO.getQty());
 			
+			paymentDetailRepo.save(paymentDetailDto);
 		}
 		
 		return response;
