@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spring22.dto.PaymentDto;
+import com.kh.spring22.vo.PaymentListVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -45,6 +46,16 @@ public class PaymentRepoImpl implements PaymentRepo{
 	@Override
 	public void cancelRemain(int paymentNo) {
 		sqlSession.update("payment.cancelRemain", paymentNo);
+	}
+
+	@Override
+	public List<PaymentListVO> treeSelect() {
+		return sqlSession.selectList("payment.treeSelect");
+	}
+
+	@Override
+	public List<PaymentListVO> treeSelect(String memberId) {
+		return sqlSession.selectList("payment.treeSelect",memberId);
 	}
 	
 }

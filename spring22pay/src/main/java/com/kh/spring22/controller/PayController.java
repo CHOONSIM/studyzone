@@ -32,6 +32,7 @@ import com.kh.spring22.vo.KakaoPayOrderRequestVO;
 import com.kh.spring22.vo.KakaoPayOrderResponseVO;
 import com.kh.spring22.vo.KakaoPayReadyRequestVO;
 import com.kh.spring22.vo.KakaoPayReadyResponseVO;
+import com.kh.spring22.vo.PaymentListVO;
 import com.kh.spring22.vo.PurchaseListVO;
 import com.kh.spring22.vo.PurchaseVO;
 
@@ -247,6 +248,14 @@ public class PayController {
 	@GetMapping("/test2/clear")
 	public String test2Clear() {
 		return "pay/clear";
+	}
+	
+	@GetMapping("/test2/list")
+	public String test2List(Model model) {
+		//	List<PaymentListVO>list = paymentRepo.treeSelect();	//전체 조회
+		List<PaymentListVO>list = paymentRepo.treeSelect("adminuser200");
+		model.addAttribute("list",list);
+		return "pay/list2";
 	}
 
 }
