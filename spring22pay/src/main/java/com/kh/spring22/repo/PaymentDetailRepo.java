@@ -5,4 +5,5 @@ import com.kh.spring22.dto.PaymentDetailDto;
 public interface PaymentDetailRepo {
 
 	void save(PaymentDetailDto paymentDetailDto);
+	void cancelPaymentDetail(int paymentNo);
 }

@@ -9,12 +9,19 @@
 	<insert id="save">
 		insert into payment_detail(
 			payment_detail_no, payment_no, item_no,
-			item_name, item_price, item_qty
+			item_name, item_price, item_qty, payment_detail_status
 		)
 		values(
 			payment_detail_seq.nextval, #{paymentNo}, #{itemNo},
-			#{itemName}, #{itemPrice}, #{itemQty}
+			#{itemName}, #{itemPrice}, #{itemQty}, '완료'
 		)
 	</insert>
+	
+	<!-- 특정 결제 건에 대한 상세 항목들의 상태를 취소로 변경하는 구문 -->
+	<update id="cancelPaymentDetail">
+		update payment_detail
+		set payment_detail_status = '취소'
+		where payment_no =#{paymentNo}
+	</update>
 	
 </mapper>

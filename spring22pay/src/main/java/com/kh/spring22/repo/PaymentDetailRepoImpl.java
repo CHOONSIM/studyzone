@@ -15,5 +15,10 @@ public class PaymentDetailRepoImpl implements PaymentDetailRepo{
 	@Override
 	public void save(PaymentDetailDto paymentDetailDto) {
 		sqlSession.insert("paymentDetail.save", paymentDetailDto);	
-		}	
+		}
+
+	@Override
+	public void cancelPaymentDetail(int paymentNo) {
+		sqlSession.update("paymentDetail.cancelPaymentDetail",paymentNo);
+	}	
 }

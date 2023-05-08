@@ -33,3 +33,9 @@ item_price number not null,
 item_qty number not null,
 );
 create SEQUENCE payment_detail_seq;
+
+alter table payment_detail add payment_detail_status char(6) 
+		check(payment_detail_status in ('완료', '취소'));
+update payment_detail set payment_detail_status = '완료';
+commit;
+alter table payment_detail modify payment_detail_status not null;

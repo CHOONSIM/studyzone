@@ -72,6 +72,7 @@
 			<result column="item_name" property="itemName"/>
 			<result column="item_price" property="itemPrice"/>
 			<result column="item_qty" property="itemQty"/>
+			<result column="payment_detail_status" property="paymentDetailStatus"/>
 		</collection>
 	</resultMap>
 	
