@@ -19,6 +19,16 @@ public class PaymentDetailRepoImpl implements PaymentDetailRepo{
 
 	@Override
 	public void cancelPaymentDetail(int paymentNo) {
-		sqlSession.update("paymentDetail.cancelPaymentDetail",paymentNo);
-	}	
+		sqlSession.update("paymentDetail.cancelPaymentDetail", paymentNo);
+	}
+
+	@Override
+	public void cancelPaymentDetailItem(int paymentDetailNo) {
+		sqlSession.update("paymentDetail.cancelPaymentDetailItem", paymentDetailNo);
+	}
+	
+	@Override
+	public PaymentDetailDto find(int paymentDetailNo) {
+		return sqlSession.selectOne("paymentDetail.find", paymentDetailNo);
+	}
 }

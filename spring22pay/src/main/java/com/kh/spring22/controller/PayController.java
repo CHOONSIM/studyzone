@@ -20,6 +20,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spring22.dto.ItemDto;
+import com.kh.spring22.dto.PaymentDetailDto;
 import com.kh.spring22.dto.PaymentDto;
 import com.kh.spring22.repo.ItemRepo;
 import com.kh.spring22.repo.PaymentDetailRepo;
@@ -289,6 +290,40 @@ public class PayController {
 			return "redirect:list";
 	}
 	
-//	@GetMapping("/test/refundItem")	
-
+	//항목 취소(부분 취소)
+	//[1] 카카오에 해당 항목만큼의 금액을 취소 요청
+	//[2] 해당 항목의 결제 상태를 '취소'로 변경
+	//[3] 해당 항목이 포함된 대표 결제에서 잔여 금액을 차감
+	
+	
+	@GetMapping("/test2/refundItem")
+	public String refundItem(@RequestParam int paymentDetailNo) throws URISyntaxException {
+		//조회
+		PaymentDetailDto paymentDetailDto = 
+							paymentDetailRepo.find(paymentDetailNo);
+		PaymentDto paymentDto = 
+							paymentRepo.find(paymentDetailDto.getPaymentNo());
+		
+		//[1] 
+		KakaoPayCancelRequestVO request = new KakaoPayCancelRequestVO();
+		request.setTid(paymentDto.getPaymentTid());
+		request.setCancel_amount(paymentDetailDto.getItemTotal());
+		KakaoPayCancelResponseVO response = kakaoPayService.cancel(request);
+		
+		//[2]
+		//update payment_detail set payment_detail_status='취소'
+		//where payment_detail_no=?
+		paymentDetailRepo.cancelPaymentDetailItem(paymentDetailNo);
+		
+		//[3]
+		//update payment 
+		//set payment_remain = payment_remain - ?
+		//where payment_no = ?
+		paymentRepo.cancelRemain(
+				paymentDto.getPaymentNo(),//결제대표번호
+				paymentDetailDto.getItemTotal()//취소시킬 금액
+		);
+		
+		return "redirect:list";
+	}
 }

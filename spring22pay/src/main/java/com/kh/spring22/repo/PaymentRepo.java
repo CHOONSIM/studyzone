@@ -12,8 +12,10 @@ public interface PaymentRepo {
 	List<PaymentDto> selectAll();
 	List<PaymentDto> selectByMember(String memberId);
 	PaymentDto find(int paymentNo);
-	void cancelRemain(int paymentNo);	// 삭제가 아니라 update 기능
 	
-	List<PaymentListVO> treeSelect();
-	List<PaymentListVO> treeSelect(String memberId);
+	List<PaymentListVO> treeSelect();		//오버로딩
+	List<PaymentListVO> treeSelect(String memberId);		//오버로딩
+	
+	void cancelRemain(int paymentNo);	// 전체 취소, 오버로딩
+	void cancelRemain(int paymentNo, int itemTotal);		//금액 차감, 오버로딩
 }

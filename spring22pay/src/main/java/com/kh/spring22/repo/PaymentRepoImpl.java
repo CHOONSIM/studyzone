@@ -1,6 +1,8 @@
 package com.kh.spring22.repo;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +58,14 @@ public class PaymentRepoImpl implements PaymentRepo{
 	@Override
 	public List<PaymentListVO> treeSelect(String memberId) {
 		return sqlSession.selectList("payment.treeSelect",memberId);
+	}
+
+	@Override
+	public void cancelRemain(int paymentNo, int itemTotal) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("paymentNo", paymentNo);
+		param.put("itemTotal", itemTotal);
+		sqlSession.update("payment.cancelRemainItem",param);
 	}
 	
 }
