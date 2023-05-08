@@ -1,7 +1,5 @@
 package com.kh.spring12.configuration;
 
-import java.io.File;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -9,11 +7,7 @@ import lombok.Data;
 
 @Data
 @Component
-@ConfigurationProperties(prefix="custom.fileupload")
-public class FileUploadProperties {
+@ConfigurationProperties(prefix = "custom.fileupload")
+public class CustomFileuploadProperties {
 	private String path;
-	
-	public File getDirectory() {
-		return new File(path);
-	}
 }

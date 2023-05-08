@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kh.spring12.configuration.FileUploadProperties;
+import com.kh.spring12.configuration.CustomFileuploadProperties;
 import com.kh.spring12.dao.AttachmentDao;
 import com.kh.spring12.dao.MemberDao;
 import com.kh.spring12.dao.MemberProfileDao;
@@ -30,7 +30,7 @@ public class MemberService {
 	private AttachmentDao attachmentDao;
 	
 	@Autowired
-	private FileUploadProperties fileUploadProperties;
+	private CustomFileuploadProperties fileUploadProperties;
 	
 	private File dir;
 	@PostConstruct

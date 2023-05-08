@@ -19,11 +19,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kh.spring12.configuration.FileUploadProperties;
+import com.kh.spring12.configuration.CustomFileuploadProperties;
 import com.kh.spring12.dao.AttachmentDao;
 import com.kh.spring12.dto.AttachmentDto;
 
@@ -37,12 +36,12 @@ public class AttachmentRestController {
 	private AttachmentDao attachmentDao;
 	
 	@Autowired
-	private FileUploadProperties fileUploadProperties;
+	private CustomFileuploadProperties fileUploadProperties;
 	
 	private File dir;
 	
 	@PostConstruct
-		public void init() {
+	public void init() {
 		dir = new File(fileUploadProperties.getPath());
 		dir.mkdirs();
 	}
@@ -50,65 +49,59 @@ public class AttachmentRestController {
 	//업로드
 	@PostMapping("/upload")
 	public AttachmentDto upload(@RequestParam MultipartFile attach) throws IllegalStateException, IOException {
-
 		if(!attach.isEmpty()) {//파일이 있을 경우
-//			번호생성
+			//번호 생성
 			int attachmentNo = attachmentDao.sequence();
 			
-//			//파일 저장(저장 위치는 임시로 생성)
-//			File dir = new File("D:/upload");
-//			dir.mkdirs();
-			
-			File target = new File(dir, String.valueOf(attachmentNo));	//파일명=시퀀스
+			//파일 저장(저장 위치는 임시로 생성)
+			File target = new File(dir, String.valueOf(attachmentNo));//파일명=시퀀스
 			attach.transferTo(target);
 			
-//			DB저장(builder 패턴)
+			//DB 저장
 			attachmentDao.insert(AttachmentDto.builder()
-					.attachmentNo(attachmentNo)
-					.attachmentName(attach.getOriginalFilename())
-					.attachmentType(attach.getContentType())
-					.attachmentSize(attach.getSize())
-					.build());
+							.attachmentNo(attachmentNo)
+							.attachmentName(attach.getOriginalFilename())
+							.attachmentType(attach.getContentType())
+							.attachmentSize(attach.getSize())
+						.build());
 			
-			return attachmentDao.selectOne(attachmentNo);	//DTO를 반환
+			return attachmentDao.selectOne(attachmentNo);//DTO를 반환
 		}
 		
-		return null;		//또는 예외 발생
+		return null;//또는 예외 발생
 	}
 	
 	//다운로드
 	@GetMapping("/download/{attachmentNo}")
-	public ResponseEntity<ByteArrayResource> download(@PathVariable int attachmentNo) throws IOException{
-		
-//		DB조회
+	public ResponseEntity<ByteArrayResource> download(
+									@PathVariable int attachmentNo) throws IOException {
+		//DB 조회
 		AttachmentDto attachmentDto = attachmentDao.selectOne(attachmentNo);
-		if(attachmentDto == null) {			// 없으면 404
+		if(attachmentDto == null) {//없으면 404
 			return ResponseEntity.notFound().build();
 		}
 		
-//		파일찾기
-//		File dir = new File("D:/upload");
+		//파일 찾기
 		File target = new File(dir, String.valueOf(attachmentNo));
 		
-//		보낼 데이터 생성
-		byte[]data = FileUtils.readFileToByteArray(target);
+		//보낼 데이터 생성
+		byte[] data = FileUtils.readFileToByteArray(target);
 		ByteArrayResource resource = new ByteArrayResource(data);
 		
-		
-//		제공되는 모든 상수와 명령을 동원해서 최대한 오류없이 변환없이 작성
+//		제공되는 모든 상수와 명령을 동원해서 최대한 오류 없이 편하게 작성
 		return ResponseEntity.ok()
 //					.header(HttpHeaders.CONTENT_TYPE, 
 //							MediaType.APPLICATION_OCTET_STREAM_VALUE)
 					.contentType(MediaType.APPLICATION_OCTET_STREAM)
 					.contentLength(attachmentDto.getAttachmentSize())
-					.header(HttpHeaders.CONTENT_ENCODING,
-										StandardCharsets.UTF_8.name())
-					.header(HttpHeaders. CONTENT_DISPOSITION,
-										ContentDisposition.attachment()
-											.filename(	
-												attachmentDto.getAttachmentName(),
-												StandardCharsets.UTF_8
-												).build().toString()
+					.header(HttpHeaders.CONTENT_ENCODING, 
+												StandardCharsets.UTF_8.name())
+					.header(HttpHeaders.CONTENT_DISPOSITION,
+						ContentDisposition.attachment()
+									.filename(
+											attachmentDto.getAttachmentName(), 
+											StandardCharsets.UTF_8
+									).build().toString()
 					)
 					.body(resource);
 	}
