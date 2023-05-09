@@ -4,9 +4,48 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>localstorage와 sessionStorage의 비교</title>
+    <title>localStorage와 sessionStorage의 비교</title>
 </head>
 <body>
-    <textarea style="width:500px" rows="10"></textarea>
+    <textarea class="editor"style="width:500px" rows="10"></textarea>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(function(){
+            // 목표 : textarea에 입력이 이루어질 때마다 저장소에 데이터를 저장
+            $(".editor").on("input",function(){
+                //입력값을 가지고 온다.
+                const text = $(this).val();
+
+                // 프론트엔드 저장소
+                // - localStorage : 브라우저가 종료되어도 유지되는 key=value저장소
+                // - sessionStroage : 브라우저가 종료되면 소멸하는 key=value저장소
+
+                //localStorage에 저장
+                localStorage.setItem("content", text);
+
+                //sessionStroage에 저장
+                sessionStorage.setItem("content", text);
+            });
+        });
+    </script>
+
+    <script>
+        $(function(){
+            //sessionStorage에 content라는 이름이 존재한다면 value를 에디터에 설정
+            //console.log(sessionStorage.getItem("content"));
+           
+            const content = sessionStorage.getItem("content")
+            if(content != null){
+                var choice = confirm("작성하던 글을 불러?")
+                if(choice == false) {
+                    sessionStorage.removeItem("content");
+                    return;
+                }
+                $(".editor").val(content);
+            }
+        });
+
+    </script>
 </body>
 </html>
