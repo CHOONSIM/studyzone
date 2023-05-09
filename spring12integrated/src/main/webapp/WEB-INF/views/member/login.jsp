@@ -7,8 +7,34 @@
 <h1>로그인</h1>
 
 <form action="login" method="post">
-	아이디 : <input type="text"name="memberId"required> <br><br>
-	비밀번호 : <input type="password"name="memberPw"required><br><br>
+	<div class="row">
+		<c:choose>
+			<c:when test="${cookie.saveId == null}">
+				아이디 : <input type="text"name="memberId"required> <br><br>			
+			</c:when>
+			<c:otherwise>
+				아이디 : <input type="text"name="memberId"required value="${cookie.saveId.value}"> <br><br>
+			</c:otherwise>
+		</c:choose>
+	</div>
+	<div class="row">
+		비밀번호 : <input type="password"name="memberPw"required><br><br>
+	</div>
+	<div class="row">
+		<label>
+			<c:choose>
+				<c:when test="${cookie.saveId == null}">
+				<!-- 아이디 저장하기 하지 않은 경우 -->
+					<input type="checkbox"  name="remember">	
+				</c:when>
+				<c:otherwise>
+				<!-- 아이디 저장하기 한경우 -->
+					<input type="checkbox" name="remember" checked>
+				</c:otherwise>
+			</c:choose>
+			아이디 저장		
+		</label>
+	</div>
 	<button>로그인</button>
 </form>
 
